@@ -1,4 +1,4 @@
-package org.rhona.gmbeta
+package org.xiaoxingqi.gmdoc
 
 import org.junit.Test
 

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:clipChildren="false"
+    android:orientation="horizontal">
+
+    <org.xiaoxingqi.gmdoc.wegidt.CustomSelecor
+        android:id="@+id/tab_01"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_weight="1"
+        android:paddingTop="2dp" />
+
+    <org.xiaoxingqi.gmdoc.wegidt.CustomSelecor
+        android:id="@+id/tab_02"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_weight="1"
+        android:paddingTop="2dp" />
+
+    <ImageView
+        android:id="@+id/Iv_HomeButton"
+        android:layout_width="58dp"
+        android:layout_height="58dp"
+        android:layout_marginTop="-8dp"
+        android:src="@mipmap/ic_launcher" />
+
+    <org.xiaoxingqi.gmdoc.wegidt.CustomSelecor
+        android:id="@+id/tab_03"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_weight="1"
+        android:paddingTop="2dp" />
+
+    <org.xiaoxingqi.gmdoc.wegidt.CustomSelecor
+        android:id="@+id/tab_04"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_weight="1"
+        android:paddingTop="2dp" />
+</LinearLayout>

@@ -1,4 +1,4 @@
-package org.rhona.gmbeta
+package org.xiaoxingqi.gmdoc
 
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4
