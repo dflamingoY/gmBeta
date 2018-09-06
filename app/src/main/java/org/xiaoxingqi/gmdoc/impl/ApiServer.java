@@ -1,14 +1,18 @@
 package org.xiaoxingqi.gmdoc.impl;
 
 
-import okhttp3.ResponseBody;
-import retrofit2.Call;
-import retrofit2.http.Header;
+import org.xiaoxingqi.gmdoc.entity.TokenData;
+
+import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Url;
+import rx.Observable;
 
 public interface ApiServer {
 
     @POST
-    Call<ResponseBody> post(@Url String url);
+    Observable<TokenData> post_token(@Url String url);
+
+    @GET
+    Observable<String> get_token(@Url String url);
 }
