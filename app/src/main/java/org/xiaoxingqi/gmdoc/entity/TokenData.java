@@ -4,7 +4,7 @@ package org.xiaoxingqi.gmdoc.entity;
  * Created by yzm on 2017/11/2.{"_token":"2lQ0sMydp6kOujGJ6rbgvsO6WRi68nHgIg2QJ4BX"}
  */
 
-public class TokenData {
+public class TokenData extends BaseRespData {
 
     private String _token;
 
