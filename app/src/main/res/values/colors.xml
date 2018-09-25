@@ -1,8 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimary">#ff7a31</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="color_666666">#666666</color>
     <color name="color_gray_division">#ececec</color>
+    <color name="color_ps4_">#2d7dd2</color>
+    <color name="color_Switch">#ea2100</color>
+    <color name="color_PC">#00bbf5</color>
+    <color name="color_XBox">#00ab14</color>
+    <color name="color_3DS">#444444</color>
+    <color name="color_PSVITA">#2d7dd2</color>
+    <color name="color_IOS">#4a4a4a</color>
+    <color name="color_PS_VR">#2d7dd2</color>
 </resources>

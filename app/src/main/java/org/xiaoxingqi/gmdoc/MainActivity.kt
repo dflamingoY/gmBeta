@@ -3,6 +3,7 @@ package org.xiaoxingqi.gmdoc
 import android.support.v4.app.Fragment
 import android.util.Log
 import kotlinx.android.synthetic.main.activity_main.*
+import org.xiaoxingqi.gmdoc.core.App
 import org.xiaoxingqi.gmdoc.core.BaseActivity
 import org.xiaoxingqi.gmdoc.core.http.HttpServer
 import org.xiaoxingqi.gmdoc.entity.TokenData
@@ -28,29 +29,10 @@ class MainActivity : BaseActivity() {
 
     override fun initView() {
 
-
     }
 
     override fun initData() {
         switchFragment(TypeFragment.Home)
-        HttpServer.getInstance(this).apiServer.post_token("post_token")
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(object : Subscriber<TokenData>() {
-                    override fun onNext(t: TokenData?) {
-                        Log.d("Mozator", "Gson 数据 ${t.toString()}  ")
-                    }
-
-                    override fun onCompleted() {
-                        Log.d("Mozator", "complete ")
-                    }
-
-                    override fun onError(e: Throwable?) {
-                        Log.d("Mozator", "error  ${e?.printStackTrace()}")
-                    }
-                })
-
-
     }
 
     override fun initEvent() {
@@ -83,6 +65,21 @@ class MainActivity : BaseActivity() {
     }
 
     override fun request() {
+        HttpServer.getInstance(this).apiServer.post_token("post_token")
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(object : Subscriber<TokenData>() {
+                    override fun onNext(t: TokenData?) {
+                        App.s_Token = t?._token
+                    }
+
+                    override fun onCompleted() {
+                    }
+
+                    override fun onError(e: Throwable?) {
+                    }
+                })
+
 
     }
 
