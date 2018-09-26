@@ -2,6 +2,9 @@ package org.xiaoxingqi.gmdoc.impl;
 
 
 import org.xiaoxingqi.gmdoc.entity.TokenData;
+import org.xiaoxingqi.gmdoc.entity.home.HomeActiveData;
+import org.xiaoxingqi.gmdoc.entity.home.HomeGameData;
+import org.xiaoxingqi.gmdoc.entity.home.HomeUserShareData;
 
 import retrofit2.http.GET;
 import retrofit2.http.POST;
@@ -15,4 +18,14 @@ public interface ApiServer {
 
     @GET
     Observable<String> get_token(@Url String url);
+
+    @GET
+    Observable<HomeActiveData> get_HomeActiv(@Url String url);
+
+    @GET
+    Observable<HomeGameData> get_HomeGame(@Url String url);
+
+    @GET
+    Observable<HomeUserShareData> get_HomeContrubite(@Url String url);
+
 }

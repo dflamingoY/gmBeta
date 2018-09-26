@@ -14,13 +14,11 @@ import rx.subscriptions.CompositeSubscription;
 /**
  * 控制网络请求, 控制视图的切换展示
  */
-public abstract class BasePresent<T> {
-    private ApiServer apiServer;
+public abstract class BasePresent {
+    protected ApiServer apiServer;
     private CompositeSubscription composite = new CompositeSubscription();
-    private T t;
 
-    public BasePresent(Context context, T t) {
-        this.t = t;
+    public BasePresent(Context context) {
         apiServer = HttpServer.getInstance(context).getApiServer();
     }
 

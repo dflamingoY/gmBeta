@@ -1,26 +1,26 @@
 package org.xiaoxingqi.gmdoc
 
+import android.graphics.Color
 import android.support.v4.app.Fragment
-import android.util.Log
 import kotlinx.android.synthetic.main.activity_main.*
 import org.xiaoxingqi.gmdoc.core.App
 import org.xiaoxingqi.gmdoc.core.BaseActivity
 import org.xiaoxingqi.gmdoc.core.http.HttpServer
 import org.xiaoxingqi.gmdoc.entity.TokenData
-import org.xiaoxingqi.gmdoc.modul.game.GameFragment
 import org.xiaoxingqi.gmdoc.modul.home.HomeFragment
-import org.xiaoxingqi.gmdoc.modul.lifeCircle.LifCircleFragment
-import org.xiaoxingqi.gmdoc.modul.message.MsgFragment
 import rx.Subscriber
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
+import android.view.WindowManager
+import android.os.Build
+import android.view.View
 
 
 class MainActivity : BaseActivity() {
     val homeFrag = HomeFragment()
-    val gameFrag = GameFragment()
-    val lifeCircle = LifCircleFragment()
-    val msgFrag = MsgFragment()
+//    val gameFrag = GameFragment()
+//    val lifeCircle = LifCircleFragment()
+//    val msgFrag = MsgFragment()
     var currentFrag: Fragment? = null
 
     override fun setContent() {
@@ -28,7 +28,13 @@ class MainActivity : BaseActivity() {
     }
 
     override fun initView() {
-
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            val window = window
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+            window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+            window.statusBarColor = Color.TRANSPARENT
+        }
     }
 
     override fun initData() {
@@ -89,12 +95,12 @@ class MainActivity : BaseActivity() {
         when (type) {
             TypeFragment.Home ->
                 currentFrag = homeFrag
-            TypeFragment.Echoe ->
-                currentFrag = gameFrag
-            TypeFragment.Listen ->
-                currentFrag = lifeCircle
-            TypeFragment.Me ->
-                currentFrag = msgFrag
+//            TypeFragment.Echoe ->
+//                currentFrag = gameFrag
+//            TypeFragment.Listen ->
+//                currentFrag = lifeCircle
+//            TypeFragment.Me ->
+//                currentFrag = msgFrag
         }
         currentFrag?.let {
             if (!currentFrag!!.isAdded) {
