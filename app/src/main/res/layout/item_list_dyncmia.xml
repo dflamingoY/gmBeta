@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/linearDyncmal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingTop="10dp"
+    android:visibility="visible">
+
+    <org.xiaoxingqi.gmdoc.view.textview.SpolierTextView
+        android:id="@+id/tv_Content_Title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:layout_marginTop="10dp"
+        android:includeFontPadding="false"
+        android:lineSpacingExtra="6dp"
+        android:textColor="#282828"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/tvNullContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:background="#f6f7f7"
+        android:drawablePadding="6dp"
+        android:paddingBottom="20dp"
+        android:paddingLeft="12dp"
+        android:paddingTop="12dp"
+        android:singleLine="true"
+        android:text="抱歉，此内容已被作者刪除"
+        android:textColor="#666666"
+        android:textSize="15sp"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:id="@+id/linearContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_Title"
+        android:orientation="vertical"
+        android:paddingBottom="8dp">
+
+        <LinearLayout
+            android:id="@+id/linear_Repeat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/tv_Original_User"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:layout_marginTop="8dp"
+                android:lineSpacingExtra="9sp"
+                android:singleLine="true"
+                android:textColor="#666666"
+                android:textSize="15sp" />
+
+            <org.xiaoxingqi.gmdoc.view.textview.EmojiSpoilerTextView
+                android:id="@+id/tv_Original_Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:lineSpacingExtra="9sp"
+                android:textColor="#666666"
+                android:textSize="15sp" />
+
+            <org.xiaoxingqi.gmdoc.view.textview.CommentTextView
+                android:id="@+id/tv_CommentContent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:lineSpacingExtra="9sp"
+                android:textColor="#666666"
+                android:textSize="15sp"
+                android:visibility="gone" />
+
+        </LinearLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:clickable="false"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:visibility="visible">
+
+        </android.support.v7.widget.RecyclerView>
+
+        <RelativeLayout
+            android:id="@+id/relativeVedio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:visibility="gone">
+
+            <org.xiaoxingqi.gmdoc.view.gameDetails.SqureImageView
+                android:id="@+id/iv_Details"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scaleType="centerCrop"
+                android:src="@drawable/img_empty_avatar_back" />
+
+            <ImageView
+                android:id="@+id/iv_Play"
+                android:layout_width="41dp"
+                android:layout_height="41dp"
+                android:layout_centerInParent="true"
+                android:visibility="visible" />
+
+        </RelativeLayout>
+    </LinearLayout>
+</LinearLayout>

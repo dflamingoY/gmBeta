@@ -10,6 +10,7 @@ import org.xiaoxingqi.gmdoc.impl.home.HomeTabCallback
 import org.xiaoxingqi.gmdoc.parsent.HomePresent
 
 class HomeFragment : BaseFrag<HomePresent>() {
+
     override fun createPresent(): HomePresent {
         return HomePresent(activity!!, object : HomeTabCallback() {
             override fun gameSuccess(data: HomeGameData?) {

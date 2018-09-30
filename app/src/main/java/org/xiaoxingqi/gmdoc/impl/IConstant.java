@@ -6,5 +6,8 @@ public interface IConstant {
     String TEST_ART_DETAIL_SPORT = "http://dzt.gmdoc.com/";
     String COOKIE = "cookie";
     String GET_END = "?device=android";
-
+    /**
+     * 是否剧透
+     */
+    String IS_SPOLIER = "isSpolier";
 }
