@@ -36,12 +36,12 @@
 
     </LinearLayout>
 
-    <org.xiaoxingqi.gmdoc.view.gameDetails.SqureImageView
+    <org.xiaoxingqi.gmdoc.wegidt.gameDetails.SqureImageView
         android:id="@+id/iv_Details"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:scaleType="centerCrop"
-        android:src="@drawable/img_empty_avatar_back" />
+        />
 
     <TextView
         android:id="@+id/tv_Desc"

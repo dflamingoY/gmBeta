@@ -7,7 +7,7 @@
     android:paddingTop="10dp"
     android:visibility="visible">
 
-    <org.xiaoxingqi.gmdoc.view.textview.SpolierTextView
+    <org.xiaoxingqi.gmdoc.wegidt.textView.SpolierTextView
         android:id="@+id/tv_Content_Title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -64,7 +64,7 @@
                 android:textColor="#666666"
                 android:textSize="15sp" />
 
-            <org.xiaoxingqi.gmdoc.view.textview.EmojiSpoilerTextView
+            <org.xiaoxingqi.gmdoc.wegidt.textView.EmojiSpoilerTextView
                 android:id="@+id/tv_Original_Title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -74,7 +74,7 @@
                 android:textColor="#666666"
                 android:textSize="15sp" />
 
-            <org.xiaoxingqi.gmdoc.view.textview.CommentTextView
+            <org.xiaoxingqi.gmdoc.wegidt.textView.CommentTextView
                 android:id="@+id/tv_CommentContent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -108,12 +108,11 @@
             android:layout_marginRight="12dp"
             android:visibility="gone">
 
-            <org.xiaoxingqi.gmdoc.view.gameDetails.SqureImageView
+            <org.xiaoxingqi.gmdoc.wegidt.gameDetails.SqureImageView
                 android:id="@+id/iv_Details"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:scaleType="centerCrop"
-                android:src="@drawable/img_empty_avatar_back" />
+                android:scaleType="centerCrop" />
 
             <ImageView
                 android:id="@+id/iv_Play"

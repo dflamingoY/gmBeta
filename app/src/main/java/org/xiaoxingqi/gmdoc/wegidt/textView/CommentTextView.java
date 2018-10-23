@@ -1,8 +1,6 @@
 package org.xiaoxingqi.gmdoc.wegidt.textView;
 
-import android.annotation.TargetApi;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -20,12 +18,12 @@ import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
-import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
 import android.text.style.BackgroundColorSpan;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.ImageSpan;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
@@ -46,37 +44,33 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static org.xiaoxingqi.gmdoc.tools.AppConfig.ALL;
+import static org.xiaoxingqi.gmdoc.tools.AppConfig.AT;
 import static org.xiaoxingqi.gmdoc.tools.AppConfig.EMOJI;
 import static org.xiaoxingqi.gmdoc.tools.AppConfig.SPOLIER;
 
 
 /**
- * Created by yzm on 2017/12/4.
- * <p>
- * 所有标签都匹配
- *
- * @列表
+ * Created by yzm on 2017/12/18.
+ * 评论的TextView
+ * 表情 剧透 显示隐藏的 切换  有@ 列表
  */
 
-public class SpolierTextView extends AppCompatTextView {
-
+public class CommentTextView extends AppCompatTextView {
     private List<Point> arrays = new ArrayList<>();
     private List<SelectionBean> selects = new ArrayList<>();
     private Paint mPaint;
     private Context mContext;
-    private boolean isSpoiler = false;
-    private boolean isAttchWindows = false;
+    private boolean isAttach = false;
 
-    public SpolierTextView(Context context) {
+    public CommentTextView(Context context) {
         this(context, null, 0);
     }
 
-    public SpolierTextView(Context context, AttributeSet attrs) {
+    public CommentTextView(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public SpolierTextView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public CommentTextView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         mContext = context;
         initView();
@@ -86,20 +80,12 @@ public class SpolierTextView extends AppCompatTextView {
         mPaint = new Paint();
         mPaint.setColor(Color.parseColor("#6d6d6d"));
         mPaint.setStyle(Paint.Style.FILL);
-        //        mPaint.setStrokeWidth(10);
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        /**
-         * 绘制一层阴影
-         */
-        if (isAttchWindows)
-            getMeasureCoondiration(canvas);
-        /**
-         * 获取第一行换行的角标
-         */
+        getMeasureCoondiration(canvas);
     }
 
     /**
@@ -108,16 +94,17 @@ public class SpolierTextView extends AppCompatTextView {
      * 同一行 直接绘制黑色块
      * 如果是已经换行   判断换行  且获取换行的矩形
      */
-    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     private void getMeasureCoondiration(Canvas canvas) {
+        canvas.save();
         if (!SPUtils.getBoolean(mContext, IConstant.IS_SPOLIER, false)) {
             return;
         }
         Layout layout = getLayout();
         if (arrays.size() > 0) {
             for (int a = 0; a < arrays.size(); a++) {
-                if (!isAttchWindows)
+                if (!isAttach) {
                     break;
+                }
                 /**
                  * 获取一行的字数
                  */
@@ -129,45 +116,39 @@ public class SpolierTextView extends AppCompatTextView {
                 /**
                  * 文本结束的行数
                  */
-
                 int endLine = layout.getLineForOffset(arrays.get(a).y);
                 int lineCount = layout.getLineCount();
-                float lineSpacingExtra = getLineSpacingExtra();
-                float lineSpacingMultiplier = getLineSpacingMultiplier();
                 layout.getLineBounds(startLine, bound);
-                //                int yAxisTop = bound.top;//字符顶部y坐标
+                int yAxisTop = bound.top;//字符顶部y坐标
                 int yAxisBottom = bound.bottom;//字符底部y坐标
-                int lineHeight = (int) ((getMeasuredHeight() - getPaddingTop() - getPaddingBottom()) * 1f / lineCount + 0.5f);//计算单行的高度
-                int yAxisTop = startLine * lineHeight;//字符顶部y坐标
                 int xAxisLeft = (int) layout.getPrimaryHorizontal(arrays.get(a).x);//字符左边x坐标
                 int xAxisRight = (int) layout.getSecondaryHorizontal(arrays.get(a).y);//偏移量
-                if (false) {
-                    continue;
-                }
-                if (startLine == endLine) {//只有一行的时候
-                    canvas.drawRect(new RectF(xAxisLeft, lineHeight * startLine + 3, (int) layout.getSecondaryHorizontal(arrays.get(a).y), yAxisTop + lineHeight - 3), mPaint);
-                } else {//多行
+                if (startLine == endLine) {
+                    canvas.drawRect(new RectF(xAxisLeft, yAxisTop + 5, (int) layout.getSecondaryHorizontal(arrays.get(a).y), yAxisBottom - 5), mPaint);
+                } else {
                     /**
                      * 换行绘制 需要绘制两行 黑色区域
                      */
-                    canvas.drawRect(new RectF(xAxisLeft, yAxisTop + 3, bound.right, yAxisTop + lineHeight - 3), mPaint);
+                    canvas.drawRect(new RectF(xAxisLeft, yAxisTop + 5, bound.right, yAxisBottom - 5), mPaint);
                     /**
                      * 循环绘制存在剧透的行数
                      */
                     if (endLine - startLine > 1) {
                         for (int i = startLine + 1; i < endLine; i++) {
-                            if (!isAttchWindows)
+                            if (!isAttach) {
                                 return;
-                            canvas.drawRect(new RectF(0, lineHeight * i + 3, bound.right, lineHeight * (i + 1) - 3), mPaint);
+                            }
+                            canvas.drawRect(new RectF(0, (yAxisBottom - yAxisTop) * i + 5, bound.right, (yAxisBottom - yAxisTop) * (i + 1) - 5), mPaint);
                         }
                     }
-                    canvas.drawRect(new RectF(0, lineHeight * endLine + 3, xAxisRight, lineHeight * (endLine + 1) - 3), mPaint);
+                    canvas.drawRect(new RectF(0, (yAxisBottom - yAxisTop) * endLine + 5, xAxisRight, (yAxisBottom - yAxisTop) * (endLine + 1) - 5), mPaint);
                 }
             }
         }
+        canvas.restore();
     }
 
-    public void setData(String text, String... tag) {
+    public void setData(String text) {
         arrays.clear();
         selects.clear();
         SpannableStringBuilder htmlStr = (SpannableStringBuilder) Html.fromHtml(text.toString());
@@ -202,33 +183,17 @@ public class SpolierTextView extends AppCompatTextView {
             }
         }
 
-        pattern = Pattern.compile(ALL);
+        pattern = Pattern.compile(AT);
         matcher.reset();
         matcher = pattern.matcher(tmep);
         while (matcher.find()) {
-            String at = matcher.group(1);
-            String topic = matcher.group(2);
-            String urlPath = matcher.group(3);
+            String at = matcher.group();
             if (at != null) {
-                int start = matcher.start(1);
+                int start = matcher.start();
                 int endSpoiler = start + at.length();
                 selects.add(new SelectionBean(at, start, endSpoiler, 2));
                 ForegroundColorSpan colorSpan = new ForegroundColorSpan(Color.parseColor("#2d7dd2"));
                 tmep.setSpan(colorSpan, start, endSpoiler, Spanned.SPAN_INCLUSIVE_INCLUSIVE);
-            }
-            if (topic != null) {
-                int start = matcher.start(2);
-                int endSpoiler = start + topic.length();
-                selects.add(new SelectionBean(topic, topic, start, endSpoiler, 3));
-                ForegroundColorSpan colorSpan = new ForegroundColorSpan(Color.parseColor("#2d7dd2"));
-                tmep.setSpan(colorSpan, start, endSpoiler, Spanned.SPAN_INCLUSIVE_INCLUSIVE);
-            }
-            if (urlPath != null) {
-                int start = matcher.start(3);
-                int endUrl = start + urlPath.length();
-                selects.add(new SelectionBean(urlPath, start, endUrl, 4));
-                ForegroundColorSpan colorSpan = new ForegroundColorSpan(Color.parseColor("#2d7dd2"));
-                tmep.setSpan(colorSpan, start, endUrl, Spanned.SPAN_INCLUSIVE_INCLUSIVE);
             }
         }
         pattern = Pattern.compile(EMOJI);
@@ -253,21 +218,6 @@ public class SpolierTextView extends AppCompatTextView {
                 }
             }
         }
-        if (tag != null && tag.length > 0) {
-            for (String str : tag)
-                if (!TextUtils.isEmpty(str)) {
-                    int start = tmep.toString().indexOf(str);
-                    int end = tmep.toString().indexOf(str) + str.length();
-                    ForegroundColorSpan colorSpan = new ForegroundColorSpan(Color.parseColor("#2d7dd2"));
-                    try {
-                        tmep.setSpan(colorSpan, start, end, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                    selects.add(new SelectionBean("", start, end, 1));
-                }
-        }
-
         setText(tmep);
         final BackgroundColorSpan span = new BackgroundColorSpan(Color.parseColor("#31000000"));
         final int slop = ViewConfiguration.get(mContext).getScaledTouchSlop();
@@ -322,17 +272,8 @@ public class SpolierTextView extends AppCompatTextView {
                         return false;
                     case MotionEvent.ACTION_MOVE:
                         int indexMove = event.findPointerIndex(id);
-                        /**
-                         * 会出现的异常 pointerIndex out of range
-                         */
-                        int currentX = 0;
-                        int currentY = 0;
-                        try {
-                            currentX = (int) event.getX(indexMove);
-                            currentY = (int) event.getY(indexMove);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
+                        int currentX = (int) event.getX(indexMove);
+                        int currentY = (int) event.getY(indexMove);
                         if (Math.abs(currentX - downX) < slop && Math.abs(currentY - downY) < slop) {
                             if (downSection == null) {
                                 getParent().requestDisallowInterceptTouchEvent(false);//允许父view拦截
@@ -352,21 +293,9 @@ public class SpolierTextView extends AppCompatTextView {
                         if (Math.abs(upX - downX) < slop && Math.abs(upY - downY) < slop) {
                             //TODO startActivity or whatever
                             if (downSection != null) {
-                                if (downSection.getType() == 3) {//跳转搜索
-                                    mContext.startActivity(new Intent(mContext, null)
-                                            .putExtra("tag", downSection.getName())
-                                            .putExtra("isTopic", true)
-                                    );
-                                } else if (downSection.getType() == 4) {
-                                    mContext.startActivity(new Intent(mContext, null)
-                                            .putExtra("path", downSection.getName())
-                                    );
-                                } else {
-                                    if (mTextTouchListener != null) {
-                                        mTextTouchListener.touch(downSection);
-                                    }
+                                if (mTextTouchListener != null) {
+                                    mTextTouchListener.touch(downSection);
                                 }
-                                downSection = null;
                             } else {
                                 return false;
                             }
@@ -379,6 +308,12 @@ public class SpolierTextView extends AppCompatTextView {
                 return true;
             }
         });
+
+    }
+
+    public static Drawable getUrlDrawable(String source, TextView mTextView) {
+        GlideImageGetter imageGetter = new GlideImageGetter(mTextView.getContext(), mTextView);
+        return imageGetter.getDrawable(source);
     }
 
     public interface OnTextTouchListener {
@@ -391,22 +326,15 @@ public class SpolierTextView extends AppCompatTextView {
         mTextTouchListener = listener;
     }
 
-    public static Drawable getUrlDrawable(String source, TextView mTextView) {
-        GlideImageGetter imageGetter = new GlideImageGetter(mTextView.getContext(), mTextView);
-        return imageGetter.getDrawable(source);
-    }
-
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
-        isAttchWindows = true;
+        isAttach = true;
     }
 
     @Override
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
-        isAttchWindows = false;
-        //        arrays.clear();
-        //        selects.clear();
+        isAttach = false;
     }
 }

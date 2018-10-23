@@ -2,4 +2,5 @@
 <resources>
 
     <item name="viewPager" type="id" />
+    <item type="id" name="drawable_callback_tag"/>
 </resources>

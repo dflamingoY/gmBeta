@@ -9,8 +9,12 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.Request;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.ViewTarget;
 
+import org.xiaoxingqi.gmdoc.R;
 import org.xiaoxingqi.gmdoc.tools.AppTools;
 
 import java.util.HashSet;
@@ -86,7 +90,7 @@ public class GlideImageGetter implements Html.ImageGetter, Drawable.Callback {
         }
 
         @Override
-        public void onResourceReady(GlideDrawable resource, GlideAnimation<? super GlideDrawable> glideAnimation) {
+        public void onResourceReady(final GlideDrawable resource, GlideAnimation<? super GlideDrawable> glideAnimation) {
             Rect rect;
             if (resource.getIntrinsicWidth() > 100) {
                 float width;
