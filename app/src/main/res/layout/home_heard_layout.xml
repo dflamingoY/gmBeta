@@ -1,130 +1,131 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
 
-
-    <RelativeLayout
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/iv_topImg"
+                android:layout_width="match_parent"
+                android:layout_height="290dp"
+                android:scaleType="centerCrop" />
+
+            <TextView
+                android:id="@+id/tv_TopDesc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/iv_topImg"
+                android:layout_marginBottom="12dp"
+                android:layout_marginLeft="14dp"
+                android:layout_marginRight="14dp"
+                android:ellipsize="end"
+                android:shadowColor="#80000000"
+                android:shadowDy="1"
+                android:shadowRadius="1"
+                android:singleLine="true"
+                android:text="大岁的老将萨的角色得了三等奖垃圾的垃圾的了大岁的卡死大岁的"
+                android:textColor="#ffffff"
+                android:textSize="15sp" />
+
+        </RelativeLayout>
 
         <ImageView
-            android:id="@+id/iv_topImg"
-            android:layout_width="match_parent"
-            android:layout_height="290dp"
-            android:scaleType="centerCrop" />
-
-        <TextView
-            android:id="@+id/tv_TopDesc"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/iv_topImg"
-            android:layout_marginBottom="12dp"
+            android:layout_width="70dp"
+            android:layout_height="23dp"
             android:layout_marginLeft="14dp"
-            android:layout_marginRight="14dp"
-            android:ellipsize="end"
-            android:shadowColor="#80000000"
-            android:shadowDy="1"
-            android:shadowRadius="1"
-            android:singleLine="true"
-            android:text="大岁的老将萨的角色得了三等奖垃圾的垃圾的了大岁的卡死大岁的"
-            android:textColor="#ffffff"
-            android:textSize="15sp" />
+            android:layout_marginTop="14dp"
 
-    </RelativeLayout>
+            />
 
-    <ImageView
-        android:layout_width="70dp"
-        android:layout_height="23dp"
-        android:layout_marginLeft="14dp"
-        android:layout_marginTop="14dp"
-
-        />
-
-    <org.xiaoxingqi.gmdoc.wegidt.LinearScrollView
-        android:id="@+id/horizontalScrollview"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:scrollbars="none">
-
-        <LinearLayout
-            android:id="@+id/linear_Active"
+        <org.xiaoxingqi.gmdoc.wegidt.LinearScrollView
+            android:id="@+id/horizontalScrollview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:scrollbars="none">
 
-        </LinearLayout>
-    </org.xiaoxingqi.gmdoc.wegidt.LinearScrollView>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="10dp"
-        android:background="@color/color_gray_division" />
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <LinearLayout
-        android:id="@+id/linear_hint"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:visibility="gone">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="92dp"
-            android:background="#edeef3">
-
-            <ImageView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:id="@+id/linear_Active"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_centerInParent="true" />
+                android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/tv_GameCount"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:gravity="start"
-                android:singleLine="true"
-                android:text="全部28个机种的游戏可以在游戏库中浏览"
-                android:textColor="#666666"
-                android:textSize="14sp" />
-        </RelativeLayout>
-        <!--   用户状态-->
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-
-            >
-
-            <ImageView
-                android:layout_width="22dp"
-                android:layout_height="22dp"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="16dp"
-
-                />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="48dp"
-                android:text="玩家贡献的游戏截图"
-                android:textColor="#282828"
-                android:textSize="16sp" />
-        </RelativeLayout>
+            </LinearLayout>
+        </org.xiaoxingqi.gmdoc.wegidt.LinearScrollView>
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="10dp"
             android:background="@color/color_gray_division" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:id="@+id/linear_hint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="92dp"
+                android:background="#edeef3">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true" />
+
+                <TextView
+                    android:id="@+id/tv_GameCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:gravity="start"
+                    android:singleLine="true"
+                    android:text="全部28个机种的游戏可以在游戏库中浏览"
+                    android:textColor="#666666"
+                    android:textSize="14sp" />
+            </RelativeLayout>
+            <!--   用户状态-->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+
+                >
+
+                <ImageView
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="16dp"
+
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="48dp"
+                    android:text="玩家贡献的游戏截图"
+                    android:textColor="#282828"
+                    android:textSize="16sp" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/color_gray_division" />
+        </LinearLayout>
     </LinearLayout>
-</LinearLayout>

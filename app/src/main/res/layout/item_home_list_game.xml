@@ -15,8 +15,7 @@
             android:id="@+id/view_Indecator"
             android:layout_width="5dp"
             android:layout_height="match_parent"
-            android:background="#2d7dd2"
-            />
+            android:background="#2d7dd2" />
 
         <ImageView
             android:id="@+id/iv_SortType"
@@ -53,6 +52,7 @@
         android:id="@+id/tvfindAll"
         android:layout_width="match_parent"
         android:layout_height="46dp"
+        android:background="@drawable/game_click_drawable"
         android:gravity="center"
         android:text="查看全部"
         android:textColor="#444444"

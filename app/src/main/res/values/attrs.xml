@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="RoundScoreView">
+        <attr name="bgStyle">
+            <enum name="roundType" value="1" />
+            <enum name="circleType" value="2" />
+        </attr>
+        <attr name="text_size" format="integer" />
+    </declare-styleable>
+</resources>

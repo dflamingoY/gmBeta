@@ -24,7 +24,7 @@ public class HomeGameData extends BaseRespData {
     }
 
     public static class DataBeanX {
-        private GameBean game;
+        private GameBean game;//游戲數據
         private List<BaseHomeBean> dy_blog;//博文
         private List<BaseHomeBean> dy_long;//长评
         private List<BaseHomeBean> dy_top_big;//顶部轮播
