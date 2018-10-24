@@ -108,12 +108,12 @@
             android:layout_marginRight="12dp"
             android:visibility="gone">
 
-            <org.xiaoxingqi.gmdoc.view.gameDetails.SqureImageView
+            <org.xiaoxingqi.gmdoc.wegidt.gameDetails.SqureImageView
                 android:id="@+id/iv_Details"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:scaleType="centerCrop"
-                android:src="@drawable/img_empty_avatar_back" />
+                />
 
             <ImageView
                 android:id="@+id/iv_Play"

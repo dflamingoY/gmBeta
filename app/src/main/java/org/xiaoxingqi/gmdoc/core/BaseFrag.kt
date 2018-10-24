@@ -10,7 +10,7 @@ import org.xiaoxingqi.gmdoc.parsent.BasePresent
 
 abstract class BaseFrag<T : BasePresent> : Fragment() {
 
-    private var mView: View? = null
+    var mView: View? = null
     var toast: Toast? = null
     var persent: T? = null
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

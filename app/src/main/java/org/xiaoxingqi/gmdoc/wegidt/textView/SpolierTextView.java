@@ -36,6 +36,7 @@ import org.xiaoxingqi.gmdoc.impl.IConstant;
 import org.xiaoxingqi.gmdoc.tools.AppTools;
 import org.xiaoxingqi.gmdoc.tools.FaceData;
 import org.xiaoxingqi.gmdoc.tools.SPUtils;
+import org.xiaoxingqi.gmdoc.wegidt.gifTools.GlideImageGetter;
 import org.xiaoxingqi.gmdoc.wegidt.imagespan.VerticalImageSpan;
 
 import java.io.IOException;
@@ -190,7 +191,7 @@ public class SpolierTextView extends AppCompatTextView {
         }
         setText(htmlStr);
         setMovementMethod(LinkMovementMethod.getInstance());
-        SpannableString tmep = (SpannableString) getText();
+        final SpannableString tmep = (SpannableString) getText();
         if (tmep instanceof Spannable) {
             final int end = tmep.length();
             final Spannable sp = (Spannable) getText();
@@ -268,8 +269,8 @@ public class SpolierTextView extends AppCompatTextView {
         }
 
         setText(tmep);
-        BackgroundColorSpan span = new BackgroundColorSpan(Color.parseColor("#31000000"));
-        int slop = ViewConfiguration.get(mContext).getScaledTouchSlop();
+        final BackgroundColorSpan span = new BackgroundColorSpan(Color.parseColor("#31000000"));
+        final int slop = ViewConfiguration.get(mContext).getScaledTouchSlop();
         setOnTouchListener(new OnTouchListener() {
 
             int downX, downY;

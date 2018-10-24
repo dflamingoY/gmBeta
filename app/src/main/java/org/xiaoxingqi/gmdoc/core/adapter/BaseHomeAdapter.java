@@ -28,7 +28,7 @@ public abstract class BaseHomeAdapter<T, H extends BaseAdapterHelper> extends Re
      */
     public BaseHomeAdapter(Context context, List<T> data) {
         mContext = context;
-        this.data = data == null ? new ArrayList<>() : data;
+        this.data = data == null ? new ArrayList<T>() : data;
     }
 
     @Override
