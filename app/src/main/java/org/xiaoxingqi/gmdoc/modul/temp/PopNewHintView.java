@@ -41,8 +41,6 @@ public class PopNewHintView {
                 /**
                  * 开始计时  3s 倒计时
                  */
-
-
                 valueAnimator = ValueAnimator.ofFloat(0, 1).setDuration(3000);
                 valueAnimator.start();
                 valueAnimator.addListener(new AnimatorListenerAdapter() {
