@@ -14,12 +14,7 @@ import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
 import android.view.WindowManager
 import android.os.Build
-import android.os.Handler
 import android.view.View
-import org.greenrobot.eventbus.EventBus
-import org.xiaoxingqi.gmdoc.eventbus.OnNewHintViewEvent
-import org.xiaoxingqi.gmdoc.modul.temp.TempAct1
-
 
 class MainActivity : BaseActivity() {
     val homeFrag = HomeFragment()
@@ -72,13 +67,6 @@ class MainActivity : BaseActivity() {
                     false
                 }
             }
-        }
-
-        flb.setOnClickListener {
-            startActivity(Intent(this, TempAct1::class.java))
-            Handler().postDelayed({
-                EventBus.getDefault().post(OnNewHintViewEvent())
-            }, 4000)
         }
     }
 

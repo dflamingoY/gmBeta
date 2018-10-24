@@ -1,4 +1,4 @@
-package org.xiaoxingqi.gmdoc.modul.temp;
+package org.xiaoxingqi.gmdoc.wegidt;
 
 import android.app.Activity;
 import android.view.View;
