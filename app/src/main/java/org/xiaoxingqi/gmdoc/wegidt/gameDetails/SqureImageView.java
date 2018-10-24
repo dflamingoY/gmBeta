@@ -4,10 +4,6 @@ import android.content.Context;
 import android.support.v7.widget.AppCompatImageView;
 import android.util.AttributeSet;
 
-/**
- * Created by yzm on 2017/11/10.
- */
-
 public class SqureImageView extends AppCompatImageView {
     public SqureImageView(Context context) {
         super(context);
@@ -21,10 +17,9 @@ public class SqureImageView extends AppCompatImageView {
         super(context, attrs, defStyleAttr);
     }
 
+
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-//        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-        int size = MeasureSpec.getSize(widthMeasureSpec);
-        setMeasuredDimension(size, size / 2);
+        super.onMeasure(widthMeasureSpec, widthMeasureSpec);
     }
 }

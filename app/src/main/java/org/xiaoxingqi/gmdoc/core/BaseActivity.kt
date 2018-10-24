@@ -6,13 +6,17 @@ import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.view.Window
 import android.view.WindowManager
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 
 abstract class BaseActivity : AppCompatActivity() {
-
+    protected var isTopActivity = true
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initSystem()
         setContent()
+        EventBus.getDefault().register(this)
         initView()
         initData()
         initEvent()
@@ -44,4 +48,23 @@ abstract class BaseActivity : AppCompatActivity() {
         setContentView(layoutId)
     }
 
+    override fun onResume() {
+        super.onResume()
+        isTopActivity = true
+    }
+
+    override fun onPause() {
+        super.onPause()
+        isTopActivity = false
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun onNewViewEvent(event: String) {
+
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        EventBus.getDefault().unregister(this)
+    }
 }

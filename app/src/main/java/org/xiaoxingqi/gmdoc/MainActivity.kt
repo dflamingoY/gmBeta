@@ -1,5 +1,6 @@
 package org.xiaoxingqi.gmdoc
 
+import android.content.Intent
 import android.graphics.Color
 import android.support.v4.app.Fragment
 import kotlinx.android.synthetic.main.activity_main.*
@@ -13,12 +14,16 @@ import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
 import android.view.WindowManager
 import android.os.Build
+import android.os.Handler
 import android.view.View
+import org.greenrobot.eventbus.EventBus
+import org.xiaoxingqi.gmdoc.eventbus.OnNewHintViewEvent
+import org.xiaoxingqi.gmdoc.modul.temp.TempAct1
 
 
 class MainActivity : BaseActivity() {
     val homeFrag = HomeFragment()
-//    val gameFrag = GameFragment()
+    //    val gameFrag = GameFragment()
 //    val lifeCircle = LifCircleFragment()
 //    val msgFrag = MsgFragment()
     var currentFrag: Fragment? = null
@@ -67,6 +72,13 @@ class MainActivity : BaseActivity() {
                     false
                 }
             }
+        }
+
+        flb.setOnClickListener {
+            startActivity(Intent(this, TempAct1::class.java))
+            Handler().postDelayed({
+                EventBus.getDefault().post(OnNewHintViewEvent())
+            }, 4000)
         }
     }
 

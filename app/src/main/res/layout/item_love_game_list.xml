@@ -40,7 +40,8 @@
         android:id="@+id/iv_Details"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:scaleType="centerCrop" />
+        android:scaleType="centerCrop"
+        />
 
     <TextView
         android:id="@+id/tv_Desc"

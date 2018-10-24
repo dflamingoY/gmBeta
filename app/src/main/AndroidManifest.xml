@@ -17,6 +17,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".modul.temp.TempAct1" />
+        <activity android:name=".modul.temp.TempAct2" />
+        <activity android:name=".modul.temp.TempAct3" />
     </application>
     <uses-permission android:name="android.permission.INTERNET" />
 </manifest>

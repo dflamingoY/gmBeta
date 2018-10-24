@@ -36,7 +36,7 @@ class HomeFragment : BaseFrag<HomePresent>() {
 
                 Glide.with(this@HomeFragment)
                         .load(data?.data?.dy_top_big?.get(0)?.cover)
-                        .into(headView.)
+//                        .into(headView.)
             }
 
             override fun activeSuccess(data: HomeActiveData?) {
