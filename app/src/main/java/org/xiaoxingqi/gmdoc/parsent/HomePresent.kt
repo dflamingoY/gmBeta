@@ -37,7 +37,7 @@ class HomePresent : BasePresent {
     }
 
     fun getAttributeData(flag: Int) {
-        addObaser(apiServer.get_HomeGame("home_contribute${IConstant.GET_END}&page=$flag"), object : Subscriber<HomeUserShareData>() {
+        addObaser(apiServer.get_HomeContrubite("home_contribute${IConstant.GET_END}&page=$flag"), object : Subscriber<HomeUserShareData>() {
             override fun onNext(t: HomeUserShareData?) {
                 tabCoallback?.let {
                     it.contibuteSuccess(t)
@@ -53,7 +53,7 @@ class HomePresent : BasePresent {
     }
 
     fun getActionData() {
-        addObaser(apiServer.get_HomeGame("activity_list${IConstant.GET_END}"), object : Subscriber<HomeActiveData>() {
+        addObaser(apiServer.get_HomeActiv("activity_list${IConstant.GET_END}"), object : Subscriber<HomeActiveData>() {
             override fun onNext(t: HomeActiveData?) {
                 tabCoallback?.let {
                     it.activeSuccess(t)

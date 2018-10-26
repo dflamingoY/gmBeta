@@ -38,8 +38,8 @@
             android:layout_height="wrap_content"
             android:layout_alignTop="@+id/cardLogo"
             android:layout_marginLeft="10dp"
-            android:layout_marginRight="12dp"
             android:layout_marginTop="4dp"
+            android:layout_marginRight="12dp"
             android:layout_toLeftOf="@+id/tv_addFollows"
             android:layout_toRightOf="@+id/cardLogo"
             android:clipChildren="false">
@@ -77,8 +77,8 @@
                 android:layout_width="28dp"
                 android:layout_height="28dp"
                 android:layout_alignParentRight="true"
-                android:paddingBottom="12dp"
-                android:paddingLeft="12dp" />
+                android:paddingLeft="12dp"
+                android:paddingBottom="12dp" />
 
             <RelativeLayout
                 android:layout_width="wrap_content"
@@ -129,10 +129,10 @@
             android:layout_marginRight="16dp"
             android:gravity="center"
             android:lineSpacingExtra="0sp"
-            android:paddingBottom="7dp"
             android:paddingLeft="12dp"
-            android:paddingRight="12dp"
             android:paddingTop="7dp"
+            android:paddingRight="12dp"
+            android:paddingBottom="7dp"
             android:text="+关注"
             android:textSize="14sp"
             android:visibility="gone" />
@@ -140,13 +140,13 @@
 
     </RelativeLayout>
 
-    <org.xiaoxingqi.gmdoc.view.textview.SpolierTextView
+    <org.xiaoxingqi.gmdoc.wegidt.textView.SpolierTextView
         android:id="@+id/tv_Title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="12dp"
-        android:layout_marginRight="12dp"
         android:layout_marginTop="10dp"
+        android:layout_marginRight="12dp"
         android:lineSpacingExtra="6sp"
         android:textColor="#282828"
         android:textSize="15sp"

@@ -1,5 +1,6 @@
 package org.xiaoxingqi.gmdoc.modul.home
 
+import android.content.Intent
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
@@ -18,6 +19,7 @@ import org.xiaoxingqi.gmdoc.entity.home.HomeActiveData
 import org.xiaoxingqi.gmdoc.entity.home.HomeGameData
 import org.xiaoxingqi.gmdoc.entity.home.HomeUserShareData
 import org.xiaoxingqi.gmdoc.impl.home.HomeTabCallback
+import org.xiaoxingqi.gmdoc.modul.game.GameDetailsActivity
 import org.xiaoxingqi.gmdoc.parsent.HomePresent
 import org.xiaoxingqi.gmdoc.tools.AppTools
 import org.xiaoxingqi.gmdoc.wegidt.ItemHomeView
@@ -25,7 +27,6 @@ import org.xiaoxingqi.gmdoc.wegidt.ItemHomeView
 class HomeFragment : BaseFrag<HomePresent>() {
     private lateinit var gameAdapter: BaseHomeAdapter<List<BaseHomeBean>, BaseAdapterHelper>
     private lateinit var adapter: QuickAdapter<HomeUserShareData.ContributeBean>
-    private lateinit var refresh: SwipeRefreshLayout
     private lateinit var gameRecycler: RecyclerView
     private val gameData by lazy {
         ArrayList<List<BaseHomeBean>>()
@@ -41,7 +42,6 @@ class HomeFragment : BaseFrag<HomePresent>() {
     override fun createPresent(): HomePresent {
         return HomePresent(activity!!, object : HomeTabCallback() {
             override fun gameSuccess(data: HomeGameData?) {
-                refresh.isRefreshing = false
                 gameData.clear()
                 data?.data?.dy_top_big
                 Glide.with(this@HomeFragment)
@@ -81,7 +81,6 @@ class HomeFragment : BaseFrag<HomePresent>() {
         mView!!.recyclerView.isNestedScrollingEnabled = false
         headView = LayoutInflater.from(activity).inflate(R.layout.home_heard_layout, mView!!.recyclerView, false)
         mView!!.relativeAction.alpha = 0f
-        refresh = view!!.refresh
         gameRecycler = headView.findViewById(R.id.recyclerView)
     }
 
@@ -104,6 +103,9 @@ class HomeFragment : BaseFrag<HomePresent>() {
                             val gameItem = ItemHomeView(activity!!)
                             gameItem.setData(bean)
                             linearContainer.addView(gameItem, params)
+                            gameItem.setOnClickListener {
+                                startActivity(Intent(activity, GameDetailsActivity::class.java))
+                            }
                         }
                     }
                 }
@@ -111,7 +113,7 @@ class HomeFragment : BaseFrag<HomePresent>() {
         }
         gameRecycler.layoutManager = LinearLayoutManager(activity)
         gameRecycler.isNestedScrollingEnabled = false
-//        gameRecycler.adapter = gameAdapter
+        gameRecycler.adapter = gameAdapter
         adapter = object : QuickAdapter<HomeUserShareData.ContributeBean>(activity, R.layout.item_dynamic, mData, headView) {
             override fun convert(helper: BaseAdapterHelper?, item: HomeUserShareData.ContributeBean?) {
 
@@ -121,13 +123,13 @@ class HomeFragment : BaseFrag<HomePresent>() {
     }
 
     override fun bindEvent() {
-        refresh.setOnRefreshListener {
-            persent?.let {
-                it.getActionData()
-                it.getAttributeData(0)
-                it.getGameData()
-            }
-        }
+        /*
+        * persent?.let {
+                  it.getActionData()
+                  it.getAttributeData(0)
+                  it.getGameData()
+              }
+        * */
     }
 
     override fun request(flag: Int) {
