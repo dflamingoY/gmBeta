@@ -16,6 +16,12 @@ import android.provider.MediaStore;
 import android.view.Gravity;
 import android.widget.Toast;
 
+import com.nostra13.universalimageloader.cache.disc.naming.HashCodeFileNameGenerator;
+import com.nostra13.universalimageloader.cache.memory.impl.LruMemoryCache;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.nostra13.universalimageloader.core.download.BaseImageDownloader;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Locale;
@@ -24,6 +30,28 @@ import java.util.regex.Pattern;
 public class AppTools {
     public final static String emailRegex = "^[a-z0-9]+([._\\\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$";
     public final static String telRegex = "[1][34578]\\d{9}";
+    private static ImageLoaderConfiguration config = null;
+
+
+    public static void initImageLoader(Context context) {
+        if (null != config) {
+            return;
+        }
+        config = new ImageLoaderConfiguration.Builder(context)
+                .denyCacheImageMultipleSizesInMemory()
+                .memoryCache(new LruMemoryCache(2 * 1024 * 1024))
+                .memoryCacheSizePercentage(13)
+                .diskCacheSize(100 * 1024 * 1024)
+                .diskCacheFileCount(200)
+                .diskCacheFileNameGenerator(new HashCodeFileNameGenerator())
+                .threadPriority(Thread.MAX_PRIORITY)
+                .imageDownloader(new BaseImageDownloader(context))
+                .writeDebugLogs() // Remove for release app
+                .build();
+        ImageLoader.getInstance().init(config);
+    }
+
+
     /**
      * @param context
      * @param value

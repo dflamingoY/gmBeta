@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
-
+apply plugin: 'me.tatarka.retrolambda'
 android {
     compileSdkVersion 27
     defaultConfig {
@@ -14,6 +14,11 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -60,10 +65,11 @@ dependencies {
     api 'com.squareup.retrofit2:converter-scalars:2.1.0'
     //    implementation 'com.github.bumptech.glide:glide:4.0.0-RC1'
     //    annotationProcessor 'com.github.bumptech.glide:compiler:4.0.0-RC1'
-    compile 'org.greenrobot:eventbus:3.0.0'
+    api 'org.greenrobot:eventbus:3.0.0'
     api 'com.github.bumptech.glide:glide:3.6.1'
     api 'com.github.bumptech.glide:okhttp3-integration:1.4.0@aar'
     api 'com.android.support:cardview-v7:27.1.1'
     implementation 'com.nineoldandroids:library:2.4.0'
-//    implementation project(':library')
+    //    implementation project(':library')
+    implementation files('libs/universal-image-loader-1.9.4-with-sources.jar')
 }

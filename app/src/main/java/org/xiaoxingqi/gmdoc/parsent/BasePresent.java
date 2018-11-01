@@ -1,6 +1,7 @@
 package org.xiaoxingqi.gmdoc.parsent;
 
 import android.content.Context;
+import android.util.Log;
 
 import org.xiaoxingqi.gmdoc.core.http.HttpServer;
 import org.xiaoxingqi.gmdoc.impl.ApiServer;
@@ -22,7 +23,8 @@ public abstract class BasePresent {
         apiServer = HttpServer.getInstance(context).getApiServer();
     }
 
-    protected void addObaser(Observable observable, Subscriber subscriber) {
+    void addObaser(Observable observable, Subscriber subscriber) {
+        Log.d("Mozator", "game add");
         composite.add(observable.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(subscriber));
     }
 

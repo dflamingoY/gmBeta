@@ -2,6 +2,7 @@ package org.xiaoxingqi.gmdoc.impl;
 
 
 import org.xiaoxingqi.gmdoc.entity.TokenData;
+import org.xiaoxingqi.gmdoc.entity.game.GameDetailsData;
 import org.xiaoxingqi.gmdoc.entity.home.HomeActiveData;
 import org.xiaoxingqi.gmdoc.entity.home.HomeGameData;
 import org.xiaoxingqi.gmdoc.entity.home.HomeUserShareData;
@@ -27,5 +28,8 @@ public interface ApiServer {
 
     @GET
     Observable<HomeUserShareData> get_HomeContrubite(@Url String url);
+
+    @GET
+    Observable<GameDetailsData> get_GameDetails(@Url String url);
 
 }

@@ -1,6 +1,7 @@
 package org.xiaoxingqi.gmdoc.core
 
 import android.app.Application
+import org.xiaoxingqi.gmdoc.tools.AppTools
 
 class App : Application() {
 
@@ -10,5 +11,6 @@ class App : Application() {
 
     override fun onCreate() {
         super.onCreate()
+        AppTools.initImageLoader(this)
     }
 }

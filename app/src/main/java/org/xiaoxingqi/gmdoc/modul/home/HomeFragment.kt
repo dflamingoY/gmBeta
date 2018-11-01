@@ -262,7 +262,7 @@ class HomeFragment : BaseFrag<HomePresent>() {
                             gameItem.setData(bean)
                             linearContainer.addView(gameItem, params)
                             gameItem.setOnClickListener {
-                                startActivity(Intent(activity, GameDetailsActivity::class.java))
+                                startActivity(Intent(activity, GameDetailsActivity::class.java).putExtra("gameId", bean.id))
                             }
                         }
                     }
@@ -272,6 +272,10 @@ class HomeFragment : BaseFrag<HomePresent>() {
         gameRecycler.layoutManager = LinearLayoutManager(activity)
         gameRecycler.isNestedScrollingEnabled = false
         gameRecycler.adapter = gameAdapter
+        gameRecycler.isFocusableInTouchMode = false
+        tv_TopDesc.isFocusableInTouchMode = true
+        tv_TopDesc.isFocusable = true
+
         adapter = object : QuickAdapter<HomeUserShareData.ContributeBean>(activity, R.layout.item_dynamic, mData, headView) {
             override fun convert(helper: BaseAdapterHelper?, item: HomeUserShareData.ContributeBean?) {
 
