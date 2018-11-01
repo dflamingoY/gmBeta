@@ -6,22 +6,16 @@ import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.view.Window
 import android.view.WindowManager
-import org.greenrobot.eventbus.EventBus
-import org.greenrobot.eventbus.Subscribe
-import org.greenrobot.eventbus.ThreadMode
-import org.xiaoxingqi.gmdoc.parsent.BasePresent
 
-abstract class BaseActivity<T : BasePresent> : AppCompatActivity() {
-    protected var isTopActivity = true
-    var persent: T? = null
+abstract class BaseAct : AppCompatActivity() {
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initSystem()
         setContent()
-        EventBus.getDefault().register(this)
         initView()
         initData()
-        persent = createPresent()
         initEvent()
     }
 
@@ -37,13 +31,6 @@ abstract class BaseActivity<T : BasePresent> : AppCompatActivity() {
         }
     }
 
-    abstract fun createPresent(): T
-    abstract fun setContent()
-    abstract fun initView()
-    abstract fun initData()
-    abstract fun initEvent()
-    abstract fun request()
-
     fun setContent(view: View) {
         setContentView(view)
     }
@@ -52,23 +39,12 @@ abstract class BaseActivity<T : BasePresent> : AppCompatActivity() {
         setContentView(layoutId)
     }
 
-    override fun onResume() {
-        super.onResume()
-        isTopActivity = true
-    }
+    abstract fun setContent()
 
-    override fun onPause() {
-        super.onPause()
-        isTopActivity = false
-    }
+    abstract fun initView()
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    fun onNewViewEvent(event: String) {
+    abstract fun initData()
 
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        EventBus.getDefault().unregister(this)
-    }
+    abstract fun initEvent()
+    abstract fun request()
 }

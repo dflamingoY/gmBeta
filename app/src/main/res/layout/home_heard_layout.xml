@@ -24,11 +24,11 @@
             android:layout_marginRight="14dp"
             android:layout_marginBottom="12dp"
             android:ellipsize="end"
+            android:focusableInTouchMode="true"
             android:shadowColor="#80000000"
             android:shadowDy="1"
             android:shadowRadius="1"
             android:singleLine="true"
-            android:text="大岁的老将萨的角色得了三等奖垃圾的垃圾的了大岁的卡死大岁的"
             android:textColor="#ffffff"
             android:textSize="15sp" />
 
@@ -38,7 +38,8 @@
         android:layout_width="70dp"
         android:layout_height="23dp"
         android:layout_marginLeft="14dp"
-        android:layout_marginTop="14dp" />
+        android:layout_marginTop="14dp"
+        android:src="@mipmap/img_mark_community_activity" />
 
     <org.xiaoxingqi.gmdoc.wegidt.LinearScrollView
         android:id="@+id/horizontalScrollview"
@@ -63,7 +64,8 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content"
+        android:focusableInTouchMode="false" />
 
     <LinearLayout
         android:id="@+id/linear_hint"
@@ -98,17 +100,13 @@
         <!--   用户状态-->
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="48dp"
-
-            >
+            android:layout_height="48dp">
 
             <ImageView
                 android:layout_width="22dp"
                 android:layout_height="22dp"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="16dp"
-
-                />
+                android:layout_marginLeft="16dp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -118,6 +116,7 @@
                 android:text="玩家贡献的游戏截图"
                 android:textColor="#282828"
                 android:textSize="16sp" />
+
         </RelativeLayout>
 
         <View

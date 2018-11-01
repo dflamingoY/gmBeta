@@ -13,20 +13,16 @@
         app:offlineLayout="@layout/view_offline"
         app:progressLayout="@layout/view_progress">
 
-        <me.dkzwm.smoothrefreshlayout.MaterialSmoothRefreshLayout
-            android:id="@+id/swipe_refresh"
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/swipeRefresh"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/color_gray_division"
-            android:focusable="true"
-            android:focusableInTouchMode="true">
+            android:layout_height="match_parent">
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
-
-        </me.dkzwm.smoothrefreshlayout.MaterialSmoothRefreshLayout>
+        </android.support.v4.widget.SwipeRefreshLayout>
 
     </org.xiaoxingqi.gmdoc.wegidt.TransLayout>
 

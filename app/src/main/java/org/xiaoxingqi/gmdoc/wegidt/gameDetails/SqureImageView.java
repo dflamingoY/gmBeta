@@ -17,9 +17,9 @@ public class SqureImageView extends AppCompatImageView {
         super(context, attrs, defStyleAttr);
     }
 
-
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        super.onMeasure(widthMeasureSpec, widthMeasureSpec);
+        int size = MeasureSpec.getSize(widthMeasureSpec);
+        setMeasuredDimension(size, size / 2);
     }
 }

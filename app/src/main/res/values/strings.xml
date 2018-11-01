@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">GmBeta</string>
+    <string name="string_all_game_count"><Data><![CDATA[全部28个机种的游戏可以在<font color="#ff7a31" >游戏库</font>中浏览 ]]></Data></string>
 </resources>

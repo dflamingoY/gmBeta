@@ -65,5 +65,5 @@ dependencies {
     api 'com.github.bumptech.glide:okhttp3-integration:1.4.0@aar'
     api 'com.android.support:cardview-v7:27.1.1'
     implementation 'com.nineoldandroids:library:2.4.0'
-    implementation project(':library')
+//    implementation project(':library')
 }

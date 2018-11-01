@@ -1,11 +1,9 @@
 package org.xiaoxingqi.gmdoc
 
-import android.content.Intent
 import android.graphics.Color
 import android.support.v4.app.Fragment
 import kotlinx.android.synthetic.main.activity_main.*
 import org.xiaoxingqi.gmdoc.core.App
-import org.xiaoxingqi.gmdoc.core.BaseActivity
 import org.xiaoxingqi.gmdoc.core.http.HttpServer
 import org.xiaoxingqi.gmdoc.entity.TokenData
 import org.xiaoxingqi.gmdoc.modul.home.HomeFragment
@@ -14,9 +12,12 @@ import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
 import android.view.WindowManager
 import android.os.Build
+import android.support.v4.widget.DrawerLayout
+import android.view.Gravity
 import android.view.View
+import org.xiaoxingqi.gmdoc.core.BaseAct
 
-class MainActivity : BaseActivity() {
+class MainActivity : BaseAct() {
     val homeFrag = HomeFragment()
     //    val gameFrag = GameFragment()
 //    val lifeCircle = LifCircleFragment()
@@ -35,6 +36,14 @@ class MainActivity : BaseActivity() {
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
             window.statusBarColor = Color.TRANSPARENT
         }
+        drawerlayout.closeDrawers()
+
+        val params = left_drawer.getLayoutParams() as DrawerLayout.LayoutParams
+        params.gravity = Gravity.START
+        left_drawer.setLayoutParams(params)
+//        mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+
+
     }
 
     override fun initData() {
@@ -85,8 +94,6 @@ class MainActivity : BaseActivity() {
                     override fun onError(e: Throwable?) {
                     }
                 })
-
-
     }
 
     private fun switchFragment(type: TypeFragment) {
