@@ -4,6 +4,7 @@ import android.graphics.Bitmap
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
+import com.bumptech.glide.Glide
 import com.nostra13.universalimageloader.core.ImageLoader
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener
 import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener
@@ -36,6 +37,10 @@ class GameDetailsActivity : BaseActivity<GameDetailPersent>() {
         return GameDetailPersent(this, object : GameDetailCallBack {
 
             override fun gameDetails(data: GameDetailsData?) {
+                Glide.with(this@GameDetailsActivity)
+                        .load(data?.game?.cover)
+                        .into(headView.iv_Game_Logo)
+
                 ImageLoader.getInstance().loadImage(data?.game?.cover, object : SimpleImageLoadingListener() {
                     override fun onLoadingComplete(imageUri: String?, view: View?, loadedImage: Bitmap?) {
                         super.onLoadingComplete(imageUri, view, loadedImage)
@@ -70,7 +75,7 @@ class GameDetailsActivity : BaseActivity<GameDetailPersent>() {
 
     override fun initView() {
         gameRecycler.layoutManager = LinearLayoutManager(this)
-        headView = LayoutInflater.from(this).inflate(R.layout.game_head, null, false)
+        headView = LayoutInflater.from(this).inflate(R.layout.game_head, gameRecycler, false)
         setSupportActionBar(toolbar)
         supportActionBar?.let {
             it.setDisplayHomeAsUpEnabled(true)

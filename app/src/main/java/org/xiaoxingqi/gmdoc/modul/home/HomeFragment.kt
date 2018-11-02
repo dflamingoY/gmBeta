@@ -251,10 +251,6 @@ class HomeFragment : BaseFrag<HomePresent>() {
                             viewDivision.setBackgroundColor(resources.getColor(R.color.color_PS_VR))
                         }
                     }
-
-
-
-
                     linearContainer.removeAllViews()
                     if (item != null) {
                         for (bean in item) {

@@ -17,11 +17,11 @@ abstract class BaseActivity<T : BasePresent> : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initSystem()
+        persent = createPresent()
         setContent()
         EventBus.getDefault().register(this)
         initView()
         initData()
-        persent = createPresent()
         initEvent()
     }
 
