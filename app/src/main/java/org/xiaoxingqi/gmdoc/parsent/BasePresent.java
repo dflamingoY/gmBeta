@@ -24,7 +24,6 @@ public abstract class BasePresent {
     }
 
     void addObaser(Observable observable, Subscriber subscriber) {
-        Log.d("Mozator", "game add");
         composite.add(observable.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(subscriber));
     }
 

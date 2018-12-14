@@ -10,4 +10,8 @@ public interface IConstant {
      * 是否剧透
      */
     String IS_SPOLIER = "isSpolier";
+    /**
+     * 缺失图片的端口
+     */
+    String PICSPORT = "http://cdn.gmdoc.com/";
 }

@@ -5,6 +5,9 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.animation.GlideAnimation
+import com.bumptech.glide.request.target.BitmapImageViewTarget
 import com.nostra13.universalimageloader.core.ImageLoader
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener
 import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener
@@ -39,32 +42,13 @@ class GameDetailsActivity : BaseActivity<GameDetailPersent>() {
             override fun gameDetails(data: GameDetailsData?) {
                 Glide.with(this@GameDetailsActivity)
                         .load(data?.game?.cover)
-                        .into(headView.iv_Game_Logo)
-
-                ImageLoader.getInstance().loadImage(data?.game?.cover, object : SimpleImageLoadingListener() {
-                    override fun onLoadingComplete(imageUri: String?, view: View?, loadedImage: Bitmap?) {
-                        super.onLoadingComplete(imageUri, view, loadedImage)
-                        Observable.create(Observable.OnSubscribe<Bitmap> {
-                            it.onNext(FastBlur().fastblur(loadedImage, 60, headView.iv_Bluer_Bg))
-                            it.onCompleted()
-                        }).observeOn(Schedulers.io())
-                                .subscribeOn(AndroidSchedulers.mainThread())
-                                .subscribe(object : Subscriber<Bitmap>() {
-                                    override fun onNext(t: Bitmap?) {
-                                        headView.iv_Bluer_Bg.setImageBitmap(t)
-                                    }
-
-                                    override fun onCompleted() {
-
-                                    }
-
-                                    override fun onError(e: Throwable?) {
-                                    }
-                                })
-                    }
-                })
-
-
+                        .asBitmap()
+                        .into(object : BitmapImageViewTarget(headView.iv_Game_Logo) {
+                            override fun onResourceReady(resource: Bitmap?, glideAnimation: GlideAnimation<in Bitmap>?) {
+                                super.onResourceReady(resource, glideAnimation)
+                                headView.iv_Bluer_Bg.setImageBitmap(FastBlur().fastblur(resource, 60, headView.iv_Bluer_Bg))
+                            }
+                        })
             }
         })
     }

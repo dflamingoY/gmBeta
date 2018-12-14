@@ -25,6 +25,7 @@ import org.xiaoxingqi.gmdoc.entity.home.HomeGameData
 import org.xiaoxingqi.gmdoc.entity.home.HomeUserShareData
 import org.xiaoxingqi.gmdoc.impl.home.HomeTabCallback
 import org.xiaoxingqi.gmdoc.modul.game.GameDetailsActivity
+import org.xiaoxingqi.gmdoc.modul.game.GameListActicivty
 import org.xiaoxingqi.gmdoc.parsent.HomePresent
 import org.xiaoxingqi.gmdoc.tools.AppTools
 import org.xiaoxingqi.gmdoc.wegidt.ItemHomeView
@@ -250,6 +251,11 @@ class HomeFragment : BaseFrag<HomePresent>() {
                             mTvTypeName.text = "PlayStation VR 最新游戏"
                             viewDivision.setBackgroundColor(resources.getColor(R.color.color_PS_VR))
                         }
+                    }
+
+                    helper.getView(R.id.tvfindAll).setOnClickListener {
+                        startActivity(Intent(activity, GameListActicivty::class.java)
+                                .putExtra("platfromId", name))
                     }
                     linearContainer.removeAllViews()
                     if (item != null) {

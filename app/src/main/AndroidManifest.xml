@@ -18,6 +18,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".modul.game.GameDetailsActivity" />
+        <activity android:name=".modul.game.GameListActicivty" />
     </application>
     <uses-permission android:name="android.permission.INTERNET" />
 </manifest>

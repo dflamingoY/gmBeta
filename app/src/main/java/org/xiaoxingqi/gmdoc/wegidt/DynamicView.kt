@@ -19,8 +19,6 @@ class DynamicView : BaseLayout {
 
     fun setData(bean : HomeUserShareData.ContributeBean) {
 
-
-
     }
 
 }
