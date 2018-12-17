@@ -12,6 +12,7 @@ import android.view.ViewGroup
 import android.view.ViewTreeObserver
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.RelativeLayout
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.animation.GlideAnimation
@@ -197,7 +198,7 @@ class GameDetailsActivity : BaseActivity<GameDetailPersent>() {
     }
 
     private var allLength = 0
-    private var commentLocation = 100f
+    private var commentLocation = 500f
     private var bowenLocation = 1080f
     override fun initEvent() {
         gameRecycler.addOnScrollListener(object : RecyclerView.OnScrollListener() {
@@ -216,11 +217,28 @@ class GameDetailsActivity : BaseActivity<GameDetailPersent>() {
                 }
                 val dy = allLength + AppTools.dp2px(this@GameDetailsActivity, 80) + AppTools.dp2px(this@GameDetailsActivity, 38)
                 if (dy >= bowenLocation) {
-                    titleDyncmia.alpha = (1 - (bowenLocation - dy) / AppTools.dp2px(this@GameDetailsActivity, 38).toFloat())
-                } else {
-                    titleDyncmia.alpha=0f
-                }
+                    var alpha = (-(bowenLocation - dy) / AppTools.dp2px(this@GameDetailsActivity, 38).toFloat())
+                    if (alpha >= 1) {
+                        alpha = 1f
+                    }
+                    val layoutComment = commentTitle.layoutParams
+                    layoutComment.height = (AppTools.dp2px(this@GameDetailsActivity, 38) * (1 - alpha) + 0.5f).toInt()
+                    commentTitle.layoutParams = layoutComment
 
+                    val params = frameBowen.layoutParams as RelativeLayout.LayoutParams
+                    params.setMargins(0, (AppTools.dp2px(this@GameDetailsActivity, 38) * (1 - alpha) + 0.5f).toInt(), 0, 0)
+                    params.height = AppTools.dp2px(this@GameDetailsActivity, 38)
+                    frameBowen.layoutParams = params
+                } else {
+                    val layoutComment = commentTitle.layoutParams
+                    layoutComment.height = AppTools.dp2px(this@GameDetailsActivity, 38)
+                    commentTitle.layoutParams = layoutComment
+
+                    val params = frameBowen.layoutParams as RelativeLayout.LayoutParams
+                    params.setMargins(0, AppTools.dp2px(this@GameDetailsActivity, 38), 0, 0)
+                    params.height = AppTools.dp2px(this@GameDetailsActivity, 38)
+                    frameBowen.layoutParams = params
+                }
             }
         })
         headView.viewTreeObserver.addOnGlobalLayoutListener {
