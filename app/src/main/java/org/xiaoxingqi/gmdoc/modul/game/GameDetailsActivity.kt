@@ -1,12 +1,15 @@
 package org.xiaoxingqi.gmdoc.modul.game
 
 import android.graphics.Bitmap
+import android.graphics.Color
+import android.os.Build
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.text.TextUtils
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewTreeObserver
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -177,9 +180,11 @@ class GameDetailsActivity : BaseActivity<GameDetailPersent>() {
     }
 
     override fun initData() {
+        window.decorView.overlay
         gameId = intent.getStringExtra("gameId")
         adapter = object : QuickAdapter<HomeUserShareData.ContributeBean>(this, R.layout.item_dynamic, mData, headView) {
             override fun convert(helper: BaseAdapterHelper?, item: HomeUserShareData.ContributeBean?) {
+
 
             }
         }
@@ -191,19 +196,37 @@ class GameDetailsActivity : BaseActivity<GameDetailPersent>() {
         persent?.getAllDynamic(gameId, "3", 0)
     }
 
+    private var allLength = 0
+    private var commentLocation = 100f
+    private var bowenLocation = 1080f
     override fun initEvent() {
         gameRecycler.addOnScrollListener(object : RecyclerView.OnScrollListener() {
 
             override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
-
-                
-                Log.d("Mozator", "scrollY :    $dy     " + recyclerView?.scaleY +"     "+recyclerView?.scrollX)
-
-
-
+                allLength += dy
+                if (allLength <= AppTools.dp2px(this@GameDetailsActivity, 238)) {
+                    appbar.setBackgroundColor(Color.argb((allLength / AppTools.dp2px(this@GameDetailsActivity, 238).toFloat() * 255 + 0.5f).toInt(), 0, 0, 0))
+                } else {
+                    appbar.setBackgroundColor(Color.BLACK)
+                }
+                if (allLength + AppTools.dp2px(this@GameDetailsActivity, 80) >= commentLocation) {
+                    commentTitle.visibility = View.VISIBLE
+                } else {
+                    commentTitle.visibility = View.GONE
+                }
+                val dy = allLength + AppTools.dp2px(this@GameDetailsActivity, 80) + AppTools.dp2px(this@GameDetailsActivity, 38)
+                if (dy >= bowenLocation) {
+                    titleDyncmia.alpha = (1 - (bowenLocation - dy) / AppTools.dp2px(this@GameDetailsActivity, 38).toFloat())
+                } else {
+                    titleDyncmia.alpha=0f
+                }
 
             }
         })
+        headView.viewTreeObserver.addOnGlobalLayoutListener {
+            commentLocation = headView.tabCommentTitle.y
+            bowenLocation = headView.tabTitleDyncmia.y
+        }
     }
 
     override fun request() {

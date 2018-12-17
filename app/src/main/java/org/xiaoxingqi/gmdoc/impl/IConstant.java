@@ -14,4 +14,8 @@ public interface IConstant {
      * 缺失图片的端口
      */
     String PICSPORT = "http://cdn.gmdoc.com/";
+    /**
+     * 用户信息
+     */
+    String USERINFO = "userInfo";
 }

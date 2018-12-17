@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
     android:orientation="vertical">
 
     <RelativeLayout
@@ -37,9 +38,7 @@
                 android:layout_marginBottom="24dp"
                 android:adjustViewBounds="true"
                 android:maxHeight="130dp"
-                android:scaleType="fitCenter"
-
-                />
+                android:scaleType="fitCenter" />
 
         </RelativeLayout>
 
@@ -292,5 +291,231 @@
         app:title_color="#888888"
         app:title_select_color="#282828" />
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="14dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginRight="14dp">
+
+        <TextView
+            android:id="@+id/tv_ShortCommentCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="短评"
+            android:textColor="#282828"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/tv_AddShotComment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/shape_yellow"
+            android:gravity="center"
+            android:paddingLeft="16dp"
+            android:paddingTop="5dp"
+            android:paddingRight="16dp"
+            android:paddingBottom="5dp"
+            android:text="写短评"
+            android:textColor="#ffffff"
+            android:textSize="14sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/linearShortContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/isHaveShort"
+            android:layout_width="179dp"
+            android:layout_height="101dp"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="30dp"
+            android:src="@mipmap/img_empty_lie" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/color_gray_division" />
+
+    <TextView
+        android:id="@+id/tv_FindMoreShort"
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:gravity="center"
+        android:text="查看更多短评"
+        android:textColor="#ff863e"
+        android:textSize="14sp"
+        android:visibility="gone" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="@color/color_gray_division" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="14dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginRight="14dp">
+
+        <TextView
+            android:id="@+id/tv_LongCommentCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="长评"
+            android:textColor="#282828"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/tv_addLongComment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/shape_yellow"
+            android:gravity="center"
+            android:paddingLeft="16dp"
+            android:paddingTop="5dp"
+            android:paddingRight="16dp"
+            android:paddingBottom="5dp"
+            android:text="写长评"
+            android:textColor="#ffffff"
+            android:textSize="14sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/linearLongCommentContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/iv_IsLongComment"
+            android:layout_width="179dp"
+            android:layout_height="101dp"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="30dp"
+            android:src="@mipmap/img_empty_lie" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/color_gray_division" />
+
+    <TextView
+        android:id="@+id/tv_FindMoreLong"
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:gravity="center"
+        android:text="查看更多长评"
+        android:textColor="#ff863e"
+        android:textSize="14sp"
+        android:visibility="gone" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="@color/color_gray_division" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="14dp"
+            android:text="#标签#"
+            android:textColor="#282828"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/tv_AddTag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="14dp"
+            android:layout_marginRight="14dp"
+            android:letterSpacing="0.03"
+            android:lineSpacingExtra="6.5sp"
+            android:text="+添加标签"
+            android:textColor="#ff7a31"
+            android:textSize="13sp" />
+
+    </RelativeLayout>
+
+    <org.xiaoxingqi.gmdoc.wegidt.gameDetails.GameTagView
+        android:id="@+id/gameTabView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="@color/color_gray_division" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="14dp"
+            android:text="包含#标签#的动态和博文"
+            android:textColor="#666666"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/tv_HintUseTag"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="14dp"
+            android:gravity="center_vertical"
+            android:letterSpacing="0.03"
+            android:lineSpacingExtra="6.5sp"
+            android:text="如何使用标签？"
+            android:textColor="#2d7dd2"
+            android:textSize="13sp" />
+    </RelativeLayout>
+
+    <org.xiaoxingqi.gmdoc.wegidt.CoondationTabLayout
+        android:id="@+id/tabTitleDyncmia"
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        android:background="@color/color_white"
+        app:arrayText="@array/game_artical"
+        app:title_color="#888888"
+        app:title_select_color="#282828" />
 
 </LinearLayout>

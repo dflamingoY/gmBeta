@@ -7,6 +7,7 @@
 
     <TextView
         android:id="@+id/tv_ShowText"
+        android:layoutAnimation="@anim/text_expend_anim"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:lineSpacingExtra="6.5sp"

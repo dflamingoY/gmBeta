@@ -1,5 +1,6 @@
 package org.xiaoxingqi.gmdoc.wegidt;
 
+import android.animation.LayoutTransition;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.TextView;
@@ -26,6 +27,7 @@ public class ExpendTextView extends BaseLayout {
     }
 
     private void initView() {
+//        setLayoutTransition(new LayoutTransition());
         mTvShowText = findViewById(R.id.tv_ShowText);
         mTvExpend = findViewById(R.id.tv_Expend);
         mTvExpend.setOnClickListener(v -> {

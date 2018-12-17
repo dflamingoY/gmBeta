@@ -16,7 +16,6 @@
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:background="#00ffffff"
-        android:visibility="visible"
         app:elevation="0dp">
 
         <android.support.v7.widget.Toolbar
@@ -37,5 +36,35 @@
 
         </android.support.v7.widget.Toolbar>
     </android.support.design.widget.AppBarLayout>
+
+    <RelativeLayout
+        android:id="@+id/linearTab"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/appbar"
+        android:orientation="vertical">
+
+        <org.xiaoxingqi.gmdoc.wegidt.CoondationTabLayout
+            android:id="@+id/commentTitle"
+            android:layout_width="match_parent"
+            android:layout_height="38dp"
+            android:background="@color/colorWhite"
+            android:visibility="gone"
+            app:arrayText="@array/game_Score"
+            app:title_color="#888888"
+            app:title_select_color="#282828" />
+
+        <org.xiaoxingqi.gmdoc.wegidt.CoondationTabLayout
+            android:id="@+id/titleDyncmia"
+            android:alpha="0"
+            android:layout_width="match_parent"
+            android:layout_height="38dp"
+            android:background="@color/color_white"
+            android:backgroundTint="@color/colorWhite"
+            app:arrayText="@array/game_artical"
+            app:title_color="#888888"
+            app:title_select_color="#282828" />
+
+    </RelativeLayout>
 
 </RelativeLayout>
