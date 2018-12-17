@@ -1,5 +1,6 @@
 package org.xiaoxingqi.gmdoc.modul.game
 
+import android.content.Intent
 import android.support.v7.widget.LinearLayoutManager
 import android.text.TextUtils
 import android.view.View
@@ -77,7 +78,10 @@ class GameListActicivty : BaseActivity<GameListPresent>() {
     }
 
     override fun initEvent() {
+        adapter.setOnItemClickListener { view, position ->
 
+            startActivity(Intent(this, GameDetailsActivity::class.java).putExtra("gameId", mData[position].id))
+        }
     }
 
     override fun request() {

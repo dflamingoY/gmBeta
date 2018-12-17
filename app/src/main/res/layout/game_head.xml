@@ -33,8 +33,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_centerInParent="true"
-                android:layout_marginBottom="24dp"
                 android:layout_marginTop="14dp"
+                android:layout_marginBottom="24dp"
                 android:adjustViewBounds="true"
                 android:maxHeight="130dp"
                 android:scaleType="fitCenter"
@@ -48,10 +48,10 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
         android:layout_marginLeft="14dp"
+        android:layout_marginTop="11dp"
         android:layout_marginRight="14dp"
-        android:layout_marginTop="11dp">
+        android:layout_marginBottom="20dp">
 
         <TextView
             android:id="@+id/tv_GameTitle"
@@ -73,8 +73,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:layout_marginRight="14dp"
                 android:layout_marginTop="2dp"
+                android:layout_marginRight="14dp"
                 android:text="社区评分"
                 android:textColor="#666666"
                 android:textSize="15sp" />
@@ -140,17 +140,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="14dp"
-        android:layout_marginRight="14dp"
         android:layout_marginTop="12dp"
+        android:layout_marginRight="14dp"
         android:orientation="horizontal">
 
         <ImageView
             android:id="@+id/iv_Wish"
             android:layout_width="78dp"
             android:layout_height="wrap_content"
-            android:src="@mipmap/btn_fav_default"
-
-            />
+            android:src="@mipmap/btn_fav_default" />
 
         <ImageView
             android:id="@+id/iv_Play"
@@ -211,8 +209,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="14dp"
-        android:layout_marginRight="14dp"
-        android:layout_marginTop="5dp" />
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="14dp" />
 
 
     <View
@@ -227,8 +225,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="14dp"
-        android:layout_marginRight="14dp"
-        android:layout_marginTop="14dp">
+        android:layout_marginTop="14dp"
+        android:layout_marginRight="14dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -250,8 +248,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="14dp"
-        android:layout_marginTop="11dp">
+        android:layout_marginTop="11dp"
+        android:layout_marginBottom="14dp">
 
         <HorizontalScrollView
             android:id="@+id/scrollView"
@@ -272,9 +270,9 @@
         <View
             android:layout_width="10dp"
             android:layout_height="match_parent"
+            android:layout_alignTop="@+id/scrollView"
             android:layout_alignBottom="@+id/scrollView"
             android:layout_alignParentRight="true"
-            android:layout_alignTop="@+id/scrollView"
             android:background="@drawable/shape_game_details_desc_gradent"
 
             />
@@ -285,4 +283,14 @@
         android:layout_width="match_parent"
         android:layout_height="10dp"
         android:background="@color/color_gray_division" />
+
+    <org.xiaoxingqi.gmdoc.wegidt.CoondationTabLayout
+        android:id="@+id/tabCommentTitle"
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        app:arrayText="@array/game_Score"
+        app:title_color="#888888"
+        app:title_select_color="#282828" />
+
+
 </LinearLayout>

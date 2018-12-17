@@ -2,6 +2,7 @@ package org.xiaoxingqi.gmdoc.parsent
 
 import android.content.Context
 import org.xiaoxingqi.gmdoc.entity.game.GameDetailsData
+import org.xiaoxingqi.gmdoc.entity.home.HomeUserShareData
 import org.xiaoxingqi.gmdoc.impl.IConstant
 import org.xiaoxingqi.gmdoc.impl.game.GameDetailCallBack
 import rx.Subscriber
@@ -36,6 +37,24 @@ class GameDetailPersent : BasePresent {
         })
     }
     //获取游戏的博文
+
+    fun getAllDynamic(gameId: String, type: String, page: Int) {
+        addObaser(apiServer.get_GameDynamic("label_dynamic/${IConstant.GET_END}&game_id=$gameId&type=$type&page=$page"), object : Subscriber<HomeUserShareData>() {
+            override fun onNext(t: HomeUserShareData?) {
+                callBack?.let {
+                    it.gameDynamic(t)
+                }
+            }
+
+            override fun onCompleted() {
+
+            }
+
+            override fun onError(e: Throwable?) {
+
+            }
+        })
+    }
 
     //添加心愿单
 

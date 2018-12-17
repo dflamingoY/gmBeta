@@ -36,4 +36,6 @@ public interface ApiServer {
     @GET
     Observable<GameListData> get_GameList(@Url String url);
 
+    @GET
+    Observable<HomeUserShareData> get_GameDynamic(@Url String url);
 }
