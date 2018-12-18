@@ -23,19 +23,21 @@ class LinearTabView : LinearLayout {
         addView(view)
     }
 
-
     fun setName(name: String) {
         tv_Name.text = name
     }
 
     fun clearSelected() {
-        isSelected = false
+        if (!isSelected) {
+            return
+        }
         val rotation = ObjectAnimator.ofFloat(iv_Arrow, "rotation", 0f)
         rotation.duration = 320
         rotation.start()
         rotation.addListener(object : AnimatorListenerAdapter() {
             override fun onAnimationEnd(animation: Animator) {
                 iv_Arrow.setImageResource(R.mipmap.btn_arrow_bottom_grey)
+                isSelected = false
             }
         })
         val valueAnimator = ValueAnimator.ofObject(ArgbEvaluator(), Color.parseColor("#FFff7a31"), Color.parseColor("#ff888888"))
@@ -48,13 +50,15 @@ class LinearTabView : LinearLayout {
     }
 
     fun setSelected() {
-        isSelected = true
+        if (isSelected)
+            return
         val rotation = ObjectAnimator.ofFloat(iv_Arrow, "rotation", 0f, 180f)
         rotation.duration = 320
         rotation.start()
         rotation.addListener(object : AnimatorListenerAdapter() {
             override fun onAnimationEnd(animation: Animator) {
                 iv_Arrow.setImageResource(R.mipmap.btn_arrow_top_orange_copy)
+                isSelected = true
             }
         })
         val valueAnimator = ValueAnimator.ofObject(ArgbEvaluator(), Color.parseColor("#ff888888"), Color.parseColor("#FFff7a31"))

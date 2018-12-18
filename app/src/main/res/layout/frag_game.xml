@@ -37,28 +37,25 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
-        <LinearLayout
+        <FrameLayout
             android:id="@+id/linearGameList"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:visibility="gone">
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="50dp" />
-
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/gameListRecycler"
                 android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="44dp" />
+
+            <org.xiaoxingqi.gmdoc.wegidt.gamefraglist.GameTabView
+                android:id="@+id/gameTabView"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent" />
 
-        </LinearLayout>
-
-        <org.xiaoxingqi.gmdoc.wegidt.gamefraglist.GameTabView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
+        </FrameLayout>
     </org.xiaoxingqi.gmdoc.wegidt.TransLayout>
 
 </RelativeLayout>

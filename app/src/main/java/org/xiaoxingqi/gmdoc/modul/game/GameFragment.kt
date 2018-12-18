@@ -23,6 +23,7 @@ import org.xiaoxingqi.gmdoc.parsent.game.GameFragPersent
 import org.xiaoxingqi.gmdoc.tools.AppTools
 import org.xiaoxingqi.gmdoc.wegidt.RoundScoreView
 import org.xiaoxingqi.gmdoc.wegidt.TransLayout
+import org.xiaoxingqi.gmdoc.wegidt.gamefraglist.GameTabView
 
 class GameFragment : BaseFrag<GameFragPersent>() {
     private lateinit var platRecycler: RecyclerView
@@ -30,6 +31,7 @@ class GameFragment : BaseFrag<GameFragPersent>() {
     private lateinit var headView: View
     private lateinit var gameListRecycler: RecyclerView
     private lateinit var transLayout: TransLayout
+    private lateinit var gameTabView: GameTabView
     private val platData by lazy {
         ArrayList<GamePlatformData.PlatformListData>()
     }
@@ -62,6 +64,7 @@ class GameFragment : BaseFrag<GameFragPersent>() {
                     platData.add(bean)
                     platAdapter.notifyItemInserted(platAdapter.itemCount - 1)
                 }
+                gameTabView.setPlatData(data = data.pla_list)
             }
 
             override fun gameDetailsList(data: GameListData?) {
@@ -86,6 +89,7 @@ class GameFragment : BaseFrag<GameFragPersent>() {
         platRecycler = view!!.platRecycler
         gameListRecycler = view!!.gameListRecycler
         transLayout = view!!.transLayout
+        gameTabView = view!!.gameTabView
         val manager = GridLayoutManager(activity, 4)
         manager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
             override fun getSpanSize(position: Int): Int {
@@ -161,6 +165,7 @@ class GameFragment : BaseFrag<GameFragPersent>() {
 
     override fun bindEvent() {
         platAdapter.setOnItemClickListener { view, position ->
+            gameTabView.setCurrentPlat(position)
             transLayout.showProgress()
             name = platData[position].name
             version = platData[position].version[0].id.toString()
