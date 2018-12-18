@@ -2,14 +2,11 @@ package org.xiaoxingqi.gmdoc.modul.game
 
 import android.graphics.Bitmap
 import android.graphics.Color
-import android.os.Build
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.text.TextUtils
-import android.util.Log
 import android.view.View
 import android.view.ViewGroup
-import android.view.ViewTreeObserver
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.RelativeLayout
@@ -27,7 +24,7 @@ import org.xiaoxingqi.gmdoc.entity.BaseSimpleData
 import org.xiaoxingqi.gmdoc.entity.game.GameDetailsData
 import org.xiaoxingqi.gmdoc.entity.home.HomeUserShareData
 import org.xiaoxingqi.gmdoc.impl.game.GameDetailCallBack
-import org.xiaoxingqi.gmdoc.parsent.GameDetailPersent
+import org.xiaoxingqi.gmdoc.parsent.game.GameDetailPersent
 import org.xiaoxingqi.gmdoc.tools.AppTools
 import org.xiaoxingqi.gmdoc.tools.FastBlur
 

@@ -23,7 +23,7 @@ public abstract class BasePresent {
         apiServer = HttpServer.getInstance(context).getApiServer();
     }
 
-    void addObaser(Observable observable, Subscriber subscriber) {
+   protected void addObaser(Observable observable, Subscriber subscriber) {
         composite.add(observable.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(subscriber));
     }
 

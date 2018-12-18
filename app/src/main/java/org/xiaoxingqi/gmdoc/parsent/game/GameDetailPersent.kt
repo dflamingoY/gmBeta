@@ -1,10 +1,11 @@
-package org.xiaoxingqi.gmdoc.parsent
+package org.xiaoxingqi.gmdoc.parsent.game
 
 import android.content.Context
 import org.xiaoxingqi.gmdoc.entity.game.GameDetailsData
 import org.xiaoxingqi.gmdoc.entity.home.HomeUserShareData
 import org.xiaoxingqi.gmdoc.impl.IConstant
 import org.xiaoxingqi.gmdoc.impl.game.GameDetailCallBack
+import org.xiaoxingqi.gmdoc.parsent.BasePresent
 import rx.Subscriber
 
 /**

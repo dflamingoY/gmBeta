@@ -1,11 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayofrag_home.xmlut xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.v7.widget.RecyclerView
+    <RelativeLayout
+        android:id="@+id/relativeTop"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="80dp"
+        android:background="@drawable/shape_app_theme_style">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="24dp"
+            android:gravity="center_vertical"
+            android:text="游戏列表"
+            android:textColor="@android:color/white"
+            android:textSize="18sp" />
+    </RelativeLayout>
+
+    <org.xiaoxingqi.gmdoc.wegidt.TransLayout
+        android:id="@+id/transLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/relativeTop"
+        app:defaultState="content"
+        app:emptyLayout="@layout/view_empty"
+        app:offlineLayout="@layout/view_offline"
+        app:progressLayout="@layout/view_progress">
 
 
-</android.support.constraint.ConstraintLayofrag_home.xmlut>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/platRecycler"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <LinearLayout
+            android:id="@+id/linearGameList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="50dp" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/gameListRecycler"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </LinearLayout>
+
+        <org.xiaoxingqi.gmdoc.wegidt.gamefraglist.GameTabView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </org.xiaoxingqi.gmdoc.wegidt.TransLayout>
+
+</RelativeLayout>

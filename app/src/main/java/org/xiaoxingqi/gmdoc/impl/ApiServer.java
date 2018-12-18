@@ -4,6 +4,7 @@ package org.xiaoxingqi.gmdoc.impl;
 import org.xiaoxingqi.gmdoc.entity.TokenData;
 import org.xiaoxingqi.gmdoc.entity.game.GameDetailsData;
 import org.xiaoxingqi.gmdoc.entity.game.GameListData;
+import org.xiaoxingqi.gmdoc.entity.game.GamePlatformData;
 import org.xiaoxingqi.gmdoc.entity.home.HomeActiveData;
 import org.xiaoxingqi.gmdoc.entity.home.HomeGameData;
 import org.xiaoxingqi.gmdoc.entity.home.HomeUserShareData;
@@ -38,4 +39,11 @@ public interface ApiServer {
 
     @GET
     Observable<HomeUserShareData> get_GameDynamic(@Url String url);
+
+    @GET
+    Observable<GamePlatformData> get_GamePlat(@Url String url);
+
+    @GET
+    Observable<GameListData> get_FragGameList(@Url String url);
+
 }

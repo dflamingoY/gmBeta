@@ -16,10 +16,11 @@ import android.support.v4.widget.DrawerLayout
 import android.view.Gravity
 import android.view.View
 import org.xiaoxingqi.gmdoc.core.BaseAct
+import org.xiaoxingqi.gmdoc.modul.game.GameFragment
 
 class MainActivity : BaseAct() {
     val homeFrag = HomeFragment()
-    //    val gameFrag = GameFragment()
+    val gameFrag = GameFragment()
 //    val lifeCircle = LifCircleFragment()
 //    val msgFrag = MsgFragment()
     var currentFrag: Fragment? = null
@@ -102,8 +103,8 @@ class MainActivity : BaseAct() {
         when (type) {
             TypeFragment.Home ->
                 currentFrag = homeFrag
-//            TypeFragment.Echoe ->
-//                currentFrag = gameFrag
+            TypeFragment.Echoe ->
+                currentFrag = gameFrag
 //            TypeFragment.Listen ->
 //                currentFrag = lifeCircle
 //            TypeFragment.Me ->

@@ -13,7 +13,7 @@ import org.xiaoxingqi.gmdoc.core.adapter.QuickAdapter
 import org.xiaoxingqi.gmdoc.entity.game.BaseGameBean
 import org.xiaoxingqi.gmdoc.impl.IConstant
 import org.xiaoxingqi.gmdoc.impl.game.GameListCallBack
-import org.xiaoxingqi.gmdoc.parsent.GameListPresent
+import org.xiaoxingqi.gmdoc.parsent.game.GameListPresent
 import org.xiaoxingqi.gmdoc.wegidt.RoundScoreView
 
 class GameListActicivty : BaseActivity<GameListPresent>() {
@@ -46,6 +46,7 @@ class GameListActicivty : BaseActivity<GameListPresent>() {
 
     override fun initData() {
         val platName = intent.getStringExtra("platfromId")
+        tv_Title.text = platName
         adapter = object : QuickAdapter<BaseGameBean>(this, R.layout.item_home_game_layout, mData) {
             override fun convert(helper: BaseAdapterHelper?, item: BaseGameBean?) {
                 var url = if (null != item!!.cover && item!!.cover.startsWith("http")!!) {

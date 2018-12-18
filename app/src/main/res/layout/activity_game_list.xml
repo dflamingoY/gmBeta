@@ -14,7 +14,19 @@
         <android.support.v7.widget.Toolbar
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="24dp" />
+            android:layout_marginTop="24dp"
+            app:contentInsetStart="0dp">
+
+            <TextView
+                android:id="@+id/tv_Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textColor="@android:color/black"
+                android:textSize="18sp" />
+
+        </android.support.v7.widget.Toolbar>
+
     </android.support.design.widget.AppBarLayout>
 
     <android.support.v7.widget.RecyclerView
