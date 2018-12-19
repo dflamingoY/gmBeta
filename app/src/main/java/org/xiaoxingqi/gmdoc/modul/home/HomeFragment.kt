@@ -1,5 +1,6 @@
 package org.xiaoxingqi.gmdoc.modul.home
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.LinearLayoutManager
@@ -9,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -30,6 +32,7 @@ import org.xiaoxingqi.gmdoc.parsent.HomePresent
 import org.xiaoxingqi.gmdoc.tools.AppTools
 import org.xiaoxingqi.gmdoc.wegidt.ItemHomeView
 import org.xiaoxingqi.gmdoc.wegidt.LinearScrollView
+import org.xiaoxingqi.gmdoc.wegidt.homegame.HomeDynamicView
 import org.xiaoxingqi.gmdoc.wegidt.homegame.HomeParentImg
 
 class HomeFragment : BaseFrag<HomePresent>() {
@@ -63,19 +66,20 @@ class HomeFragment : BaseFrag<HomePresent>() {
                         .into(headView.findViewById(R.id.iv_topImg))
                 for (indices in data?.data?.game?.data!!.indices) {//遍歷游戏数据在不同的位置插入 新闻
                     if (indices == 2) {
-                        gameData.add(data?.data?.dy_long!!)
+                        gameData.add(data.data?.dy_long!!)
                     } else if (indices == 5) {
-                        gameData.add(data?.data?.dy_blog!!)
+                        gameData.add(data.data?.dy_blog!!)
                     }
-                    gameData.add(data?.data?.game?.data!![indices])
+                    gameData.add(data.data?.game?.data!![indices])
                 }
-                gameTitleData.addAll(data?.data?.game?.pla_list!!)
+                gameTitleData.addAll(data.data?.game?.pla_list!!)
                 /**
                  * update recyclerView
                  */
                 gameAdapter.notifyDataSetChanged()
             }
 
+            @SuppressLint("InflateParams")
             override fun activeSuccess(data: HomeActiveData?) {//6个活动的type
                 swipeRefresh.isRefreshing = false
                 if (data!!.data != null && data.data.data != null) {
@@ -112,6 +116,7 @@ class HomeFragment : BaseFrag<HomePresent>() {
         return R.layout.frag_home
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun initView(view: View?) {
         /**
          * 自动滚动
@@ -194,7 +199,7 @@ class HomeFragment : BaseFrag<HomePresent>() {
 
                     }
                 } else {//游戏列表
-                    val linearContainer = helper!!.itemView.findViewById<LinearLayout>(R.id.linearContainer)
+                    val linearContainer = helper.itemView.findViewById<LinearLayout>(R.id.linearContainer)
                     val viewDivision = helper.getView(R.id.view_Indecator)
                     val mIvTypeGame = helper.getImageView(R.id.iv_SortType)
                     val mTvTypeName = helper.getTextView(R.id.tv_SortTypeName)
@@ -280,12 +285,21 @@ class HomeFragment : BaseFrag<HomePresent>() {
 
         adapter = object : QuickAdapter<HomeUserShareData.ContributeBean>(activity, R.layout.item_dynamic, mData, headView) {
             override fun convert(helper: BaseAdapterHelper?, item: HomeUserShareData.ContributeBean?) {
-
+                Glide.with(this@HomeFragment)
+                        .load(item!!.avatar)
+                        .override(80, 80)
+                        .into(helper!!.getImageView(R.id.iv_UserLogo))
+                helper.getTextView(R.id.tv_UserName).text = item.username
+                helper.getTextView(R.id.tv_loveGame).text = "(" + item.like_game.split(" ")[0] + ")"
+                (helper.getView(R.id.homedynamic) as HomeDynamicView).setData(item)
+                /*val parent = helper.getView(R.id.frame_Container) as FrameLayout
+                parent.removeAllViews()
+                val dynamicView = HomeDynamicView(activity!!)
+                dynamicView.setData(item)
+                parent.addView(dynamicView)*/
             }
         }
         mView!!.recyclerView.adapter = adapter
-
-
     }
 
     override fun bindEvent() {

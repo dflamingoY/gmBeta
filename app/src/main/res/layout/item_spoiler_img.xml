@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<org.xiaoxingqi.gmdoc.wegidt.SqureRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="4dp"
+    android:layout_marginRight="4dp"
+    android:layout_marginTop="8dp">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cardLogo"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:cardCornerRadius="2dp"
+        app:cardElevation="0dp">
+
+        <ImageView
+            android:id="@+id/iv_img"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop" />
+    </android.support.v7.widget.CardView>
+
+    <ImageView
+        android:id="@+id/viewSpoiler"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignBottom="@+id/cardLogo"
+        android:layout_alignLeft="@+id/cardLogo"
+        android:layout_alignRight="@+id/cardLogo"
+        android:layout_alignTop="@+id/cardLogo"
+        android:src="@mipmap/img_hidden_106"
+        android:visibility="gone" />
+
+    <ImageView
+        android:id="@+id/iv_Gif"
+        android:layout_width="30dp"
+        android:layout_height="19dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:src="@mipmap/img_mark_gif"
+        android:visibility="gone" />
+</org.xiaoxingqi.gmdoc.wegidt.SqureRelativeLayout>
