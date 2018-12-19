@@ -19,6 +19,7 @@ import org.xiaoxingqi.gmdoc.entity.game.GameListData
 import org.xiaoxingqi.gmdoc.entity.game.GamePlatformData
 import org.xiaoxingqi.gmdoc.impl.IConstant
 import org.xiaoxingqi.gmdoc.impl.game.GameFragCallback
+import org.xiaoxingqi.gmdoc.listener.OnGameTabClickListener
 import org.xiaoxingqi.gmdoc.parsent.game.GameFragPersent
 import org.xiaoxingqi.gmdoc.tools.AppTools
 import org.xiaoxingqi.gmdoc.wegidt.RoundScoreView
@@ -174,6 +175,40 @@ class GameFragment : BaseFrag<GameFragPersent>() {
         adapter.setOnItemClickListener { view, position ->
             startActivity(Intent(activity, GameDetailsActivity::class.java).putExtra("gameId", mData[position].id))
         }
+        gameTabView.setOnTabListener(object : OnGameTabClickListener {
+            override fun onplatClick(name: String?, position: Int) {
+                this@GameFragment.name = name
+                transLayout.showProgress()
+                version = platData[position].version[0].id.toString()
+                mData.clear()
+                adapter.notifyDataSetChanged()
+                persent?.getGameList(name!!, version = version!!, sell = sell!!, type = defaultType!!, page = 0)
+            }
+
+            override fun versionClick(id: Int) {
+                version = id.toString()
+                transLayout.showProgress()
+                mData.clear()
+                adapter.notifyDataSetChanged()
+                persent?.getGameList(name!!, version = version!!, sell = sell!!, type = defaultType!!, page = 0)
+            }
+
+            override fun sellClick(id: Int) {
+                sell = id.toString()
+                transLayout.showProgress()
+                mData.clear()
+                adapter.notifyDataSetChanged()
+                persent?.getGameList(name!!, version = version!!, sell = sell!!, type = defaultType!!, page = 0)
+            }
+
+            override fun releasClick(id: Int) {
+                defaultType = id.toString()
+                transLayout.showProgress()
+                mData.clear()
+                adapter.notifyDataSetChanged()
+                persent?.getGameList(name!!, version = version!!, sell = sell!!, type = defaultType!!, page = 0)
+            }
+        })
     }
 
     override fun request(flag: Int) {
