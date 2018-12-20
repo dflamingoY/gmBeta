@@ -1,6 +1,7 @@
 package org.xiaoxingqi.gmdoc.modul.home
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.LinearLayoutManager
@@ -10,11 +11,12 @@ import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
-import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.bumptech.glide.Glide
+import com.jaeger.ninegridimageview.NineGridImageView
+import com.jaeger.ninegridimageview.NineGridImageViewAdapter
 import kotlinx.android.synthetic.main.frag_home.view.*
 import org.xiaoxingqi.gmdoc.R
 import org.xiaoxingqi.gmdoc.core.BaseFrag
@@ -22,6 +24,7 @@ import org.xiaoxingqi.gmdoc.core.adapter.BaseAdapterHelper
 import org.xiaoxingqi.gmdoc.core.adapter.BaseHomeAdapter
 import org.xiaoxingqi.gmdoc.core.adapter.QuickAdapter
 import org.xiaoxingqi.gmdoc.entity.BaseHomeBean
+import org.xiaoxingqi.gmdoc.entity.BaseImgBean
 import org.xiaoxingqi.gmdoc.entity.home.HomeActiveData
 import org.xiaoxingqi.gmdoc.entity.home.HomeGameData
 import org.xiaoxingqi.gmdoc.entity.home.HomeUserShareData
@@ -291,7 +294,18 @@ class HomeFragment : BaseFrag<HomePresent>() {
                         .into(helper!!.getImageView(R.id.iv_UserLogo))
                 helper.getTextView(R.id.tv_UserName).text = item.username
                 helper.getTextView(R.id.tv_loveGame).text = "(" + item.like_game.split(" ")[0] + ")"
-                (helper.getView(R.id.homedynamic) as HomeDynamicView).setData(item)
+                val gridImageView = helper.getView(R.id.nineGridView) as NineGridImageView<BaseImgBean>
+                gridImageView.setImagesData(item.img)
+                val adapter = object : NineGridImageViewAdapter<BaseImgBean>() {
+                    override fun onDisplayImage(context: Context?, imageView: ImageView?, t: BaseImgBean?) {
+                        Glide.with(context)
+                                .load(t!!.url + "?imageMogr2/thumbnail/!240x240r/auto-orient")
+                                .asBitmap()
+                                .override(80, 80)
+                                .into(imageView)
+                    }
+                }
+                gridImageView.setAdapter(adapter)
                 /*val parent = helper.getView(R.id.frame_Container) as FrameLayout
                 parent.removeAllViews()
                 val dynamicView = HomeDynamicView(activity!!)
