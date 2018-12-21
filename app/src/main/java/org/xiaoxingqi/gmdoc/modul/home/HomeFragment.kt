@@ -306,6 +306,10 @@ class HomeFragment : BaseFrag<HomePresent>() {
                     }
                 }
                 gridImageView.setAdapter(adapter)
+                helper.getView(R.id.cardLogo).setOnClickListener {
+                    startActivity(Intent(activity, UserHomeActivity::class.java))
+                }
+
                 /*val parent = helper.getView(R.id.frame_Container) as FrameLayout
                 parent.removeAllViews()
                 val dynamicView = HomeDynamicView(activity!!)

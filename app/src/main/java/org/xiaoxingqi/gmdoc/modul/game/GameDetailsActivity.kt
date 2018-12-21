@@ -45,7 +45,7 @@ class GameDetailsActivity : BaseActivity<GameDetailPersent>() {
                         .into(object : BitmapImageViewTarget(headView.iv_Game_Logo) {
                             override fun onResourceReady(resource: Bitmap?, glideAnimation: GlideAnimation<in Bitmap>?) {
                                 super.onResourceReady(resource, glideAnimation)
-                                headView.iv_Bluer_Bg.setImageBitmap(FastBlur().fastblur(resource, 60, headView.iv_Bluer_Bg))
+                                headView.iv_Bluer_Bg.setImageBitmap(FastBlur().fastblur(resource, 30, headView.iv_Bluer_Bg))
                             }
                         })
                 headView.expendView.setTvShowText(data!!.game.introduce + data.game.introduce_2)
