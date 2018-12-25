@@ -153,10 +153,13 @@
         android:textSize="15sp"
         android:visibility="gone" />
 
-    <com.jaeger.ninegridimageview.NineGridImageView
+    <org.xiaoxingqi.gmdoc.wegidt.ninegridView.NineGridImageView
         android:id="@+id/nineGridView"
         android:layout_width="match_parent"
+        android:clipChildren="false"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
         app:imgGap="3dp"
         app:showStyle="grid" />
 

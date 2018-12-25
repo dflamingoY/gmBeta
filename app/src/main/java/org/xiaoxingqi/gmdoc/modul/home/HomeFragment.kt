@@ -3,10 +3,14 @@ package org.xiaoxingqi.gmdoc.modul.home
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.drawable.Drawable
+import android.media.Image
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.text.Html
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
@@ -15,8 +19,8 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.bumptech.glide.Glide
-import com.jaeger.ninegridimageview.NineGridImageView
-import com.jaeger.ninegridimageview.NineGridImageViewAdapter
+import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.target.SimpleTarget
 import kotlinx.android.synthetic.main.frag_home.view.*
 import org.xiaoxingqi.gmdoc.R
 import org.xiaoxingqi.gmdoc.core.BaseFrag
@@ -35,8 +39,10 @@ import org.xiaoxingqi.gmdoc.parsent.HomePresent
 import org.xiaoxingqi.gmdoc.tools.AppTools
 import org.xiaoxingqi.gmdoc.wegidt.ItemHomeView
 import org.xiaoxingqi.gmdoc.wegidt.LinearScrollView
-import org.xiaoxingqi.gmdoc.wegidt.homegame.HomeDynamicView
+import org.xiaoxingqi.gmdoc.wegidt.SpoilerImageView
 import org.xiaoxingqi.gmdoc.wegidt.homegame.HomeParentImg
+import org.xiaoxingqi.gmdoc.wegidt.ninegridView.NineGridImageView
+import org.xiaoxingqi.gmdoc.wegidt.ninegridView.NineGridImageViewAdapter
 
 class HomeFragment : BaseFrag<HomePresent>() {
     private lateinit var gameAdapter: BaseHomeAdapter<List<BaseHomeBean>, BaseAdapterHelper>
@@ -286,7 +292,8 @@ class HomeFragment : BaseFrag<HomePresent>() {
         tv_TopDesc.isFocusableInTouchMode = true
         tv_TopDesc.isFocusable = true
 
-        adapter = object : QuickAdapter<HomeUserShareData.ContributeBean>(activity, R.layout.item_dynamic, mData, headView) {
+        adapter = object : QuickAdapter<HomeUserShareData.ContributeBean>(activity, R.layout.item_dynamic, mData/*, headView*/) {
+
             override fun convert(helper: BaseAdapterHelper?, item: HomeUserShareData.ContributeBean?) {
                 Glide.with(this@HomeFragment)
                         .load(item!!.avatar)
@@ -295,26 +302,27 @@ class HomeFragment : BaseFrag<HomePresent>() {
                 helper.getTextView(R.id.tv_UserName).text = item.username
                 helper.getTextView(R.id.tv_loveGame).text = "(" + item.like_game.split(" ")[0] + ")"
                 val gridImageView = helper.getView(R.id.nineGridView) as NineGridImageView<BaseImgBean>
-                gridImageView.setImagesData(item.img)
                 val adapter = object : NineGridImageViewAdapter<BaseImgBean>() {
-                    override fun onDisplayImage(context: Context?, imageView: ImageView?, t: BaseImgBean?) {
+                    override fun onDisplayImage(context: Context?, imageView: View?, t: BaseImgBean?) {
+//                        val img = imageView!!.findViewById<ImageView>(R.id.iv_img)
+//                        val params = img.layoutParams
+//                        params.width=imageView.width
+//                        params.height=imageView.height
+//                        img.layoutParams=params
+//                        Log.d("Mozator", "${img?.width}  ${img?.height}  ${imageView!!.width}  ${imageView.height}")
                         Glide.with(context)
                                 .load(t!!.url + "?imageMogr2/thumbnail/!240x240r/auto-orient")
                                 .asBitmap()
-                                .override(80, 80)
-                                .into(imageView)
+                                .centerCrop()
+//                                .override(imageView.width, imageView.height)
+                                .into((imageView as SpoilerImageView).getImageView())
                     }
                 }
                 gridImageView.setAdapter(adapter)
+                gridImageView.setImagesData(item.img)
                 helper.getView(R.id.cardLogo).setOnClickListener {
                     startActivity(Intent(activity, UserHomeActivity::class.java))
                 }
-
-                /*val parent = helper.getView(R.id.frame_Container) as FrameLayout
-                parent.removeAllViews()
-                val dynamicView = HomeDynamicView(activity!!)
-                dynamicView.setData(item)
-                parent.addView(dynamicView)*/
             }
         }
         mView!!.recyclerView.adapter = adapter

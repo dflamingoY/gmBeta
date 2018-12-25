@@ -73,6 +73,6 @@ dependencies {
     //    implementation project(':library')
     implementation files('libs/universal-image-loader-1.9.4-with-sources.jar')
     api 'me.everything:overscroll-decor-android:1.0.4'
-    api 'com.jaeger.ninegridimageview:library:1.1.1'
+//    api 'com.jaeger.ninegridimageview:library:1.1.1'
 
 }

@@ -5,6 +5,9 @@ import org.xiaoxingqi.gmdoc.core.BaseActivity
 import org.xiaoxingqi.gmdoc.impl.home.UserInfoCallBack
 import org.xiaoxingqi.gmdoc.parsent.home.HomeUserInfoPersent
 
+/**
+ * 用户个人中心界面
+ */
 class UserHomeActivity : BaseActivity<HomeUserInfoPersent>() {
 
     override fun createPresent(): HomeUserInfoPersent {

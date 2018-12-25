@@ -10,5 +10,12 @@
         <item>全部</item>
         <item>博文</item>
     </string-array>
+    <string-array name="all_title">
+        <item>全部</item>
+        <item>图片</item>
+        <item>短评</item>
+        <item>长评</item>
+        <item>博文</item>
+    </string-array>
 
 </resources>

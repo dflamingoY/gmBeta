@@ -358,18 +358,15 @@
 
                 </LinearLayout>
 
-<!--
-                <org.xiaoxingqi.gmdoc.view.BaseToolbarLayout
+                <org.xiaoxingqi.gmdoc.wegidt.BaseToolbarLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:contentLayout="@layout/layout_homecenter_toolbar"
                     app:layout_collapseMode="pin" />
--->
 
             </android.support.design.widget.CollapsingToolbarLayout>
 
-<!--
-            <org.xiaoxingqi.gmdoc.view.BaseTabTitleLayout
+            <org.xiaoxingqi.gmdoc.wegidt.BaseTabTitleLayout
                 android:id="@+id/tabTitleLayout"
                 android:layout_width="match_parent"
                 android:layout_height="44dp"
@@ -377,7 +374,6 @@
                 app:arrayText="@array/all_title"
                 app:title_color="#888888"
                 app:title_select_color="#282828" />
--->
 
             <View
                 android:layout_width="match_parent"

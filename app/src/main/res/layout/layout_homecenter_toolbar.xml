@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/iv_toolBarBg"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:alpha="0"
+        android:scaleType="centerCrop"
+        android:src="@drawable/img_empty_avatar_back" />
+
+    <ImageView
+        android:id="@+id/ivBack"
+        android:layout_width="34dp"
+        android:layout_height="34dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="34dp"
+        android:layout_marginBottom="10dp"
+        android:src="@mipmap/btn_back_circle" />
+
+    <ImageView
+        android:id="@+id/ivSearch"
+        android:layout_width="34dp"
+        android:layout_height="34dp"
+        android:layout_marginTop="34dp"
+        android:layout_marginBottom="10dp"
+        android:layout_toLeftOf="@+id/iv_Setting"
+        android:src="@mipmap/btn_search_circle" />
+
+    <ImageView
+        android:id="@+id/iv_Setting"
+        android:layout_width="34dp"
+        android:layout_height="34dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="14dp"
+        android:layout_marginTop="34dp"
+        android:layout_marginRight="12dp"
+        android:layout_marginBottom="10dp"
+        android:src="@mipmap/btn_set_circle" />
+
+</RelativeLayout>
