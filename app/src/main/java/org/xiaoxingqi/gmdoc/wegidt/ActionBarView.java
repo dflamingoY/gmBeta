@@ -71,17 +71,17 @@ public class ActionBarView extends BaseLayout implements View.OnClickListener {
         mTab03.setOnClickListener(this);
         mTab04.setOnClickListener(this);
 
-        mTab01.setDefaultView(R.mipmap.ic_launcher, "主页", false);
-        mTab01.setSelectView(R.mipmap.ic_launcher, R.color.color_666666);
+        mTab01.setDefaultView(R.mipmap.btn_home, "主页", false);
+        mTab01.setSelectView(R.mipmap.btn_home_selected, R.color.color_666666);
 
-        mTab02.setDefaultView(R.mipmap.ic_launcher, "游戏库", false);
-        mTab02.setSelectView(R.mipmap.ic_launcher, R.color.color_666666);
+        mTab02.setDefaultView(R.mipmap.btn_game, "游戏库", false);
+        mTab02.setSelectView(R.mipmap.btn_game_selected, R.color.color_666666);
 
-        mTab03.setDefaultView(R.mipmap.ic_launcher, "关注圈", false);
-        mTab03.setSelectView(R.mipmap.ic_launcher, R.color.color_666666);
+        mTab03.setDefaultView(R.mipmap.btn_group, "关注圈", false);
+        mTab03.setSelectView(R.mipmap.btn_group_selected, R.color.color_666666);
 
-        mTab04.setDefaultView(R.mipmap.ic_launcher, "消息", false);
-        mTab04.setSelectView(R.mipmap.ic_launcher, R.color.color_666666);
+        mTab04.setDefaultView(R.mipmap.btn_ring, "消息", false);
+        mTab04.setSelectView(R.mipmap.btn_ring_selected, R.color.color_666666);
 
     }
 

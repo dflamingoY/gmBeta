@@ -623,20 +623,26 @@ public class NineGridImageView<T> extends ViewGroup {
             return mImageViewList.get(position);
         } else {
             if (mAdapter != null) {
-                View imageView = mAdapter.generateImageView(getContext(), this);
+                View imageView = mAdapter.generateImageView(getContext());
                 mImageViewList.add(imageView);
-                imageView.setOnClickListener(v -> {
-                    mAdapter.onItemImageClick(getContext(), v, position, mImgDataList);
-                    if (mItemImageClickListener != null) {
-                        mItemImageClickListener.onItemImageClick(getContext(), v, position, mImgDataList);
+                imageView.setOnClickListener(new OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        mAdapter.onItemImageClick(getContext(), v, position, mImgDataList);
+                        if (mItemImageClickListener != null) {
+                            mItemImageClickListener.onItemImageClick(getContext(), v, position, mImgDataList);
+                        }
                     }
                 });
-                imageView.setOnLongClickListener(v -> {
-                    boolean consumedEvent = mAdapter.onItemImageLongClick(getContext(), v, position, mImgDataList);
-                    if (mItemImageLongClickListener != null) {
-                        consumedEvent = mItemImageLongClickListener.onItemImageLongClick(getContext(), v, position, mImgDataList) || consumedEvent;
+                imageView.setOnLongClickListener(new OnLongClickListener() {
+                    @Override
+                    public boolean onLongClick(View v) {
+                        boolean consumedEvent = mAdapter.onItemImageLongClick(getContext(), v, position, mImgDataList);
+                        if (mItemImageLongClickListener != null) {
+                            consumedEvent = mItemImageLongClickListener.onItemImageLongClick(getContext(), v, position, mImgDataList) || consumedEvent;
+                        }
+                        return consumedEvent;
                     }
-                    return consumedEvent;
                 });
                 return imageView;
             } else {

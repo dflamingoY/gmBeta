@@ -59,24 +59,24 @@ import static org.xiaoxingqi.gmdoc.tools.AppConfig.SPOLIER;
  * @列表
  */
 
-public class SpolierTextView extends AppCompatTextView {
+public class SpoilerTextView extends AppCompatTextView {
 
     private List<Point> arrays = new ArrayList<>();
     private List<SelectionBean> selects = new ArrayList<>();
     private Paint mPaint;
     private Context mContext;
     private boolean isSpoiler = false;
-    private boolean isAttchWindows = false;
+    private boolean isAttachWindows = false;
 
-    public SpolierTextView(Context context) {
+    public SpoilerTextView(Context context) {
         this(context, null, 0);
     }
 
-    public SpolierTextView(Context context, AttributeSet attrs) {
+    public SpoilerTextView(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public SpolierTextView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public SpoilerTextView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         mContext = context;
         initView();
@@ -94,12 +94,10 @@ public class SpolierTextView extends AppCompatTextView {
         super.onDraw(canvas);
         /**
          * 绘制一层阴影
-         */
-        if (isAttchWindows)
-            getMeasureCoondiration(canvas);
-        /**
          * 获取第一行换行的角标
          */
+        if (isAttachWindows)
+            getMeasureCoondiration(canvas);
     }
 
     /**
@@ -116,7 +114,7 @@ public class SpolierTextView extends AppCompatTextView {
         Layout layout = getLayout();
         if (arrays.size() > 0) {
             for (int a = 0; a < arrays.size(); a++) {
-                if (!isAttchWindows)
+                if (!isAttachWindows)
                     break;
                 /**
                  * 获取一行的字数
@@ -156,7 +154,7 @@ public class SpolierTextView extends AppCompatTextView {
                      */
                     if (endLine - startLine > 1) {
                         for (int i = startLine + 1; i < endLine; i++) {
-                            if (!isAttchWindows)
+                            if (!isAttachWindows)
                                 return;
                             canvas.drawRect(new RectF(0, lineHeight * i + 3, bound.right, lineHeight * (i + 1) - 3), mPaint);
                         }
@@ -353,14 +351,16 @@ public class SpolierTextView extends AppCompatTextView {
                             //TODO startActivity or whatever
                             if (downSection != null) {
                                 if (downSection.getType() == 3) {//跳转搜索
-                                    mContext.startActivity(new Intent(mContext, null)
+                                    /*mContext.startActivity(new Intent(mContext, null)
                                             .putExtra("tag", downSection.getName())
                                             .putExtra("isTopic", true)
-                                    );
+                                    );*/
                                 } else if (downSection.getType() == 4) {
+/*
                                     mContext.startActivity(new Intent(mContext, null)
                                             .putExtra("path", downSection.getName())
                                     );
+*/
                                 } else {
                                     if (mTextTouchListener != null) {
                                         mTextTouchListener.touch(downSection);
@@ -399,13 +399,13 @@ public class SpolierTextView extends AppCompatTextView {
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
-        isAttchWindows = true;
+        isAttachWindows = true;
     }
 
     @Override
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
-        isAttchWindows = false;
+        isAttachWindows = false;
         //        arrays.clear();
         //        selects.clear();
     }

@@ -1,7 +1,9 @@
-package org.xiaoxingqi.gmdoc
+package org.xiaoxingqi.gmdoc.modul.global
 
 import android.content.Intent
 import android.os.Handler
+import org.xiaoxingqi.gmdoc.MainActivity
+import org.xiaoxingqi.gmdoc.R
 import org.xiaoxingqi.gmdoc.core.BaseAct
 
 class SplashActivity : BaseAct() {

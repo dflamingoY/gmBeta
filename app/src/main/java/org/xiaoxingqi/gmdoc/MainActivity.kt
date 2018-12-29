@@ -1,5 +1,6 @@
 package org.xiaoxingqi.gmdoc
 
+import android.content.Intent
 import android.graphics.Color
 import android.support.v4.app.Fragment
 import kotlinx.android.synthetic.main.activity_main.*
@@ -13,17 +14,118 @@ import rx.schedulers.Schedulers
 import android.view.WindowManager
 import android.os.Build
 import android.support.v4.widget.DrawerLayout
+import android.text.TextUtils
 import android.view.Gravity
 import android.view.View
-import org.xiaoxingqi.gmdoc.core.BaseAct
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.target.GlideDrawableImageViewTarget
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
+import org.xiaoxingqi.gmdoc.core.BaseActivity
+import org.xiaoxingqi.gmdoc.entity.BaseRespData
+import org.xiaoxingqi.gmdoc.entity.user.UserInfoData
+import org.xiaoxingqi.gmdoc.impl.IConstant
+import org.xiaoxingqi.gmdoc.impl.MainCallBack
 import org.xiaoxingqi.gmdoc.modul.game.GameFragment
+import org.xiaoxingqi.gmdoc.modul.login.LoginActivity
+import org.xiaoxingqi.gmdoc.onEvent.LoginEvent
+import org.xiaoxingqi.gmdoc.parsent.MainPersenter
+import org.xiaoxingqi.gmdoc.tools.PreferenceTools
+import org.xiaoxingqi.gmdoc.tools.SPUtils
 
-class MainActivity : BaseAct() {
-    val homeFrag = HomeFragment()
-    val gameFrag = GameFragment()
-//    val lifeCircle = LifCircleFragment()
+class MainActivity : BaseActivity<MainPersenter>() {
+
+    private val map by lazy { HashMap<String, String>() }
+
+
+    override fun createPresent(): MainPersenter {
+        return MainPersenter(this, object : MainCallBack {
+
+            override fun token(data: TokenData?) {
+                App.s_Token = data?._token
+                transLayout.showContent()
+            }
+
+            override fun loginOut(data: BaseRespData?) {
+                /**
+                 * 退出登录 检测是否退出成功
+                 */
+                drawerlayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+
+                persent?.post_token()
+            }
+
+            override fun userInfo(data: UserInfoData?) {
+                /**
+                 * 信息查询成功 表示用户已经登录
+                 */
+                data?.let {
+                    if (it.getData().jutou === 0) {//剧透打开
+                        toggle_Button.isChecked = true
+                        SPUtils.setBoolean(this@MainActivity, IConstant.IS_SPOLIER, true)
+                    } else {//关闭
+                        SPUtils.setBoolean(this@MainActivity, IConstant.IS_SPOLIER, false)
+                        toggle_Button.isChecked = false
+                    }
+                    PreferenceTools.saveObj(this@MainActivity, IConstant.USERINFO, it)
+                    drawerlayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
+                    Glide.with(this@MainActivity)
+                            .load(it.getData().avatar)
+                            .error(R.mipmap.img_avatar_default)
+                            .centerCrop()
+                            .into(GlideDrawableImageViewTarget(iv_UserLogo, 0))
+                    Glide.with(this@MainActivity)
+                            .load(it.getData().top_image)
+//                            .error(R.mipmap.img_mine_banner)
+                            .centerCrop()
+                            .into(user_Home_Bg)
+                    tv_UserName.text = it.data.username
+                    if (TextUtils.isEmpty(it.data.like_num)) {
+                        tv_UserLike.text = "0 关注 · "
+                    } else {
+                        tv_UserLike.setText(it.getData().follow_num + " 关注 · ")
+                    }
+
+                    if (it.getData().fans_switch === 0) {//切换是否隐藏读者数
+                        if (TextUtils.isEmpty(it.getData().fans_num)) {
+                            tv_UserFans.setText("0 读者")
+                        } else {
+                            tv_UserFans.setText(it.getData().fans_num + " 读者")
+                        }
+                    } else {
+                        tv_UserFans.setText("未知 读者")
+                    }
+//                    updateFrag()
+
+                    if (TextUtils.isEmpty(it.getData().like_game) || TextUtils.isEmpty(it.getData().username)) {
+//                        startActivity(Intent(this@MainActivity, PerfectInfoActivity::class.java))
+                    } else {
+                        if (!TextUtils.isEmpty(it.getData().like_game)) {
+                            val split = it.getData().like_game.split(",")
+                            if (split == null || split.size < 1) {
+//                                startActivity(Intent(this@MainActivity, PerfectInfoActivity::class.java))
+                            }
+                        }
+                    }
+                }
+
+            }
+
+            override fun onError(obj: Any?) {
+                /**
+                 * 错误的时候  未登录
+                 */
+                drawerlayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+            }
+        })
+    }
+
+    private val homeFrag = HomeFragment()
+    private val gameFrag = GameFragment()
+    //    val lifeCircle = LifCircleFragment()
 //    val msgFrag = MsgFragment()
-    var currentFrag: Fragment? = null
+    private var currentFrag: Fragment? = null
 
     override fun setContent() {
         setContent(R.layout.activity_main)
@@ -38,17 +140,17 @@ class MainActivity : BaseAct() {
             window.statusBarColor = Color.TRANSPARENT
         }
         drawerlayout.closeDrawers()
-
-        val params = left_drawer.getLayoutParams() as DrawerLayout.LayoutParams
+        val params = left_drawer.layoutParams as DrawerLayout.LayoutParams
         params.gravity = Gravity.START
-        left_drawer.setLayoutParams(params)
-//        mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
-
-
+        left_drawer.layoutParams = params
+//        drawerlayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
     }
 
     override fun initData() {
+        EventBus.getDefault().register(this)
         switchFragment(TypeFragment.Home)
+        persent?.post_token()
+        persent?.queryInfo()
     }
 
     override fun initEvent() {
@@ -63,6 +165,8 @@ class MainActivity : BaseAct() {
                     true
                 }
                 R.id.Iv_HomeButton -> {
+                    startActivity(Intent(this, LoginActivity::class.java))
+                    overridePendingTransition(R.anim.act_enter_trans, 0)
                     true
                 }
                 R.id.tab_03 -> {
@@ -78,23 +182,15 @@ class MainActivity : BaseAct() {
                 }
             }
         }
+
+        iv_login_out.setOnClickListener {
+            map["_token"] = App.s_Token!!
+            persent?.loginOut(map)
+        }
     }
 
     override fun request() {
-        HttpServer.getInstance(this).apiServer.post_token("post_token")
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(object : Subscriber<TokenData>() {
-                    override fun onNext(t: TokenData?) {
-                        App.s_Token = t?._token
-                    }
 
-                    override fun onCompleted() {
-                    }
-
-                    override fun onError(e: Throwable?) {
-                    }
-                })
     }
 
     private fun switchFragment(type: TypeFragment) {
@@ -109,6 +205,9 @@ class MainActivity : BaseAct() {
 //                currentFrag = lifeCircle
 //            TypeFragment.Me ->
 //                currentFrag = msgFrag
+            else -> {
+
+            }
         }
         currentFrag?.let {
             if (!currentFrag!!.isAdded) {
@@ -120,12 +219,19 @@ class MainActivity : BaseAct() {
     }
 
     enum class TypeFragment(type: Int) {
-
         Home(0), Echoe(1), Listen(2), Me(3);
 
         var value = type
-
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        EventBus.getDefault().unregister(this)
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun loginEvent(event: LoginEvent) {
+        persent?.queryInfo()
+    }
 
 }

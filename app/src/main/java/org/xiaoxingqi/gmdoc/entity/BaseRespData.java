@@ -2,7 +2,7 @@ package org.xiaoxingqi.gmdoc.entity;
 
 public class BaseRespData {
 
-    private String state;
+    private int state;
     private String msg;
 
     public String getMsg() {
@@ -13,11 +13,11 @@ public class BaseRespData {
         this.msg = msg;
     }
 
-    public String getState() {
+    public int getState() {
         return state;
     }
 
-    public void setState(String state) {
+    public void setState(int state) {
         this.state = state;
     }
 }

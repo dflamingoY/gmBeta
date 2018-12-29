@@ -2,9 +2,11 @@ package org.xiaoxingqi.gmdoc.modul.game
 
 import android.graphics.Bitmap
 import android.graphics.Color
+import android.os.Handler
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.text.TextUtils
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -17,27 +19,70 @@ import com.bumptech.glide.request.target.BitmapImageViewTarget
 import kotlinx.android.synthetic.main.activity_game_details.*
 import kotlinx.android.synthetic.main.game_head.view.*
 import org.xiaoxingqi.gmdoc.R
+import org.xiaoxingqi.gmdoc.core.App
 import org.xiaoxingqi.gmdoc.core.BaseActivity
 import org.xiaoxingqi.gmdoc.core.adapter.BaseAdapterHelper
 import org.xiaoxingqi.gmdoc.core.adapter.QuickAdapter
 import org.xiaoxingqi.gmdoc.entity.BaseSimpleData
 import org.xiaoxingqi.gmdoc.entity.game.GameDetailsData
+import org.xiaoxingqi.gmdoc.entity.game.GameScoreAllData
 import org.xiaoxingqi.gmdoc.entity.home.HomeUserShareData
 import org.xiaoxingqi.gmdoc.impl.game.GameDetailCallBack
 import org.xiaoxingqi.gmdoc.parsent.game.GameDetailPersent
 import org.xiaoxingqi.gmdoc.tools.AppTools
 import org.xiaoxingqi.gmdoc.tools.FastBlur
+import org.xiaoxingqi.gmdoc.wegidt.gameDetails.GameLongCommentView
+import org.xiaoxingqi.gmdoc.wegidt.gameDetails.GameShortCommentView
 
 class GameDetailsActivity : BaseActivity<GameDetailPersent>() {
     private lateinit var adapter: QuickAdapter<HomeUserShareData.ContributeBean>
     private lateinit var headView: View
     private lateinit var gameId: String
+    private var loadArray = IntArray(3)//0 游戏信息  1  动态  2   长短评
+
+
     private val mData by lazy {
         ArrayList<HomeUserShareData.ContributeBean>()
     }
+    private val map = HashMap<String, String>()
 
     override fun createPresent(): GameDetailPersent {
         return GameDetailPersent(this, object : GameDetailCallBack {
+            override fun gameComment(data: GameScoreAllData?) {
+                headView.tv_ShortCommentCount.text = "短评 (${data!!.short_list_total})"
+                headView.linearShortContainer.removeAllViews()
+                headView.linearLongCommentContainer.removeAllViews()
+                try {
+                    for (bean in data.short_list) {
+                        if (headView.linearShortContainer.childCount >= 3) {
+                            break
+                        }
+                        val view = GameShortCommentView(this@GameDetailsActivity)
+                        view.setData(bean)
+                        headView.linearShortContainer.addView(view)
+                    }
+                } catch (e: Exception) {
+                }
+                headView.isHaveShort.visibility = if (headView.linearShortContainer.childCount > 0) View.GONE else View.VISIBLE
+                headView.tv_FindMoreShort.visibility = if (headView.linearShortContainer.childCount >= 3) View.VISIBLE else View.GONE
+                headView.tv_LongCommentCount.text = "长评( ${data.long_list_total})"
+                try {
+                    for (bean in data.long_list) {
+                        if (headView.linearLongCommentContainer.childCount >= 3) {
+                            break
+                        }
+                        val longView = GameLongCommentView(this@GameDetailsActivity)
+                        longView.setData(bean)
+                        headView.linearLongCommentContainer.addView(longView)
+                    }
+                } catch (e: Exception) {
+                }
+                headView.iv_IsLongComment.visibility = if (headView.linearLongCommentContainer.childCount > 0) View.GONE else View.VISIBLE
+                headView.tv_FindMoreLong.visibility = if (headView.linearLongCommentContainer.childCount >= 3) View.VISIBLE else View.GONE
+                loadArray[2] = 1
+                checkStatus()
+            }
+
             override fun gameDetails(data: GameDetailsData?) {
                 Glide.with(this@GameDetailsActivity)
                         .load(data?.game?.cover)
@@ -150,6 +195,8 @@ class GameDetailsActivity : BaseActivity<GameDetailPersent>() {
                     headView.linear_img_Details.addView(view, params)
 //                    view.setOnClickListener { v -> startActivity(Intent(this@GameDetailsActivity, GameImgListActivity::class.java).putExtra("gameId", gameId)) }
                 }
+                loadArray[0] = 1
+                checkStatus()
             }
 
             override fun gameDynamic(data: HomeUserShareData?) {
@@ -157,8 +204,22 @@ class GameDetailsActivity : BaseActivity<GameDetailPersent>() {
                     mData.add(bean)
                     adapter.notifyItemInserted(adapter.itemCount - 1)
                 }
+                loadArray[1] = 1
+                checkStatus()
             }
         })
+    }
+
+    private fun checkStatus() {
+        Log.d("Mozator", "${loadArray[0]}  ${loadArray[1]}  ${loadArray[2]}")
+        for (status in loadArray) {
+            if (status != 1) {
+                return
+            }
+        }
+        Handler().postDelayed({
+            transLayout.showContent()
+        }, 1000)
     }
 
     override fun setContent() {
@@ -180,17 +241,20 @@ class GameDetailsActivity : BaseActivity<GameDetailPersent>() {
     override fun initData() {
         window.decorView.overlay
         gameId = intent.getStringExtra("gameId")
+        map["_token"] = App.s_Token!!
+        map["game_id"] = gameId
         adapter = object : QuickAdapter<HomeUserShareData.ContributeBean>(this, R.layout.item_dynamic, mData, headView) {
             override fun convert(helper: BaseAdapterHelper?, item: HomeUserShareData.ContributeBean?) {
-
 
             }
         }
         gameRecycler.adapter = adapter
+        transLayout.showProgress()
         /**
          * 獲取游戲詳情
          */
         persent?.getGameDetail(gameId)
+        persent?.getComment(map, gameId)
         persent?.getAllDynamic(gameId, "3", 0)
     }
 
@@ -198,6 +262,9 @@ class GameDetailsActivity : BaseActivity<GameDetailPersent>() {
     private var commentLocation = 500f
     private var bowenLocation = 1080f
     override fun initEvent() {
+        headView.tv_FindMoreLong.setOnClickListener {
+            headView.linearLongCommentContainer.removeViewAt(0)
+        }
         gameRecycler.addOnScrollListener(object : RecyclerView.OnScrollListener() {
 
             override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
@@ -241,6 +308,69 @@ class GameDetailsActivity : BaseActivity<GameDetailPersent>() {
         headView.viewTreeObserver.addOnGlobalLayoutListener {
             commentLocation = headView.tabCommentTitle.y
             bowenLocation = headView.tabTitleDyncmia.y
+        }
+        commentTitle.setOnClick {
+            val indexOfChild = commentTitle.indexOfChild(it)
+            when (indexOfChild) {
+                0 -> {
+                    true
+                }
+                1 -> {
+                    true
+                }
+                2 -> {
+                    true
+                }
+                else -> {
+                    false
+                }
+            }
+        }
+        headView.tabCommentTitle.setOnClick {
+            val indexOfChild = headView.tabCommentTitle.indexOfChild(it)
+            when (indexOfChild) {
+                0 -> {
+                    true
+                }
+                1 -> {
+                    true
+                }
+                2 -> {
+                    true
+                }
+                else -> {
+                    false
+                }
+            }
+        }
+        titleDyncmia.setOnClick {
+            val indexOfChild = titleDyncmia.indexOfChild(it)
+            when (indexOfChild) {
+                0 -> {
+                    true
+                }
+                1 -> {
+                    true
+                }
+                else -> {
+                    false
+                }
+            }
+        }
+        headView.tabTitleDyncmia.setOnClick {
+            val indexOfChild = headView.tabTitleDyncmia.indexOfChild(it)
+            when (indexOfChild) {
+                0 -> {
+                    true
+                }
+                1 -> {
+                    true
+                }
+
+                else -> {
+                    false
+                }
+            }
         }
     }
 

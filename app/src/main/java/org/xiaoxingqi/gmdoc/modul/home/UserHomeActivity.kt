@@ -2,6 +2,7 @@ package org.xiaoxingqi.gmdoc.modul.home
 
 import org.xiaoxingqi.gmdoc.R
 import org.xiaoxingqi.gmdoc.core.BaseActivity
+import org.xiaoxingqi.gmdoc.entity.user.UserInfoData
 import org.xiaoxingqi.gmdoc.impl.home.UserInfoCallBack
 import org.xiaoxingqi.gmdoc.parsent.home.HomeUserInfoPersent
 
@@ -12,7 +13,9 @@ class UserHomeActivity : BaseActivity<HomeUserInfoPersent>() {
 
     override fun createPresent(): HomeUserInfoPersent {
         return HomeUserInfoPersent(this, object : UserInfoCallBack() {
+            override fun userInfo(info: UserInfoData?) {
 
+            }
         })
     }
 
@@ -25,7 +28,8 @@ class UserHomeActivity : BaseActivity<HomeUserInfoPersent>() {
     }
 
     override fun initData() {
-
+        val userId = intent.getStringExtra("userId")
+        persent?.getUserInfo(userId)
     }
 
     override fun initEvent() {
@@ -33,6 +37,7 @@ class UserHomeActivity : BaseActivity<HomeUserInfoPersent>() {
     }
 
     override fun request() {
+
 
     }
 }

@@ -10,11 +10,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity"></activity>
-        <activity android:name=".modul.game.GameDetailsActivity" />
-        <activity android:name=".modul.game.GameListActicivty" />
         <activity
-            android:name=".SplashActivity"
+            android:name=".MainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".modul.game.GameDetailsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".modul.game.GameListActicivty"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".modul.global.SplashActivity"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,6 +30,14 @@
 
         </activity>
         <activity android:name=".modul.home.UserHomeActivity" />
+        <activity
+            android:name=".modul.common.ShowPicActivity"
+            android:theme="@style/translucentTheme" />
+        <activity
+            android:name=".modul.login.LoginActivity"
+            android:theme="@style/translucentTheme" />
+
+
     </application>
     <uses-permission android:name="android.permission.INTERNET" />
 </manifest>

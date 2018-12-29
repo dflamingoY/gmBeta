@@ -19,6 +19,7 @@
 
     <color name="color_state_press">#FFE5D7</color>
     <color name="color_text_color">#8995a7</color>
-
-
+    <color name="color_normal_bg">#f7f7f2</color>
+    <color name="color_Black">#000</color>
+    <color name="color_888">#888888</color>
 </resources>

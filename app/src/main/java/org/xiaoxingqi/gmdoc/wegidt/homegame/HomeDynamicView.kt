@@ -1,25 +1,55 @@
 package org.xiaoxingqi.gmdoc.wegidt.homegame
 
+import android.app.Activity
 import android.content.Context
-import android.support.v7.widget.GridLayoutManager
+import android.content.Intent
+import android.graphics.Canvas
+import android.graphics.Color
+import android.text.TextUtils
 import android.util.AttributeSet
+import android.util.Log
+import android.view.View
+import android.widget.ImageView
 import com.bumptech.glide.Glide
+import com.nostra13.universalimageloader.core.ImageLoader
 import kotlinx.android.synthetic.main.layout_dynamic.view.*
+import org.jetbrains.anko.backgroundColor
 import org.xiaoxingqi.gmdoc.R
-import org.xiaoxingqi.gmdoc.core.adapter.BaseAdapterHelper
-import org.xiaoxingqi.gmdoc.core.adapter.QuickAdapter
 import org.xiaoxingqi.gmdoc.entity.BaseImgBean
 import org.xiaoxingqi.gmdoc.entity.home.HomeUserShareData
-import org.xiaoxingqi.gmdoc.impl.IConstant
-import org.xiaoxingqi.gmdoc.tools.SPUtils
+import org.xiaoxingqi.gmdoc.modul.common.ShowPicActivity
+import org.xiaoxingqi.gmdoc.modul.game.GameDetailsActivity
+import org.xiaoxingqi.gmdoc.tools.AppConfig
+import org.xiaoxingqi.gmdoc.tools.AppTools
 import org.xiaoxingqi.gmdoc.wegidt.BaseLayout
+import org.xiaoxingqi.gmdoc.wegidt.ninegridView.GridImageView
+import org.xiaoxingqi.gmdoc.wegidt.ninegridView.NineGridImageView
+import org.xiaoxingqi.gmdoc.wegidt.ninegridView.NineGridImageViewAdapter
 
 class HomeDynamicView : BaseLayout {
+    private var nigenineGridView: NineGridImageView<BaseImgBean> = findViewById(R.id.nineGridView)
+    private var bean: HomeUserShareData.ContributeBean? = null
 
-    constructor(context: Context, attributeSet: AttributeSet) : super(context, attributeSet){
-        dynamic_recycler.isNestedScrollingEnabled=false
-        dynamic_recycler.isNestedScrollingEnabled=false
+    constructor(context: Context) : this(context, null)
 
+    constructor(context: Context, attributeSet: AttributeSet?) : super(context, attributeSet) {
+        tv_Content_Title.setOnTextTouchListener {
+            when (it.type) {
+                1 -> {
+                    context.startActivity(Intent(context, GameDetailsActivity::class.java).putExtra("gameId", bean?.game_id))
+                }
+                2 -> {
+
+                }
+            }
+        }
+        nigenineGridView.setItemImageClickListener { context, imageView, index, list ->
+            context.startActivity(Intent(context, ShowPicActivity::class.java)
+                    .putExtra("imgs", bean?.img)
+                    .putExtra("index", index)
+            )
+            (context as Activity).overridePendingTransition(R.anim.act_enter_scale, 0)
+        }
     }
 
     override fun getLayoutId(): Int {
@@ -27,35 +57,40 @@ class HomeDynamicView : BaseLayout {
     }
 
     fun setData(bean: HomeUserShareData.ContributeBean) {
-        /*val adapter = object : QuickAdapter<BaseImgBean>(context, R.layout.item_spoiler_img, bean.img) {
-            override fun convert(helper: BaseAdapterHelper?, item: BaseImgBean?) {
-                if (item!!.url.endsWith("gif")) {
-                    helper!!.getView(R.id.iv_Gif).visibility = VISIBLE
-                } else {
-                    helper!!.getView(R.id.iv_Gif).visibility = GONE
-                }
-                if ("0" == item.spoiler) {//不包含剧透
-                    helper.getView(R.id.viewSpoiler).visibility = GONE
-                } else {
-                    if (SPUtils.getBoolean(context, IConstant.IS_SPOLIER, false)) {
-                        helper.getView(R.id.viewSpoiler).visibility = VISIBLE
-                    } else {
-                        helper.getView(R.id.viewSpoiler).visibility = GONE
-                    }
-                }
-                Glide.with(context)
-                        .load(item.url + "?imageMogr2/thumbnail/!240x240r/auto-orient")
-                        .asBitmap()
-                        .error(R.mipmap.btn_create_post)
-                        .override(80, 80)
-                        .placeholder(R.mipmap.btn_create_post)
-                        .into(helper.getImageView(R.id.iv_img))
-//                ImageLoader.getInstance().displayImage(item.url + "?imageMogr2/thumbnail/!240x240r/auto-orient", helper.getImageView(R.id.iv_img))
+        this.bean = bean
+        if (!TextUtils.isEmpty(bean.title)) {
+            tv_Content_Title.setData(AppConfig.getImageHtml(bean.title))
+        }
+        if (bean.is_ori == 0) {
+
+        } else {
+            linear_Repeat.visibility = GONE
+            linearContent.backgroundColor = Color.WHITE
+            if (bean.game_id != null) {
+                val text = "为 " + bean.game.game_name + "(" + bean.game.game_pla + "|" + bean.game.game_ver + ") " + "贡献了游戏截图" + "#" + bean.game.game_name + "#"
+                tv_Content_Title.setData(text, bean.game.game_name + "(" + bean.game.game_pla + "|" + bean.game.game_ver + ") ")
             }
         }
-        dynamic_recycler.layoutManager = GridLayoutManager(context, 3)
-        dynamic_recycler.adapter = adapter*/
-
+        if (bean.is_video == 1) {
+            relativeVedio.visibility = VISIBLE
+            nigenineGridView.visibility = GONE
+            ImageLoader.getInstance().displayImage(bean.video_cover, iv_Details, AppTools.options)
+        } else if (bean.is_photo == 1) {
+            relativeVedio.visibility = GONE
+            nigenineGridView.visibility = VISIBLE
+            val adapter = object : NineGridImageViewAdapter<BaseImgBean>() {
+                override fun onDisplayImage(context: Context?, imageView: View?, t: BaseImgBean?) {
+                    /* Glide.with(context)
+                             .load(t!!.url + "?imageMogr2/thumbnail/!240x240r/auto-orient")
+                             .asBitmap()
+                             .centerCrop()
+                             .into(imageView as ImageView)*/
+                    (imageView as GridImageView).loadPic(t!!.url + "?imageMogr2/thumbnail/!240x240r/auto-orient")
+                    Log.d("Mozator", "draw img")
+                }
+            }
+            nigenineGridView.setAdapter(adapter)
+            nigenineGridView.setImagesData(bean.img)
+        }
     }
-
 }

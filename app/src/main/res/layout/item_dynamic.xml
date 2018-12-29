@@ -71,6 +71,7 @@
                 android:layout_marginLeft="4dp"
                 android:layout_marginTop="-6dp"
                 android:layout_toRightOf="@+id/tv_UserName"
+                android:src="@mipmap/img_noti_thumb"
                 android:visibility="gone" />
 
             <ImageView
@@ -79,7 +80,8 @@
                 android:layout_height="28dp"
                 android:layout_alignParentRight="true"
                 android:paddingLeft="12dp"
-                android:paddingBottom="12dp" />
+                android:paddingBottom="12dp"
+                android:src="@mipmap/rectangle_11_xhdpi" />
 
             <RelativeLayout
                 android:layout_width="wrap_content"
@@ -103,6 +105,7 @@
                     android:layout_alignTop="@+id/tv_CreateTime"
                     android:layout_marginLeft="8dp"
                     android:layout_toRightOf="@+id/tv_CreateTime"
+                    android:drawableLeft="@mipmap/img_closed_topic"
                     android:drawablePadding="3dp"
                     android:includeFontPadding="false"
                     android:text="仅自己可见"
@@ -141,7 +144,7 @@
 
     </RelativeLayout>
 
-    <org.xiaoxingqi.gmdoc.wegidt.textView.SpolierTextView
+    <org.xiaoxingqi.gmdoc.wegidt.textView.SpoilerTextView
         android:id="@+id/tv_Title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -153,15 +156,10 @@
         android:textSize="15sp"
         android:visibility="gone" />
 
-    <org.xiaoxingqi.gmdoc.wegidt.ninegridView.NineGridImageView
-        android:id="@+id/nineGridView"
+    <FrameLayout
+        android:id="@+id/frameContainer"
         android:layout_width="match_parent"
-        android:clipChildren="false"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        app:imgGap="3dp"
-        app:showStyle="grid" />
+        android:layout_height="wrap_content"></FrameLayout>
 
     <View
         android:layout_width="match_parent"
@@ -185,7 +183,8 @@
             <ImageView
                 android:id="@+id/iv_Thumb"
                 android:layout_width="14dp"
-                android:layout_height="14dp" />
+                android:layout_height="14dp"
+                android:src="@drawable/thumb_selector" />
 
             <TextView
                 android:id="@+id/tv_Thumb"
@@ -208,7 +207,8 @@
 
             <ImageView
                 android:layout_width="14dp"
-                android:layout_height="14dp" />
+                android:layout_height="14dp"
+                android:src="@mipmap/btn_comment_grey" />
 
             <TextView
                 android:id="@+id/tv_CommentCount"
@@ -231,7 +231,8 @@
 
             <ImageView
                 android:layout_width="14dp"
-                android:layout_height="14dp" />
+                android:layout_height="14dp"
+                android:src="@mipmap/btn_aircraft_grey" />
 
             <TextView
                 android:id="@+id/tv_Report"
@@ -253,7 +254,8 @@
             <ImageView
                 android:id="@+id/iv_pay_leg"
                 android:layout_width="14dp"
-                android:layout_height="14dp" />
+                android:layout_height="14dp"
+                android:src="@drawable/jitui_selector" />
 
             <TextView
                 android:id="@+id/tv_AddLeg"

@@ -18,4 +18,23 @@ public interface IConstant {
      * 用户信息
      */
     String USERINFO = "userInfo";
+
+    /**
+     * 根文件夹名
+     */
+    String DOCNAME = "GMDOC";
+    /**
+     * 缓存文件
+     */
+    String CACHE_NAME = "cache";
+    /**
+     * 下载目录
+     */
+    String DOWNLOAD = "down";
+    /**
+     * 缓存的邮箱地址
+     */
+    String CACHEEMAIL="cacheEmail";
+
+
 }

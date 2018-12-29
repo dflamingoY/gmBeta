@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<org.xiaoxingqi.gmdoc.wegidt.TransLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/transLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_white"
+    app:defaultState="content"
+    app:emptyLayout="@layout/view_empty"
+    app:offlineLayout="@layout/view_offline"
+    app:progressLayout="@layout/view_progress">
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/color_white"
+        android:fillViewport="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/color_white">
+
+            <ImageView
+                android:id="@+id/iv_Bg"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop" />
+
+            <LinearLayout
+                android:id="@+id/linear_Close"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="13dp"
+                    android:layout_height="13dp"
+                    android:layout_marginLeft="12dp"
+                    android:src="@mipmap/btn_close_w_shadow" />
+
+                <TextView
+                    android:layout_width="40dp"
+                    android:layout_height="22dp"
+                    android:layout_marginLeft="8dp"
+                    android:gravity="center_horizontal"
+                    android:letterSpacing="0.01"
+                    android:shadowColor="#7e000000"
+                    android:shadowDy="1"
+                    android:shadowRadius="2"
+                    android:text="关闭"
+                    android:textColor="#ffffff"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/iv_app_Logo"
+                android:layout_width="193dp"
+                android:layout_height="67dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="108dp" />
+
+            <org.xiaoxingqi.gmdoc.wegidt.GradientRelative
+                android:id="@+id/relative_Email"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="234dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/login_edittext_selector">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="13dp"
+                    android:src="@mipmap/group_4" />
+
+                <EditText
+                    android:id="@+id/et_Email"
+                    style="@style/Login_ET_Style"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="42dp"
+                    android:hint="请输入邮箱地址"
+                    android:inputType="textEmailAddress" />
+
+            </org.xiaoxingqi.gmdoc.wegidt.GradientRelative>
+
+            <org.xiaoxingqi.gmdoc.wegidt.GradientRelative
+                android:id="@+id/relative_Pwd"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="302dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/login_edittext_selector">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="13dp"
+                    android:src="@mipmap/btn_login_key" />
+
+                <EditText
+                    android:id="@+id/et_Pwd"
+                    style="@style/Login_ET_Style"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="42dp"
+                    android:hint="请输入密码,最少6位"
+                    android:inputType="textPassword" />
+
+                <ImageView
+                    android:id="@+id/iv_hide_pwd"
+                    android:layout_width="24dp"
+                    android:layout_height="25dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="12dp"
+                    android:padding="2dp"
+                    android:src="@mipmap/eye_closed" />
+            </org.xiaoxingqi.gmdoc.wegidt.GradientRelative>
+
+            <ImageView
+                android:id="@+id/iv_Login"
+                android:layout_width="match_parent"
+                android:layout_height="69dp"
+                android:layout_marginLeft="14dp"
+                android:layout_marginTop="390dp"
+                android:layout_marginRight="14dp"
+                android:src="@drawable/login_seletor" />
+
+            <TextView
+                android:id="@+id/tv_Dissmiss_Pwd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="463dp"
+                android:gravity="center_horizontal"
+                android:text="忘记密码？"
+                android:textColor="#666666"
+                android:textSize="14sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="524dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/Login_By_QQ"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp" />
+
+                <ImageView
+                    android:id="@+id/Login_By_Wechat"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="47dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="594dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="没有账号？"
+                    android:textColor="#666666"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/tv_Sign"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="立即注册"
+                    android:textColor="#ff7100"
+                    android:textSize="15sp" />
+
+            </LinearLayout>
+        </RelativeLayout>
+    </android.support.v4.widget.NestedScrollView>
+</org.xiaoxingqi.gmdoc.wegidt.TransLayout>

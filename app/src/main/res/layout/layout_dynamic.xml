@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <org.xiaoxingqi.gmdoc.wegidt.textView.SpolierTextView
+    <org.xiaoxingqi.gmdoc.wegidt.textView.SpoilerTextView
         android:id="@+id/tv_Content_Title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
         android:layout_marginLeft="12dp"
-        android:layout_marginRight="12dp"
         android:layout_marginTop="10dp"
+        android:layout_marginRight="12dp"
+        android:layout_marginBottom="10dp"
         android:includeFontPadding="false"
         android:lineSpacingExtra="6dp"
         android:textColor="#282828"
-        android:textSize="15sp"
-        android:visibility="gone" />
+        android:textSize="15sp" />
 
     <TextView
         android:id="@+id/tvNullContent"
@@ -26,9 +26,9 @@
         android:background="#f6f7f7"
         android:drawableLeft="@mipmap/img_mark_warning"
         android:drawablePadding="6dp"
-        android:paddingBottom="20dp"
         android:paddingLeft="12dp"
         android:paddingTop="12dp"
+        android:paddingBottom="20dp"
         android:singleLine="true"
         android:text="抱歉，此内容已被作者刪除"
         android:textColor="#666666"
@@ -54,10 +54,10 @@
                 android:id="@+id/tv_Original_User"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
                 android:layout_marginLeft="12dp"
-                android:layout_marginRight="12dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginRight="12dp"
+                android:layout_marginBottom="8dp"
                 android:lineSpacingExtra="9sp"
                 android:singleLine="true"
                 android:textColor="#666666"
@@ -86,18 +86,16 @@
 
         </LinearLayout>
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/dynamic_recycler"
+        <org.xiaoxingqi.gmdoc.wegidt.ninegridView.NineGridImageView
+            android:id="@+id/nineGridView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
-            android:clickable="false"
-            android:focusable="false"
-            android:focusableInTouchMode="false"
-            android:visibility="visible">
-
-        </android.support.v7.widget.RecyclerView>
+            android:paddingLeft="4dp"
+            android:paddingTop="4dp"
+            app:imgGap="8dp"
+            app:showStyle="grid" />
 
         <RelativeLayout
             android:id="@+id/relativeVedio"

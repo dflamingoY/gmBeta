@@ -24,7 +24,6 @@
             android:layout_marginRight="14dp"
             android:layout_marginBottom="12dp"
             android:ellipsize="end"
-            android:focusableInTouchMode="true"
             android:shadowColor="#80000000"
             android:shadowDy="1"
             android:shadowRadius="1"

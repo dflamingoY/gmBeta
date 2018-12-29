@@ -2,6 +2,7 @@ package org.xiaoxingqi.gmdoc.parsent.game
 
 import android.content.Context
 import org.xiaoxingqi.gmdoc.entity.game.GameDetailsData
+import org.xiaoxingqi.gmdoc.entity.game.GameScoreAllData
 import org.xiaoxingqi.gmdoc.entity.home.HomeUserShareData
 import org.xiaoxingqi.gmdoc.impl.IConstant
 import org.xiaoxingqi.gmdoc.impl.game.GameDetailCallBack
@@ -59,7 +60,23 @@ class GameDetailPersent : BasePresent {
 
     //添加心愿单
 
-    //长评短评
+    /**
+     *长评短评
+     */
+    fun getComment(map: Map<String, String>, gameId: String) {
+        addObaser(apiServer.queryGameComment("scoreList/$gameId${IConstant.GET_END}", map), object : Subscriber<GameScoreAllData>() {
+            override fun onNext(t: GameScoreAllData?) {
+                callBack?.gameComment(t)
+            }
+
+            override fun onCompleted() {
+
+            }
+
+            override fun onError(e: Throwable?) {
+            }
+        })
+    }
 
 
 }

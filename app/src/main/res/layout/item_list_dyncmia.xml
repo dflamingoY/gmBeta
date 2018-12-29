@@ -7,7 +7,7 @@
     android:paddingTop="10dp"
     android:visibility="visible">
 
-    <org.xiaoxingqi.gmdoc.wegidt.textView.SpolierTextView
+    <org.xiaoxingqi.gmdoc.wegidt.textView.SpoilerTextView
         android:id="@+id/tv_Content_Title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

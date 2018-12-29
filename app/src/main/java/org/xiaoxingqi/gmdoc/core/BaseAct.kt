@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.view.Window
 import android.view.WindowManager
+import android.widget.Toast
 
 abstract class BaseAct : AppCompatActivity() {
 
@@ -47,4 +48,8 @@ abstract class BaseAct : AppCompatActivity() {
 
     abstract fun initEvent()
     abstract fun request()
+
+    protected fun showToast(text: String) {
+        Toast.makeText(this, text, Toast.LENGTH_SHORT).show()
+    }
 }
