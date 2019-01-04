@@ -222,9 +222,9 @@ class MainActivity : BaseActivity<MainPersenter>() {
                 currentFrag = homeFrag
             TypeFragment.Echoe ->
                 currentFrag = gameFrag
-//            TypeFragment.Listen ->
+//            TypeCircleFragment.Listen ->
 //                currentFrag = lifeCircle
-//            TypeFragment.Me ->
+//            TypeCircleFragment.Me ->
 //                currentFrag = msgFrag
             else -> {
 

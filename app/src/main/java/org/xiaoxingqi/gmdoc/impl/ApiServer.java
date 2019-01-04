@@ -85,4 +85,14 @@ public interface ApiServer {
     @POST
     Observable<BaseRespData> base_post(@Url String url, @QueryMap Map<String, String> map);
 
+    /**
+     * 不做json解析的get请求  拿到返回值才做解析
+     *
+     * @param url
+     * @return
+     */
+    @GET
+    Observable<String> base_get(@Url String url);
+
+
 }

@@ -27,6 +27,8 @@ abstract class BaseFrag<T : BasePresent> : Fragment() {
         return mView
     }
 
+    abstract fun createPresent(): T
+
     abstract fun getlyoutId(): Int
 
     abstract fun initView(view: View?)
@@ -37,7 +39,6 @@ abstract class BaseFrag<T : BasePresent> : Fragment() {
 
     abstract fun request(flag: Int)
 
-    abstract fun createPresent(): T
 
     fun showToast(text: String) {
         if (toast == null) {

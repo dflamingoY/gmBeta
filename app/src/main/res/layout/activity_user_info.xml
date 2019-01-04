@@ -49,18 +49,13 @@
                         android:clipChildren="true"
                         android:orientation="horizontal">
 
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="124dp">
 
-                            <ImageView
-                                android:id="@+id/iv_User_Bg"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_alignParentBottom="true"
-                                android:scaleType="centerCrop"
-                                android:src="@drawable/img_empty_avatar_back" />
-                        </RelativeLayout>
+                        <ImageView
+                            android:id="@+id/iv_User_Bg"
+                            android:layout_width="match_parent"
+                            android:layout_height="124dp"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/img_empty_avatar_back" />
 
                         <RelativeLayout
                             android:layout_width="78dp"
@@ -389,6 +384,7 @@
         </android.support.design.widget.AppBarLayout>
 
         <android.support.v4.view.ViewPager
+
             android:id="@+id/viewPager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
