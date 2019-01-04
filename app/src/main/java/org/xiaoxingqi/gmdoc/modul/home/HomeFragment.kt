@@ -303,7 +303,8 @@ class HomeFragment : BaseFrag<HomePresent>() {
                 dynamic.setData(item)
                 container.addView(dynamic)
                 helper.getView(R.id.cardLogo).setOnClickListener {
-                    startActivity(Intent(activity, UserHomeActivity::class.java))
+                    startActivity(Intent(activity, UserHomeActivity::class.java)
+                            .putExtra("userId", item.uid))
                 }
             }
         }

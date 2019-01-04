@@ -5,11 +5,13 @@ import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
 import com.nostra13.universalimageloader.core.ImageLoader
 import kotlinx.android.synthetic.main.activity_login.*
+import org.greenrobot.eventbus.EventBus
 import org.xiaoxingqi.gmdoc.R
 import org.xiaoxingqi.gmdoc.core.App
 import org.xiaoxingqi.gmdoc.core.BaseActivity
 import org.xiaoxingqi.gmdoc.impl.IConstant
 import org.xiaoxingqi.gmdoc.impl.login.LoginCallBack
+import org.xiaoxingqi.gmdoc.onEvent.LoginEvent
 import org.xiaoxingqi.gmdoc.parsent.login.LoginPresenter
 import org.xiaoxingqi.gmdoc.tools.AppTools
 import org.xiaoxingqi.gmdoc.tools.SPUtils
@@ -27,7 +29,7 @@ class LoginActivity : BaseActivity<LoginPresenter>() {
         return LoginPresenter(this, LoginCallBack {
             SPUtils.setString(this@LoginActivity, IConstant.CACHEEMAIL, et_Email.text.toString().trim())
             showToast("登录成功")
-
+            EventBus.getDefault().post(LoginEvent())
             finish()
         })
     }

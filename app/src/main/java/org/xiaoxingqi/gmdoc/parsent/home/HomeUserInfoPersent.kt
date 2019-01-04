@@ -11,7 +11,7 @@ class HomeUserInfoPersent : BasePresent {
     private var callBack: UserInfoCallBack? = null
 
     constructor(activity: Activity, callback: UserInfoCallBack) : super(activity) {
-        this.callBack = callBack
+        this.callBack = callback
     }
 
     fun getUserInfo(userId: String) {

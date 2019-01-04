@@ -1,5 +1,6 @@
 package org.xiaoxingqi.gmdoc
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Color
 import android.support.v4.app.Fragment
@@ -8,9 +9,6 @@ import org.xiaoxingqi.gmdoc.core.App
 import org.xiaoxingqi.gmdoc.core.http.HttpServer
 import org.xiaoxingqi.gmdoc.entity.TokenData
 import org.xiaoxingqi.gmdoc.modul.home.HomeFragment
-import rx.Subscriber
-import rx.android.schedulers.AndroidSchedulers
-import rx.schedulers.Schedulers
 import android.view.WindowManager
 import android.os.Build
 import android.support.v4.widget.DrawerLayout
@@ -19,7 +17,6 @@ import android.view.Gravity
 import android.view.View
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.GlideDrawableImageViewTarget
-import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 import org.xiaoxingqi.gmdoc.core.BaseActivity
@@ -28,6 +25,7 @@ import org.xiaoxingqi.gmdoc.entity.user.UserInfoData
 import org.xiaoxingqi.gmdoc.impl.IConstant
 import org.xiaoxingqi.gmdoc.impl.MainCallBack
 import org.xiaoxingqi.gmdoc.modul.game.GameFragment
+import org.xiaoxingqi.gmdoc.modul.home.UserHomeActivity
 import org.xiaoxingqi.gmdoc.modul.login.LoginActivity
 import org.xiaoxingqi.gmdoc.onEvent.LoginEvent
 import org.xiaoxingqi.gmdoc.parsent.MainPersenter
@@ -56,12 +54,13 @@ class MainActivity : BaseActivity<MainPersenter>() {
                 persent?.post_token()
             }
 
+            @SuppressLint("SetTextI18n")
             override fun userInfo(data: UserInfoData?) {
                 /**
                  * 信息查询成功 表示用户已经登录
                  */
                 data?.let {
-                    if (it.getData().jutou === 0) {//剧透打开
+                    if (it.data.jutou == 0) {//剧透打开
                         toggle_Button.isChecked = true
                         SPUtils.setBoolean(this@MainActivity, IConstant.IS_SPOLIER, true)
                     } else {//关闭
@@ -71,12 +70,12 @@ class MainActivity : BaseActivity<MainPersenter>() {
                     PreferenceTools.saveObj(this@MainActivity, IConstant.USERINFO, it)
                     drawerlayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
                     Glide.with(this@MainActivity)
-                            .load(it.getData().avatar)
+                            .load(it.data.avatar)
                             .error(R.mipmap.img_avatar_default)
                             .centerCrop()
                             .into(GlideDrawableImageViewTarget(iv_UserLogo, 0))
                     Glide.with(this@MainActivity)
-                            .load(it.getData().top_image)
+                            .load(it.data.top_image)
 //                            .error(R.mipmap.img_mine_banner)
                             .centerCrop()
                             .into(user_Home_Bg)
@@ -84,26 +83,25 @@ class MainActivity : BaseActivity<MainPersenter>() {
                     if (TextUtils.isEmpty(it.data.like_num)) {
                         tv_UserLike.text = "0 关注 · "
                     } else {
-                        tv_UserLike.setText(it.getData().follow_num + " 关注 · ")
+                        tv_UserLike.text = "${it.data.follow_num} 关注 · "
                     }
-
-                    if (it.getData().fans_switch === 0) {//切换是否隐藏读者数
-                        if (TextUtils.isEmpty(it.getData().fans_num)) {
-                            tv_UserFans.setText("0 读者")
+                    if (it.data.fans_switch == 0) {//切换是否隐藏读者数
+                        if (TextUtils.isEmpty(it.data.fans_num)) {
+                            tv_UserFans.text = "0 读者"
                         } else {
-                            tv_UserFans.setText(it.getData().fans_num + " 读者")
+                            tv_UserFans.text = "${it.data.fans_num} 读者"
                         }
                     } else {
-                        tv_UserFans.setText("未知 读者")
+                        tv_UserFans.text = "未知 读者"
                     }
 //                    updateFrag()
 
-                    if (TextUtils.isEmpty(it.getData().like_game) || TextUtils.isEmpty(it.getData().username)) {
+                    if (TextUtils.isEmpty(it.data.like_game) || TextUtils.isEmpty(it.data.username)) {
 //                        startActivity(Intent(this@MainActivity, PerfectInfoActivity::class.java))
                     } else {
-                        if (!TextUtils.isEmpty(it.getData().like_game)) {
-                            val split = it.getData().like_game.split(",")
-                            if (split == null || split.size < 1) {
+                        if (!TextUtils.isEmpty(it.data.like_game)) {
+                            val split = it.data.like_game.split(",")
+                            if (split.isEmpty()) {
 //                                startActivity(Intent(this@MainActivity, PerfectInfoActivity::class.java))
                             }
                         }
@@ -147,7 +145,6 @@ class MainActivity : BaseActivity<MainPersenter>() {
     }
 
     override fun initData() {
-        EventBus.getDefault().register(this)
         switchFragment(TypeFragment.Home)
         persent?.post_token()
         persent?.queryInfo()
@@ -186,6 +183,30 @@ class MainActivity : BaseActivity<MainPersenter>() {
         iv_login_out.setOnClickListener {
             map["_token"] = App.s_Token!!
             persent?.loginOut(map)
+        }
+        relative_User_Home.setOnClickListener {
+            startActivity(Intent(this, UserHomeActivity::class.java))
+        }
+        relative_likeGame.setOnClickListener {
+
+        }
+        relative_Content.setOnClickListener {
+
+        }
+        relative_More.setOnClickListener {
+
+        }
+        relative_User_Wallet.setOnClickListener {
+
+        }
+        relative_User_Enjoy.setOnClickListener {
+
+        }
+        relative_Setting.setOnClickListener {
+
+        }
+        iv_Help.setOnClickListener {
+
         }
     }
 
@@ -226,7 +247,7 @@ class MainActivity : BaseActivity<MainPersenter>() {
 
     override fun onDestroy() {
         super.onDestroy()
-        EventBus.getDefault().unregister(this)
+
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
