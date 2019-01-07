@@ -37,15 +37,7 @@ class UserHomeActivity : BaseActivity<HomeUserInfoPersent>() {
                 Glide.with(this@UserHomeActivity)
                         .load(info!!.data.top_image)
                         .asBitmap()
-                        .into(object : BitmapImageViewTarget(iv_User_Bg) {
-                            override fun onResourceReady(resource: Bitmap?, glideAnimation: GlideAnimation<in Bitmap>?) {
-                                super.onResourceReady(resource, glideAnimation)
-                                /**
-                                 * 切割bitmap
-                                 */
-                                collapsing_toolbar.contentScrim = BitmapDrawable(resources, resource)
-                            }
-                        })
+                        .into(iv_User_Bg)
                 Glide.with(this@UserHomeActivity)
                         .load(info.data.avatar)
                         .error(R.mipmap.img_avatar_default)
