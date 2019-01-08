@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingTop="10dp">
+
+    <org.xiaoxingqi.gmdoc.wegidt.textView.SpoilerTextView
+        android:id="@+id/tv_Title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:layout_marginTop="10dp"
+        android:lineSpacingExtra="6sp"
+        android:textColor="#282828"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/tvNullContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:background="#f6f7f7"
+        android:drawableLeft="@mipmap/img_mark_warning"
+        android:drawablePadding="6dp"
+        android:paddingBottom="20dp"
+        android:paddingLeft="12dp"
+        android:paddingTop="12dp"
+        android:singleLine="true"
+        android:text="抱歉，此内容已被作者刪除"
+        android:textColor="#666666"
+        android:textSize="15sp"
+        android:visibility="gone" />
+
+
+    <LinearLayout
+        android:id="@+id/linearContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/linear_Orignal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/tv_Orignal_User"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:layout_marginTop="8dp"
+                android:lineSpacingExtra="9sp"
+                android:singleLine="true"
+                android:textColor="#666666"
+                android:textSize="15sp" />
+
+            <org.xiaoxingqi.gmdoc.wegidt.textView.EmojiSpoilerTextView
+                android:id="@+id/tv_GameInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:lineSpacingExtra="9sp"
+                android:singleLine="true"
+                android:textColor="#666666"
+                android:textSize="15sp" />
+
+        </LinearLayout>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/appbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="13dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:elevation="1dp"
+            android:orientation="vertical"
+            app:cardCornerRadius="2dp"
+            app:cardElevation="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <View
+                        android:id="@+id/gameClick"
+                        android:layout_width="match_parent"
+                        android:layout_height="64dp"
+                        android:background="#383a44" />
+
+                    <TextView
+                        android:id="@+id/tv_GameTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="12dp"
+                        android:layout_marginRight="18dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_toLeftOf="@+id/scoreView"
+                        android:layout_toRightOf="@+id/iv_GameLogo"
+                        android:lineSpacingExtra="3.6sp"
+                        android:singleLine="true"
+                        android:text="游戏标题"
+                        android:textColor="#ffffff"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/tv_Version"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tv_GameTitle"
+                        android:layout_marginLeft="12dp"
+                        android:layout_marginTop="4dp"
+                        android:layout_toRightOf="@+id/iv_GameLogo"
+                        android:lineSpacingExtra="1sp"
+                        android:text="平台 | 版本"
+                        android:textColor="#9b9b9b"
+                        android:textSize="13sp" />
+
+                    <ImageView
+                        android:id="@+id/iv_GameLogo"
+                        android:layout_width="86dp"
+                        android:layout_height="86dp"
+                        android:layout_marginLeft="12dp"
+                        android:layout_marginTop="12dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/img_empty_avatar_back" />
+
+                    <org.xiaoxingqi.gmdoc.wegidt.RoundScoreView
+                        android:id="@+id/scoreView"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="12dp"
+                        android:layout_marginTop="12dp"
+                        android:gravity="center"
+                        android:text="tbd"
+                        android:textColor="#ffffff"
+                        android:textSize="14sp"
+                        app:bgStyle="circleType" />
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:id="@+id/linear_Good"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginTop="8dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:src="@mipmap/img_good_bubble_copy" />
+
+                    <TextView
+                        android:id="@+id/tv_GoodWay"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="7dp"
+                        android:ellipsize="end"
+                        android:singleLine="true"
+                        android:textColor="#000000"
+                        android:textSize="14sp" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linear_bad"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginTop="4dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:src="@mipmap/img_bad_bubble_copy" />
+
+                    <TextView
+                        android:id="@+id/tv_BadWay"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="7dp"
+                        android:ellipsize="end"
+                        android:singleLine="true"
+                        android:textColor="#000000"
+                        android:textSize="14sp" />
+
+                </LinearLayout>
+
+                <org.xiaoxingqi.gmdoc.wegidt.textView.SpoilerTextView
+                    android:id="@+id/tv_GameDesc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/linear_bad"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="12dp"
+                    android:layout_marginTop="6dp"
+                    android:textColor="#6d6d6d"
+                    android:textSize="15sp" />
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+        <View
+            android:id="@+id/viewFill"
+            android:layout_width="match_parent"
+            android:layout_height="12dp"
+            android:visibility="gone" />
+
+    </LinearLayout>
+</LinearLayout>

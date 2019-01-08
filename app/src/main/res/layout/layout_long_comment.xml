@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingTop="10dp">
+
+    <org.xiaoxingqi.gmdoc.wegidt.textView.SpoilerTextView
+        android:id="@+id/tv_Title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:layout_marginTop="10dp"
+        android:includeFontPadding="false"
+        android:lineSpacingExtra="6dp"
+        android:textColor="#282828"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/tvNullContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:background="#f6f7f7"
+        android:drawableLeft="@mipmap/img_mark_warning"
+        android:drawablePadding="6dp"
+        android:paddingBottom="20dp"
+        android:paddingLeft="12dp"
+        android:paddingTop="12dp"
+        android:singleLine="true"
+        android:text="抱歉，此内容已被作者刪除"
+        android:textColor="#666666"
+        android:textSize="15sp"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:id="@+id/linearContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="10dp">
+
+        <LinearLayout
+            android:id="@+id/linear_Orignal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/tv_Orignal_User"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:layout_marginTop="8dp"
+                android:lineSpacingExtra="9sp"
+                android:singleLine="true"
+                android:textColor="#666666"
+                android:textSize="15sp" />
+
+            <org.xiaoxingqi.gmdoc.wegidt.textView.EmojiSpoilerTextView
+                android:id="@+id/tv_GameInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:lineSpacingExtra="9sp"
+                android:textColor="#666666"
+                android:textSize="15sp" />
+        </LinearLayout>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/appBarPhoto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="14dp"
+            android:layout_marginRight="14dp"
+            android:orientation="vertical"
+            app:cardCornerRadius="2dp"
+            app:cardElevation="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:id="@+id/relative_Img"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <org.xiaoxingqi.gmdoc.wegidt.gameDetails.SqureImageView
+                        android:id="@+id/iv_Details"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/img_empty_avatar_back" />
+
+                    <org.xiaoxingqi.gmdoc.wegidt.RoundScoreView
+                        android:id="@+id/scoreView"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="12dp"
+                        android:layout_marginTop="12dp"
+                        android:gravity="center"
+                        android:text="tbd"
+                        android:textColor="#ffffff"
+                        android:textSize="14sp"
+                        android:visibility="gone"
+                        app:bgStyle="circleType" />
+
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/tv_PhotoTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="32dp"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="12dp"
+                    android:gravity="center_vertical"
+                    android:singleLine="true"
+                    android:textColor="#282828"
+                    android:textSize="14sp" />
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+        <TextView
+            android:id="@+id/tv_Content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="14dp"
+            android:layout_marginRight="14dp"
+            android:layout_marginTop="16dp"
+            android:lineSpacingExtra="3dp"
+            android:textColor="#282828"
+            android:textSize="14sp"
+            android:visibility="gone" />
+    </LinearLayout>
+</LinearLayout>
