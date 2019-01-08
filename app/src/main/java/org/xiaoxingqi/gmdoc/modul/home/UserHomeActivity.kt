@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
+import android.support.v4.view.ViewPager
 import android.text.TextUtils
 import android.util.TypedValue
 import android.view.View
@@ -147,7 +148,13 @@ class UserHomeActivity : BaseActivity<HomeUserInfoPersent>() {
     }
 
     override fun initEvent() {
+        viewPager.addOnPageChangeListener(object : ViewPager.SimpleOnPageChangeListener() {
 
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+                tabTitleLayout.setCurrentSelect(position)
+            }
+        })
     }
 
     override fun request() {
