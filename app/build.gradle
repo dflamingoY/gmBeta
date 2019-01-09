@@ -30,6 +30,22 @@ android {
     packagingOptions {
         exclude 'META-INF/rxjava.properties'
     }
+    signingConfigs {
+        app {
+            keyAlias 'fave'
+            keyPassword 'fave.cn'
+            storeFile file('../sign/temp.jks')
+            storePassword 'fave.cn'
+        }
+    }
+    buildTypes {
+        release {
+            signingConfig signingConfigs.app
+        }
+        debug {
+            signingConfig signingConfigs.app
+        }
+    }
 
 }
 
