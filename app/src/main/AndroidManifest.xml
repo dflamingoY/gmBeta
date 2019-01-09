@@ -37,6 +37,7 @@
             android:name=".modul.login.LoginActivity"
             android:theme="@style/translucentTheme" />
         <activity android:name=".modul.dynamic.DynamicDetailsActivity" />
+        <activity android:name=".modul.global.WriteDynamicActivity" />
 
 
     </application>

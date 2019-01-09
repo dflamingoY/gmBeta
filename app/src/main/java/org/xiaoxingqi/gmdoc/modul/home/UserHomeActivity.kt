@@ -155,6 +155,11 @@ class UserHomeActivity : BaseActivity<HomeUserInfoPersent>() {
                 tabTitleLayout.setCurrentSelect(position)
             }
         })
+        tabTitleLayout.setOnClick {
+            val ofChild = tabTitleLayout.indexOfChild(it)
+            viewPager.setCurrentItem(ofChild, false)
+        }
+
     }
 
     override fun request() {

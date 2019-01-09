@@ -82,5 +82,10 @@
             </FrameLayout>
 
         </RelativeLayout>
+
+        <org.xiaoxingqi.gmdoc.wegidt.gameDetails.HintTagView
+            android:id="@+id/hintTagView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
     </RelativeLayout>
 </org.xiaoxingqi.gmdoc.wegidt.TransLayout>

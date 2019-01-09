@@ -27,6 +27,8 @@ import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 import com.nostra13.universalimageloader.core.download.BaseImageDownloader;
 
 import org.xiaoxingqi.gmdoc.R;
+import org.xiaoxingqi.gmdoc.entity.user.UserInfoData;
+import org.xiaoxingqi.gmdoc.impl.IConstant;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -252,4 +254,19 @@ public class AppTools {
         }
         context.startActivityForResult(intent, request);
     }
+
+    /**
+     * 判断是否已经登录
+     *
+     * @param context
+     * @return true 已经登录 false  未登录
+     */
+    public static boolean isLogin(Context context) {
+        UserInfoData obj = PreferenceTools.getObj(context, IConstant.USERINFO, UserInfoData.class);
+        if (obj == null || obj.getData() == null) {
+            return false;
+        }
+        return true;
+    }
+
 }

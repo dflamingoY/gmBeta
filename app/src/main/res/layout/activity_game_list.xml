@@ -9,13 +9,15 @@
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        app:elevation="0dp">
+        android:background="@color/colorWhite">
 
         <android.support.v7.widget.Toolbar
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="24dp"
-            app:contentInsetStart="0dp">
+            app:contentInsetStart="0dp"
+            app:navigationIcon="@mipmap/btn_back_g"
+            app:titleMarginStart="0dp">
 
             <TextView
                 android:id="@+id/tv_Title"

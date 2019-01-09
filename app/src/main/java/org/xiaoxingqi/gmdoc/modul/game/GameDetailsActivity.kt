@@ -1,18 +1,18 @@
 package org.xiaoxingqi.gmdoc.modul.game
 
+import android.annotation.SuppressLint
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Color
 import android.os.Handler
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.text.TextUtils
-import android.util.Log
+import android.view.KeyEvent
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.RelativeLayout
-import android.widget.TextView
+import android.widget.*
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.animation.GlideAnimation
 import com.bumptech.glide.request.target.BitmapImageViewTarget
@@ -28,24 +28,29 @@ import org.xiaoxingqi.gmdoc.entity.game.GameDetailsData
 import org.xiaoxingqi.gmdoc.entity.game.GameScoreAllData
 import org.xiaoxingqi.gmdoc.entity.home.HomeUserShareData
 import org.xiaoxingqi.gmdoc.impl.game.GameDetailCallBack
+import org.xiaoxingqi.gmdoc.modul.home.UserHomeActivity
 import org.xiaoxingqi.gmdoc.parsent.game.GameDetailPersent
 import org.xiaoxingqi.gmdoc.tools.AppTools
 import org.xiaoxingqi.gmdoc.tools.FastBlur
+import org.xiaoxingqi.gmdoc.tools.TimeUtils
 import org.xiaoxingqi.gmdoc.wegidt.gameDetails.GameLongCommentView
 import org.xiaoxingqi.gmdoc.wegidt.gameDetails.GameShortCommentView
+import org.xiaoxingqi.gmdoc.wegidt.homegame.ArticleListView
+import org.xiaoxingqi.gmdoc.wegidt.homegame.HomeDynamicView
 
 class GameDetailsActivity : BaseActivity<GameDetailPersent>() {
     private lateinit var adapter: QuickAdapter<HomeUserShareData.ContributeBean>
     private lateinit var headView: View
     private lateinit var gameId: String
     private var loadArray = IntArray(3)//0 游戏信息  1  动态  2   长短评
-
+    private lateinit var footView: View
 
     private val mData by lazy {
         ArrayList<HomeUserShareData.ContributeBean>()
     }
     private val map = HashMap<String, String>()
 
+    @SuppressLint("SetTextI18n")
     override fun createPresent(): GameDetailPersent {
         return GameDetailPersent(this, object : GameDetailCallBack {
             override fun gameComment(data: GameScoreAllData?) {
@@ -62,6 +67,7 @@ class GameDetailsActivity : BaseActivity<GameDetailPersent>() {
                         headView.linearShortContainer.addView(view)
                     }
                 } catch (e: Exception) {
+
                 }
                 headView.isHaveShort.visibility = if (headView.linearShortContainer.childCount > 0) View.GONE else View.VISIBLE
                 headView.tv_FindMoreShort.visibility = if (headView.linearShortContainer.childCount >= 3) View.VISIBLE else View.GONE
@@ -153,7 +159,7 @@ class GameDetailsActivity : BaseActivity<GameDetailPersent>() {
                             isVeedio.visibility = View.VISIBLE
                         }
                         val mIvGameDesc = view.findViewById<ImageView>(R.id.iv_game_img)
-                        var url = if (it[index].pic.contains("?")) {
+                        val url = if (it[index].pic.contains("?")) {
                             it[index].pic + "&imageMogr2/auto-orient/thumbnail/!200x200r"
                         } else {
                             it[index].pic + "?imageMogr2/auto-orient/thumbnail/!200x200r"
@@ -204,6 +210,12 @@ class GameDetailsActivity : BaseActivity<GameDetailPersent>() {
                     mData.add(bean)
                     adapter.notifyItemInserted(adapter.itemCount - 1)
                 }
+                if (mData.size == 0) {
+                    adapter.setIsHaveFoot(true)
+                    adapter.notifyDataSetChanged()
+                } else {
+                    adapter.notifyBFootView(false)
+                }
                 loadArray[1] = 1
                 checkStatus()
             }
@@ -211,7 +223,6 @@ class GameDetailsActivity : BaseActivity<GameDetailPersent>() {
     }
 
     private fun checkStatus() {
-        Log.d("Mozator", "${loadArray[0]}  ${loadArray[1]}  ${loadArray[2]}")
         for (status in loadArray) {
             if (status != 1) {
                 return
@@ -236,16 +247,43 @@ class GameDetailsActivity : BaseActivity<GameDetailPersent>() {
             it.setDisplayHomeAsUpEnabled(true)
             it.setDisplayShowTitleEnabled(false)
         }
+        footView = LayoutInflater.from(this).inflate(R.layout.layout_game_details_foot, gameRecycler, false)
+
     }
 
+    @SuppressLint("SetTextI18n")
     override fun initData() {
         window.decorView.overlay
         gameId = intent.getStringExtra("gameId")
         map["_token"] = App.s_Token!!
         map["game_id"] = gameId
-        adapter = object : QuickAdapter<HomeUserShareData.ContributeBean>(this, R.layout.item_dynamic, mData, headView) {
+        adapter = object : QuickAdapter<HomeUserShareData.ContributeBean>(this, R.layout.item_dynamic, mData, headView, footView) {
             override fun convert(helper: BaseAdapterHelper?, item: HomeUserShareData.ContributeBean?) {
+                Glide.with(this@GameDetailsActivity)
+                        .load(item!!.avatar)
+                        .override(80, 80)
+                        .into(helper!!.getImageView(R.id.iv_UserLogo))
+                helper.getTextView(R.id.tv_CreateTime).text = TimeUtils.getInstance().paserTime(item.created_at)
+                helper.getTextView(R.id.tv_UserName).text = item.username
+                helper.getTextView(R.id.tv_loveGame).text = "(${item.like_game.split(" ")[0]})"
+                val container = helper.getView(R.id.frameContainer) as FrameLayout
+                container.removeAllViews()
 
+                when (item.type) {
+                    0 -> {
+                        val dynamicView = HomeDynamicView(this@GameDetailsActivity)
+                        dynamicView.setData(item)
+                        container.addView(dynamicView)
+                    }
+                    3 -> {
+                        val articleListView = ArticleListView(this@GameDetailsActivity)
+                        articleListView.setData(item)
+                        container.addView(articleListView)
+                    }
+                }
+                helper.getImageView(R.id.iv_UserLogo).setOnClickListener {
+                    startActivity(Intent(this@GameDetailsActivity, UserHomeActivity::class.java).putExtra("userId", item.uid))
+                }
             }
         }
         gameRecycler.adapter = adapter
@@ -372,9 +410,24 @@ class GameDetailsActivity : BaseActivity<GameDetailPersent>() {
                 }
             }
         }
+        headView.tv_HintUseTag.setOnClickListener {
+            hintTagView.showMenu()
+        }
     }
 
     override fun request() {
 
+    }
+
+
+    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            if (hintTagView.isShow) {
+                hintTagView.showMenu()
+                return true
+            }
+        }
+
+        return super.onKeyDown(keyCode, event)
     }
 }

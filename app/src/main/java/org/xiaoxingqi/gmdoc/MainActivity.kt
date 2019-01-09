@@ -25,10 +25,12 @@ import org.xiaoxingqi.gmdoc.entity.user.UserInfoData
 import org.xiaoxingqi.gmdoc.impl.IConstant
 import org.xiaoxingqi.gmdoc.impl.MainCallBack
 import org.xiaoxingqi.gmdoc.modul.game.GameFragment
+import org.xiaoxingqi.gmdoc.modul.global.WriteDynamicActivity
 import org.xiaoxingqi.gmdoc.modul.home.UserHomeActivity
 import org.xiaoxingqi.gmdoc.modul.login.LoginActivity
 import org.xiaoxingqi.gmdoc.onEvent.LoginEvent
 import org.xiaoxingqi.gmdoc.parsent.MainPersenter
+import org.xiaoxingqi.gmdoc.tools.AppTools
 import org.xiaoxingqi.gmdoc.tools.PreferenceTools
 import org.xiaoxingqi.gmdoc.tools.SPUtils
 
@@ -162,8 +164,12 @@ class MainActivity : BaseActivity<MainPersenter>() {
                     true
                 }
                 R.id.Iv_HomeButton -> {
-                    startActivity(Intent(this, LoginActivity::class.java))
-                    overridePendingTransition(R.anim.act_enter_trans, 0)
+                    if (AppTools.isLogin(this)) {
+                        startActivity(Intent(this, WriteDynamicActivity::class.java))
+                    } else {
+                        startActivity(Intent(this, LoginActivity::class.java))
+                        overridePendingTransition(R.anim.act_enter_trans, 0)
+                    }
                     true
                 }
                 R.id.tab_03 -> {
@@ -185,7 +191,8 @@ class MainActivity : BaseActivity<MainPersenter>() {
             persent?.loginOut(map)
         }
         relative_User_Home.setOnClickListener {
-            startActivity(Intent(this, UserHomeActivity::class.java))
+            val infoData = PreferenceTools.getObj(this, IConstant.USERINFO, UserInfoData::class.java)
+            startActivity(Intent(this, UserHomeActivity::class.java).putExtra("userId", infoData.data.uid))
         }
         relative_likeGame.setOnClickListener {
 

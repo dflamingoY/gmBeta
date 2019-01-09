@@ -1,6 +1,7 @@
 package org.xiaoxingqi.gmdoc.modul.lifeCircle
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
@@ -14,6 +15,7 @@ import org.xiaoxingqi.gmdoc.core.adapter.BaseAdapterHelper
 import org.xiaoxingqi.gmdoc.core.adapter.QuickAdapter
 import org.xiaoxingqi.gmdoc.entity.home.HomeUserShareData
 import org.xiaoxingqi.gmdoc.impl.home.TypeFragCallback
+import org.xiaoxingqi.gmdoc.modul.home.UserHomeActivity
 import org.xiaoxingqi.gmdoc.parsent.home.TypeFragPersenter
 import org.xiaoxingqi.gmdoc.tools.TimeUtils
 import org.xiaoxingqi.gmdoc.wegidt.homegame.ArticleListView
@@ -28,15 +30,21 @@ class TypeCircleFragment : BaseFrag<TypeFragPersenter>() {
     private lateinit var refreshLayout: SwipeRefreshLayout
     private lateinit var adapter: QuickAdapter<HomeUserShareData.ContributeBean>
     private val mData by lazy { ArrayList<HomeUserShareData.ContributeBean>() }
-
+    private var current = 0
     override fun createPresent(): TypeFragPersenter {
         return TypeFragPersenter(activity!!, object : TypeFragCallback {
             override fun callTypeData(data: HomeUserShareData?) {
                 refreshLayout.isRefreshing = false
                 if (data!!.data.data != null && data.data.data.size > 0) {
-                    for (bean in data.data.data) {
-                        mData.add(bean)
-                        adapter.notifyItemInserted(adapter.itemCount - 1)
+                    if (current == 0) {
+                        mData.clear()
+                        mData.addAll(data!!.data.data)
+                        adapter.notifyDataSetChanged()
+                    } else {
+                        for (bean in data.data.data) {
+                            mData.add(bean)
+                            adapter.notifyItemInserted(adapter.itemCount - 1)
+                        }
                     }
                 }
             }
@@ -49,8 +57,8 @@ class TypeCircleFragment : BaseFrag<TypeFragPersenter>() {
 
     override fun initView(view: View?) {
         recyclerView = view!!.recyclerView
-        refreshLayout = view!!.swipeRefresh
-
+        refreshLayout = view.swipeRefresh
+        refreshLayout.isRefreshing = true
     }
 
     override fun initData() {
@@ -94,15 +102,22 @@ class TypeCircleFragment : BaseFrag<TypeFragPersenter>() {
                         container.addView(articleListView)
                     }
                 }
+                helper.getImageView(R.id.iv_UserLogo).setOnClickListener {
+                    if (userId != item.uid)
+                        startActivity(Intent(activity, UserHomeActivity::class.java).putExtra("userId", item.uid))
+                }
             }
         }
         recyclerView.layoutManager = LinearLayoutManager(activity)
         recyclerView.adapter = adapter
-        persent?.queryData(0, userId!!, chooseType)
+        persent?.queryData(current, userId, chooseType)
     }
 
     override fun bindEvent() {
-
+        refreshLayout.setOnRefreshListener {
+            current = 0
+            persent?.queryData(current, userId, chooseType)
+        }
     }
 
     override fun request(flag: Int) {

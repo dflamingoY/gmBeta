@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#aa000000"
+    android:orientation="vertical">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="30dp"
+        android:letterSpacing="0.01"
+        android:text="如何使用标签？"
+        android:textColor="#ffffff"
+        android:textSize="18sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="27dp"
+        android:lineSpacingExtra="7sp"
+        android:text="◆ 动态中加入标签：\n在编辑动态的时候，先输入⌈#⌋，再输入标签文字，然后再次输入⌈#⌋，你的动态就会出现在包含此标签的游戏详情页——比如#塞尔达荒野之息# 、#昆特3#、#农药#\n\n● 博文中加入标签：\n在博文编辑页面的点击下方的⌈#⌋按钮，添加你想要使用的标签。\n\n如果该游戏尚未包含此标签，可在游戏词条下添加，添加成功之后，包含#标签#的动态或博文将会出现在游戏详情页。"
+        android:textColor="#ffffff"
+        android:textSize="14sp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tv_Close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="80dp"
+            android:gravity="center_horizontal"
+            android:letterSpacing="0.01"
+            android:text="点击关闭 ×"
+            android:textColor="#ffffff"
+            android:textSize="16sp" />
+    </RelativeLayout>
+
+</LinearLayout>
