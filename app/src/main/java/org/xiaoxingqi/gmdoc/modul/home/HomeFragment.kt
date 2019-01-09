@@ -29,6 +29,7 @@ import org.xiaoxingqi.gmdoc.entity.home.HomeActiveData
 import org.xiaoxingqi.gmdoc.entity.home.HomeGameData
 import org.xiaoxingqi.gmdoc.entity.home.HomeUserShareData
 import org.xiaoxingqi.gmdoc.impl.home.HomeTabCallback
+import org.xiaoxingqi.gmdoc.modul.dynamic.DynamicDetailsActivity
 import org.xiaoxingqi.gmdoc.modul.game.GameDetailsActivity
 import org.xiaoxingqi.gmdoc.modul.game.GameListActicivty
 import org.xiaoxingqi.gmdoc.parsent.HomePresent
@@ -318,6 +319,9 @@ class HomeFragment : BaseFrag<HomePresent>() {
                 it.getAttributeData(0)
                 it.getGameData()
             }
+        }
+        adapter.setOnItemClickListener { view, position ->
+            startActivity(Intent(activity, DynamicDetailsActivity::class.java).putExtra("dynamicId", mData[position].id))
         }
     }
 

@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/cardLogo"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="12dp"
+            app:cardCornerRadius="21dp"
+            app:cardElevation="0dp">
+
+            <ImageView
+                android:id="@+id/iv_UserLogo"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/img_avatar_default" />
+
+        </android.support.v7.widget.CardView>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/cardLogo"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="12dp"
+            android:layout_marginTop="4dp"
+            android:layout_toRightOf="@+id/cardLogo"
+            android:clipChildren="false">
+
+            <TextView
+                android:id="@+id/tv_UserName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:textColor="#282828"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/tv_loveGame"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="8dp"
+                android:layout_toLeftOf="@+id/iv_Jubao"
+                android:layout_toRightOf="@+id/tv_UserName"
+                android:singleLine="true"
+                android:textColor="#888888"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:id="@+id/iv_ThumbTop"
+                android:layout_width="14dp"
+                android:layout_height="21dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginTop="-6dp"
+                android:layout_toRightOf="@+id/tv_UserName"
+                android:src="@mipmap/img_noti_thumb"
+                android:visibility="gone" />
+
+            <ImageView
+                android:id="@+id/iv_Jubao"
+                android:layout_width="21dp"
+                android:layout_height="21dp"
+                android:layout_alignParentRight="true"
+                android:paddingBottom="5dp"
+                android:paddingLeft="5dp"
+                android:src="@mipmap/rectangle_11_xhdpi" />
+
+            <TextView
+                android:id="@+id/tv_CreateTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_UserName"
+                android:layout_marginTop="6dp"
+                android:textColor="#888888"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/tv_Private"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/tv_CreateTime"
+                android:layout_marginStart="8dp"
+                android:layout_toRightOf="@+id/tv_CreateTime"
+                android:drawablePadding="3dp"
+                android:drawableStart="@mipmap/img_closed_topic"
+                android:includeFontPadding="false"
+                android:text="仅自己可见"
+                android:textColor="#888888"
+                android:textSize="12sp"
+                android:visibility="gone" />
+
+            <ImageView
+                android:id="@+id/iv_Flag"
+                android:layout_width="28dp"
+                android:layout_height="14dp"
+                android:layout_alignTop="@+id/tv_CreateTime"
+                android:layout_marginLeft="6dp"
+                android:layout_toRightOf="@+id/tv_CreateTime"
+                android:src="@mipmap/img_1st"
+                android:visibility="gone" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <FrameLayout
+        android:id="@+id/frame_Container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </FrameLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="@color/color_gray_division" />
+
+    <RelativeLayout
+        android:id="@+id/relativeTab"
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+
+        <org.xiaoxingqi.gmdoc.wegidt.LineBottomTextView
+            android:id="@+id/tv_CommentCount"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="12dp"
+            android:gravity="center"
+            android:lineSpacingExtra="0sp"
+            android:text="评论 "
+            android:textColor="#ff7a31"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/tv_Repeat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="22dp"
+            android:layout_toLeftOf="@+id/tvThumb"
+            android:gravity="end"
+            android:lineSpacingExtra="0sp"
+            android:text="转发"
+            android:textColor="#b2b2b2"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/tvThumb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="12dp"
+            android:gravity="end"
+            android:lineSpacingExtra="0sp"
+            android:text="赞"
+            android:textColor="#b2b2b2"
+            android:textSize="14sp" />
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/color_gray_division" />
+</LinearLayout>

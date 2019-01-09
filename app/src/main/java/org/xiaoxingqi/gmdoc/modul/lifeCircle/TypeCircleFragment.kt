@@ -15,6 +15,7 @@ import org.xiaoxingqi.gmdoc.core.adapter.BaseAdapterHelper
 import org.xiaoxingqi.gmdoc.core.adapter.QuickAdapter
 import org.xiaoxingqi.gmdoc.entity.home.HomeUserShareData
 import org.xiaoxingqi.gmdoc.impl.home.TypeFragCallback
+import org.xiaoxingqi.gmdoc.modul.dynamic.DynamicDetailsActivity
 import org.xiaoxingqi.gmdoc.modul.home.UserHomeActivity
 import org.xiaoxingqi.gmdoc.parsent.home.TypeFragPersenter
 import org.xiaoxingqi.gmdoc.tools.TimeUtils
@@ -117,6 +118,9 @@ class TypeCircleFragment : BaseFrag<TypeFragPersenter>() {
         refreshLayout.setOnRefreshListener {
             current = 0
             persent?.queryData(current, userId, chooseType)
+        }
+        adapter.setOnItemClickListener { _, position ->
+            startActivity(Intent(activity, DynamicDetailsActivity::class.java).putExtra("dynamicId", mData[position].id))
         }
     }
 
