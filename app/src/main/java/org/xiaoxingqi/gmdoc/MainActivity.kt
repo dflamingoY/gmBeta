@@ -27,6 +27,7 @@ import org.xiaoxingqi.gmdoc.impl.MainCallBack
 import org.xiaoxingqi.gmdoc.modul.game.GameFragment
 import org.xiaoxingqi.gmdoc.modul.global.WriteDynamicActivity
 import org.xiaoxingqi.gmdoc.modul.home.UserHomeActivity
+import org.xiaoxingqi.gmdoc.modul.lifeCircle.LifCircleFragment
 import org.xiaoxingqi.gmdoc.modul.login.LoginActivity
 import org.xiaoxingqi.gmdoc.onEvent.LoginEvent
 import org.xiaoxingqi.gmdoc.parsent.MainPersenter
@@ -123,8 +124,8 @@ class MainActivity : BaseActivity<MainPersenter>() {
 
     private val homeFrag = HomeFragment()
     private val gameFrag = GameFragment()
-    //    val lifeCircle = LifCircleFragment()
-//    val msgFrag = MsgFragment()
+    val lifeCircle = LifCircleFragment()
+    //    val msgFrag = MsgFragment()
     private var currentFrag: Fragment? = null
 
     override fun setContent() {
@@ -173,8 +174,14 @@ class MainActivity : BaseActivity<MainPersenter>() {
                     true
                 }
                 R.id.tab_03 -> {
-                    switchFragment(TypeFragment.Listen)
-                    true
+                    if (!AppTools.isLogin(this)) {
+                        startActivity(Intent(this, LoginActivity::class.java))
+                        overridePendingTransition(R.anim.act_enter_trans, 0)
+                        false
+                    } else {
+                        switchFragment(TypeFragment.Listen)
+                        true
+                    }
                 }
                 R.id.tab_04 -> {
                     switchFragment(TypeFragment.Me)
@@ -229,8 +236,8 @@ class MainActivity : BaseActivity<MainPersenter>() {
                 currentFrag = homeFrag
             TypeFragment.Echoe ->
                 currentFrag = gameFrag
-//            TypeCircleFragment.Listen ->
-//                currentFrag = lifeCircle
+            TypeFragment.Listen ->
+                currentFrag = lifeCircle
 //            TypeCircleFragment.Me ->
 //                currentFrag = msgFrag
             else -> {

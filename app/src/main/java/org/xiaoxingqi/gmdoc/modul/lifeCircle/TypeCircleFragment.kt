@@ -9,10 +9,13 @@ import android.view.View
 import android.widget.FrameLayout
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.frag_type_circle.view.*
+import me.dkzwm.widget.srl.MaterialSmoothRefreshLayout
+import me.dkzwm.widget.srl.RefreshingListenerAdapter
 import org.xiaoxingqi.gmdoc.R
 import org.xiaoxingqi.gmdoc.core.BaseFrag
 import org.xiaoxingqi.gmdoc.core.adapter.BaseAdapterHelper
 import org.xiaoxingqi.gmdoc.core.adapter.QuickAdapter
+import org.xiaoxingqi.gmdoc.entity.ThumbData
 import org.xiaoxingqi.gmdoc.entity.home.HomeUserShareData
 import org.xiaoxingqi.gmdoc.impl.home.TypeFragCallback
 import org.xiaoxingqi.gmdoc.modul.dynamic.DynamicDetailsActivity
@@ -28,14 +31,18 @@ class TypeCircleFragment : BaseFrag<TypeFragPersenter>() {
     private var chooseType = ""
     private var userId: String = ""
     private lateinit var recyclerView: RecyclerView
-    private lateinit var refreshLayout: SwipeRefreshLayout
+    private lateinit var refreshLayout: MaterialSmoothRefreshLayout
     private lateinit var adapter: QuickAdapter<HomeUserShareData.ContributeBean>
     private val mData by lazy { ArrayList<HomeUserShareData.ContributeBean>() }
-    private var current = 0
+    private var current = 1
     override fun createPresent(): TypeFragPersenter {
-        return TypeFragPersenter(activity!!, object : TypeFragCallback {
+        return TypeFragPersenter(activity!!, object : TypeFragCallback() {
+
+            override fun thumbCallback(data: ThumbData?, view: View?) {
+
+            }
+
             override fun callTypeData(data: HomeUserShareData?) {
-                refreshLayout.isRefreshing = false
                 if (data!!.data.data != null && data.data.data.size > 0) {
                     if (current == 0) {
                         mData.clear()
@@ -48,6 +55,7 @@ class TypeCircleFragment : BaseFrag<TypeFragPersenter>() {
                         }
                     }
                 }
+                refreshLayout.refreshComplete()
             }
         })
     }
@@ -59,7 +67,12 @@ class TypeCircleFragment : BaseFrag<TypeFragPersenter>() {
     override fun initView(view: View?) {
         recyclerView = view!!.recyclerView
         refreshLayout = view.swipeRefresh
-        refreshLayout.isRefreshing = true
+        refreshLayout.setDisableLoadMore(false)
+        refreshLayout.materialStyle()
+        refreshLayout.setEnableAutoLoadMore(true)
+        refreshLayout.setEnableSmoothRollbackWhenCompleted(true)
+        refreshLayout.setDisableLoadMoreWhenContentNotFull(true)
+        refreshLayout.autoRefresh(false)
     }
 
     override fun initData() {
@@ -115,10 +128,17 @@ class TypeCircleFragment : BaseFrag<TypeFragPersenter>() {
     }
 
     override fun bindEvent() {
-        refreshLayout.setOnRefreshListener {
-            current = 0
-            persent?.queryData(current, userId, chooseType)
-        }
+        refreshLayout.setOnRefreshListener(object : RefreshingListenerAdapter() {
+            override fun onRefreshing() {
+                current = 0
+                persent?.queryData(current, userId, chooseType)
+            }
+
+            override fun onLoadingMore() {
+                current++
+                persent?.queryData(current, userId, chooseType)
+            }
+        })
         adapter.setOnItemClickListener { _, position ->
             startActivity(Intent(activity, DynamicDetailsActivity::class.java).putExtra("dynamicId", mData[position].id))
         }

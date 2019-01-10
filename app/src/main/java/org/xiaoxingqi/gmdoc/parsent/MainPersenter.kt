@@ -1,6 +1,7 @@
 package org.xiaoxingqi.gmdoc.parsent
 
 import android.content.Context
+import com.alibaba.fastjson.JSON
 import org.xiaoxingqi.gmdoc.entity.BaseRespData
 import org.xiaoxingqi.gmdoc.entity.TokenData
 import org.xiaoxingqi.gmdoc.entity.user.UserInfoData
@@ -36,9 +37,9 @@ class MainPersenter : BasePresent {
 
 
     fun loginOut(map: Map<String, String>) {
-        addObaser(apiServer.base_post("logout/${IConstant.GET_END}", map), object : Subscriber<BaseRespData>() {
-            override fun onNext(t: BaseRespData?) {
-                callback?.loginOut(t)
+        addObaser(apiServer.base_post("logout/${IConstant.GET_END}", map), object : Subscriber<String>() {
+            override fun onNext(t: String?) {
+                callback?.loginOut(JSON.parseObject(t, BaseRespData::class.java))
             }
 
             override fun onCompleted() {

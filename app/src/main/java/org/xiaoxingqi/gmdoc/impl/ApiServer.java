@@ -83,7 +83,7 @@ public interface ApiServer {
      * @return
      */
     @POST
-    Observable<BaseRespData> base_post(@Url String url, @QueryMap Map<String, String> map);
+    Observable<String> base_post(@Url String url, @QueryMap Map<String, String> map);
 
     /**
      * 不做json解析的get请求  拿到返回值才做解析

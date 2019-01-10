@@ -177,4 +177,8 @@ class UserHomeActivity : BaseActivity<HomeUserInfoPersent>() {
         }
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        fragments.orEmpty()
+    }
 }
