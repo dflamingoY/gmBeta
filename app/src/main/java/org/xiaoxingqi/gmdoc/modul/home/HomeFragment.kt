@@ -18,6 +18,9 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.frag_home.view.*
+import me.dkzwm.widget.srl.MaterialSmoothRefreshLayout
+import me.dkzwm.widget.srl.RefreshingListenerAdapter
+import me.dkzwm.widget.srl.config.Constants
 import org.xiaoxingqi.gmdoc.R
 import org.xiaoxingqi.gmdoc.core.BaseFrag
 import org.xiaoxingqi.gmdoc.core.adapter.BaseAdapterHelper
@@ -48,7 +51,7 @@ class HomeFragment : BaseFrag<HomePresent>() {
     private lateinit var adapter: QuickAdapter<HomeUserShareData.ContributeBean>
     private lateinit var gameRecycler: RecyclerView
     private lateinit var activeLinearContainer: LinearLayout
-    private lateinit var swipeRefresh: SwipeRefreshLayout
+    private lateinit var swipeRefresh: MaterialSmoothRefreshLayout
     private lateinit var tv_TopDesc: TextView
     private lateinit var tv_GameCount: TextView
     private val gameData by lazy {
@@ -61,11 +64,11 @@ class HomeFragment : BaseFrag<HomePresent>() {
     private val gameTitleData by lazy {
         ArrayList<String>()
     }
+    private var current = 1
 
     override fun createPresent(): HomePresent {
         return HomePresent(activity!!, object : HomeTabCallback() {
             override fun gameSuccess(data: HomeGameData?) {
-                swipeRefresh.isRefreshing = false
                 gameData.clear()
                 data?.data?.dy_top_big
                 tv_TopDesc.text = data?.data?.dy_top_big?.get(0)?.title
@@ -85,11 +88,11 @@ class HomeFragment : BaseFrag<HomePresent>() {
                  * update recyclerView
                  */
                 gameAdapter.notifyDataSetChanged()
+                swipeRefresh.refreshComplete()
             }
 
             @SuppressLint("InflateParams")
             override fun activeSuccess(data: HomeActiveData?) {//6个活动的type
-                swipeRefresh.isRefreshing = false
                 if (data!!.data != null && data.data.data != null) {
                     activeLinearContainer.removeAllViews()
                     val width = ((AppTools.getWindowsWidth(activity) - AppTools.dp2px(activity, 52)) * 1f / 4.28f + 0.5f).toInt()
@@ -110,12 +113,17 @@ class HomeFragment : BaseFrag<HomePresent>() {
                         activeLinearContainer.addView(view, params)
                     }
                 }
+                swipeRefresh.refreshComplete()
             }
 
             override fun contibuteSuccess(data: HomeUserShareData?) {
-                swipeRefresh.isRefreshing = false
-                mData.addAll(data?.data?.data!!)
-                adapter.notifyDataSetChanged()
+                if (data != null && data.data.data != null) {
+                    for (bean in data.data.data) {
+                        mData.add(bean)
+                        adapter.notifyItemInserted(adapter.itemCount - 1)
+                    }
+                }
+                swipeRefresh.refreshComplete()
             }
         })
     }
@@ -173,6 +181,12 @@ class HomeFragment : BaseFrag<HomePresent>() {
             }
             false
         }
+        swipeRefresh.setDisableLoadMore(false)
+        swipeRefresh.materialStyle()
+        swipeRefresh.setEnableAutoLoadMore(true)
+        swipeRefresh.setEnableSmoothRollbackWhenCompleted(true)
+        swipeRefresh.setDisableLoadMoreWhenContentNotFull(true)
+        swipeRefresh.autoRefresh(Constants.ACTION_NOTIFY, true)
     }
 
     override fun initData() {
@@ -184,6 +198,7 @@ class HomeFragment : BaseFrag<HomePresent>() {
         gameAdapter = object : BaseHomeAdapter<List<BaseHomeBean>, BaseAdapterHelper>(activity, gameData) {
             val params = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, AppTools.dp2px(activity, 152))
             var width = ((AppTools.getWindowsWidth(activity) - AppTools.dp2px(activity, 14)) * 1f / 1.3 + 0.5f).toInt()
+            @SuppressLint("SetTextI18n")
             override fun convert(helper: BaseAdapterHelper?, item: List<BaseHomeBean>?) {
                 if (getItemViewType(helper!!.itemView.tag as Int) == 1) {//圖片
                     if (helper.itemView.tag as Int == 2) {
@@ -290,6 +305,7 @@ class HomeFragment : BaseFrag<HomePresent>() {
         gameRecycler.isFocusableInTouchMode = false
         adapter = object : QuickAdapter<HomeUserShareData.ContributeBean>(activity, R.layout.item_dynamic, mData, headView) {
 
+            @SuppressLint("SetTextI18n")
             override fun convert(helper: BaseAdapterHelper?, item: HomeUserShareData.ContributeBean?) {
                 Glide.with(this@HomeFragment)
                         .load(item!!.avatar)
@@ -313,13 +329,21 @@ class HomeFragment : BaseFrag<HomePresent>() {
     }
 
     override fun bindEvent() {
-        swipeRefresh.setOnRefreshListener {
-            persent?.let {
-                it.getActionData()
-                it.getAttributeData(0)
-                it.getGameData()
+        swipeRefresh.setOnRefreshListener(object : RefreshingListenerAdapter() {
+            override fun onRefreshing() {
+                persent?.let {
+                    current = 1
+                    it.getActionData()
+                    it.getAttributeData(current)
+                    it.getGameData()
+                }
             }
-        }
+
+            override fun onLoadingMore() {
+                current++
+                persent?.getAttributeData(current)
+            }
+        })
         adapter.setOnItemClickListener { view, position ->
             startActivity(Intent(activity, DynamicDetailsActivity::class.java).putExtra("dynamicId", mData[position].id))
         }
