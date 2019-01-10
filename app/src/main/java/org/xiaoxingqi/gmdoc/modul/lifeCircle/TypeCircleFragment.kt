@@ -2,7 +2,6 @@ package org.xiaoxingqi.gmdoc.modul.lifeCircle
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.View
@@ -20,14 +19,14 @@ import org.xiaoxingqi.gmdoc.entity.home.HomeUserShareData
 import org.xiaoxingqi.gmdoc.impl.home.TypeFragCallback
 import org.xiaoxingqi.gmdoc.modul.dynamic.DynamicDetailsActivity
 import org.xiaoxingqi.gmdoc.modul.home.UserHomeActivity
-import org.xiaoxingqi.gmdoc.parsent.home.TypeFragPersenter
+import org.xiaoxingqi.gmdoc.presenter.home.TypeFragPresenter
 import org.xiaoxingqi.gmdoc.tools.TimeUtils
 import org.xiaoxingqi.gmdoc.wegidt.homegame.ArticleListView
 import org.xiaoxingqi.gmdoc.wegidt.homegame.HomeDynamicView
 import org.xiaoxingqi.gmdoc.wegidt.homegame.HomeLongCommentView
 import org.xiaoxingqi.gmdoc.wegidt.homegame.HomeShortCommentView
 
-class TypeCircleFragment : BaseFrag<TypeFragPersenter>() {
+class TypeCircleFragment : BaseFrag<TypeFragPresenter>() {
     private var chooseType = ""
     private var userId: String = ""
     private lateinit var recyclerView: RecyclerView
@@ -35,8 +34,8 @@ class TypeCircleFragment : BaseFrag<TypeFragPersenter>() {
     private lateinit var adapter: QuickAdapter<HomeUserShareData.ContributeBean>
     private val mData by lazy { ArrayList<HomeUserShareData.ContributeBean>() }
     private var current = 1
-    override fun createPresent(): TypeFragPersenter {
-        return TypeFragPersenter(activity!!, object : TypeFragCallback() {
+    override fun createPresent(): TypeFragPresenter {
+        return TypeFragPresenter(activity!!, object : TypeFragCallback() {
 
             override fun thumbCallback(data: ThumbData?, view: View?) {
 

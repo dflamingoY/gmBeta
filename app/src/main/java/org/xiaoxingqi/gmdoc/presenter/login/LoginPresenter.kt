@@ -1,13 +1,13 @@
-package org.xiaoxingqi.gmdoc.parsent.login
+package org.xiaoxingqi.gmdoc.presenter.login
 
 import android.content.Context
 import org.xiaoxingqi.gmdoc.entity.login.LoginUserData
 import org.xiaoxingqi.gmdoc.impl.IConstant
 import org.xiaoxingqi.gmdoc.impl.login.LoginCallBack
-import org.xiaoxingqi.gmdoc.parsent.BasePresent
+import org.xiaoxingqi.gmdoc.presenter.BasePresenter
 import rx.Subscriber
 
-class LoginPresenter : BasePresent {
+class LoginPresenter : BasePresenter {
     private var callBack: LoginCallBack? = null
 
     constructor(context: Context, callBack: LoginCallBack) : super(context) {

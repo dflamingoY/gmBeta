@@ -25,7 +25,7 @@ import org.xiaoxingqi.gmdoc.entity.ThumbData
 import org.xiaoxingqi.gmdoc.entity.home.HomeUserShareData
 import org.xiaoxingqi.gmdoc.impl.home.TypeFragCallback
 import org.xiaoxingqi.gmdoc.modul.home.UserHomeActivity
-import org.xiaoxingqi.gmdoc.parsent.home.TypeFragPersenter
+import org.xiaoxingqi.gmdoc.presenter.home.TypeFragPresenter
 import org.xiaoxingqi.gmdoc.tools.TimeUtils
 import org.xiaoxingqi.gmdoc.wegidt.homegame.ArticleListView
 import org.xiaoxingqi.gmdoc.wegidt.homegame.HomeDynamicView
@@ -36,7 +36,7 @@ import org.xiaoxingqi.gmdoc.wegidt.smallHeart.SmallBang
 /**
  * 首頁關注圈的界面
  */
-class HomeCircleFragment : BaseFrag<TypeFragPersenter>() {
+class HomeCircleFragment : BaseFrag<TypeFragPresenter>() {
     private var chooseType = "0"
     private var groupId = "0"
     private var current = 1
@@ -50,8 +50,8 @@ class HomeCircleFragment : BaseFrag<TypeFragPersenter>() {
     private val headData by lazy { ArrayList<BaseSimpleData>() }
     private val map by lazy { HashMap<String, String>() }
 
-    override fun createPresent(): TypeFragPersenter {
-        return TypeFragPersenter(activity!!, object : TypeFragCallback() {
+    override fun createPresent(): TypeFragPresenter {
+        return TypeFragPresenter(activity!!, object : TypeFragCallback() {
             override fun thumbCallback(data: ThumbData?, view: View?) {
                 data?.let {
                     if (it.state == 200) {

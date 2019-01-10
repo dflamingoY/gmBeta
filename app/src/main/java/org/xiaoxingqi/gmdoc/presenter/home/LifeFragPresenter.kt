@@ -1,14 +1,14 @@
-package org.xiaoxingqi.gmdoc.parsent.home
+package org.xiaoxingqi.gmdoc.presenter.home
 
 import android.content.Context
 import com.alibaba.fastjson.JSON
 import org.xiaoxingqi.gmdoc.entity.GroupData
 import org.xiaoxingqi.gmdoc.impl.IConstant
 import org.xiaoxingqi.gmdoc.impl.home.LifeFragCallback
-import org.xiaoxingqi.gmdoc.parsent.BasePresent
+import org.xiaoxingqi.gmdoc.presenter.BasePresenter
 import rx.Subscriber
 
-class LifeFragPersenter : BasePresent {
+class LifeFragPresenter : BasePresenter {
     private var callback: LifeFragCallback? = null
 
     constructor(context: Context, callback: LifeFragCallback) : super(context) {

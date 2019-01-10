@@ -1,4 +1,4 @@
-package org.xiaoxingqi.gmdoc.parsent
+package org.xiaoxingqi.gmdoc.presenter
 
 import android.content.Context
 import org.xiaoxingqi.gmdoc.entity.home.HomeActiveData
@@ -12,7 +12,7 @@ import rx.Subscriber
  * 获取热门游戏列表
  * 获取玩家的 贡献图
  */
-class HomePresent : BasePresent {
+class HomePresent : BasePresenter {
 
     private var tabCoallback: HomeTabCallback? = null
 

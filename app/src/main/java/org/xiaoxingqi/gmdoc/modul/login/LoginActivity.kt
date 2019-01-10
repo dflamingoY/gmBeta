@@ -12,7 +12,7 @@ import org.xiaoxingqi.gmdoc.core.BaseActivity
 import org.xiaoxingqi.gmdoc.impl.IConstant
 import org.xiaoxingqi.gmdoc.impl.login.LoginCallBack
 import org.xiaoxingqi.gmdoc.onEvent.LoginEvent
-import org.xiaoxingqi.gmdoc.parsent.login.LoginPresenter
+import org.xiaoxingqi.gmdoc.presenter.login.LoginPresenter
 import org.xiaoxingqi.gmdoc.tools.AppTools
 import org.xiaoxingqi.gmdoc.tools.SPUtils
 

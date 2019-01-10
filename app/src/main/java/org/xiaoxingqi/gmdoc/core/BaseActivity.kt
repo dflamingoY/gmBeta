@@ -10,9 +10,9 @@ import android.widget.Toast
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
-import org.xiaoxingqi.gmdoc.parsent.BasePresent
+import org.xiaoxingqi.gmdoc.presenter.BasePresenter
 
-abstract class BaseActivity<T : BasePresent> : AppCompatActivity() {
+abstract class BaseActivity<T : BasePresenter> : AppCompatActivity() {
     protected var isTopActivity = true
     var persent: T? = null
     override fun onCreate(savedInstanceState: Bundle?) {

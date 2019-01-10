@@ -1,7 +1,6 @@
-package org.xiaoxingqi.gmdoc.parsent;
+package org.xiaoxingqi.gmdoc.presenter;
 
 import android.content.Context;
-import android.util.Log;
 
 import org.xiaoxingqi.gmdoc.core.http.HttpServer;
 import org.xiaoxingqi.gmdoc.impl.ApiServer;
@@ -15,11 +14,11 @@ import rx.subscriptions.CompositeSubscription;
 /**
  * 控制网络请求, 控制视图的切换展示
  */
-public abstract class BasePresent {
+public abstract class BasePresenter {
     protected ApiServer apiServer;
     private CompositeSubscription composite = new CompositeSubscription();
 
-    public BasePresent(Context context) {
+    public BasePresenter(Context context) {
         apiServer = HttpServer.getInstance(context).getApiServer();
     }
 

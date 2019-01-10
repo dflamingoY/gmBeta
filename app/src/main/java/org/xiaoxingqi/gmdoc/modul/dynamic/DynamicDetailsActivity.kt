@@ -17,14 +17,14 @@ import org.xiaoxingqi.gmdoc.entity.CommentData
 import org.xiaoxingqi.gmdoc.entity.DynamicDetailsData
 import org.xiaoxingqi.gmdoc.entity.home.HomeUserShareData
 import org.xiaoxingqi.gmdoc.impl.global.DynamicDetailsCallback
-import org.xiaoxingqi.gmdoc.parsent.global.DynamicDetailsPersenter
+import org.xiaoxingqi.gmdoc.presenter.global.DynamicDetailsPresenter
 import org.xiaoxingqi.gmdoc.tools.TimeUtils
 import org.xiaoxingqi.gmdoc.wegidt.homegame.ArticleListView
 import org.xiaoxingqi.gmdoc.wegidt.homegame.HomeDynamicView
 import org.xiaoxingqi.gmdoc.wegidt.homegame.HomeLongCommentView
 import org.xiaoxingqi.gmdoc.wegidt.homegame.HomeShortCommentView
 
-class DynamicDetailsActivity : BaseActivity<DynamicDetailsPersenter>() {
+class DynamicDetailsActivity : BaseActivity<DynamicDetailsPresenter>() {
     private lateinit var headView: View
     private lateinit var adapter: QuickAdapter<CommentData.CommentDataBean>
     private var dynamicId: String? = null
@@ -32,8 +32,8 @@ class DynamicDetailsActivity : BaseActivity<DynamicDetailsPersenter>() {
     private val mData by lazy { ArrayList<CommentData.CommentDataBean>() }
 
     @SuppressLint("SetTextI18n")
-    override fun createPresent(): DynamicDetailsPersenter {
-        return DynamicDetailsPersenter(this, object : DynamicDetailsCallback {
+    override fun createPresent(): DynamicDetailsPresenter {
+        return DynamicDetailsPresenter(this, object : DynamicDetailsCallback {
             override fun dynamicInfo(data: DynamicDetailsData) {
                 transLayout.showContent()
                 mBean = data.data[0]

@@ -29,7 +29,7 @@ import org.xiaoxingqi.gmdoc.entity.game.GameScoreAllData
 import org.xiaoxingqi.gmdoc.entity.home.HomeUserShareData
 import org.xiaoxingqi.gmdoc.impl.game.GameDetailCallBack
 import org.xiaoxingqi.gmdoc.modul.home.UserHomeActivity
-import org.xiaoxingqi.gmdoc.parsent.game.GameDetailPersent
+import org.xiaoxingqi.gmdoc.presenter.game.GameDetailPersent
 import org.xiaoxingqi.gmdoc.tools.AppTools
 import org.xiaoxingqi.gmdoc.tools.FastBlur
 import org.xiaoxingqi.gmdoc.tools.TimeUtils

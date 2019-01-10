@@ -1,14 +1,14 @@
-package org.xiaoxingqi.gmdoc.parsent.game
+package org.xiaoxingqi.gmdoc.presenter.game
 
 import android.content.Context
 import org.xiaoxingqi.gmdoc.entity.game.GameListData
 import org.xiaoxingqi.gmdoc.entity.game.GamePlatformData
 import org.xiaoxingqi.gmdoc.impl.IConstant
 import org.xiaoxingqi.gmdoc.impl.game.GameFragCallback
-import org.xiaoxingqi.gmdoc.parsent.BasePresent
+import org.xiaoxingqi.gmdoc.presenter.BasePresenter
 import rx.Subscriber
 
-class GameFragPersent : BasePresent {
+class GameFragPersent : BasePresenter {
     private var callBack: GameFragCallback? = null
 
     constructor(context: Context, callBack: GameFragCallback) : super(context) {

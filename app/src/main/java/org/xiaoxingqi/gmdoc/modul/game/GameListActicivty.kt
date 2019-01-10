@@ -13,7 +13,7 @@ import org.xiaoxingqi.gmdoc.core.adapter.QuickAdapter
 import org.xiaoxingqi.gmdoc.entity.game.BaseGameBean
 import org.xiaoxingqi.gmdoc.impl.IConstant
 import org.xiaoxingqi.gmdoc.impl.game.GameListCallBack
-import org.xiaoxingqi.gmdoc.parsent.game.GameListPresent
+import org.xiaoxingqi.gmdoc.presenter.game.GameListPresent
 import org.xiaoxingqi.gmdoc.wegidt.RoundScoreView
 
 class GameListActicivty : BaseActivity<GameListPresent>() {

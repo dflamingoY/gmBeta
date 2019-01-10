@@ -1,16 +1,15 @@
-package org.xiaoxingqi.gmdoc.parsent.game;
+package org.xiaoxingqi.gmdoc.presenter.game;
 
 import android.content.Context;
 
-import org.json.JSONException;
 import org.xiaoxingqi.gmdoc.entity.game.GameListData;
 import org.xiaoxingqi.gmdoc.impl.IConstant;
 import org.xiaoxingqi.gmdoc.impl.game.GameListCallBack;
-import org.xiaoxingqi.gmdoc.parsent.BasePresent;
+import org.xiaoxingqi.gmdoc.presenter.BasePresenter;
 
 import rx.Subscriber;
 
-public class GameListPresent extends BasePresent {
+public class GameListPresent extends BasePresenter {
     private GameListCallBack callBack;
 
     public GameListPresent(Context context, GameListCallBack callBack) {

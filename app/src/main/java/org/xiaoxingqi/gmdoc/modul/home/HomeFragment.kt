@@ -1,13 +1,10 @@
 package org.xiaoxingqi.gmdoc.modul.home
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.content.Intent
-import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.text.Html
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
@@ -27,7 +24,6 @@ import org.xiaoxingqi.gmdoc.core.adapter.BaseAdapterHelper
 import org.xiaoxingqi.gmdoc.core.adapter.BaseHomeAdapter
 import org.xiaoxingqi.gmdoc.core.adapter.QuickAdapter
 import org.xiaoxingqi.gmdoc.entity.BaseHomeBean
-import org.xiaoxingqi.gmdoc.entity.BaseImgBean
 import org.xiaoxingqi.gmdoc.entity.home.HomeActiveData
 import org.xiaoxingqi.gmdoc.entity.home.HomeGameData
 import org.xiaoxingqi.gmdoc.entity.home.HomeUserShareData
@@ -35,16 +31,13 @@ import org.xiaoxingqi.gmdoc.impl.home.HomeTabCallback
 import org.xiaoxingqi.gmdoc.modul.dynamic.DynamicDetailsActivity
 import org.xiaoxingqi.gmdoc.modul.game.GameDetailsActivity
 import org.xiaoxingqi.gmdoc.modul.game.GameListActicivty
-import org.xiaoxingqi.gmdoc.parsent.HomePresent
+import org.xiaoxingqi.gmdoc.presenter.HomePresent
 import org.xiaoxingqi.gmdoc.tools.AppTools
 import org.xiaoxingqi.gmdoc.tools.TimeUtils
 import org.xiaoxingqi.gmdoc.wegidt.ItemHomeView
 import org.xiaoxingqi.gmdoc.wegidt.LinearScrollView
 import org.xiaoxingqi.gmdoc.wegidt.homegame.HomeDynamicView
 import org.xiaoxingqi.gmdoc.wegidt.homegame.HomeParentImg
-import org.xiaoxingqi.gmdoc.wegidt.ninegridView.GridImageView
-import org.xiaoxingqi.gmdoc.wegidt.ninegridView.NineGridImageView
-import org.xiaoxingqi.gmdoc.wegidt.ninegridView.NineGridImageViewAdapter
 
 class HomeFragment : BaseFrag<HomePresent>() {
     private lateinit var gameAdapter: BaseHomeAdapter<List<BaseHomeBean>, BaseAdapterHelper>

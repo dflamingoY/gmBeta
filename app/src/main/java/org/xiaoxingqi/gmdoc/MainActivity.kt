@@ -6,7 +6,6 @@ import android.graphics.Color
 import android.support.v4.app.Fragment
 import kotlinx.android.synthetic.main.activity_main.*
 import org.xiaoxingqi.gmdoc.core.App
-import org.xiaoxingqi.gmdoc.core.http.HttpServer
 import org.xiaoxingqi.gmdoc.entity.TokenData
 import org.xiaoxingqi.gmdoc.modul.home.HomeFragment
 import android.view.WindowManager
@@ -30,18 +29,18 @@ import org.xiaoxingqi.gmdoc.modul.home.UserHomeActivity
 import org.xiaoxingqi.gmdoc.modul.lifeCircle.LifCircleFragment
 import org.xiaoxingqi.gmdoc.modul.login.LoginActivity
 import org.xiaoxingqi.gmdoc.onEvent.LoginEvent
-import org.xiaoxingqi.gmdoc.parsent.MainPersenter
+import org.xiaoxingqi.gmdoc.presenter.MainPresenter
 import org.xiaoxingqi.gmdoc.tools.AppTools
 import org.xiaoxingqi.gmdoc.tools.PreferenceTools
 import org.xiaoxingqi.gmdoc.tools.SPUtils
 
-class MainActivity : BaseActivity<MainPersenter>() {
+class MainActivity : BaseActivity<MainPresenter>() {
 
     private val map by lazy { HashMap<String, String>() }
 
 
-    override fun createPresent(): MainPersenter {
-        return MainPersenter(this, object : MainCallBack {
+    override fun createPresent(): MainPresenter {
+        return MainPresenter(this, object : MainCallBack {
 
             override fun token(data: TokenData?) {
                 App.s_Token = data?._token

@@ -1,10 +1,10 @@
-package org.xiaoxingqi.gmdoc.parsent.global
+package org.xiaoxingqi.gmdoc.presenter.global
 
 import android.content.Context
 import org.xiaoxingqi.gmdoc.impl.global.WriteDynamicCallback
-import org.xiaoxingqi.gmdoc.parsent.BasePresent
+import org.xiaoxingqi.gmdoc.presenter.BasePresenter
 
-class WriteDynamicPersenter : BasePresent {
+class WriteDynamicPresenter : BasePresenter {
     private var callback: WriteDynamicCallback? = null
 
     constructor(context: Context, callback: WriteDynamicCallback) : super(context) {

@@ -5,17 +5,16 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
 import android.support.v4.view.ViewPager
-import android.util.Log
 import android.view.View
 import kotlinx.android.synthetic.main.frag_lifecircle.view.*
 import org.xiaoxingqi.gmdoc.R
 import org.xiaoxingqi.gmdoc.core.BaseFrag
 import org.xiaoxingqi.gmdoc.entity.GroupData
 import org.xiaoxingqi.gmdoc.impl.home.LifeFragCallback
-import org.xiaoxingqi.gmdoc.parsent.home.LifeFragPersenter
+import org.xiaoxingqi.gmdoc.presenter.home.LifeFragPresenter
 import org.xiaoxingqi.gmdoc.wegidt.BaseTabTitleLayout
 
-class LifCircleFragment : BaseFrag<LifeFragPersenter>() {
+class LifCircleFragment : BaseFrag<LifeFragPresenter>() {
 
     private val chooseType = arrayOf("", "4", "1", "2", "3")
     private val fragments = arrayOfNulls<HomeCircleFragment>(5)
@@ -23,8 +22,8 @@ class LifCircleFragment : BaseFrag<LifeFragPersenter>() {
     private lateinit var viewPager: ViewPager
     private lateinit var tabTitleLayout: BaseTabTitleLayout
 
-    override fun createPresent(): LifeFragPersenter {
-        return LifeFragPersenter(activity!!, object : LifeFragCallback {
+    override fun createPresent(): LifeFragPresenter {
+        return LifeFragPresenter(activity!!, object : LifeFragCallback {
             override fun getGroupData(data: GroupData) {
 
             }

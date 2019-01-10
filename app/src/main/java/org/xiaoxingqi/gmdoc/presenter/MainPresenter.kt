@@ -1,4 +1,4 @@
-package org.xiaoxingqi.gmdoc.parsent
+package org.xiaoxingqi.gmdoc.presenter
 
 import android.content.Context
 import com.alibaba.fastjson.JSON
@@ -9,7 +9,7 @@ import org.xiaoxingqi.gmdoc.impl.IConstant
 import org.xiaoxingqi.gmdoc.impl.MainCallBack
 import rx.Subscriber
 
-class MainPersenter : BasePresent {
+class MainPresenter : BasePresenter {
     private var callback: MainCallBack? = null
 
     constructor(context: Context, callback: MainCallBack) : super(context) {

@@ -1,13 +1,13 @@
-package org.xiaoxingqi.gmdoc.parsent.home
+package org.xiaoxingqi.gmdoc.presenter.home
 
 import android.app.Activity
 import org.xiaoxingqi.gmdoc.entity.user.UserInfoData
 import org.xiaoxingqi.gmdoc.impl.IConstant
 import org.xiaoxingqi.gmdoc.impl.home.UserInfoCallBack
-import org.xiaoxingqi.gmdoc.parsent.BasePresent
+import org.xiaoxingqi.gmdoc.presenter.BasePresenter
 import rx.Subscriber
 
-class HomeUserInfoPersent : BasePresent {
+class HomeUserInfoPersent : BasePresenter {
     private var callBack: UserInfoCallBack? = null
 
     constructor(activity: Activity, callback: UserInfoCallBack) : super(activity) {

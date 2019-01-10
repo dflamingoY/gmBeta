@@ -6,9 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import org.xiaoxingqi.gmdoc.parsent.BasePresent
+import org.xiaoxingqi.gmdoc.presenter.BasePresenter
 
-abstract class BaseFrag<T : BasePresent> : Fragment() {
+abstract class BaseFrag<T : BasePresenter> : Fragment() {
 
     var mView: View? = null
     var toast: Toast? = null

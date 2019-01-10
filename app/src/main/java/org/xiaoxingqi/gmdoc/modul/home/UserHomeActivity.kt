@@ -1,8 +1,6 @@
 package org.xiaoxingqi.gmdoc.modul.home
 
 import android.annotation.SuppressLint
-import android.graphics.Bitmap
-import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
@@ -12,8 +10,6 @@ import android.text.TextUtils
 import android.util.TypedValue
 import android.view.View
 import com.bumptech.glide.Glide
-import com.bumptech.glide.request.animation.GlideAnimation
-import com.bumptech.glide.request.target.BitmapImageViewTarget
 import kotlinx.android.synthetic.main.activity_user_info.*
 import org.xiaoxingqi.gmdoc.R
 import org.xiaoxingqi.gmdoc.core.BaseActivity
@@ -21,7 +17,7 @@ import org.xiaoxingqi.gmdoc.entity.user.UserInfoData
 import org.xiaoxingqi.gmdoc.impl.IConstant
 import org.xiaoxingqi.gmdoc.impl.home.UserInfoCallBack
 import org.xiaoxingqi.gmdoc.modul.lifeCircle.TypeCircleFragment
-import org.xiaoxingqi.gmdoc.parsent.home.HomeUserInfoPersent
+import org.xiaoxingqi.gmdoc.presenter.home.HomeUserInfoPersent
 import org.xiaoxingqi.gmdoc.tools.PreferenceTools
 
 /**

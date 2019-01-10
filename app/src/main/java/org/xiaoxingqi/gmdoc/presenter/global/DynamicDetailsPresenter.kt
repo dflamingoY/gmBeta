@@ -1,14 +1,14 @@
-package org.xiaoxingqi.gmdoc.parsent.global
+package org.xiaoxingqi.gmdoc.presenter.global
 
 import android.content.Context
 import com.alibaba.fastjson.JSON
 import org.xiaoxingqi.gmdoc.entity.DynamicDetailsData
 import org.xiaoxingqi.gmdoc.impl.IConstant
 import org.xiaoxingqi.gmdoc.impl.global.DynamicDetailsCallback
-import org.xiaoxingqi.gmdoc.parsent.BasePresent
+import org.xiaoxingqi.gmdoc.presenter.BasePresenter
 import rx.Subscriber
 
-class DynamicDetailsPersenter : BasePresent {
+class DynamicDetailsPresenter : BasePresenter {
     private var callback: DynamicDetailsCallback? = null
 
     constructor(context: Context, callback: DynamicDetailsCallback) : super(context) {

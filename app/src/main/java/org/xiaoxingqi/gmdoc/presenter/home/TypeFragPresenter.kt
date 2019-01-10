@@ -1,4 +1,4 @@
-package org.xiaoxingqi.gmdoc.parsent.home
+package org.xiaoxingqi.gmdoc.presenter.home
 
 import android.content.Context
 import android.view.View
@@ -8,10 +8,10 @@ import org.xiaoxingqi.gmdoc.entity.ThumbData
 import org.xiaoxingqi.gmdoc.entity.home.HomeUserShareData
 import org.xiaoxingqi.gmdoc.impl.IConstant
 import org.xiaoxingqi.gmdoc.impl.home.TypeFragCallback
-import org.xiaoxingqi.gmdoc.parsent.BasePresent
+import org.xiaoxingqi.gmdoc.presenter.BasePresenter
 import rx.Subscriber
 
-class TypeFragPersenter : BasePresent {
+class TypeFragPresenter : BasePresenter {
     private var callback: TypeFragCallback? = null
 
     constructor(context: Context, callback: TypeFragCallback) : super(context) {

@@ -20,7 +20,7 @@ import org.xiaoxingqi.gmdoc.entity.game.GamePlatformData
 import org.xiaoxingqi.gmdoc.impl.IConstant
 import org.xiaoxingqi.gmdoc.impl.game.GameFragCallback
 import org.xiaoxingqi.gmdoc.listener.OnGameTabClickListener
-import org.xiaoxingqi.gmdoc.parsent.game.GameFragPersent
+import org.xiaoxingqi.gmdoc.presenter.game.GameFragPersent
 import org.xiaoxingqi.gmdoc.tools.AppTools
 import org.xiaoxingqi.gmdoc.wegidt.RoundScoreView
 import org.xiaoxingqi.gmdoc.wegidt.TransLayout

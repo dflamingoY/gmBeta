@@ -1,4 +1,4 @@
-package org.xiaoxingqi.gmdoc.parsent.game
+package org.xiaoxingqi.gmdoc.presenter.game
 
 import android.content.Context
 import org.xiaoxingqi.gmdoc.entity.game.GameDetailsData
@@ -6,14 +6,14 @@ import org.xiaoxingqi.gmdoc.entity.game.GameScoreAllData
 import org.xiaoxingqi.gmdoc.entity.home.HomeUserShareData
 import org.xiaoxingqi.gmdoc.impl.IConstant
 import org.xiaoxingqi.gmdoc.impl.game.GameDetailCallBack
-import org.xiaoxingqi.gmdoc.parsent.BasePresent
+import org.xiaoxingqi.gmdoc.presenter.BasePresenter
 import rx.Subscriber
 
 /**
  *1 请求游戏详情数据
  * 2
  */
-class GameDetailPersent : BasePresent {
+class GameDetailPersent : BasePresenter {
     private var callBack: GameDetailCallBack? = null
 
     constructor(context: Context?, callBack: GameDetailCallBack) : super(context) {
