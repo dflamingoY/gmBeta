@@ -180,7 +180,8 @@ public class EmojiLayoutView extends BaseLayout {
                         } else {
                             Glide.with(mContext)
                                     .load("file:///android_asset/" + entity.getIconName())
-                                    .into(new GlideDrawableImageViewTarget(helper.getImageView(R.id.iv_emoji), 0));
+                                    .asBitmap()
+                                    .into(helper.getImageView(R.id.iv_emoji));
                         }
                     }
                 }

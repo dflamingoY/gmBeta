@@ -58,5 +58,10 @@
         <attr name="sb_background" format="reference|color" />
         <attr name="sb_enable_effect" format="reference|boolean" />
     </declare-styleable>
+    <declare-styleable name="CustomCheckImageView">
+        <attr name="checkState" format="boolean" />
+        <attr name="checkOn" format="reference" />
+        <attr name="checkOff" format="reference" />
+    </declare-styleable>
 
 </resources>

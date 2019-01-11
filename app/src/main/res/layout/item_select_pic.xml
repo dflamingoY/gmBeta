@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<org.xiaoxingqi.gmdoc.wegidt.SqureRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="2dp">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:cardCornerRadius="2dp"
+        app:cardElevation="1dp">
+
+        <ImageView
+            android:id="@+id/img"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/img_empty_avatar_back" />
+    </android.support.v7.widget.CardView>
+
+    <org.xiaoxingqi.gmdoc.wegidt.CustomCheckImageView
+        android:id="@+id/check_img"
+        android:layout_width="23dp"
+        android:layout_height="23dp"
+        android:layout_alignParentRight="true"
+        android:layout_margin="8dp"
+        android:elevation="2dp" />
+
+    <ImageView
+        android:id="@+id/iv_Gif"
+        android:layout_width="30dp"
+        android:layout_height="19dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:elevation="2dp"
+        android:src="@mipmap/img_mark_gif"
+        android:visibility="gone" />
+
+</org.xiaoxingqi.gmdoc.wegidt.SqureRelativeLayout>

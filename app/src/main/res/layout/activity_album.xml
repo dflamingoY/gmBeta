@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@color/color_white"
+        app:elevation="1dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="24dp">
+
+            <ImageView
+                android:id="@+id/viewBack"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_centerVertical="true"
+                android:src="@mipmap/btn_back_grey" />
+
+            <TextView
+                android:id="@+id/tv_Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_centerVertical="true"
+                android:drawableRight="@mipmap/btn_arrow_bottom_grey"
+                android:drawablePadding="6dp"
+                android:text="相册"
+                android:textColor="#1a191a"
+                android:textSize="20sp"
+                android:textStyle="normal" />
+
+            <TextView
+                android:id="@+id/tv_Cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="14dp"
+                android:gravity="end"
+                android:text=" 取消"
+                android:textColor="#282828"
+                android:textSize="18sp" />
+        </RelativeLayout>
+    </android.support.design.widget.AppBarLayout>
+
+    <org.xiaoxingqi.gmdoc.wegidt.TransLayout
+        android:id="@+id/transLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:defaultState="content"
+        app:emptyLayout="@layout/view_empty"
+        app:offlineLayout="@layout/view_offline"
+        app:progressLayout="@layout/view_progress">
+
+        <LinearLayout
+            android:id="@+id/linearContent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="2dp"
+                android:layout_weight="1" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="44dp">
+
+                <TextView
+                    android:id="@+id/tv_Pre"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_centerVertical="true"
+                    android:gravity="center"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
+                    android:text="预览"
+                    android:textColor="#666666"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/tv_Count"
+                    android:layout_width="19dp"
+                    android:layout_height="19dp"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@+id/tv_Commit"
+                    android:background="@drawable/shape_red_circle"
+                    android:gravity="center"
+                    android:text="0"
+                    android:textColor="#fdfdfd"
+                    android:textSize="12sp"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/tv_Commit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:gravity="center"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
+                    android:text="完成"
+                    android:textColor="#ff7a31"
+                    android:textSize="14sp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/color_gray_division" />
+
+            </RelativeLayout>
+        </LinearLayout>
+
+        <FrameLayout
+            android:id="@+id/frameFile"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#00ffffff">
+
+            <ImageView
+                android:id="@+id/iv_Bg"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#00ffffff" />
+        </FrameLayout>
+    </org.xiaoxingqi.gmdoc.wegidt.TransLayout>
+</LinearLayout>
+

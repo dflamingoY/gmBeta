@@ -1,30 +1,53 @@
 package org.xiaoxingqi.gmdoc.modul.global
 
+import android.app.Activity
+import android.content.Context
+import android.content.Intent
 import android.graphics.drawable.BitmapDrawable
+import android.support.v7.widget.GridLayoutManager
+import android.support.v7.widget.RecyclerView
+import android.support.v7.widget.helper.ItemTouchHelper
 import android.text.*
 import android.util.Log
 import android.view.KeyEvent
 import android.view.View
+import android.view.inputmethod.InputMethodManager
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.target.GlideDrawableImageViewTarget
 import kotlinx.android.synthetic.main.activity_write_dynamic.*
 import org.xiaoxingqi.gmdoc.R
 import org.xiaoxingqi.gmdoc.core.BaseActivity
+import org.xiaoxingqi.gmdoc.core.adapter.BaseAdapterHelper
+import org.xiaoxingqi.gmdoc.core.adapter.QuickAdapter
+import org.xiaoxingqi.gmdoc.entity.BaseImgBean
+import org.xiaoxingqi.gmdoc.entity.ImgBean
 import org.xiaoxingqi.gmdoc.entity.emoji.EmojiEntity
 import org.xiaoxingqi.gmdoc.impl.global.WriteDynamicCallback
 import org.xiaoxingqi.gmdoc.listener.SoftkeyBoardManager
+import org.xiaoxingqi.gmdoc.modul.album.AlbumActivity
 import org.xiaoxingqi.gmdoc.presenter.global.WriteDynamicPresenter
 import org.xiaoxingqi.gmdoc.tools.AppTools
+import org.xiaoxingqi.gmdoc.wegidt.CustomCheckImageView
 import org.xiaoxingqi.gmdoc.wegidt.imagespan.VerticalImageSpan
+import java.util.*
 import java.util.regex.Pattern
 
 /**
  * 创建内容 视频 图片 文字
  */
 class WriteDynamicActivity : BaseActivity<WriteDynamicPresenter>() {
+    private val REQUEST_CODE_SELECT_AT_USER = 0x01
+    private val REQUEST_PHOTO = 0x02
+
     private lateinit var manager: SoftkeyBoardManager
-    private var keyboardHegiht: Int = 0
+    private var keyboardHeight: Int = 0
+    private var isEmojiMenu = false
+    private lateinit var adapter: QuickAdapter<ImgBean>
+    private val imgData by lazy { ArrayList<ImgBean>() }
     override fun createPresent(): WriteDynamicPresenter {
         return WriteDynamicPresenter(this, WriteDynamicCallback())
     }
+
 
     override fun setContent() {
         setContent(R.layout.activity_write_dynamic)
@@ -36,18 +59,45 @@ class WriteDynamicActivity : BaseActivity<WriteDynamicPresenter>() {
 
     override fun initData() {
         manager = SoftkeyBoardManager(window.decorView, false)
+        adapter = object : QuickAdapter<ImgBean>(this, R.layout.item_spoiler_input, imgData) {
+            override fun convert(helper: BaseAdapterHelper?, item: ImgBean?) {
+                Glide.with(this@WriteDynamicActivity)
+                        .load(item!!.key)
+                        .asBitmap()
+                        .centerCrop()
+                        .into(helper!!.getImageView(R.id.iv_img))
+                val checkImageView = helper.getView(R.id.checkbox) as CustomCheckImageView
+                checkImageView.setOnStateChangeListener { selected ->
+                    item.isSelected = selected
+                    helper.getView(R.id.viewSpoiler).visibility = if (selected) View.VISIBLE else View.GONE
+                }
+                helper.getView(R.id.iv_Delete).setOnClickListener { v ->
+                    imgData.remove(item)
+                    adapter.notifyDataSetChanged()
+                    if (imgData.size == 0) {
+                        iv_Vedio.isClickable = true
+                        iv_Vedio.alpha = 1f
+                    }
+                }
+            }
+        }
+        recycler_img.layoutManager = GridLayoutManager(this, 3)
+        recycler_img.adapter = adapter
     }
 
     override fun initEvent() {
         manager.addSoftKeyboardStateListener(keyboardListener)
         iv_Gif.setOnClickListener {
             if (manager.isSoftKeyboardOpened) {
-
-            } else {
+                closeMenu()
+            }
+            if (emojiView.visibility != View.VISIBLE) {
                 emojiView.visibility = View.VISIBLE
                 val params = emojiView.layoutParams
                 params.height = AppTools.dp2px(this, 206)
                 emojiView.layoutParams = params
+            } else {
+                showMenu()
             }
         }
         emojiView.setOnEmojiClicklistener {
@@ -101,13 +151,91 @@ class WriteDynamicActivity : BaseActivity<WriteDynamicPresenter>() {
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 if (count == 1 && "@" == s?.get(start).toString()) {
-//                    startActivityForResult(Intent(this@WriteDynamicActivity, Act_AT_List::class.java).putExtra("Uid", mInfoData.getData().getUid()), REQUEST_CODE_SELECT_AT_USER)
+                    startActivityForResult(Intent(this@WriteDynamicActivity, AtListActivity::class.java), REQUEST_CODE_SELECT_AT_USER)
                 }
             }
         })
+        iv_Photo.setOnClickListener {
+            startActivityForResult(Intent(this, AlbumActivity::class.java).putExtra("allowCount", 9 - imgData.size), REQUEST_PHOTO)
+        }
+
+        val helper = ItemTouchHelper(object : ItemTouchHelper.Callback() {
+            override fun getMovementFlags(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder): Int {
+                val dragFlags = ItemTouchHelper.UP or ItemTouchHelper.DOWN or ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT //允许上下左右的拖动
+                return makeMovementFlags(dragFlags, 0)
+            }
+
+            override fun onMove(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, target: RecyclerView.ViewHolder): Boolean {
+                Log.d("Mozator", "onMove " + viewHolder.itemView.tag + "   " + target.itemView.tag)
+                //                Collections.swap(photoList, (int) viewHolder.itemView.getTag(), (int) target.itemView.getTag());
+                //                mAdapter.notifyItemMoved((int) viewHolder.itemView.getTag(), (int) target.itemView.getTag());
+                // 真实的Position：通过ViewHolder拿到的position都需要减掉HeadView的数量。
+                val fromPosition = viewHolder.layoutPosition
+                val toPosition = target.layoutPosition
+                if (fromPosition < toPosition)
+                    for (i in fromPosition until toPosition)
+                        Collections.swap(imgData, i, i + 1)
+                else
+                    for (i in fromPosition downTo toPosition + 1)
+                        Collections.swap(imgData, i, i - 1)
+                adapter.notifyItemMoved(fromPosition, toPosition)
+
+                return true
+            }
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+            }
+
+            override fun onSelectedChanged(viewHolder: RecyclerView.ViewHolder?, actionState: Int) {
+                super.onSelectedChanged(viewHolder, actionState)
+            }
+        })
+        helper.attachToRecyclerView(recycler_img)
+        iv_Topic.setOnClickListener {
+            val start = et_Content.selectionStart
+            val end = et_Content.selectionEnd
+            val editable = et_Content.editableText
+            if (start <= 0 || start > editable.length) {
+                editable.insert(0, "#输入相关游戏标签#")
+            } else {
+                if (start == end) {
+                    editable.insert(start, "#输入相关游戏标签#")
+                } else {
+                    editable.replace(start, end, "#输入相关游戏标签#")
+                }
+            }
+            et_Content.setSelection(start + 1, start + "#输入相关游戏标签#".length - 1)
+            showMenu()
+        }
+        iv_Spoiler.setOnClickListener {
+            val start = et_Content.selectionStart
+            val end = et_Content.selectionEnd
+            if (start == end) {
+                showToast("请选中剧透文字")
+                return@setOnClickListener
+            }
+            val editableText = et_Content.editableText
+            if (start < 0 || start >= editableText.length) {
+
+            } else {
+                editableText.insert(start, "[剧透:")//光标所在位置插入文字
+                editableText.insert(end + "[剧透:".length, "]")//光标所在位置插入文字
+            }
+            et_Content.setSelection(end + 5)
+        }
+    }
+
+    private fun showMenu() {
+        val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.showSoftInput(et_Content, InputMethodManager.SHOW_FORCED)
+    }
+
+    private fun closeMenu() {
+        (getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager).hideSoftInputFromWindow(et_Content.windowToken, 0)
     }
 
     private var pattern = Pattern.compile(":\\w+:")
+
     private fun calcLength(s: String): Int {
         val matcher = pattern.matcher(s)
         var length = 0
@@ -115,7 +243,7 @@ class WriteDynamicActivity : BaseActivity<WriteDynamicPresenter>() {
         while (matcher.find()) {
             val at = matcher.group(0)
             if (at != null) {
-                length += at!!.length
+                length += at.length
                 count++
             }
         }
@@ -126,13 +254,15 @@ class WriteDynamicActivity : BaseActivity<WriteDynamicPresenter>() {
     private val keyboardListener = object : SoftkeyBoardManager.SoftKeyboardStateListener {
         override fun onSoftKeyboardOpened(keyboardHeightInPx: Int) {
             val statusBarHeight = AppTools.getStatusBarHeight(this@WriteDynamicActivity)
-            keyboardHegiht = keyboardHeightInPx - statusBarHeight
+            val navigation = AppTools.getNavigationBarHeight(this@WriteDynamicActivity)
+            keyboardHeight = keyboardHeightInPx - statusBarHeight - navigation
             emojiView.visibility = View.INVISIBLE
             val params = emojiView.layoutParams
-            if (params.height != keyboardHegiht) {
-                params.height = keyboardHegiht
+            if (params.height != keyboardHeight) {
+                params.height = keyboardHeight
                 emojiView.layoutParams = params
             }
+            Log.d("Mozator", "keyboardHeightInPx  : $keyboardHeightInPx  statusBarHeight : $statusBarHeight   navigation : $navigation")
         }
 
         override fun onSoftKeyboardClosed() {
@@ -142,12 +272,30 @@ class WriteDynamicActivity : BaseActivity<WriteDynamicPresenter>() {
             if (emojiView.visibility == View.VISIBLE || emojiView.visibility == View.INVISIBLE) {
                 emojiView.visibility = View.GONE
             }
-            Log.d("Mozator", "close board")
         }
     }
 
     override fun request() {
 
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == Activity.RESULT_OK) {
+            if (requestCode == REQUEST_PHOTO) {
+                data?.let {
+                    val result = data.getSerializableExtra("result") as ArrayList<String>
+                    for (path in result) {
+                        imgData.add(ImgBean(path))
+                    }
+                    adapter.notifyDataSetChanged()
+                    if (imgData.size > 0) {
+                        iv_Vedio.alpha = 0.8f
+                        iv_Vedio.isClickable = false
+                    }
+                }
+            }
+        }
     }
 
     override fun onDestroy() {

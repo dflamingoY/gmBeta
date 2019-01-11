@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<org.xiaoxingqi.gmdoc.wegidt.SqureRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="4dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginRight="4dp">
+
+    <ImageView
+        android:id="@+id/iv_img"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#4d000000" />
+
+    <ImageView
+        android:id="@+id/viewSpoiler"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignLeft="@+id/iv_img"
+        android:layout_alignTop="@+id/iv_img"
+        android:layout_alignRight="@+id/iv_img"
+        android:layout_alignBottom="@+id/iv_img"
+        android:background="#666666"
+        android:visibility="gone" />
+
+    <ImageView
+        android:id="@+id/iv_Delete"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
+        android:layout_alignParentRight="true"
+        android:padding="8dp"
+        android:src="@mipmap/btn_close_w_shadow" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/iv_img"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="9dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <org.xiaoxingqi.gmdoc.wegidt.CustomCheckImageView
+            android:id="@+id/checkbox"
+            android:layout_width="18dp"
+            android:layout_height="18dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="6dp"
+            android:gravity="center_horizontal"
+            android:lineSpacingExtra="0sp"
+            android:text="含剧透"
+            android:textColor="#ffffff"
+            android:textSize="14sp" />
+
+
+    </LinearLayout>
+</org.xiaoxingqi.gmdoc.wegidt.SqureRelativeLayout>

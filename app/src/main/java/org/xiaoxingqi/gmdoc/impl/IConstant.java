@@ -26,7 +26,7 @@ public interface IConstant {
     /**
      * 缓存文件
      */
-    String CACHE_NAME = "cache";
+    String CACHE_NAME = "gmdocCache";
     /**
      * 下载目录
      */
@@ -34,7 +34,6 @@ public interface IConstant {
     /**
      * 缓存的邮箱地址
      */
-    String CACHEEMAIL="cacheEmail";
-
+    String CACHEEMAIL = "cacheEmail";
 
 }
