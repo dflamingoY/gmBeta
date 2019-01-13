@@ -15,6 +15,10 @@ class AtListActivity : BaseActivity<AtlistPresenter>() {
     }
 
     override fun initView() {
+
+
+
+        
     }
 
     override fun initData() {
