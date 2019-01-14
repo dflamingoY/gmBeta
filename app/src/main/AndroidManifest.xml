@@ -44,6 +44,9 @@
         <activity android:name=".modul.global.AtListActivity" />
         <activity android:name=".modul.album.AlbumActivity" />
         <activity android:name=".modul.album.PreviewActivity" />
+        <activity
+            android:name=".modul.global.WriteBlogActivity"
+            android:windowSoftInputMode="stateHidden" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"

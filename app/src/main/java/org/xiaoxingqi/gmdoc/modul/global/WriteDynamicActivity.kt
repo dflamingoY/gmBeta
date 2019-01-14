@@ -282,7 +282,7 @@ class WriteDynamicActivity : BaseActivity<WriteDynamicPresenter>() {
         }
         iv_Other.setOnClickListener {
             DialogDToB(this).setOnClickListener(View.OnClickListener {
-
+                startActivity(Intent(this, WriteBlogActivity::class.java))
             }).show()
         }
     }
@@ -324,7 +324,6 @@ class WriteDynamicActivity : BaseActivity<WriteDynamicPresenter>() {
                 params.height = keyboardHeight
                 emojiView.layoutParams = params
             }
-            Log.d("Mozator", "keyboardHeightInPx  : $keyboardHeightInPx  statusBarHeight : $statusBarHeight   navigation : $navigation")
         }
 
         override fun onSoftKeyboardClosed() {
