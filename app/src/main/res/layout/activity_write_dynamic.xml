@@ -105,7 +105,7 @@
                     android:layout_marginRight="33dp" />
 
                 <RelativeLayout
-                    android:id="@+id/relative_Vedio"
+                    android:id="@+id/relative_Video"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="12dp"
@@ -185,7 +185,7 @@
                         android:src="@mipmap/btn_edit_pic" />
 
                     <ImageView
-                        android:id="@+id/iv_Vedio"
+                        android:id="@+id/iv_Video"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:layout_marginLeft="16dp"

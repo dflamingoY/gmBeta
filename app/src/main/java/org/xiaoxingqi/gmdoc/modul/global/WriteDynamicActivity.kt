@@ -1,5 +1,6 @@
 package org.xiaoxingqi.gmdoc.modul.global
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
@@ -12,25 +13,33 @@ import android.util.Log
 import android.view.KeyEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import com.alibaba.fastjson.JSONArray
+import com.alibaba.fastjson.JSONObject
 import com.bumptech.glide.Glide
-import com.bumptech.glide.request.target.GlideDrawableImageViewTarget
 import kotlinx.android.synthetic.main.activity_write_dynamic.*
 import org.xiaoxingqi.gmdoc.R
+import org.xiaoxingqi.gmdoc.core.App
 import org.xiaoxingqi.gmdoc.core.BaseActivity
 import org.xiaoxingqi.gmdoc.core.adapter.BaseAdapterHelper
 import org.xiaoxingqi.gmdoc.core.adapter.QuickAdapter
-import org.xiaoxingqi.gmdoc.entity.BaseImgBean
+import org.xiaoxingqi.gmdoc.core.http.UpQiNiuManager
+import org.xiaoxingqi.gmdoc.dialog.DialogDToB
+import org.xiaoxingqi.gmdoc.dialog.DialogVideo
+import org.xiaoxingqi.gmdoc.entity.BaseRespData
 import org.xiaoxingqi.gmdoc.entity.ImgBean
+import org.xiaoxingqi.gmdoc.entity.QINiuRespData
 import org.xiaoxingqi.gmdoc.entity.emoji.EmojiEntity
 import org.xiaoxingqi.gmdoc.impl.global.WriteDynamicCallback
 import org.xiaoxingqi.gmdoc.listener.SoftkeyBoardManager
 import org.xiaoxingqi.gmdoc.modul.album.AlbumActivity
 import org.xiaoxingqi.gmdoc.presenter.global.WriteDynamicPresenter
 import org.xiaoxingqi.gmdoc.tools.AppTools
+import org.xiaoxingqi.gmdoc.tools.TimeUtils
 import org.xiaoxingqi.gmdoc.wegidt.CustomCheckImageView
 import org.xiaoxingqi.gmdoc.wegidt.imagespan.VerticalImageSpan
 import java.util.*
 import java.util.regex.Pattern
+import kotlin.collections.HashMap
 
 /**
  * 创建内容 视频 图片 文字
@@ -44,8 +53,19 @@ class WriteDynamicActivity : BaseActivity<WriteDynamicPresenter>() {
     private var isEmojiMenu = false
     private lateinit var adapter: QuickAdapter<ImgBean>
     private val imgData by lazy { ArrayList<ImgBean>() }
+    private val map by lazy { HashMap<String, String>() }
+    private var videoPath = ""
     override fun createPresent(): WriteDynamicPresenter {
-        return WriteDynamicPresenter(this, WriteDynamicCallback())
+        return WriteDynamicPresenter(this, object : WriteDynamicCallback {
+            override fun qiniuToken(data: QINiuRespData) {
+                sendPic(data)
+            }
+
+            override fun pushSuccess(data: BaseRespData) {
+                showToast("发布成功")
+                finish()
+            }
+        })
     }
 
 
@@ -75,8 +95,8 @@ class WriteDynamicActivity : BaseActivity<WriteDynamicPresenter>() {
                     imgData.remove(item)
                     adapter.notifyDataSetChanged()
                     if (imgData.size == 0) {
-                        iv_Vedio.isClickable = true
-                        iv_Vedio.alpha = 1f
+                        iv_Video.isClickable = true
+                        iv_Video.alpha = 1f
                     }
                 }
             }
@@ -120,7 +140,7 @@ class WriteDynamicActivity : BaseActivity<WriteDynamicPresenter>() {
                     val manager = assets
                     val spannableString = SpannableString(text)
                     val open = manager.open(it.iconName)
-                    val drawable = BitmapDrawable(open)
+                    val drawable = BitmapDrawable(resources, open)
                     drawable.setBounds(8, 0, AppTools.dp2px(this, 15) + 8, AppTools.dp2px(this, 15))
                     spannableString.setSpan(VerticalImageSpan(drawable), 0, text!!.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
                     if (start <= 0 || start > editable.length) {
@@ -138,6 +158,7 @@ class WriteDynamicActivity : BaseActivity<WriteDynamicPresenter>() {
             }
         }
         et_Content.addTextChangedListener(object : TextWatcher {
+            @SuppressLint("SetTextI18n")
             override fun afterTextChanged(s: Editable?) {
                 /**
                  * 把所有的表情长度 标记为2
@@ -166,7 +187,6 @@ class WriteDynamicActivity : BaseActivity<WriteDynamicPresenter>() {
             }
 
             override fun onMove(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, target: RecyclerView.ViewHolder): Boolean {
-                Log.d("Mozator", "onMove " + viewHolder.itemView.tag + "   " + target.itemView.tag)
                 //                Collections.swap(photoList, (int) viewHolder.itemView.getTag(), (int) target.itemView.getTag());
                 //                mAdapter.notifyItemMoved((int) viewHolder.itemView.getTag(), (int) target.itemView.getTag());
                 // 真实的Position：通过ViewHolder拿到的position都需要减掉HeadView的数量。
@@ -184,10 +204,6 @@ class WriteDynamicActivity : BaseActivity<WriteDynamicPresenter>() {
             }
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-            }
-
-            override fun onSelectedChanged(viewHolder: RecyclerView.ViewHolder?, actionState: Int) {
-                super.onSelectedChanged(viewHolder, actionState)
             }
         })
         helper.attachToRecyclerView(recycler_img)
@@ -222,6 +238,52 @@ class WriteDynamicActivity : BaseActivity<WriteDynamicPresenter>() {
                 editableText.insert(end + "[剧透:".length, "]")//光标所在位置插入文字
             }
             et_Content.setSelection(end + 5)
+        }
+        cancel.setOnClickListener {
+            finish()
+        }
+        tv_Commit.setOnClickListener {
+            /**
+             * 上传资源
+             */
+            if (imgData.size > 0) {
+                persent?.getQiNiuToken()
+            } else {
+                persent?.getQiNiuToken()
+                map["type"] = "0"
+                map["state"] = "1"
+                map["title"] = "动态"
+                map["editorValue"] = et_Content.text.toString()
+                map["_token"] = App.s_Token!!
+                if (!TextUtils.isEmpty(videoPath)) {
+                    map["video"] = videoPath
+                }
+                persent?.pushDynamic(map)
+            }
+        }
+        iv_Video.setOnClickListener {
+            DialogVideo(this).setOnResultListener(object : DialogVideo.OnClickResult {
+                override fun result(result: String) {
+                    videoPath = result
+                    iv_Photo.isEnabled = false
+                    iv_Photo.alpha = 0.2f
+                    iv_Video.isEnabled = false
+                    iv_Video.alpha = 0.2f
+                    relative_Video.visibility = View.VISIBLE
+                }
+            }).show()
+        }
+        iv_Close.setOnClickListener {
+            relative_Video.visibility = View.GONE
+            iv_Photo.isEnabled = true
+            iv_Photo.alpha = 1f
+            iv_Video.isEnabled = true
+            iv_Video.alpha = 1f
+        }
+        iv_Other.setOnClickListener {
+            DialogDToB(this).setOnClickListener(View.OnClickListener {
+
+            }).show()
         }
     }
 
@@ -275,6 +337,43 @@ class WriteDynamicActivity : BaseActivity<WriteDynamicPresenter>() {
         }
     }
 
+    fun sendPic(data: QINiuRespData) {
+
+        UpQiNiuManager(data.token, object : UpQiNiuManager.LoadStateListener {
+            var mJSONArray = JSONArray()
+            override fun success() {
+                map["type"] = "0"
+                map["state"] = "1"
+                map["title"] = "动态"
+                map["editorValue"] = et_Content.text.toString()
+                map["img"] = mJSONArray.toJSONString()
+                map["_token"] = App.s_Token!!
+                persent?.pushDynamic(map)
+            }
+
+            override fun fail() {
+
+            }
+
+            override fun oneFinish(endTag: String?, position: Int) {
+                val `object` = JSONObject()
+                `object`["url"] = data.url + endTag
+                `object`["time"] = TimeUtils.getInstance().paserLong(System.currentTimeMillis())
+                `object`["spoiler"] = if (imgData[imgData.size - 1 - position].isSelected) 1 else 0
+                mJSONArray.add(`object`)
+            }
+        }, *parse()).next()
+    }
+
+    fun parse(): Array<String?> {
+        val arrays = arrayOfNulls<String>(imgData.size)
+        for (item in imgData.indices) {
+            arrays[item] = imgData[item].key
+        }
+        return arrays
+    }
+
+
     override fun request() {
 
     }
@@ -290,8 +389,8 @@ class WriteDynamicActivity : BaseActivity<WriteDynamicPresenter>() {
                     }
                     adapter.notifyDataSetChanged()
                     if (imgData.size > 0) {
-                        iv_Vedio.alpha = 0.8f
-                        iv_Vedio.isClickable = false
+                        iv_Video.alpha = 0.2f
+                        iv_Video.isClickable = false
                     }
                 }
             }

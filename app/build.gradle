@@ -86,4 +86,5 @@ dependencies {
     implementation files('libs/fastjson-1.1.34.android.jar')
     implementation 'me.dkzwm.widget.srl:core:1.6.5'
     implementation 'me.dkzwm.widget.srl:ext-material:1.6.5'
+    implementation 'com.qiniu:qiniu-android-sdk:7.3.+'
 }

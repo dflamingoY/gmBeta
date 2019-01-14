@@ -85,6 +85,7 @@ class HomeDynamicView : BaseLayout {
                              .asBitmap()
                              .centerCrop()
                              .into(imageView as ImageView)*/
+
                     (imageView as GridImageView).loadPic(t!!.url + "?imageMogr2/thumbnail/!240x240r/auto-orient")
                     Log.d("Mozator", "draw img")
                 }
