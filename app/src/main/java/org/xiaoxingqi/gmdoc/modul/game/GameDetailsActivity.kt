@@ -24,6 +24,7 @@ import org.xiaoxingqi.gmdoc.core.BaseActivity
 import org.xiaoxingqi.gmdoc.core.adapter.BaseAdapterHelper
 import org.xiaoxingqi.gmdoc.core.adapter.QuickAdapter
 import org.xiaoxingqi.gmdoc.entity.BaseSimpleData
+import org.xiaoxingqi.gmdoc.entity.ThumbData
 import org.xiaoxingqi.gmdoc.entity.game.GameDetailsData
 import org.xiaoxingqi.gmdoc.entity.game.GameScoreAllData
 import org.xiaoxingqi.gmdoc.entity.home.HomeUserShareData
@@ -44,7 +45,6 @@ class GameDetailsActivity : BaseActivity<GameDetailPersent>() {
     private lateinit var gameId: String
     private var loadArray = IntArray(3)//0 游戏信息  1  动态  2   长短评
     private lateinit var footView: View
-
     private val mData by lazy {
         ArrayList<HomeUserShareData.ContributeBean>()
     }
@@ -53,6 +53,22 @@ class GameDetailsActivity : BaseActivity<GameDetailPersent>() {
     @SuppressLint("SetTextI18n")
     override fun createPresent(): GameDetailPersent {
         return GameDetailPersent(this, object : GameDetailCallBack {
+
+            override fun gameOperator(data: ThumbData?, type: String?) {
+                when (type) {
+                    "wish" -> {
+                        headView.iv_Wish.setImageResource(if (data?.data?.type == 1) R.mipmap.btn_fav_selected else R.mipmap.btn_fav_default)
+                    }
+                    "playing" -> {
+                        headView.iv_Play.setImageResource(if (data?.data?.type == 1) R.mipmap.btn_fav_defaultcopy else R.mipmap.btn_playing_default)
+                    }
+                    "waiting_score" -> {
+                        headView.iv_Score.setImageResource(if (data?.data?.type == 1) R.mipmap.btn_wait_selected else R.mipmap.btn_wait_default)
+                    }
+                }
+                transLayout.showContent()
+            }
+
             override fun gameComment(data: GameScoreAllData?) {
                 headView.tv_ShortCommentCount.text = "短评 (${data!!.short_list_total})"
                 headView.linearShortContainer.removeAllViews()
@@ -106,11 +122,13 @@ class GameDetailsActivity : BaseActivity<GameDetailPersent>() {
                 } else {
                     headView.tv_GameExtrl.text = data.game.platform + " | " + data.game.developer + " | " + data.game.type
                 }
+                headView.iv_Wish.setImageResource(if (data.is_love == "1") R.mipmap.btn_fav_selected else R.mipmap.btn_fav_default)
+                headView.iv_Play.setImageResource(if (data.is_playing == 1) R.mipmap.btn_fav_defaultcopy else R.mipmap.btn_playing_default)
+                headView.iv_Score.setImageResource(if (data.is_waiting == 1) R.mipmap.btn_wait_selected else R.mipmap.btn_wait_default)
                 headView.scoreView_Community.setScore(data.all.score)
                 headView.scoreView_Follow.setScore(data.my.score)
                 headView.linear_img_Details.removeAllViews()
                 tv_Game_Name.text = data.game.game_name
-
                 var descData: ArrayList<BaseSimpleData>? = null
                 /**
                  * 组装视屏图片的集合
@@ -413,6 +431,34 @@ class GameDetailsActivity : BaseActivity<GameDetailPersent>() {
         headView.tv_HintUseTag.setOnClickListener {
             hintTagView.showMenu()
         }
+        headView.iv_Wish.setOnClickListener {
+            if (!AppTools.isLogin(this)) {
+                AppTools.login(this)
+            } else {
+                transLayout.showProgress()
+                persent?.addWish(map, "wish")
+            }
+        }
+        headView.iv_Play.setOnClickListener {
+            if (!AppTools.isLogin(this)) {
+                AppTools.login(this)
+            } else {
+                transLayout.showProgress()
+                persent?.addWish(map, "playing")
+            }
+        }
+        headView.iv_Score.setOnClickListener {
+            if (!AppTools.isLogin(this)) {
+                AppTools.login(this)
+            } else {
+                transLayout.showProgress()
+                persent?.addWish(map, "waiting_score")
+            }
+        }
+        headView.linear_invalide.setOnClickListener {
+
+        }
+
     }
 
     override fun request() {

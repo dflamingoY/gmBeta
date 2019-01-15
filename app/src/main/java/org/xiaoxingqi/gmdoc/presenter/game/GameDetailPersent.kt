@@ -1,6 +1,8 @@
 package org.xiaoxingqi.gmdoc.presenter.game
 
 import android.content.Context
+import com.alibaba.fastjson.JSON
+import org.xiaoxingqi.gmdoc.entity.ThumbData
 import org.xiaoxingqi.gmdoc.entity.game.GameDetailsData
 import org.xiaoxingqi.gmdoc.entity.game.GameScoreAllData
 import org.xiaoxingqi.gmdoc.entity.home.HomeUserShareData
@@ -78,5 +80,24 @@ class GameDetailPersent : BasePresenter {
         })
     }
 
+    /**
+     * 添加心愿单
+     */
+    fun addWish(map: Map<String, String>, type: String) {
+        addObaser(apiServer.base_post("$type${IConstant.GET_END}", map), object : Subscriber<String>() {
+            override fun onNext(t: String?) {
+                callBack?.gameOperator(JSON.parseObject(t, ThumbData::class.java), type)
+            }
+
+            override fun onCompleted() {
+
+            }
+
+            override fun onError(e: Throwable?) {
+                e?.stackTrace
+                e?.printStackTrace()
+            }
+        })
+    }
 
 }

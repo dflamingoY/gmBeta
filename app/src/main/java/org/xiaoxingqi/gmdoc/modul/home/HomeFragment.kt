@@ -183,11 +183,6 @@ class HomeFragment : BaseFrag<HomePresent>() {
     }
 
     override fun initData() {
-        persent?.let {
-            it.getActionData()
-            it.getAttributeData(0)
-            it.getGameData()
-        }
         gameAdapter = object : BaseHomeAdapter<List<BaseHomeBean>, BaseAdapterHelper>(activity, gameData) {
             val params = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, AppTools.dp2px(activity, 152))
             var width = ((AppTools.getWindowsWidth(activity) - AppTools.dp2px(activity, 14)) * 1f / 1.3 + 0.5f).toInt()
@@ -319,6 +314,11 @@ class HomeFragment : BaseFrag<HomePresent>() {
             }
         }
         mView!!.recyclerView.adapter = adapter
+        persent?.let {
+            it.getActionData()
+            it.getAttributeData(current)
+            it.getGameData()
+        }
     }
 
     override fun bindEvent() {

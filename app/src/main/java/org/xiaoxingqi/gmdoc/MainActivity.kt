@@ -52,7 +52,7 @@ class MainActivity : BaseActivity<MainPresenter>() {
                  * 退出登录 检测是否退出成功
                  */
                 drawerlayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
-
+                PreferenceTools.clear(this@MainActivity,IConstant.USERINFO)
                 persent?.post_token()
             }
 

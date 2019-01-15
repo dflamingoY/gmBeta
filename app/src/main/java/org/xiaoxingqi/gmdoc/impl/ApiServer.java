@@ -1,7 +1,6 @@
 package org.xiaoxingqi.gmdoc.impl;
 
 
-import org.xiaoxingqi.gmdoc.entity.BaseRespData;
 import org.xiaoxingqi.gmdoc.entity.TokenData;
 import org.xiaoxingqi.gmdoc.entity.game.GameDetailsData;
 import org.xiaoxingqi.gmdoc.entity.game.GameListData;

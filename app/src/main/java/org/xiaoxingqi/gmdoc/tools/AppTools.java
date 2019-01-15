@@ -31,6 +31,7 @@ import com.nostra13.universalimageloader.core.download.BaseImageDownloader;
 import org.xiaoxingqi.gmdoc.R;
 import org.xiaoxingqi.gmdoc.entity.user.UserInfoData;
 import org.xiaoxingqi.gmdoc.impl.IConstant;
+import org.xiaoxingqi.gmdoc.modul.login.LoginActivity;
 
 import java.lang.reflect.Method;
 import java.security.MessageDigest;
@@ -326,6 +327,11 @@ public class AppTools {
             return false;
         }
         return true;
+    }
+
+    public static void login(Context context) {
+        context.startActivity(new Intent(context, LoginActivity.class));
+        ((Activity) context).overridePendingTransition(R.anim.act_enter_trans, 0);
     }
 
 }

@@ -80,14 +80,7 @@ class HomeDynamicView : BaseLayout {
             nigenineGridView.visibility = VISIBLE
             val adapter = object : NineGridImageViewAdapter<BaseImgBean>() {
                 override fun onDisplayImage(context: Context?, imageView: View?, t: BaseImgBean?) {
-                    /* Glide.with(context)
-                             .load(t!!.url + "?imageMogr2/thumbnail/!240x240r/auto-orient")
-                             .asBitmap()
-                             .centerCrop()
-                             .into(imageView as ImageView)*/
-
-                    (imageView as GridImageView).loadPic(t!!.url + "?imageMogr2/thumbnail/!240x240r/auto-orient")
-                    Log.d("Mozator", "draw img")
+                    (imageView as GridImageView).loadPic(t!!.url + "?imageMogr2/thumbnail/!240x240r/auto-orient", t.spoiler == "1")
                 }
             }
             nigenineGridView.setAdapter(adapter)
