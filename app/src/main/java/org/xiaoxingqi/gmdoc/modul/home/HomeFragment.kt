@@ -179,7 +179,7 @@ class HomeFragment : BaseFrag<HomePresent>() {
         swipeRefresh.setEnableAutoLoadMore(true)
         swipeRefresh.setEnableSmoothRollbackWhenCompleted(true)
         swipeRefresh.setDisableLoadMoreWhenContentNotFull(true)
-        swipeRefresh.autoRefresh(Constants.ACTION_NOTIFY, true)
+        swipeRefresh.autoRefresh(Constants.ACTION_NOTHING, false)
     }
 
     override fun initData() {

@@ -27,8 +27,10 @@ import org.xiaoxingqi.gmdoc.entity.BaseSimpleData
 import org.xiaoxingqi.gmdoc.entity.ThumbData
 import org.xiaoxingqi.gmdoc.entity.game.GameDetailsData
 import org.xiaoxingqi.gmdoc.entity.game.GameScoreAllData
+import org.xiaoxingqi.gmdoc.entity.game.GameTabData
 import org.xiaoxingqi.gmdoc.entity.home.HomeUserShareData
 import org.xiaoxingqi.gmdoc.impl.game.GameDetailCallBack
+import org.xiaoxingqi.gmdoc.modul.global.WriteShortCommentActivity
 import org.xiaoxingqi.gmdoc.modul.home.UserHomeActivity
 import org.xiaoxingqi.gmdoc.presenter.game.GameDetailPersent
 import org.xiaoxingqi.gmdoc.tools.AppTools
@@ -53,6 +55,9 @@ class GameDetailsActivity : BaseActivity<GameDetailPersent>() {
     @SuppressLint("SetTextI18n")
     override fun createPresent(): GameDetailPersent {
         return GameDetailPersent(this, object : GameDetailCallBack {
+            override fun gameTab(data: GameTabData?) {
+                headView.gameTabView.setData(data!!.data.labels)
+            }
 
             override fun gameOperator(data: ThumbData?, type: String?) {
                 when (type) {
@@ -312,6 +317,7 @@ class GameDetailsActivity : BaseActivity<GameDetailPersent>() {
         persent?.getGameDetail(gameId)
         persent?.getComment(map, gameId)
         persent?.getAllDynamic(gameId, "3", 0)
+        persent?.getTab(gameId)
     }
 
     private var allLength = 0
@@ -456,6 +462,30 @@ class GameDetailsActivity : BaseActivity<GameDetailPersent>() {
             }
         }
         headView.linear_invalide.setOnClickListener {
+            if (!AppTools.isLogin(this)) {
+                AppTools.login(this)
+            } else
+                startActivity(Intent(this, InviteScoreActivity::class.java)
+                        .putExtra("gameId", gameId)
+                )
+        }
+        headView.tv_FindMoreShort.setOnClickListener {
+
+        }
+        headView.tv_AddShotComment.setOnClickListener {
+            startActivity(Intent(this, WriteShortCommentActivity::class.java)
+                    .putExtra("gameId", gameId))
+        }
+        headView.tv_addLongComment.setOnClickListener {
+
+        }
+        headView.tv_FindMoreLong.setOnClickListener {
+
+        }
+        headView.tv_AddTag.setOnClickListener {
+
+        }
+        headView.gameTabView.setOnItemClickListener {
 
         }
 

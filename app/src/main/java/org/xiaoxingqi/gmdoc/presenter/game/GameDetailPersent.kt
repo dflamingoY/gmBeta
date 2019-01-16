@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSON
 import org.xiaoxingqi.gmdoc.entity.ThumbData
 import org.xiaoxingqi.gmdoc.entity.game.GameDetailsData
 import org.xiaoxingqi.gmdoc.entity.game.GameScoreAllData
+import org.xiaoxingqi.gmdoc.entity.game.GameTabData
 import org.xiaoxingqi.gmdoc.entity.home.HomeUserShareData
 import org.xiaoxingqi.gmdoc.impl.IConstant
 import org.xiaoxingqi.gmdoc.impl.game.GameDetailCallBack
@@ -97,6 +98,22 @@ class GameDetailPersent : BasePresenter {
                 e?.stackTrace
                 e?.printStackTrace()
             }
+        })
+    }
+
+    fun getTab(gameId: String) {
+        addObaser(apiServer.base_get("get_label${IConstant.GET_END}&game_id=$gameId"), object : Subscriber<String>() {
+            override fun onNext(t: String?) {
+                callBack?.gameTab(JSON.parseObject(t, GameTabData::class.java))
+
+            }
+
+            override fun onCompleted() {
+            }
+
+            override fun onError(e: Throwable?) {
+            }
+
         })
     }
 

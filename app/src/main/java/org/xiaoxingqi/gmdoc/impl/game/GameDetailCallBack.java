@@ -3,6 +3,7 @@ package org.xiaoxingqi.gmdoc.impl.game;
 import org.xiaoxingqi.gmdoc.entity.ThumbData;
 import org.xiaoxingqi.gmdoc.entity.game.GameDetailsData;
 import org.xiaoxingqi.gmdoc.entity.game.GameScoreAllData;
+import org.xiaoxingqi.gmdoc.entity.game.GameTabData;
 import org.xiaoxingqi.gmdoc.entity.home.HomeUserShareData;
 
 public interface GameDetailCallBack {
@@ -34,5 +35,10 @@ public interface GameDetailCallBack {
      * @param type
      */
     void gameOperator(ThumbData data, String type);
+
+    /**
+     * 获取游戏的标签
+     */
+    void gameTab(GameTabData data);
 
 }

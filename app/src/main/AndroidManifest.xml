@@ -47,6 +47,10 @@
         <activity
             android:name=".modul.global.WriteBlogActivity"
             android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".modul.game.InviteScoreActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity android:name=".modul.global.WriteShortCommentActivity" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"

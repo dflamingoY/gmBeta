@@ -43,7 +43,7 @@ abstract class BaseActivity<T : BasePresenter> : AppCompatActivity() {
     abstract fun initView()
     abstract fun initData()
     abstract fun initEvent()
-    abstract fun request()
+    open fun request() {}
 
     fun setContent(view: View) {
         setContentView(view)
