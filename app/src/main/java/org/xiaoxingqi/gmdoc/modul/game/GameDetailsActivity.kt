@@ -30,6 +30,7 @@ import org.xiaoxingqi.gmdoc.entity.game.GameScoreAllData
 import org.xiaoxingqi.gmdoc.entity.game.GameTabData
 import org.xiaoxingqi.gmdoc.entity.home.HomeUserShareData
 import org.xiaoxingqi.gmdoc.impl.game.GameDetailCallBack
+import org.xiaoxingqi.gmdoc.modul.global.WriteLongCommentActivity
 import org.xiaoxingqi.gmdoc.modul.global.WriteShortCommentActivity
 import org.xiaoxingqi.gmdoc.modul.home.UserHomeActivity
 import org.xiaoxingqi.gmdoc.presenter.game.GameDetailPersent
@@ -477,7 +478,7 @@ class GameDetailsActivity : BaseActivity<GameDetailPersent>() {
                     .putExtra("gameId", gameId))
         }
         headView.tv_addLongComment.setOnClickListener {
-
+            startActivity(Intent(this, WriteLongCommentActivity::class.java).putExtra("gameId", gameId))
         }
         headView.tv_FindMoreLong.setOnClickListener {
 
@@ -488,7 +489,6 @@ class GameDetailsActivity : BaseActivity<GameDetailPersent>() {
         headView.gameTabView.setOnItemClickListener {
 
         }
-
     }
 
     override fun request() {

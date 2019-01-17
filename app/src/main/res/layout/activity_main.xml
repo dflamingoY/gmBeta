@@ -202,7 +202,7 @@
                 </RelativeLayout>
 
                 <RelativeLayout
-                    android:id="@+id/relative_likeGame"
+                    android:id="@+id/relative_text"
                     android:layout_width="match_parent"
                     android:layout_height="50dp">
 
@@ -229,7 +229,7 @@
                 </RelativeLayout>
 
                 <RelativeLayout
-                    android:id="@+id/relative_Content"
+                    android:id="@+id/relative_album"
                     android:layout_width="match_parent"
                     android:layout_height="50dp">
 
@@ -256,7 +256,7 @@
                 </RelativeLayout>
 
                 <RelativeLayout
-                    android:id="@+id/relative_More"
+                    android:id="@+id/relative_love_game"
                     android:layout_width="match_parent"
                     android:layout_height="50dp">
 

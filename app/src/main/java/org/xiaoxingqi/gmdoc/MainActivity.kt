@@ -7,7 +7,6 @@ import android.support.v4.app.Fragment
 import kotlinx.android.synthetic.main.activity_main.*
 import org.xiaoxingqi.gmdoc.core.App
 import org.xiaoxingqi.gmdoc.entity.TokenData
-import org.xiaoxingqi.gmdoc.modul.home.HomeFragment
 import android.view.WindowManager
 import android.os.Build
 import android.support.v4.widget.DrawerLayout
@@ -25,7 +24,7 @@ import org.xiaoxingqi.gmdoc.impl.IConstant
 import org.xiaoxingqi.gmdoc.impl.MainCallBack
 import org.xiaoxingqi.gmdoc.modul.game.GameFragment
 import org.xiaoxingqi.gmdoc.modul.global.WriteDynamicActivity
-import org.xiaoxingqi.gmdoc.modul.home.UserHomeActivity
+import org.xiaoxingqi.gmdoc.modul.home.*
 import org.xiaoxingqi.gmdoc.modul.lifeCircle.LifCircleFragment
 import org.xiaoxingqi.gmdoc.modul.login.LoginActivity
 import org.xiaoxingqi.gmdoc.onEvent.LoginEvent
@@ -52,7 +51,7 @@ class MainActivity : BaseActivity<MainPresenter>() {
                  * 退出登录 检测是否退出成功
                  */
                 drawerlayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
-                PreferenceTools.clear(this@MainActivity,IConstant.USERINFO)
+                PreferenceTools.clear(this@MainActivity, IConstant.USERINFO)
                 persent?.post_token()
             }
 
@@ -200,26 +199,26 @@ class MainActivity : BaseActivity<MainPresenter>() {
             val infoData = PreferenceTools.getObj(this, IConstant.USERINFO, UserInfoData::class.java)
             startActivity(Intent(this, UserHomeActivity::class.java).putExtra("userId", infoData.data.uid))
         }
-        relative_likeGame.setOnClickListener {
-
+        relative_love_game.setOnClickListener {
+            startActivity(Intent(this, LoveGameListActivity::class.java))
         }
-        relative_Content.setOnClickListener {
-
+        relative_text.setOnClickListener {
+            startActivity(Intent(this, UserEditTextActivity::class.java))
         }
-        relative_More.setOnClickListener {
-
+        relative_album.setOnClickListener {
+            startActivity(Intent(this, UserAlbumActivity::class.java))
         }
         relative_User_Wallet.setOnClickListener {
-
+            startActivity(Intent(this, UserWalletActivity::class.java))
         }
         relative_User_Enjoy.setOnClickListener {
-
+            startActivity(Intent(this, UserEnjoyActivity::class.java))
         }
         relative_Setting.setOnClickListener {
-
+            startActivity(Intent(this, UserSetActivity::class.java))
         }
         iv_Help.setOnClickListener {
-
+            startActivity(Intent(this, InviteCodeActivity::class.java))
         }
     }
 

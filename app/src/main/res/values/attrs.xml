@@ -63,5 +63,13 @@
         <attr name="checkOn" format="reference" />
         <attr name="checkOff" format="reference" />
     </declare-styleable>
+    <declare-styleable name="ViewMoreGroupView">
+        <attr name="title_name" format="string" />
+        <attr name="title_img" format="reference" />
+        <attr name="title_selected" format="boolean" />
+    </declare-styleable>
+    <declare-styleable name="ViewShareAppLink">
+        <attr name="typeName" format="string" />
+    </declare-styleable>
 
 </resources>

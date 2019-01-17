@@ -109,12 +109,27 @@ public class ViewCommentScore extends View {
                     break;
                 }
             }
-            return false;
+            return true;
         }
 
         @Override
         public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
-            Log.d("Mozator",  "${e1.}")
+
+            float x = e2.getX();
+            float y = e2.getY();
+            for (int a = 1; a < 12; a++) {
+                RectF rectF = new RectF(a * defaultmargin + (a - 1) * mWidth, defaultmargin, a * defaultmargin + mWidth * a, mHeight);
+                if (rectF.contains(x, y)) {
+                    current = a;
+                    invalidate();
+                    if (mListener != null) {
+                        mListener.change(a - 1);
+                    }
+                    break;
+                }
+            }
+
+            Log.d("Mozator", "开始滚动 : " + e1.getX() + "   结束的位置  :  "+e2.getX());
 
             return super.onScroll(e1, e2, distanceX, distanceY);
         }

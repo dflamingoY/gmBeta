@@ -1,0 +1,503 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@color/color_white">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="24dp">
+
+            <ImageView
+                android:id="@+id/viewBack"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_centerVertical="true"
+                android:src="@mipmap/btn_back_grey" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_centerVertical="true"
+                android:text="提现"
+                android:textColor="#1a191a"
+                android:textSize="20sp"
+                android:textStyle="normal" />
+
+            <TextView
+                android:id="@+id/tvSetting"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="16dp"
+                android:gravity="end"
+                android:text="提现设置"
+                android:textColor="@color/color_shallow_yellow"
+                android:textSize="18sp" />
+        </RelativeLayout>
+    </android.support.design.widget.AppBarLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:background="#F6F7F7">
+
+        <ImageView
+            android:id="@+id/iv_money"
+            android:layout_width="26dp"
+            android:layout_height="26dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="14dp"
+            android:src="@mipmap/img_wallet_coin" />
+
+        <TextView
+            android:id="@+id/tv_BalanceName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="12dp"
+            android:layout_toRightOf="@+id/iv_money"
+            android:text="钱包余额"
+            android:textColor="#282828"
+            android:textSize="16sp" />
+
+
+        <TextView
+            android:id="@+id/tv_Balance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="12dp"
+            android:layout_toRightOf="@+id/tv_BalanceName"
+            android:fontFamily="sans-serif"
+            android:textColor="@color/color_shallow_yellow"
+            android:textSize="16sp"
+            android:textStyle="normal" />
+    </RelativeLayout>
+
+    <org.xiaoxingqi.gmdoc.wegidt.TransLayout
+        android:id="@+id/transLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/color_white"
+        app:defaultState="content"
+        app:emptyLayout="@layout/view_empty"
+        app:offlineLayout="@layout/view_offline"
+        app:progressLayout="@layout/view_progress">
+
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/color_white">
+
+            <LinearLayout
+                android:id="@+id/linear_UnBindInfo"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="44dp">
+
+                    <ImageView
+                        android:id="@+id/iv_hint"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="14dp"
+                        android:src="@mipmap/img_info_oval" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="8dp"
+                        android:layout_toRightOf="@+id/iv_hint"
+                        android:text="为保证您的账户安全，请先完善以下信息"
+                        android:textColor="#666666"
+                        android:textSize="14sp" />
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:paddingLeft="14sp">
+
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="9dp"
+                        android:text="提现设置"
+                        android:textColor="#454545"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/tv_InfoSate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginBottom="11dp"
+                        android:text="未填写"
+                        android:textColor="#888888"
+                        android:textSize="12sp" />
+
+
+                    <TextView
+                        android:id="@+id/tv_Info"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="14dp"
+                        android:background="@drawable/shape_round_yellow_r_2"
+                        android:gravity="end"
+                        android:lineSpacingExtra="2sp"
+                        android:paddingLeft="21dp"
+                        android:paddingTop="8dp"
+                        android:paddingRight="21dp"
+                        android:paddingBottom="8dp"
+                        android:text="去完善"
+                        android:textColor="#ffffff"
+                        android:textSize="14sp" />
+
+                    <LinearLayout
+                        android:id="@+id/relativeBindOther"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="14sp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:visibility="gone">
+
+                        <ImageView
+                            android:layout_width="14dp"
+                            android:layout_height="10dp"
+                            android:layout_marginRight="6dp"
+                            android:src="@mipmap/selected" />
+
+                        <TextView
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="end"
+                            android:lineSpacingExtra="2sp"
+                            android:text="已绑定"
+                            android:textColor="#ff7100"
+                            android:textSize="14sp" />
+
+                    </LinearLayout>
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/color_gray_division" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:paddingLeft="14sp">
+
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="9dp"
+                        android:text="绑定手机"
+                        android:textColor="#454545"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/tvPhoneBindState"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginBottom="11dp"
+                        android:text="未绑定"
+                        android:textColor="#888888"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/tv_BindPhone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="14dp"
+                        android:background="@drawable/shape_round_yellow_r_2"
+                        android:gravity="end"
+                        android:lineSpacingExtra="2sp"
+                        android:paddingLeft="21dp"
+                        android:paddingTop="8dp"
+                        android:paddingRight="21dp"
+                        android:paddingBottom="8dp"
+                        android:text="去绑定"
+                        android:textColor="#ffffff"
+                        android:textSize="14sp" />
+
+                    <LinearLayout
+                        android:id="@+id/relativeBindPhoneState"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="14sp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:visibility="gone">
+
+                        <ImageView
+                            android:layout_width="14dp"
+                            android:layout_height="10dp"
+                            android:layout_marginRight="6dp"
+                            android:src="@mipmap/selected" />
+
+                        <TextView
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="end"
+                            android:lineSpacingExtra="2sp"
+                            android:text="已绑定"
+                            android:textColor="#ff7100"
+                            android:textSize="14sp" />
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/color_gray_division" />
+            </LinearLayout>
+
+            <android.support.v4.widget.NestedScrollView
+                android:id="@+id/bindFinish"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="14dp"
+                        android:layout_marginTop="10dp"
+                        android:lineSpacingExtra="7sp"
+                        android:text="提现资金将转出至您的微信钱包中"
+                        android:textColor="#d0021b"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="14dp"
+                        android:layout_marginTop="8dp"
+                        android:text="微信将收取2%的转账成本，3个工作日内到账"
+                        android:textColorHint="#666666"
+                        android:textSize="12sp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/color_gray_division" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="86dp">
+
+                        <android.support.v7.widget.CardView
+                            android:id="@+id/cardLogo"
+                            android:layout_width="56dp"
+                            android:layout_height="56dp"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="14dp"
+                            app:cardCornerRadius="28dp"
+                            app:cardElevation="0dp">
+
+                            <ImageView
+                                android:id="@+id/iv_userLogo"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:scaleType="centerCrop"
+                                android:src="@mipmap/img_avatar_default" />
+                        </android.support.v7.widget.CardView>
+
+                        <TextView
+                            android:id="@+id/tv_Name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="14dp"
+                            android:layout_marginTop="22dp"
+                            android:layout_toRightOf="@+id/cardLogo"
+                            android:text="收款人：用户名"
+                            android:textColor="#282828"
+                            android:textSize="14sp" />
+
+                        <TextView
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentBottom="true"
+                            android:layout_marginLeft="14dp"
+                            android:layout_marginBottom="24dp"
+                            android:layout_toRightOf="@+id/cardLogo"
+                            android:text="您可以在右上角「提现设置」中修改收款人"
+                            android:textColor="#888888"
+                            android:textSize="12sp" />
+
+                    </RelativeLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/color_gray_division" />
+
+                    <EditText
+                        android:id="@+id/et_Balance"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:layout_marginLeft="14dp"
+                        android:layout_marginTop="13dp"
+                        android:layout_marginRight="14dp"
+                        android:background="@drawable/shape_stoken_round_grey_bg"
+                        android:hint="请输入提现金额，最低5元"
+                        android:inputType="numberDecimal"
+                        android:paddingLeft="12dp"
+                        android:textColor="#282828"
+                        android:textColorHint="#888888"
+                        android:textSize="15sp" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:layout_marginLeft="14dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginRight="14dp"
+                        android:background="@drawable/shape_stoken_round_deep_grey_bg">
+
+                        <TextView
+                            android:id="@+id/tv_PhoneNum"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@null"
+                            android:fontFamily="sans-serif"
+                            android:padding="12dp"
+                            android:singleLine="true"
+                            android:textColor="#282828"
+                            android:textColorHint="#888888"
+                            android:textSize="15sp"
+                            android:textStyle="normal" />
+
+                        <TextView
+                            android:id="@+id/tv_GetCode"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginRight="12dp"
+                            android:gravity="center_vertical"
+                            android:text="获取验证码"
+                            android:textColor="@color/color_shallow_yellow"
+                            android:textSize="15sp" />
+                    </RelativeLayout>
+
+                    <EditText
+                        android:id="@+id/et_Code"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:layout_marginLeft="14dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginRight="14dp"
+                        android:background="@drawable/shape_gray_stoken_login"
+                        android:hint="请输入手机验证码"
+                        android:inputType="number"
+                        android:paddingLeft="12dp"
+                        android:singleLine="true"
+                        android:textColor="#282828"
+                        android:textColorHint="#888888"
+                        android:textSize="15sp" />
+
+
+                    <TextView
+                        android:id="@+id/tv_Withdrawals"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:layout_marginLeft="14dp"
+                        android:layout_marginTop="24dp"
+                        android:layout_marginRight="14dp"
+                        android:background="@drawable/shape_round_yellow_r_2"
+                        android:gravity="center"
+                        android:text="提现"
+                        android:textColor="#ffffff"
+                        android:textSize="18sp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="10dp"
+                        android:layout_marginTop="24dp"
+                        android:background="@color/color_gray_division" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp">
+
+                        <ImageView
+                            android:layout_width="13dp"
+                            android:layout_height="13dp"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="14dp"
+                            android:src="@mipmap/img_time_grey" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="39dp"
+                            android:gravity="center_horizontal"
+                            android:text="提现记录"
+                            android:textColor="#666666"
+                            android:textSize="14sp" />
+
+                    </RelativeLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/color_gray_division" />
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/recyclerHistory"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+                </LinearLayout>
+            </android.support.v4.widget.NestedScrollView>
+
+
+        </FrameLayout>
+
+    </org.xiaoxingqi.gmdoc.wegidt.TransLayout>
+</LinearLayout>

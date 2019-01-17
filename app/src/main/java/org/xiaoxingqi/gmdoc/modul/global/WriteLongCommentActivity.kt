@@ -1,33 +1,29 @@
 package org.xiaoxingqi.gmdoc.modul.global
 
-import kotlinx.android.synthetic.main.activity_write_short_comment.*
 import org.xiaoxingqi.gmdoc.R
 import org.xiaoxingqi.gmdoc.core.BaseActivity
 import org.xiaoxingqi.gmdoc.impl.global.WriteCallback
 import org.xiaoxingqi.gmdoc.presenter.global.WritePresenter
 
-class WriteShortCommentActivity : BaseActivity<WritePresenter>() {
+class WriteLongCommentActivity : BaseActivity<WritePresenter>() {
     override fun createPresent(): WritePresenter {
         return WritePresenter(this, object : WriteCallback() {})
     }
 
     override fun setContent() {
-        setContent(R.layout.activity_write_short_comment)
+        setContent(R.layout.activity_write_long_comment
+        )
     }
 
     override fun initView() {
+
     }
 
     override fun initData() {
+
     }
 
     override fun initEvent() {
-        cancel.setOnClickListener {
-            finish()
-        }
-        tv_Commit.setOnClickListener {
-
-        }
 
     }
 }

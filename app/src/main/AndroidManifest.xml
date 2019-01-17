@@ -18,7 +18,7 @@
             android:name=".modul.game.GameDetailsActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".modul.game.GameListActicivty"
+            android:name=".modul.game.GameListActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".modul.global.SplashActivity"
@@ -51,6 +51,15 @@
             android:name=".modul.game.InviteScoreActivity"
             android:windowSoftInputMode="stateHidden" />
         <activity android:name=".modul.global.WriteShortCommentActivity" />
+        <activity android:name=".modul.global.WriteLongCommentActivity" />
+        <activity android:name=".modul.home.LoveGameListActivity" />
+        <activity android:name=".modul.home.UserEditTextActivity" />
+        <activity android:name=".modul.home.UserAlbumActivity" />
+        <activity android:name=".modul.home.UserWalletActivity" />
+        <activity android:name=".modul.home.UserEnjoyActivity" />
+        <activity android:name=".modul.home.UserSetActivity" />
+        <activity android:name=".modul.home.InviteCodeActivity" />
+        <activity android:name=".modul.home.WithDrawActivity" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"

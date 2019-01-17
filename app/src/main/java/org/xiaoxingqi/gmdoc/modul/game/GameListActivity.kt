@@ -16,7 +16,7 @@ import org.xiaoxingqi.gmdoc.impl.game.GameListCallBack
 import org.xiaoxingqi.gmdoc.presenter.game.GameListPresent
 import org.xiaoxingqi.gmdoc.wegidt.RoundScoreView
 
-class GameListActicivty : BaseActivity<GameListPresent>() {
+class GameListActivity : BaseActivity<GameListPresent>() {
     private lateinit var adapter: QuickAdapter<BaseGameBean>
     private var current = 0
     private val mData by lazy {
@@ -59,7 +59,7 @@ class GameListActicivty : BaseActivity<GameListPresent>() {
                 } else {
                     helper!!.getView(R.id.linear_Time).visibility = View.VISIBLE
                 }
-                Glide.with(this@GameListActicivty)
+                Glide.with(this@GameListActivity)
                         .load(url)
                         .error(R.mipmap.img_empty_square)
                         .placeholder(R.mipmap.img_empty_square)

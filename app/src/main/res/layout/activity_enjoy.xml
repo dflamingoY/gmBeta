@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@color/color_white">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="24dp">
+
+
+            <ImageView
+                android:id="@+id/viewBack"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_centerVertical="true"
+                android:src="@mipmap/btn_back_grey" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_centerVertical="true"
+                android:text="更多"
+                android:textColor="#1a191a"
+                android:textSize="20sp"
+                android:textStyle="normal" />
+
+        </RelativeLayout>
+    </android.support.design.widget.AppBarLayout>
+
+    <org.xiaoxingqi.gmdoc.wegidt.ViewMoreGroupView
+        android:id="@+id/viewMoreThumb"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        app:title_img="@mipmap/mine_thumb"
+        app:title_name="我的赞" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="16dp"
+        android:background="@color/color_gray_division" />
+
+    <org.xiaoxingqi.gmdoc.wegidt.ViewMoreGroupView
+        android:id="@+id/viewMoreCollect"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        app:title_img="@mipmap/mine_collection"
+        app:title_name="我的收藏" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="16dp"
+        android:background="@color/color_gray_division" />
+
+    <org.xiaoxingqi.gmdoc.wegidt.ViewMoreGroupView
+        android:id="@+id/viewMoreBlack"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        app:title_img="@mipmap/mine_black_list"
+        app:title_name="黑名单" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/color_gray_division" />
+</LinearLayout>

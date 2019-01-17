@@ -36,6 +36,9 @@ abstract class BaseActivity<T : BasePresenter> : AppCompatActivity() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             window.requestFeature(Window.FEATURE_CONTENT_TRANSITIONS)
         }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {//修改状态栏文字颜色
+            window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+        }
     }
 
     abstract fun createPresent(): T

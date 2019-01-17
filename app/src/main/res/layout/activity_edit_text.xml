@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@color/color_white">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="24dp">
+
+
+            <ImageView
+                android:id="@+id/viewBack"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_centerVertical="true"
+                android:src="@mipmap/btn_back_grey" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_centerVertical="true"
+                android:text="我的文字"
+                android:textColor="#1a191a"
+                android:textSize="20sp"
+                android:textStyle="normal" />
+
+        </RelativeLayout>
+    </android.support.design.widget.AppBarLayout>
+
+    <org.xiaoxingqi.gmdoc.wegidt.ViewMoreGroupView
+        android:id="@+id/viewMoreShort"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        app:title_img="@mipmap/img_mine_cmmt_s"
+        app:title_name="短评" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="16dp"
+        android:background="@color/color_gray_division" />
+
+    <org.xiaoxingqi.gmdoc.wegidt.ViewMoreGroupView
+        android:id="@+id/viewMoreLong"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        app:title_img="@mipmap/img_mine_cmmt_l"
+        app:title_name="长评" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="16dp"
+        android:background="@color/color_gray_division" />
+
+    <org.xiaoxingqi.gmdoc.wegidt.ViewMoreGroupView
+        android:id="@+id/viewMoreBowen"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        app:title_img="@mipmap/img_mine_bowen"
+        app:title_name="博文" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="16dp"
+        android:background="@color/color_gray_division" />
+
+    <org.xiaoxingqi.gmdoc.wegidt.ViewMoreGroupView
+        android:id="@+id/viewMorePhoto"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:visibility="gone"
+        app:title_img="@mipmap/img_mine_album"
+        app:title_name="相册" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="16dp"
+        android:background="@color/color_gray_division"
+        android:visibility="gone" />
+
+    <org.xiaoxingqi.gmdoc.wegidt.ViewMoreGroupView
+        android:id="@+id/viewMoreShare"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:visibility="gone"
+        app:title_img="@mipmap/img_mine_cake"
+        app:title_name="贡献" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/color_gray_division" />
+</LinearLayout>

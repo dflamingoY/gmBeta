@@ -30,7 +30,7 @@ import org.xiaoxingqi.gmdoc.entity.home.HomeUserShareData
 import org.xiaoxingqi.gmdoc.impl.home.HomeTabCallback
 import org.xiaoxingqi.gmdoc.modul.dynamic.DynamicDetailsActivity
 import org.xiaoxingqi.gmdoc.modul.game.GameDetailsActivity
-import org.xiaoxingqi.gmdoc.modul.game.GameListActicivty
+import org.xiaoxingqi.gmdoc.modul.game.GameListActivity
 import org.xiaoxingqi.gmdoc.presenter.HomePresent
 import org.xiaoxingqi.gmdoc.tools.AppTools
 import org.xiaoxingqi.gmdoc.tools.TimeUtils
@@ -270,7 +270,7 @@ class HomeFragment : BaseFrag<HomePresent>() {
                     }
 
                     helper.getView(R.id.tvfindAll).setOnClickListener {
-                        startActivity(Intent(activity, GameListActicivty::class.java)
+                        startActivity(Intent(activity, GameListActivity::class.java)
                                 .putExtra("platfromId", name))
                     }
                     linearContainer.removeAllViews()

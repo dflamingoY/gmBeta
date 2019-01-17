@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@color/color_white">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="24dp"
+            android:background="@color/color_white">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/viewBack"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_centerVertical="true"
+                    android:src="@mipmap/btn_back_grey" />
+
+                <TextView
+                    android:id="@+id/tv_Title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="最喜欢的游戏"
+                    android:textColor="#1a191a"
+                    android:textSize="20sp"
+                    android:textStyle="normal" />
+
+                <TextView
+                    android:id="@+id/tv_Edit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="14dp"
+                    android:gravity="end"
+                    android:text="编辑"
+                    android:textColor="@color/color_shallow_yellow"
+                    android:textSize="18sp"
+                    android:visibility="gone" />
+            </RelativeLayout>
+        </RelativeLayout>
+    </android.support.design.widget.AppBarLayout>
+
+    <org.xiaoxingqi.gmdoc.wegidt.TransLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/transLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:defaultState="progress"
+        app:emptyLayout="@layout/view_empty"
+        app:offlineLayout="@layout/view_offline"
+        app:progressLayout="@layout/view_progress">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerGame"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </android.support.v7.widget.RecyclerView>
+    </org.xiaoxingqi.gmdoc.wegidt.TransLayout>
+
+</LinearLayout>

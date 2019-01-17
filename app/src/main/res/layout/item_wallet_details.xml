@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:id="@+id/relativeTop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="9dp">
+
+        <ImageView
+            android:id="@+id/iv_legType"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_marginLeft="14sp"
+            android:src="@mipmap/img_wallet_leg_out" />
+
+        <TextView
+            android:id="@+id/tv_LegState"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="8dp"
+            android:layout_toRightOf="@+id/iv_legType"
+            android:text="加鸡腿"
+            android:textColor="#282828"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/tv_pay_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="15dp"
+            android:textColor="#282828"
+            android:textSize="18sp" />
+
+    </RelativeLayout>
+
+    <org.xiaoxingqi.gmdoc.wegidt.textView.WalletTextView
+        android:id="@+id/tv_Info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/relativeTop"
+        android:layout_marginLeft="14sp"
+        android:layout_marginTop="11dp"
+        android:layout_marginRight="14sp"
+        android:lineSpacingExtra="4dp"
+        android:maxLines="2"
+        android:text="给我的动态"
+        android:textColor="#888888"
+        android:textSize="14sp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_Info"
+        android:layout_marginTop="16dp">
+
+        <TextView
+            android:id="@+id/tv_pay_Type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="14dp"
+            android:text="余额支付"
+            android:textColor="#888888"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/tv_TIme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="14sp"
+            android:gravity="end"
+            android:text="2018-09-09   18:99"
+            android:textColor="#888888"
+            android:textSize="12sp" />
+    </RelativeLayout>
+
+</RelativeLayout>
+
