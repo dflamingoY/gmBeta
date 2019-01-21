@@ -240,14 +240,4 @@ public abstract class BaseQuickAdapter<T, H extends BaseAdapterHelper> extends R
         this.mOnItemLongClickListener = onItemLongClickListener;
     }
 
-    public enum ELoadState {
-        READY,//准备
-        LOADING,//加载中
-        EMPTY, //空数据
-        GONE,//不可见
-        NULLDATA//空数据
-    }
-
-
-
 }

@@ -200,13 +200,16 @@ class MainActivity : BaseActivity<MainPresenter>() {
             startActivity(Intent(this, UserHomeActivity::class.java).putExtra("userId", infoData.data.uid))
         }
         relative_love_game.setOnClickListener {
-            startActivity(Intent(this, LoveGameListActivity::class.java))
+            startActivity(Intent(this, UserGameListActivity::class.java))
         }
         relative_text.setOnClickListener {
             startActivity(Intent(this, UserEditTextActivity::class.java))
         }
         relative_album.setOnClickListener {
-            startActivity(Intent(this, UserAlbumActivity::class.java))
+            val infoData = PreferenceTools.getObj(this, IConstant.USERINFO, UserInfoData::class.java)
+            startActivity(Intent(this, UserAlbumActivity::class.java)
+                    .putExtra("userId", infoData.data.uid)
+            )
         }
         relative_User_Wallet.setOnClickListener {
             startActivity(Intent(this, UserWalletActivity::class.java))

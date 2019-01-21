@@ -3,6 +3,8 @@ package org.xiaoxingqi.gmdoc.presenter.home
 import android.content.Context
 import com.alibaba.fastjson.JSON
 import org.xiaoxingqi.gmdoc.entity.home.HomeUserShareData
+import org.xiaoxingqi.gmdoc.entity.user.LoveGameData
+import org.xiaoxingqi.gmdoc.entity.user.UserContentPhotoData
 import org.xiaoxingqi.gmdoc.impl.IConstant
 import org.xiaoxingqi.gmdoc.impl.home.UserCallback
 import org.xiaoxingqi.gmdoc.presenter.BasePresenter
@@ -25,6 +27,7 @@ class UserPresenter : BasePresenter {
             }
 
             override fun onCompleted() {
+
             }
 
             override fun onError(e: Throwable?) {
@@ -32,5 +35,36 @@ class UserPresenter : BasePresenter {
         })
     }
 
+    /**
+     * 获取用户的相册
+     */
+    fun getUserPhoto(userId: String, page: Int) {
+
+        addObaser(apiServer.base_get("photo/$userId${IConstant.GET_END}&page=$page"), object : Subscriber<String>() {
+            override fun onNext(t: String?) {
+                callback?.userPhoto(JSON.parseObject(t, UserContentPhotoData::class.java))
+            }
+
+            override fun onCompleted() {
+            }
+
+            override fun onError(e: Throwable?) {
+            }
+        })
+    }
+
+    fun loveGame(userId: String) {
+        addObaser(apiServer.base_get("like_game/$userId${IConstant.GET_END}"), object : Subscriber<String>() {
+            override fun onNext(t: String?) {
+                callback?.loveGameList(JSON.parseObject(t, LoveGameData::class.java))
+            }
+
+            override fun onCompleted() {
+            }
+
+            override fun onError(e: Throwable?) {
+            }
+        })
+    }
 
 }

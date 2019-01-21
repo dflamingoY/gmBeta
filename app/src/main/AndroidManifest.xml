@@ -60,6 +60,9 @@
         <activity android:name=".modul.home.UserSetActivity" />
         <activity android:name=".modul.home.InviteCodeActivity" />
         <activity android:name=".modul.home.WithDrawActivity" />
+        <activity android:name=".modul.home.UserContributionActivity" />
+        <activity android:name=".modul.home.UserPhotoListActivity" />
+        <activity android:name=".modul.home.UserGameListActivity" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"

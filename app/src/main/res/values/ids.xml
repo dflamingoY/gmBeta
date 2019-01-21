@@ -2,5 +2,11 @@
 <resources>
 
     <item name="viewPager" type="id" />
-    <item type="id" name="drawable_callback_tag"/>
+    <item name="drawable_callback_tag" type="id" />
+
+    <item name="text_retry" type="id" />
+    <item name="text_msg" type="id" />
+    <item name="linearProgress" type="id" />
+    <item name="progress" type="id" />
+    <item name="relative_Empty" type="id" />
 </resources>
