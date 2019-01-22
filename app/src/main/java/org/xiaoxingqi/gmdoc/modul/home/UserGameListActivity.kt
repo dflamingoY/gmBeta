@@ -12,6 +12,7 @@ import org.xiaoxingqi.gmdoc.presenter.home.UserPresenter
  * 用户的游戏列表
  */
 class UserGameListActivity : BaseActivity<UserPresenter>() {
+    private lateinit var userId: String
     override fun createPresent(): UserPresenter {
         return UserPresenter(this, object : UserCallback() {})
     }
@@ -25,21 +26,21 @@ class UserGameListActivity : BaseActivity<UserPresenter>() {
     }
 
     override fun initData() {
-
+        userId = intent.getStringExtra("userId")
     }
 
     override fun initEvent() {
         viewLoveGame.setOnClickListener {
-            startActivity(Intent(this, LoveGameListActivity::class.java))
+            startActivity(Intent(this, LoveGameListActivity::class.java).putExtra("userId", userId))
         }
         viewMoreWant.setOnClickListener {
-
+            startActivity(Intent(this, UserWantGameListActivity::class.java).putExtra("userId", userId))
         }
         viewMorePlaying.setOnClickListener {
-
+            startActivity(Intent(this, UserPlayGameListActivity::class.java).putExtra("userId", userId))
         }
         viewWaitScore.setOnClickListener {
-
+            startActivity(Intent(this, UserWantScoreGameListActivity::class.java).putExtra("userId", userId))
         }
     }
 }

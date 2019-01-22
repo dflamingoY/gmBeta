@@ -71,5 +71,11 @@
     <declare-styleable name="ViewShareAppLink">
         <attr name="typeName" format="string" />
     </declare-styleable>
+    <declare-styleable name="StokenView">
+        <attr name="size_Type" format="enum">
+            <enum name="type_Squ" value="1" />
+            <enum name="type_Rect" value="2" />
+        </attr>
+    </declare-styleable>
 
 </resources>

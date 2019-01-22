@@ -1,7 +1,9 @@
 package org.xiaoxingqi.gmdoc
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Color
 import android.support.v4.app.Fragment
 import kotlinx.android.synthetic.main.activity_main.*
@@ -9,6 +11,7 @@ import org.xiaoxingqi.gmdoc.core.App
 import org.xiaoxingqi.gmdoc.entity.TokenData
 import android.view.WindowManager
 import android.os.Build
+import android.support.v4.app.ActivityCompat
 import android.support.v4.widget.DrawerLayout
 import android.text.TextUtils
 import android.view.Gravity
@@ -36,7 +39,7 @@ import org.xiaoxingqi.gmdoc.tools.SPUtils
 class MainActivity : BaseActivity<MainPresenter>() {
 
     private val map by lazy { HashMap<String, String>() }
-
+    private val REQUEST_PERMISSION = 0x01
 
     override fun createPresent(): MainPresenter {
         return MainPresenter(this, object : MainCallBack {
@@ -146,6 +149,11 @@ class MainActivity : BaseActivity<MainPresenter>() {
     }
 
     override fun initData() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), REQUEST_PERMISSION)
+            }
+        }
         switchFragment(TypeFragment.Home)
         persent?.post_token()
         persent?.queryInfo()
@@ -200,7 +208,9 @@ class MainActivity : BaseActivity<MainPresenter>() {
             startActivity(Intent(this, UserHomeActivity::class.java).putExtra("userId", infoData.data.uid))
         }
         relative_love_game.setOnClickListener {
-            startActivity(Intent(this, UserGameListActivity::class.java))
+            val infoData = PreferenceTools.getObj(this, IConstant.USERINFO, UserInfoData::class.java)
+            startActivity(Intent(this, UserGameListActivity::class.java)
+                    .putExtra("userId", infoData.data.uid))
         }
         relative_text.setOnClickListener {
             startActivity(Intent(this, UserEditTextActivity::class.java))
@@ -268,6 +278,11 @@ class MainActivity : BaseActivity<MainPresenter>() {
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun loginEvent(event: LoginEvent) {
         persent?.queryInfo()
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+
     }
 
 }

@@ -1,58 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.AppBarLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginLeft="12dp"
-    android:layout_marginRight="12dp"
+    android:layout_marginLeft="8dp"
     android:layout_marginTop="8dp"
-    android:orientation="vertical">
+    android:layout_marginRight="8dp"
+    android:background="@android:color/white"
+    android:orientation="vertical"
+    app:cardCornerRadius="2dp">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@color/color_shallow_yellow"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_List"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:fontFamily="sans-serif"
+                android:gravity="center"
+                android:textColor="#ffffff"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_GameName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:lineSpacingExtra="3.6sp"
+                android:singleLine="true"
+                android:text="游戏标题"
+                android:textColor="#ffffff"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+        <org.xiaoxingqi.gmdoc.wegidt.gameDetails.SqureImageView
+            android:id="@+id/iv_Details"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="centerCrop" />
 
         <TextView
-            android:id="@+id/tv_List"
+            android:id="@+id/tv_Desc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="sans-serif"
-            android:gravity="center"
-            android:textColor="#ffffff"
-            android:textSize="13sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/tv_GameName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:lineSpacingExtra="3.6sp"
-            android:singleLine="true"
-            android:text="游戏标题"
-            android:textColor="#ffffff"
-            android:textSize="16sp" />
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginRight="12dp"
+            android:layout_marginBottom="17dp"
+            android:lineSpacingExtra="6sp"
+            android:textColor="#282828"
+            android:textSize="14sp" />
 
     </LinearLayout>
 
-    <org.xiaoxingqi.gmdoc.wegidt.gameDetails.SqureImageView
-        android:id="@+id/iv_Details"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:scaleType="centerCrop"
-        />
-
-    <TextView
-        android:id="@+id/tv_Desc"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="17dp"
-        android:layout_marginLeft="12dp"
-        android:layout_marginRight="12dp"
-        android:layout_marginTop="12dp"
-        android:lineSpacingExtra="6sp"
-        android:text="整个游戏只有一个主要技能：Shift——使时光倒流。它构成了所有精妙的操作、谜题和剧情。洞次打次洞次打次"
-        android:textColor="#282828"
-        android:textSize="14sp" />
-</android.support.design.widget.AppBarLayout>
+</android.support.v7.widget.CardView>

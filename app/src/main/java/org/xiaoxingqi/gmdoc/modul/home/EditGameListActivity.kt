@@ -3,25 +3,24 @@ package org.xiaoxingqi.gmdoc.modul.home
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.support.v7.widget.LinearLayoutManager
-import android.view.View
-import com.bumptech.glide.Glide
-import kotlinx.android.synthetic.main.activity_love_game_list.*
+import kotlinx.android.synthetic.main.activity_edit_game_list.*
 import org.xiaoxingqi.gmdoc.R
 import org.xiaoxingqi.gmdoc.core.BaseActivity
 import org.xiaoxingqi.gmdoc.core.adapter.BaseAdapterHelper
 import org.xiaoxingqi.gmdoc.core.adapter.QuickAdapter
+import org.xiaoxingqi.gmdoc.entity.BaseRespData
 import org.xiaoxingqi.gmdoc.entity.user.LoveGameData
 import org.xiaoxingqi.gmdoc.impl.home.UserCallback
 import org.xiaoxingqi.gmdoc.presenter.home.UserPresenter
 
-class LoveGameListActivity : BaseActivity<UserPresenter>() {
+class EditGameListActivity : BaseActivity<UserPresenter>() {
     private lateinit var adapter: QuickAdapter<LoveGameData.DataBean>
     private lateinit var userId: String
     private val mData by lazy { ArrayList<LoveGameData.DataBean>() }
+
     override fun createPresent(): UserPresenter {
         return UserPresenter(this, object : UserCallback() {
             override fun loveGameList(data: LoveGameData) {
-                transLayout.showContent()
                 for (bean in data.data) {
                     mData.add(bean)
                     adapter.notifyItemInserted(adapter.itemCount - 1)
@@ -31,34 +30,24 @@ class LoveGameListActivity : BaseActivity<UserPresenter>() {
     }
 
     override fun setContent() {
-        setContent(R.layout.activity_love_game_list)
+        setContent(R.layout.activity_edit_game_list)
     }
 
     override fun initView() {
-        tv_Edit.visibility = View.VISIBLE
+
     }
 
     override fun initData() {
         userId = intent.getStringExtra("userId")
-        adapter = object : QuickAdapter<LoveGameData.DataBean>(this, R.layout.item_love_game_list, mData) {
+        adapter = object : QuickAdapter<LoveGameData.DataBean>(this, R.layout.item_suolve_lvoe_game, mData) {
             @SuppressLint("SetTextI18n")
             override fun convert(helper: BaseAdapterHelper?, item: LoveGameData.DataBean?) {
-
-                helper!!.getTextView(R.id.tv_List).text = "No." + item!!.rank
-                helper.getTextView(R.id.tv_GameName).text = item.game_name
-                Glide.with(this@LoveGameListActivity)
-                        .load(item.img)
-                        .asBitmap()
-                        .centerCrop()
-                        .override(360, 180)
-                        .error(R.drawable.img_empty_avatar_back)
-                        .into(helper.getImageView(R.id.iv_Details))
-                helper.getTextView(R.id.tv_Desc).text = item.desc
+                helper!!.getTextView(R.id.tv_No).text = "No." + item!!.rank
+                helper.getTextView(R.id.tv_gameName).text = item.game_name
             }
         }
         recyclerGame.layoutManager = LinearLayoutManager(this)
         recyclerGame.adapter = adapter
-        persent?.loveGame(userId)
     }
 
     override fun onStart() {
@@ -66,14 +55,21 @@ class LoveGameListActivity : BaseActivity<UserPresenter>() {
         mData.clear()
         adapter.notifyDataSetChanged()
         persent?.loveGame(userId)
+
     }
 
     override fun initEvent() {
-        viewBack.setOnClickListener {
-            finish()
+        viewBack.setOnClickListener { finish() }
+        adapter.setOnItemClickListener { view, position ->
+            startActivity(Intent(this, UserEditGameActivity::class.java)
+                    .putExtra("data", mData)
+                    .putExtra("current", position)
+            )
         }
-        tv_Edit.setOnClickListener {
-            startActivity(Intent(this, EditGameListActivity::class.java).putExtra("userId", userId))
+        linear_AddGame.setOnClickListener {
+            startActivity(Intent(this, UserEditGameActivity::class.java)
+                    .putExtra("data", mData)
+                    .putExtra("current", -1))
         }
     }
 }

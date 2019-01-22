@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<org.xiaoxingqi.gmdoc.wegidt.TransLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/transLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:defaultState="content"
+    app:emptyLayout="@layout/view_empty"
+    app:offlineLayout="@layout/view_offline"
+    app:progressLayout="@layout/view_progress">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/color_Black"
+        android:clipChildren="false">
+
+        <org.xiaoxingqi.gmdoc.wegidt.RelativeCropView
+            android:id="@+id/cropView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:clipChildren="false">
+
+            <org.xiaoxingqi.gmdoc.wegidt.TouchImageView
+                android:id="@+id/touchImg"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop" />
+
+        </org.xiaoxingqi.gmdoc.wegidt.RelativeCropView>
+
+        <org.xiaoxingqi.gmdoc.wegidt.StokenView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            app:size_Type="type_Rect" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/cropView"
+            android:background="#99000000" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/cropView"
+            android:background="#99000000" />
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_alignParentBottom="true"
+            android:background="#4d000000">
+
+            <TextView
+                android:id="@+id/tv_Cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="16dp"
+                android:text="取消"
+                android:textColor="@color/color_white"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tv_Commit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:text="确定"
+                android:textColor="@color/color_white"
+                android:textSize="16sp" />
+
+        </RelativeLayout>
+    </RelativeLayout>
+</org.xiaoxingqi.gmdoc.wegidt.TransLayout>
