@@ -6,7 +6,6 @@
     android:layout_marginTop="14dp"
     android:layout_marginBottom="14dp"
     android:focusable="true"
-    android:focusableInTouchMode="true"
     android:gravity="center_horizontal"
     android:text="请选择一个游戏平台"
     android:textColor="#666666"

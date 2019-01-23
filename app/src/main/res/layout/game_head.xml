@@ -9,9 +9,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="238dp"
-        android:focusable="true"
-        android:focusableInTouchMode="true">
+        android:layout_height="238dp">
 
         <ImageView
             android:id="@+id/iv_Bluer_Bg"

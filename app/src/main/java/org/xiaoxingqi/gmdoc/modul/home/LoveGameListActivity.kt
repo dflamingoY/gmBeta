@@ -58,7 +58,6 @@ class LoveGameListActivity : BaseActivity<UserPresenter>() {
         }
         recyclerGame.layoutManager = LinearLayoutManager(this)
         recyclerGame.adapter = adapter
-        persent?.loveGame(userId)
     }
 
     override fun onStart() {

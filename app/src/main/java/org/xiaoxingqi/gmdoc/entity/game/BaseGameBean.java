@@ -58,6 +58,9 @@ public class BaseGameBean implements Parcelable {
     private String game_id;//更多想玩 在玩中的数据
     private int f_score;//关注均分
 
+    public BaseGameBean() {
+    }
+
     protected BaseGameBean(Parcel in) {
         cover = in.readString();
         created_at = in.readString();

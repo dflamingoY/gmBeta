@@ -1,3 +1,4 @@
+/*
 package org.xiaoxingqi.gmdoc.presenter.home
 
 import android.content.Context
@@ -20,9 +21,11 @@ class UserPresenter : BasePresenter {
         this.callback = callback
     }
 
-    /**
+    */
+/**
      * 查询用户的钱包信息
-     */
+     *//*
+
     fun getWallet(type: Int, page: Int) {
         addObaser(apiServer.base_get("wallet${IConstant.GET_END}&type=$type&page=$page"), object : Subscriber<String>() {
             override fun onNext(t: String?) {
@@ -38,9 +41,11 @@ class UserPresenter : BasePresenter {
         })
     }
 
-    /**
+    */
+/**
      * 获取用户的相册
-     */
+     *//*
+
     fun getUserPhoto(userId: String, page: Int) {
 
         addObaser(apiServer.base_get("photo/$userId${IConstant.GET_END}&page=$page"), object : Subscriber<String>() {
@@ -56,9 +61,11 @@ class UserPresenter : BasePresenter {
         })
     }
 
-    /**
+    */
+/**
      * 喜欢的游戏单
-     */
+     *//*
+
     fun loveGame(userId: String) {
         addObaser(apiServer.base_get("like_game/$userId${IConstant.GET_END}"), object : Subscriber<String>() {
             override fun onNext(t: String?) {
@@ -73,9 +80,11 @@ class UserPresenter : BasePresenter {
         })
     }
 
-    /**
+    */
+/**
      *增删改游戏单
-     */
+     *//*
+
     fun changeGame(map: Map<String, String>) {
         addObaser(apiServer.base_post("updateinfo/${IConstant.GET_END}", map), object : Subscriber<String>() {
             override fun onNext(t: String?) {
@@ -90,9 +99,11 @@ class UserPresenter : BasePresenter {
         })
     }
 
-    /**
+    */
+/**
      * 获取7牛的token
-     */
+     *//*
+
     fun getQiNiuToken() {
         addObaser(apiServer.base_get("niu_token"), object : Subscriber<String>() {
             override fun onNext(t: String?) {
@@ -113,7 +124,7 @@ class UserPresenter : BasePresenter {
 
         addObaser(apiServer.base_get("$type/$uid/${IConstant.GET_END}&page=$page"), object : Subscriber<String>() {
             override fun onNext(t: String?) {
-                JSON.parseObject(t, GameListData::class.java)
+                callback?.otherGame(JSON.parseObject(t, GameListData::class.java))
             }
 
             override fun onCompleted() {
@@ -126,4 +137,4 @@ class UserPresenter : BasePresenter {
         })
     }
 
-}
+}*/
