@@ -37,4 +37,15 @@ open class UserCallback {
      * 想玩 在玩 待评分
      */
     open fun otherGame(data: GameListData) {}
+
+    /**
+     * 用户的文字
+     */
+    open fun userWordList(data: HomeUserShareData) {}
+
+    /**
+     *更新用户信息
+     */
+    open fun updateInfo(data: BaseRespData) {}
+
 }

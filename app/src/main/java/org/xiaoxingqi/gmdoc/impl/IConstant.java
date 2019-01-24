@@ -35,5 +35,14 @@ public interface IConstant {
      * 缓存的邮箱地址
      */
     String CACHEEMAIL = "cacheEmail";
+    /**
+     * 关注圈是否显示更多人
+     */
+    String ISCIRCLERECOMMEND = "isCircleRecommend";
+
+    /**
+     * 是否隐藏读者
+     */
+    String ISVISIBLEREADER = "isVisibleReader";
 
 }

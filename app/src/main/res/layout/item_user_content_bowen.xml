@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="108dp"
+    android:background="@color/color_white">
+
+    <TextView
+        android:id="@+id/tv_GameName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="14dp"
+        android:layout_marginRight="16dp"
+        android:singleLine="true"
+        android:textColor="#454545"
+        android:textSize="18sp" />
+
+
+    <TextView
+        android:id="@+id/tv_stateInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="16dp"
+        android:layout_marginBottom="18dp"
+        android:layout_toLeftOf="@+id/tv_Edit"
+        android:lineSpacingExtra="4sp"
+        android:singleLine="true"
+        android:text="10赞 · 2转发 · 昨天 12:25"
+        android:textColor="#b2b2b2"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/tv_Edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/tv_Delete"
+        android:layout_marginRight="8dp"
+        android:layout_toLeftOf="@+id/tv_Delete"
+        android:background="@color/color_white"
+        android:gravity="center"
+        android:lineSpacingExtra="3sp"
+        android:paddingLeft="19dp"
+        android:paddingTop="10dp"
+        android:paddingRight="19dp"
+        android:paddingBottom="10dp"
+        android:text="编辑"
+        android:textColor="#454545"
+        android:textSize="13sp" />
+
+    <TextView
+        android:id="@+id/tv_Delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@color/color_white"
+        android:gravity="center"
+        android:lineSpacingExtra="3sp"
+        android:paddingLeft="19dp"
+        android:paddingTop="10dp"
+        android:paddingRight="19dp"
+        android:paddingBottom="10dp"
+        android:text="删除"
+        android:textColor="#fe3f56"
+        android:textSize="13sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/color_gray_division" />
+</RelativeLayout>

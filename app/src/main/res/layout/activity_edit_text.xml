@@ -5,7 +5,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="80dp"
@@ -17,14 +16,12 @@
             android:layout_centerVertical="true"
             android:layout_marginTop="24dp">
 
-
             <ImageView
                 android:id="@+id/viewBack"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:layout_centerVertical="true"
                 android:src="@mipmap/btn_back_grey" />
-
 
             <TextView
                 android:layout_width="wrap_content"

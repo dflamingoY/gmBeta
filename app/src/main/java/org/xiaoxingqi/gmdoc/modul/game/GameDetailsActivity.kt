@@ -376,12 +376,15 @@ class GameDetailsActivity : BaseActivity<GameDetailPersent>() {
             val indexOfChild = commentTitle.indexOfChild(it)
             when (indexOfChild) {
                 0 -> {
+
                     true
                 }
                 1 -> {
+
                     true
                 }
                 2 -> {
+
                     true
                 }
                 else -> {

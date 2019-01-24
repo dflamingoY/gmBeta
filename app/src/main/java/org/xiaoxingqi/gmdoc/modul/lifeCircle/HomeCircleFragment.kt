@@ -105,7 +105,7 @@ class HomeCircleFragment : BaseFrag<TypeFragPresenter>() {
         refresh.setEnableAutoLoadMore(true)
         refresh.setEnableSmoothRollbackWhenCompleted(true)
         refresh.setDisableLoadMoreWhenContentNotFull(true)
-        refresh.autoRefresh(Constants.ACTION_NOTIFY, true)
+        refresh.autoRefresh(Constants.ACTION_NOTHING, true)
     }
 
     override fun initData() {

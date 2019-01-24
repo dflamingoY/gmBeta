@@ -21,5 +21,10 @@
         <item>支出</item>
         <item>收入</item>
     </string-array>
+    <string-array name="longCommentTitle">
+        <item>发布的</item>
+        <item>草稿箱</item>
+        <item>垃圾箱</item>
+    </string-array>
 
 </resources>

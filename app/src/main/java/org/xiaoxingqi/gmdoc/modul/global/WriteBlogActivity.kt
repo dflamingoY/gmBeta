@@ -91,7 +91,6 @@ class WriteBlogActivity : BaseActivity<WritePresenter>() {
                 emojiView.visibility = View.GONE
             }
         }
-
     }
 
     override fun request() {

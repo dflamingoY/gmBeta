@@ -69,6 +69,13 @@
         <activity android:name=".modul.home.UserWantScoreGameListActivity" />
         <activity android:name=".modul.home.UserPlayGameListActivity" />
         <activity android:name=".modul.home.UserWantGameListActivity" />
+        <activity android:name=".modul.home.UserShortListActivity" />
+        <activity android:name=".modul.home.UserLongListActivity" />
+        <activity android:name=".modul.home.UserBlogListActivity" />
+        <activity android:name=".modul.home.UserCircleMoreActivity" />
+        <activity android:name=".modul.home.UserVisibleReaderActivity" />
+        <activity android:name=".modul.home.EditUserInfoActivity" />
+        <activity android:name=".modul.global.CropUserAvatarActivity" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"

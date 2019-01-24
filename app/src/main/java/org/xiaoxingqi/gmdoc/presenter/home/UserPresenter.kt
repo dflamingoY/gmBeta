@@ -1,4 +1,3 @@
-/*
 package org.xiaoxingqi.gmdoc.presenter.home
 
 import android.content.Context
@@ -21,11 +20,7 @@ class UserPresenter : BasePresenter {
         this.callback = callback
     }
 
-    */
-/**
-     * 查询用户的钱包信息
-     *//*
-
+    /**查询用户的钱包信息*/
     fun getWallet(type: Int, page: Int) {
         addObaser(apiServer.base_get("wallet${IConstant.GET_END}&type=$type&page=$page"), object : Subscriber<String>() {
             override fun onNext(t: String?) {
@@ -41,11 +36,9 @@ class UserPresenter : BasePresenter {
         })
     }
 
-    */
-/**
+    /**
      * 获取用户的相册
-     *//*
-
+     * */
     fun getUserPhoto(userId: String, page: Int) {
 
         addObaser(apiServer.base_get("photo/$userId${IConstant.GET_END}&page=$page"), object : Subscriber<String>() {
@@ -61,11 +54,8 @@ class UserPresenter : BasePresenter {
         })
     }
 
-    */
-/**
-     * 喜欢的游戏单
-     *//*
-
+    /**
+     * 喜欢的游戏单*/
     fun loveGame(userId: String) {
         addObaser(apiServer.base_get("like_game/$userId${IConstant.GET_END}"), object : Subscriber<String>() {
             override fun onNext(t: String?) {
@@ -73,18 +63,17 @@ class UserPresenter : BasePresenter {
             }
 
             override fun onCompleted() {
+
             }
 
             override fun onError(e: Throwable?) {
+
             }
         })
     }
 
-    */
-/**
-     *增删改游戏单
-     *//*
-
+    /**
+     *增删改游戏单*/
     fun changeGame(map: Map<String, String>) {
         addObaser(apiServer.base_post("updateinfo/${IConstant.GET_END}", map), object : Subscriber<String>() {
             override fun onNext(t: String?) {
@@ -92,18 +81,17 @@ class UserPresenter : BasePresenter {
             }
 
             override fun onCompleted() {
+
             }
 
             override fun onError(e: Throwable?) {
+
             }
         })
     }
 
-    */
-/**
-     * 获取7牛的token
-     *//*
-
+    /**
+     * 获取7牛的token*/
     fun getQiNiuToken() {
         addObaser(apiServer.base_get("niu_token"), object : Subscriber<String>() {
             override fun onNext(t: String?) {
@@ -121,7 +109,6 @@ class UserPresenter : BasePresenter {
     }
 
     fun otherGameList(type: String, uid: String, page: Int) {
-
         addObaser(apiServer.base_get("$type/$uid/${IConstant.GET_END}&page=$page"), object : Subscriber<String>() {
             override fun onNext(t: String?) {
                 callback?.otherGame(JSON.parseObject(t, GameListData::class.java))
@@ -137,4 +124,58 @@ class UserPresenter : BasePresenter {
         })
     }
 
-}*/
+    /**
+     * 获取用户的点评列表
+     */
+    fun shortCommentList(userId: String, type: Int, key: Int, page: Int, order: String) {
+        addObaser(apiServer.base_get("dynamic/$userId${IConstant.GET_END}&type=$type&key=$key&page=$page&order=$order"), object : Subscriber<String>() {
+            override fun onNext(t: String?) {
+                callback?.userWordList(JSON.parseObject(t, HomeUserShareData::class.java))
+            }
+
+            override fun onCompleted() {
+
+            }
+
+            override fun onError(e: Throwable?) {
+
+            }
+        })
+    }
+
+    /**
+     * 更新用户信息
+     */
+    fun updateUserInfo(map: Map<String, String>) {
+        addObaser(apiServer.base_post("updateinfo${IConstant.GET_END}", map), object : Subscriber<String>() {
+            override fun onNext(t: String?) {
+                callback?.updateInfo(JSON.parseObject(t, BaseRespData::class.java))
+            }
+
+            override fun onCompleted() {
+            }
+
+            override fun onError(e: Throwable?) {
+            }
+        })
+    }
+
+    /**
+     * 更新用户头像
+     */
+    fun updateAvatar(map: Map<String, String>) {
+
+        addObaser(apiServer.base_post("contribution${IConstant.GET_END}", map), object : Subscriber<String>() {
+            override fun onNext(t: String?) {
+
+            }
+
+            override fun onCompleted() {
+            }
+
+            override fun onError(e: Throwable?) {
+            }
+        })
+    }
+
+}

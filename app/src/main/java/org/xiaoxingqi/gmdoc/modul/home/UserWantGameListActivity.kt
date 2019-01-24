@@ -54,7 +54,7 @@ class UserWantGameListActivity : BaseActivity<UserPresenter>() {
                 helper.getView(R.id.tv_Edit).visibility = View.GONE
                 helper.getView(R.id.tv_Delete).visibility = /*if (mIsEdit) View.VISIBLE else */View.GONE
                 helper.getView(R.id.tv_Delete).setOnClickListener { v ->
-                        
+
                 }
             }
         }

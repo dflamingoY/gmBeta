@@ -15,6 +15,7 @@ import android.support.v4.app.ActivityCompat
 import android.support.v4.widget.DrawerLayout
 import android.text.TextUtils
 import android.view.Gravity
+import android.view.KeyEvent
 import android.view.View
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.GlideDrawableImageViewTarget
@@ -213,7 +214,9 @@ class MainActivity : BaseActivity<MainPresenter>() {
                     .putExtra("userId", infoData.data.uid))
         }
         relative_text.setOnClickListener {
-            startActivity(Intent(this, UserEditTextActivity::class.java))
+            val infoData = PreferenceTools.getObj(this, IConstant.USERINFO, UserInfoData::class.java)
+            startActivity(Intent(this, UserEditTextActivity::class.java)
+                    .putExtra("userId", infoData.data.uid))
         }
         relative_album.setOnClickListener {
             val infoData = PreferenceTools.getObj(this, IConstant.USERINFO, UserInfoData::class.java)
@@ -236,7 +239,7 @@ class MainActivity : BaseActivity<MainPresenter>() {
     }
 
     override fun request() {
-
+        
     }
 
     private fun switchFragment(type: TypeFragment) {
@@ -285,4 +288,14 @@ class MainActivity : BaseActivity<MainPresenter>() {
 
     }
 
+    override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            val intent = Intent(Intent.ACTION_MAIN)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK// 注意
+            intent.addCategory(Intent.CATEGORY_HOME)
+            this.startActivity(intent)
+            return true
+        }
+        return super.onKeyDown(keyCode, event)
+    }
 }

@@ -58,6 +58,10 @@ class CropRectActivity : BaseActivity<UserPresenter>() {
             private var result: String? = null
 
             override fun success() {
+                try {
+                    File(loadPath).delete()
+                } catch (e: Exception) {
+                }
                 val intent = Intent()
                 intent.putExtra("path", result)
                 setResult(RESULT_OK, intent)
