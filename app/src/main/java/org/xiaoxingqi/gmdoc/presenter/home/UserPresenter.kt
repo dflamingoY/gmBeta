@@ -4,6 +4,7 @@ import android.content.Context
 import com.alibaba.fastjson.JSON
 import org.xiaoxingqi.gmdoc.entity.BaseRespData
 import org.xiaoxingqi.gmdoc.entity.QINiuRespData
+import org.xiaoxingqi.gmdoc.entity.game.GameDetailsData
 import org.xiaoxingqi.gmdoc.entity.game.GameListData
 import org.xiaoxingqi.gmdoc.entity.home.HomeUserShareData
 import org.xiaoxingqi.gmdoc.entity.user.LoveGameData
@@ -167,7 +168,6 @@ class UserPresenter : BasePresenter {
 
         addObaser(apiServer.base_post("contribution${IConstant.GET_END}", map), object : Subscriber<String>() {
             override fun onNext(t: String?) {
-
             }
 
             override fun onCompleted() {
@@ -178,4 +178,21 @@ class UserPresenter : BasePresenter {
         })
     }
 
+    /**
+     * 获取用户的贡献图
+     */
+    fun getUserComtribute(gameId: String) {
+        addObaser(apiServer.base_get("propaganda/$gameId${IConstant.GET_END}&page=2"), object : Subscriber<String>() {
+            override fun onNext(t: String?) {
+                callback?.userContribute(JSON.parseObject(t, GameDetailsData::class.java))
+            }
+
+            override fun onCompleted() {
+            }
+
+            override fun onError(e: Throwable?) {
+            }
+        })
+
+    }
 }

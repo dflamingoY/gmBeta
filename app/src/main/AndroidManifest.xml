@@ -76,6 +76,8 @@
         <activity android:name=".modul.home.UserVisibleReaderActivity" />
         <activity android:name=".modul.home.EditUserInfoActivity" />
         <activity android:name=".modul.global.CropUserAvatarActivity" />
+        <activity android:name=".modul.game.ImageVideoListActivity" />
+        <activity android:name=".presenter.game.GameContributeActivity" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"

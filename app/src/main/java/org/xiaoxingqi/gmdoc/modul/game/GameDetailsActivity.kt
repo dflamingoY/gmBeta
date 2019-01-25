@@ -33,6 +33,7 @@ import org.xiaoxingqi.gmdoc.impl.game.GameDetailCallBack
 import org.xiaoxingqi.gmdoc.modul.global.WriteLongCommentActivity
 import org.xiaoxingqi.gmdoc.modul.global.WriteShortCommentActivity
 import org.xiaoxingqi.gmdoc.modul.home.UserHomeActivity
+import org.xiaoxingqi.gmdoc.presenter.game.GameContributeActivity
 import org.xiaoxingqi.gmdoc.presenter.game.GameDetailPersent
 import org.xiaoxingqi.gmdoc.tools.AppTools
 import org.xiaoxingqi.gmdoc.tools.FastBlur
@@ -223,7 +224,7 @@ class GameDetailsActivity : BaseActivity<GameDetailPersent>() {
                     val mTvCount = view.findViewById<TextView>(R.id.tv_AllCount)
                     mTvCount.text = "${data.all_pic_num}张"
                     headView.linear_img_Details.addView(view, params)
-//                    view.setOnClickListener { v -> startActivity(Intent(this@GameDetailsActivity, GameImgListActivity::class.java).putExtra("gameId", gameId)) }
+                    view.setOnClickListener { v -> startActivity(Intent(this@GameDetailsActivity, ImageVideoListActivity::class.java).putExtra("gameId", gameId)) }
                 }
                 loadArray[0] = 1
                 checkStatus()
@@ -491,6 +492,9 @@ class GameDetailsActivity : BaseActivity<GameDetailPersent>() {
         }
         headView.gameTabView.setOnItemClickListener {
 
+        }
+        headView.tv_Share_img.setOnClickListener {
+            startActivity(Intent(this, GameContributeActivity::class.java).putExtra("gameId", gameId))
         }
     }
 

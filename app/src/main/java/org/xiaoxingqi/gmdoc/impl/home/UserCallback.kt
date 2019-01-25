@@ -2,6 +2,7 @@ package org.xiaoxingqi.gmdoc.impl.home
 
 import org.xiaoxingqi.gmdoc.entity.BaseRespData
 import org.xiaoxingqi.gmdoc.entity.QINiuRespData
+import org.xiaoxingqi.gmdoc.entity.game.GameDetailsData
 import org.xiaoxingqi.gmdoc.entity.game.GameListData
 import org.xiaoxingqi.gmdoc.entity.home.HomeUserShareData
 import org.xiaoxingqi.gmdoc.entity.user.LoveGameData
@@ -48,4 +49,6 @@ open class UserCallback {
      */
     open fun updateInfo(data: BaseRespData) {}
 
+
+    open fun userContribute(data: GameDetailsData) {}
 }
