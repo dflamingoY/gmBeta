@@ -1,4 +1,4 @@
-package org.xiaoxingqi.gmdoc.presenter.game
+package org.xiaoxingqi.gmdoc.modul.game
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -10,13 +10,17 @@ import android.util.SparseArray
 import android.view.View
 import android.webkit.URLUtil
 import android.widget.EditText
+import com.alibaba.fastjson.JSONArray
+import com.alibaba.fastjson.JSONObject
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_contibute_photo.*
 import org.xiaoxingqi.gmdoc.R
+import org.xiaoxingqi.gmdoc.core.App
 import org.xiaoxingqi.gmdoc.core.BaseActivity
 import org.xiaoxingqi.gmdoc.core.adapter.BaseAdapterHelper
 import org.xiaoxingqi.gmdoc.core.adapter.QuickAdapter
 import org.xiaoxingqi.gmdoc.core.http.UpQiNiuManager
+import org.xiaoxingqi.gmdoc.entity.BaseRespData
 import org.xiaoxingqi.gmdoc.entity.BaseSimpleData
 import org.xiaoxingqi.gmdoc.entity.QINiuRespData
 import org.xiaoxingqi.gmdoc.entity.game.GameDetailsData
@@ -33,6 +37,9 @@ class GameContributeActivity : BaseActivity<UserPresenter>() {
     private lateinit var gameId: String
     private val mData by lazy { ArrayList<BaseSimpleData>() }
     private lateinit var adapter: QuickAdapter<BaseSimpleData>
+    private var upLoadData: ArrayList<BaseSimpleData>? = null
+    private val map by lazy { HashMap<String, String>() }
+
     override fun createPresent(): UserPresenter {
         return UserPresenter(this, object : UserCallback() {
             @SuppressLint("SetTextI18n")
@@ -61,10 +68,14 @@ class GameContributeActivity : BaseActivity<UserPresenter>() {
                     private var count = 0
                     override fun success() {
                         /**
-                         * 图片上传完成
+                         * 图片上传完成 整理数据 上传
                          */
-
-
+                        for (index in upLoadData!!.indices) {
+                            upLoadData!![index].pic = cache[index]
+                        }
+                        map["pic"] = sortData()
+                        transLayout.showProgress()
+                        persent?.addContribute(map)
                     }
 
                     override fun fail() {
@@ -75,6 +86,27 @@ class GameContributeActivity : BaseActivity<UserPresenter>() {
                         cache.put(count++, data.url + endTag)
                     }
                 }, *parseArrays()).next()
+            }
+
+            override fun addContributeSuccess(data: BaseRespData) {
+                transLayout.showContent()
+                if (mData.size > 0) {//
+                    map.clear()
+                    map["_token"] = App.s_Token!!
+                    map["type"] = "0"
+                    map["state"] = "1"
+                    map["title"] = "贡献图"
+                    map["editorValue"] = "贡献图"
+                    map["img"] = parsePush()
+                    transLayout.showProgress()
+                    persent?.pushDynamic(map)
+                } else {
+                    finish()
+                }
+            }
+
+            override fun pushSuccess(data: BaseRespData) {
+                finish()
             }
         })
     }
@@ -139,7 +171,9 @@ class GameContributeActivity : BaseActivity<UserPresenter>() {
         }
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = adapter
-        persent?.getUserComtribute(gameId)
+        persent?.getUserContribute(gameId)
+        map["_token"] = App.s_Token!!
+        map["game_id"] = gameId
     }
 
     override fun initEvent() {
@@ -154,12 +188,53 @@ class GameContributeActivity : BaseActivity<UserPresenter>() {
         }
     }
 
+    /**
+     * 获取上传的数据
+     */
     private fun parseArrays(): Array<String?> {
-        val ofNulls = arrayOfNulls<String>(mData.size)
+        if (null == upLoadData) {
+            upLoadData = ArrayList()
+        }
+        val data = ArrayList<BaseSimpleData>()
         for (index in mData.indices) {
-            ofNulls[index] = mData[index].pic
+            if (URLUtil.isValidUrl(mData[index].pic)) {
+                data.add(mData[index])
+            }
+        }
+        val ofNulls = arrayOfNulls<String>(upLoadData!!.size)
+        for (index in upLoadData!!.indices) {
+            ofNulls[index] = upLoadData!![index].pic
         }
         return ofNulls
+    }
+
+    /**
+     * 整理上传的数据
+     */
+    private fun sortData(): String {
+        val arrays = JSONArray()
+        for (bean in mData) {
+            val json = JSONObject()
+            json["pic"] = bean.pic
+            json["title"] = bean.title
+            arrays.add(json)
+        }
+        return arrays.toJSONString()
+    }
+
+    /**
+     * 整理发布的数据
+     */
+    private fun parsePush(): String {
+        val arrays = JSONArray()
+        for (bean in mData) {
+            val json = JSONObject()
+            json["url"] = bean.pic
+            json["time"] = System.currentTimeMillis().toString()
+            json["spoiler"] = "0"
+            arrays.add(json)
+        }
+        return arrays.toJSONString()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

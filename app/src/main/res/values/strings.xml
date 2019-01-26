@@ -2,4 +2,5 @@
     <string name="app_name">GmBeta</string>
     <string name="string_all_game_count"><Data><![CDATA[全部28个机种的游戏可以在<font color="#ff7a31" >游戏库</font>中浏览 ]]></Data></string>
     <string name="text_attle_count"><Data><![CDATA[当前还可以上传  <font color="#ff7a31" >%1$s</font> 张 ]]></Data></string>
+    <string name="string_at_me">\@我的</string>
 </resources>

@@ -110,7 +110,7 @@ public abstract class BaseQuickAdapter<T, H extends BaseAdapterHelper> extends R
         if (data.size() == 0) {
             return position == mHeadViewCount + data.size();
         }
-        return position == data.size() + 1;
+        return position == data.size() + mHeadViewCount;
     }
 
     public boolean isHeader(int position) {
@@ -144,6 +144,11 @@ public abstract class BaseQuickAdapter<T, H extends BaseAdapterHelper> extends R
         this.context = context;
         this.layoutResId = layoutResId;
         mFootView = footView;
+        if (null != mFootView) {
+            mFootViewCount = 1;
+            isHaveFoot = true;
+        }
+
         if (headView != null) {
             this.mHeadView = headView;
             setIsHaveHeadView(true);

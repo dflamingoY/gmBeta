@@ -33,7 +33,6 @@ import org.xiaoxingqi.gmdoc.impl.game.GameDetailCallBack
 import org.xiaoxingqi.gmdoc.modul.global.WriteLongCommentActivity
 import org.xiaoxingqi.gmdoc.modul.global.WriteShortCommentActivity
 import org.xiaoxingqi.gmdoc.modul.home.UserHomeActivity
-import org.xiaoxingqi.gmdoc.presenter.game.GameContributeActivity
 import org.xiaoxingqi.gmdoc.presenter.game.GameDetailPersent
 import org.xiaoxingqi.gmdoc.tools.AppTools
 import org.xiaoxingqi.gmdoc.tools.FastBlur
@@ -213,11 +212,11 @@ class GameDetailsActivity : BaseActivity<GameDetailPersent>() {
                     iv.setImageResource(R.drawable.btn_post_pic)
                     headView.linear_img_Details.addView(iv, params)
                     iv.setOnClickListener { v ->
-                        /*if (AppTools.isLogin(this)) {
-                            startActivity(Intent(this, Act_AddShare::class.java).putExtra("gameId", mGameId))
+                        if (AppTools.isLogin(this@GameDetailsActivity)) {
+                            startActivity(Intent(this@GameDetailsActivity, ContributeDetailsActivity::class.java).putExtra("gameId", gameId))
                         } else {
-                            AppTools.startAct(this)
-                        }*/
+                            AppTools.login(this@GameDetailsActivity)
+                        }
                     }
                 } else {
                     val view = View.inflate(this@GameDetailsActivity, R.layout.layout_game_desc_find_all, null)
@@ -255,7 +254,7 @@ class GameDetailsActivity : BaseActivity<GameDetailPersent>() {
         }
         Handler().postDelayed({
             transLayout.showContent()
-        }, 1000)
+        }, 500)
     }
 
     override fun setContent() {

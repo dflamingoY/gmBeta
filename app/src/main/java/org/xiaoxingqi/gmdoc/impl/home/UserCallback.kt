@@ -49,6 +49,19 @@ open class UserCallback {
      */
     open fun updateInfo(data: BaseRespData) {}
 
-
+    /**
+     * 获取用户的贡献图
+     */
     open fun userContribute(data: GameDetailsData) {}
+
+    /**
+     * 贡献图发布成功
+     */
+    open fun addContributeSuccess(data: BaseRespData) {}
+
+    /**
+     *发布动态
+     */
+    open fun pushSuccess(data: BaseRespData) {}
+
 }

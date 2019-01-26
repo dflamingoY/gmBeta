@@ -181,7 +181,7 @@ class UserPresenter : BasePresenter {
     /**
      * 获取用户的贡献图
      */
-    fun getUserComtribute(gameId: String) {
+    fun getUserContribute(gameId: String) {
         addObaser(apiServer.base_get("propaganda/$gameId${IConstant.GET_END}&page=2"), object : Subscriber<String>() {
             override fun onNext(t: String?) {
                 callback?.userContribute(JSON.parseObject(t, GameDetailsData::class.java))
@@ -193,6 +193,42 @@ class UserPresenter : BasePresenter {
             override fun onError(e: Throwable?) {
             }
         })
-
     }
+
+    /**
+     * 添加贡献图
+     */
+    fun addContribute(map: Map<String, String>) {
+        addObaser(apiServer.base_post("contribution${IConstant.GET_END}", map), object : Subscriber<String>() {
+            override fun onNext(t: String?) {
+                callback?.addContributeSuccess(JSON.parseObject(t, BaseRespData::class.java))
+            }
+
+            override fun onCompleted() {
+            }
+
+            override fun onError(e: Throwable?) {
+            }
+        })
+    }
+
+    /**
+     * 发布
+     */
+    fun pushDynamic(map: Map<String, String>) {
+        addObaser(apiServer.base_post("send/${IConstant.GET_END}", map), object : Subscriber<String>() {
+            override fun onNext(t: String?) {
+                callback?.pushSuccess(JSON.parseObject(t, BaseRespData::class.java))
+            }
+
+            override fun onCompleted() {
+
+            }
+
+            override fun onError(e: Throwable?) {
+
+            }
+        })
+    }
+
 }

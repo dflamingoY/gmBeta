@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<org.xiaoxingqi.gmdoc.wegidt.TransLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/transLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:defaultState="content"
+    app:emptyLayout="@layout/view_empty"
+    app:offlineLayout="@layout/view_offline"
+    app:progressLayout="@layout/view_progress">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <android.support.design.widget.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:background="@color/color_white">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="24dp">
+
+                <ImageView
+                    android:id="@+id/viewBack"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_centerVertical="true"
+                    android:src="@mipmap/btn_back_grey" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="10dp"
+                    android:includeFontPadding="false"
+                    android:text="聊天"
+                    android:textColor="#1a191a"
+                    android:textSize="18sp"
+                    android:textStyle="normal" />
+
+                <TextView
+                    android:id="@+id/tv_FromUser"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="10dp"
+                    android:ems="20"
+                    android:fontFamily="sans-serif"
+                    android:gravity="center_horizontal"
+                    android:includeFontPadding="false"
+                    android:singleLine="true"
+                    android:textColor="#1a191a"
+                    android:textSize="10sp"
+                    android:textStyle="normal" />
+
+                <ImageView
+                    android:id="@+id/iv_menu"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="14dp"
+                    android:src="@mipmap/btn_home_more" />
+            </RelativeLayout>
+        </android.support.design.widget.AppBarLayout>
+
+
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/swipeRefresh"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerContent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#F0F0F0" />
+
+        </android.support.v4.widget.SwipeRefreshLayout>
+
+        <LinearLayout
+            android:id="@+id/menu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="bottom"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/color_white"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/iv_Photo"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="13dp"
+                    android:layout_marginBottom="17dp"
+                    android:src="@mipmap/btn_edit_pic" />
+
+                <ImageView
+
+                    android:id="@+id/iv_Gif"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginTop="13dp"
+                    android:layout_toRightOf="@+id/iv_Photo"
+                    android:src="@mipmap/btn_edit_emoji" />
+
+                <EditText
+                    android:id="@+id/et_Content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_toLeftOf="@+id/tv_Send"
+                    android:layout_toRightOf="@+id/iv_Gif"
+                    android:background="@drawable/shape_stoken_round_grey_bg"
+                    android:maxLines="5"
+                    android:minHeight="39dp"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp"
+                    android:textColor="#282828"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/tv_Send"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="18dp"
+                    android:gravity="center"
+                    android:paddingLeft="14dp"
+                    android:paddingRight="14dp"
+                    android:text="发送"
+                    android:textColor="@color/color_shallow_yellow"
+                    android:textSize="14sp" />
+
+            </RelativeLayout>
+
+            <org.xiaoxingqi.gmdoc.wegidt.emoji.EmojiLayoutView
+                android:id="@+id/emojiView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+</org.xiaoxingqi.gmdoc.wegidt.TransLayout>

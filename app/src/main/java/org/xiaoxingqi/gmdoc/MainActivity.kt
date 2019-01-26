@@ -31,6 +31,7 @@ import org.xiaoxingqi.gmdoc.modul.global.WriteDynamicActivity
 import org.xiaoxingqi.gmdoc.modul.home.*
 import org.xiaoxingqi.gmdoc.modul.lifeCircle.LifCircleFragment
 import org.xiaoxingqi.gmdoc.modul.login.LoginActivity
+import org.xiaoxingqi.gmdoc.modul.message.MsgFragment
 import org.xiaoxingqi.gmdoc.onEvent.LoginEvent
 import org.xiaoxingqi.gmdoc.presenter.MainPresenter
 import org.xiaoxingqi.gmdoc.tools.AppTools
@@ -127,7 +128,7 @@ class MainActivity : BaseActivity<MainPresenter>() {
     private val homeFrag = HomeFragment()
     private val gameFrag = GameFragment()
     val lifeCircle = LifCircleFragment()
-    //    val msgFrag = MsgFragment()
+    val msgFrag = MsgFragment()
     private var currentFrag: Fragment? = null
 
     override fun setContent() {
@@ -239,7 +240,7 @@ class MainActivity : BaseActivity<MainPresenter>() {
     }
 
     override fun request() {
-        
+
     }
 
     private fun switchFragment(type: TypeFragment) {
@@ -252,8 +253,8 @@ class MainActivity : BaseActivity<MainPresenter>() {
                 currentFrag = gameFrag
             TypeFragment.Listen ->
                 currentFrag = lifeCircle
-//            TypeCircleFragment.Me ->
-//                currentFrag = msgFrag
+            TypeFragment.Me ->
+                currentFrag = msgFrag
             else -> {
 
             }

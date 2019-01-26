@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:background="@color/color_white"
+        android:gravity="center_vertical"
+        android:paddingLeft="15dp"
+        android:text="消息分类"
+        android:textColor="#282828"
+        android:textSize="14sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/color_gray_division" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/color_gray_division"
+        android:orientation="horizontal"
+        android:weightSum="4">
+
+        <org.xiaoxingqi.gmdoc.wegidt.SqureRelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/color_white">
+
+            <org.xiaoxingqi.gmdoc.wegidt.ViewMsgShortType
+                android:id="@+id/msg_newFans"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:title_img="@mipmap/news_fans"
+                app:title_name="新的读者" />
+
+
+        </org.xiaoxingqi.gmdoc.wegidt.SqureRelativeLayout>
+
+        <org.xiaoxingqi.gmdoc.wegidt.SqureRelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="1dp"
+            android:layout_weight="1"
+            android:background="@color/color_white">
+
+            <org.xiaoxingqi.gmdoc.wegidt.ViewMsgShortType
+                android:id="@+id/msg_walletHint"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:title_img="@mipmap/news_wallet"
+                app:title_name="钱包提醒" />
+
+        </org.xiaoxingqi.gmdoc.wegidt.SqureRelativeLayout>
+
+
+        <org.xiaoxingqi.gmdoc.wegidt.SqureRelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="1dp"
+            android:layout_weight="1"
+            android:background="@color/color_white">
+
+            <org.xiaoxingqi.gmdoc.wegidt.ViewMsgShortType
+                android:id="@+id/msg_at_me"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:title_img="@mipmap/news_at"
+                app:title_name="\@我的" />
+        </org.xiaoxingqi.gmdoc.wegidt.SqureRelativeLayout>
+
+        <org.xiaoxingqi.gmdoc.wegidt.SqureRelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="1dp"
+
+            android:layout_weight="1"
+            android:background="@color/color_white">
+
+            <org.xiaoxingqi.gmdoc.wegidt.ViewMsgShortType
+                android:id="@+id/msg_comment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:title_img="@mipmap/news_comment"
+                app:title_name="收到的评论" />
+        </org.xiaoxingqi.gmdoc.wegidt.SqureRelativeLayout>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/color_gray_division" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/color_gray_division"
+        android:orientation="horizontal"
+        android:weightSum="4">
+
+        <org.xiaoxingqi.gmdoc.wegidt.SqureRelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/color_white">
+
+            <org.xiaoxingqi.gmdoc.wegidt.ViewMsgShortType
+                android:id="@+id/msg_thumb"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:title_img="@mipmap/news_thumb"
+                app:title_name="收到的赞" />
+        </org.xiaoxingqi.gmdoc.wegidt.SqureRelativeLayout>
+
+        <org.xiaoxingqi.gmdoc.wegidt.SqureRelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="1dp"
+            android:layout_weight="1"
+            android:background="@color/color_white">
+
+            <org.xiaoxingqi.gmdoc.wegidt.ViewMsgShortType
+                android:id="@+id/msg_score"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:title_img="@mipmap/news_invitation"
+                app:title_name="评分邀请" />
+        </org.xiaoxingqi.gmdoc.wegidt.SqureRelativeLayout>
+
+
+        <org.xiaoxingqi.gmdoc.wegidt.SqureRelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="1dp"
+            android:layout_weight="1"
+            android:background="@color/color_white">
+
+            <org.xiaoxingqi.gmdoc.wegidt.ViewMsgShortType
+                android:id="@+id/msg_system"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:title_img="@mipmap/news_quest"
+                app:title_name="支线任务" />
+
+        </org.xiaoxingqi.gmdoc.wegidt.SqureRelativeLayout>
+
+        <org.xiaoxingqi.gmdoc.wegidt.SqureRelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="1dp"
+            android:layout_weight="1"
+            android:background="@color/color_white">
+
+            <org.xiaoxingqi.gmdoc.wegidt.ViewMsgShortType
+                android:id="@+id/msg_summary"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:title_img="@mipmap/btn_news_weekly"
+                app:title_name="一周总结" />
+
+
+        </org.xiaoxingqi.gmdoc.wegidt.SqureRelativeLayout>
+    </LinearLayout>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/color_gray_division" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:background="@color/color_white"
+        android:gravity="center_vertical"
+        android:paddingLeft="15dp"
+        android:text="近期消息"
+        android:textColor="#282828"
+        android:textSize="14sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/color_gray_division" />
+
+
+
+</LinearLayout>
