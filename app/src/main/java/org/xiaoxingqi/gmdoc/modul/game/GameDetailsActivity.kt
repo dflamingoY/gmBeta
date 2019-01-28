@@ -287,7 +287,7 @@ class GameDetailsActivity : BaseActivity<GameDetailPersent>() {
                         .load(item!!.avatar)
                         .override(80, 80)
                         .into(helper!!.getImageView(R.id.iv_UserLogo))
-                helper.getTextView(R.id.tv_CreateTime).text = TimeUtils.getInstance().paserTime(item.created_at)
+                helper.getTextView(R.id.tv_CreateTime).text = TimeUtils.getInstance().parseTime(item.created_at)
                 helper.getTextView(R.id.tv_UserName).text = item.username
                 helper.getTextView(R.id.tv_loveGame).text = "(${item.like_game.split(" ")[0]})"
                 val container = helper.getView(R.id.frameContainer) as FrameLayout

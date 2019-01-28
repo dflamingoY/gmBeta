@@ -54,7 +54,7 @@ class UserShortListActivity : BaseActivity<UserPresenter>() {
                 val scoreView = helper!!.getView(R.id.roundScore) as RoundScoreView
                 scoreView.setScore(item!!.game.score.toFloat())
                 helper.getTextView(R.id.tv_GameName).text = item.game.game_name + " | " + item.game.game_pla + item.game.game_ver
-                helper.getTextView(R.id.tv_stateInfo).text = "${item.like_num}赞 · " + item.forward_num + "转发 · " + TimeUtils.getInstance().paserTime(item.created_at)
+                helper.getTextView(R.id.tv_stateInfo).text = "${item.like_num}赞 · " + item.forward_num + "转发 · " + TimeUtils.getInstance().parseTime(item.created_at)
                 if (isEdit) {
                     helper.getView(R.id.tv_Edit).visibility = View.VISIBLE
                     helper.getView(R.id.tv_Delete).visibility = View.VISIBLE

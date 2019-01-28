@@ -146,7 +146,7 @@ class HomeCircleFragment : BaseFrag<TypeFragPresenter>() {
                         .load(item!!.avatar)
                         .override(80, 80)
                         .into(helper!!.getImageView(R.id.iv_UserLogo))
-                helper.getTextView(R.id.tv_CreateTime).text = TimeUtils.getInstance().paserTime(item.created_at)
+                helper.getTextView(R.id.tv_CreateTime).text = TimeUtils.getInstance().parseTime(item.created_at)
                 helper.getTextView(R.id.tv_UserName).text = item.username
                 helper.getTextView(R.id.tv_loveGame).text = "(${item.like_game.split(" ")[0]})"
                 helper.getImageView(R.id.iv_Flag).visibility = if (item.is_ori == 0) View.GONE else View.VISIBLE

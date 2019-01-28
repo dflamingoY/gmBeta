@@ -48,7 +48,7 @@ class GameLongCommentView(context: Context) : BaseLayout(context) {
             tv_CreateTime.text = bean.version + " | " + bean.platform_id
             iv_Flag.visibility = GONE
         } else {
-            tv_CreateTime.text = TimeUtils.getInstance().paserTime(bean.created_at)
+            tv_CreateTime.text = TimeUtils.getInstance().parseTime(bean.created_at)
             iv_Flag.visibility = VISIBLE
         }
         tv_Title.text = bean.self_title

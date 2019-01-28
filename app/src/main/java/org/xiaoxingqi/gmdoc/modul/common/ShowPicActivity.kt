@@ -40,9 +40,12 @@ class ShowPicActivity : BaseAct() {
     }
 
     override fun initData() {
-        val imgs = intent.getSerializableExtra("imgs") as ArrayList<BaseImgBean>
+        var imgs = intent.getSerializableExtra("imgs")?.let { it as ArrayList<BaseImgBean> }
         val index = intent.getIntExtra("index", 0)
-        mData.addAll(imgs)
+        intent.getStringExtra("path")?.let {
+            mData.add(BaseImgBean(it))
+        }
+        imgs?.let { mData.addAll(it) }
         viewPager.adapter = ImgAdapter()
         viewPager.setCurrentItem(index, false)
     }
@@ -124,6 +127,9 @@ class ShowPicActivity : BaseAct() {
                 }).show()
                 false
             }
+            ivPic.setOnClickListener {
+                finish()
+            }
             return view
         }
 
@@ -185,8 +191,6 @@ class ShowPicActivity : BaseAct() {
                 }
             }
         }.execute()
-
-
     }
 
 

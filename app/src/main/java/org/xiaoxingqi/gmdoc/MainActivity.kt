@@ -14,16 +14,20 @@ import android.os.Build
 import android.support.v4.app.ActivityCompat
 import android.support.v4.widget.DrawerLayout
 import android.text.TextUtils
+import android.util.Log
 import android.view.Gravity
 import android.view.KeyEvent
 import android.view.View
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.GlideDrawableImageViewTarget
+import okhttp3.WebSocket
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 import org.xiaoxingqi.gmdoc.core.BaseActivity
 import org.xiaoxingqi.gmdoc.entity.BaseRespData
 import org.xiaoxingqi.gmdoc.entity.user.UserInfoData
+import org.xiaoxingqi.gmdoc.eventbus.SocketEvent
+import org.xiaoxingqi.gmdoc.eventbus.SocketOffline
 import org.xiaoxingqi.gmdoc.impl.IConstant
 import org.xiaoxingqi.gmdoc.impl.MainCallBack
 import org.xiaoxingqi.gmdoc.modul.game.GameFragment
@@ -37,9 +41,10 @@ import org.xiaoxingqi.gmdoc.presenter.MainPresenter
 import org.xiaoxingqi.gmdoc.tools.AppTools
 import org.xiaoxingqi.gmdoc.tools.PreferenceTools
 import org.xiaoxingqi.gmdoc.tools.SPUtils
+import org.xiaoxingqi.gmdoc.tools.SocketUtils
 
 class MainActivity : BaseActivity<MainPresenter>() {
-
+    private var socket: WebSocket? = null
     private val map by lazy { HashMap<String, String>() }
     private val REQUEST_PERMISSION = 0x01
 
@@ -100,8 +105,8 @@ class MainActivity : BaseActivity<MainPresenter>() {
                     } else {
                         tv_UserFans.text = "未知 读者"
                     }
+                    socket = SocketUtils.initSocket()
 //                    updateFrag()
-
                     if (TextUtils.isEmpty(it.data.like_game) || TextUtils.isEmpty(it.data.username)) {
 //                        startActivity(Intent(this@MainActivity, PerfectInfoActivity::class.java))
                     } else {
@@ -286,7 +291,6 @@ class MainActivity : BaseActivity<MainPresenter>() {
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-
     }
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {
@@ -298,5 +302,20 @@ class MainActivity : BaseActivity<MainPresenter>() {
             return true
         }
         return super.onKeyDown(keyCode, event)
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun socketEvent(event: SocketEvent) {
+        Log.d("Mozator", event.msg)
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun offline(event: SocketOffline) {
+        /**
+         * 断线重连
+         */
+        socket?.let {
+            socket = null
+        }
     }
 }

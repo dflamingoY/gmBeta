@@ -64,7 +64,7 @@ class MsgFragment : BaseFrag<MessagePresenter>() {
                 } else {
 //                    (helper.getTextView(R.id.tv_content) as EmojiTextView).setDataText(activity.getAssets(), item.getMsg().getContent())
                 }
-                helper.getTextView(R.id.tv_Time).text = TimeUtils.getInstance().paserTime(item.msg.created_at)
+                helper.getTextView(R.id.tv_Time).text = TimeUtils.getInstance().parseTime(item.msg.created_at)
             }
         }
         recyclerView.adapter = adapter
@@ -79,6 +79,8 @@ class MsgFragment : BaseFrag<MessagePresenter>() {
                     .putExtra("name", mData[position].name)
             )
         }
+
+
     }
 
     override fun request(flag: Int) {

@@ -9,7 +9,6 @@ import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.helper.ItemTouchHelper
 import android.text.*
-import android.util.Log
 import android.view.KeyEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
@@ -357,7 +356,7 @@ class WriteDynamicActivity : BaseActivity<WriteDynamicPresenter>() {
             override fun oneFinish(endTag: String?, position: Int) {
                 val `object` = JSONObject()
                 `object`["url"] = data.url + endTag
-                `object`["time"] = TimeUtils.getInstance().paserLong(System.currentTimeMillis())
+                `object`["time"] = TimeUtils.getInstance().parseLong(System.currentTimeMillis())
                 `object`["spoiler"] = if (imgData[imgData.size - 1 - position].isSelected) 1 else 0
                 mJSONArray.add(`object`)
             }

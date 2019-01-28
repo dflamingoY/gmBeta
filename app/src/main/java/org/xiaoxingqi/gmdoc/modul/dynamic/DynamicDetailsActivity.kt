@@ -55,7 +55,7 @@ class DynamicDetailsActivity : BaseActivity<DynamicDetailsPresenter>() {
                     headView.tv_Private.visibility = if (mBean!!.power == 3) View.VISIBLE else View.GONE
                     headView.tv_UserName.text = mBean!!.username
                     headView.tv_loveGame.text = "(" + mBean!!.like_game.split(" ")[0] + ")"
-                    headView.tv_loveGame.text = TimeUtils.getInstance().paserTime(mBean!!.created_at)
+                    headView.tv_loveGame.text = TimeUtils.getInstance().parseTime(mBean!!.created_at)
                     if (!TextUtils.isEmpty(mBean!!.ranking)) {
                         headView.iv_Flag.setImageResource(if ("1" == mBean!!.ranking) R.mipmap.img_1st else if ("2" == mBean!!.ranking) R.mipmap.img_2nd else if ("3" == mBean!!.ranking) R.mipmap.img_3rd else 0)
                     } else {

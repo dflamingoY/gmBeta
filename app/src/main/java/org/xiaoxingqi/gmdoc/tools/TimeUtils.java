@@ -26,12 +26,12 @@ public class TimeUtils {
         return sTimeUtils;
     }
 
-    public String paserLong(long time) {
+    public String parseLong(long time) {
         Date date = new Date(time);
         return sdf.format(date);
     }
 
-    public long paserString(String time) {
+    public long parseString(String time) {
         try {
             Date date = sdf.parse(time);
             return date.getTime();
@@ -47,7 +47,7 @@ public class TimeUtils {
      * @param time
      * @return
      */
-    public String paserTime(String time) {
+    public String parseTime(String time) {
         try {
             int today = IsToday(time);
             if (today == 0) {

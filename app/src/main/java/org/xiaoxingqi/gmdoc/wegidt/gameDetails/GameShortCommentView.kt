@@ -49,7 +49,7 @@ class GameShortCommentView(context: Context) : BaseLayout(context) {
             tv_CreateTim.text = bean.version + " | " + bean.platform_id
             iv_Flag.visibility = GONE
         } else {
-            tv_CreateTim.text = TimeUtils.getInstance().paserTime(bean.created_at)
+            tv_CreateTim.text = TimeUtils.getInstance().parseTime(bean.created_at)
             iv_Flag.visibility = VISIBLE
         }
         if (bean.ranking <= 3) {

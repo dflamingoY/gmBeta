@@ -86,7 +86,7 @@ class UserWalletActivity : BaseActivity<UserPresenter>() {
                 } else if ("balance_pay" == item.pay_type) {
                     helper!!.getTextView(R.id.tv_pay_Type).text = "余额支付"
                 }
-                helper!!.getTextView(R.id.tv_TIme).text = TimeUtils.getInstance().paserTime(item.created_at)
+                helper!!.getTextView(R.id.tv_TIme).text = TimeUtils.getInstance().parseTime(item.created_at)
                 val result: String
                 if (type == 1) {//支出
                     result = item.username + " 的" + typeName + " " + title

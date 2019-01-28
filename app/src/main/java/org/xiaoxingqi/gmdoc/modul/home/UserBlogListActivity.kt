@@ -51,7 +51,7 @@ class UserBlogListActivity : BaseActivity<UserPresenter>() {
             @SuppressLint("SetTextI18n")
             override fun convert(helper: BaseAdapterHelper?, item: HomeUserShareData.ContributeBean?) {
                 helper!!.getTextView(R.id.tv_GameName).text = item!!.title
-                helper.getTextView(R.id.tv_stateInfo).text = "${item.like_num}赞 · " + item.forward_num + "转发 · " + TimeUtils.getInstance().paserTime(item.created_at)
+                helper.getTextView(R.id.tv_stateInfo).text = "${item.like_num}赞 · " + item.forward_num + "转发 · " + TimeUtils.getInstance().parseTime(item.created_at)
                 if (isEdit) {
                     helper.getTextView(R.id.tv_Delete).visibility = View.VISIBLE
                     helper.getTextView(R.id.tv_Edit).visibility = View.VISIBLE
