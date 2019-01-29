@@ -2,6 +2,7 @@ package org.xiaoxingqi.gmdoc.presenter.msg
 
 import android.content.Context
 import com.alibaba.fastjson.JSON
+import org.xiaoxingqi.gmdoc.entity.msg.MsgCommentData
 import org.xiaoxingqi.gmdoc.entity.msg.MsgDetailsData
 import org.xiaoxingqi.gmdoc.entity.msg.MsgInfoListData
 import org.xiaoxingqi.gmdoc.impl.IConstant
@@ -45,6 +46,25 @@ class MessagePresenter : BasePresenter {
 
             override fun onError(e: Throwable?) {
 
+            }
+        })
+    }
+
+    /**
+     * 发送消息
+     */
+    fun sendMsg(map: Map<String, String>) {
+        addObaser(apiServer.base_post("send_msg/${IConstant.GET_END}", map), object : Subscriber<String>() {
+            override fun onNext(t: String?) {
+                callback?.sendSuccess(JSON.parseObject(t, MsgCommentData::class.java))
+            }
+
+            override fun onCompleted() {
+
+            }
+
+            override fun onError(e: Throwable?) {
+                callback?.onError(e)
             }
         })
     }

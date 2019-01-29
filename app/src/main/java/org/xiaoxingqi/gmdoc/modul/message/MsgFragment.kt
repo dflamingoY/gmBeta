@@ -16,6 +16,7 @@ import org.xiaoxingqi.gmdoc.entity.msg.MsgInfoListData
 import org.xiaoxingqi.gmdoc.impl.msg.MessageCallback
 import org.xiaoxingqi.gmdoc.presenter.msg.MessagePresenter
 import org.xiaoxingqi.gmdoc.tools.TimeUtils
+import org.xiaoxingqi.gmdoc.wegidt.textView.EmojiTextView
 
 /**
  * 消息
@@ -60,9 +61,9 @@ class MsgFragment : BaseFrag<MessagePresenter>() {
                 helper.getView(R.id.viewUnRead).visibility = if (item.unread == 0) View.GONE else View.VISIBLE
                 helper.getTextView(R.id.tv_name).text = item.name
                 if (item.msg.is_pic == 1) {
-//                    helper.getTextView(R.id.tv_content).text = "[图片]"
+                    helper.getTextView(R.id.tv_content).text = "[图片]"
                 } else {
-//                    (helper.getTextView(R.id.tv_content) as EmojiTextView).setDataText(activity.getAssets(), item.getMsg().getContent())
+                    (helper.getTextView(R.id.tv_content) as EmojiTextView).setDataText(activity!!.assets, item.msg.content)
                 }
                 helper.getTextView(R.id.tv_Time).text = TimeUtils.getInstance().parseTime(item.msg.created_at)
             }
@@ -79,8 +80,6 @@ class MsgFragment : BaseFrag<MessagePresenter>() {
                     .putExtra("name", mData[position].name)
             )
         }
-
-
     }
 
     override fun request(flag: Int) {

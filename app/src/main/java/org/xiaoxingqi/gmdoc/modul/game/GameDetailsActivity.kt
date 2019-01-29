@@ -376,15 +376,23 @@ class GameDetailsActivity : BaseActivity<GameDetailPersent>() {
             val indexOfChild = commentTitle.indexOfChild(it)
             when (indexOfChild) {
                 0 -> {
-
+                    map["is_sub"] = "1"
+                    persent?.getComment(map, gameId)
                     true
                 }
                 1 -> {
-
-                    true
+                    if (AppTools.isLogin(this)) {
+                        map["is_sub"] = "2"
+                        persent?.getComment(map, gameId)
+                        false
+                    } else {
+                        AppTools.login(this)
+                        true
+                    }
                 }
                 2 -> {
-
+                    map["is_sub"] = "3"
+                    persent?.getComment(map, gameId)
                     true
                 }
                 else -> {
@@ -396,12 +404,15 @@ class GameDetailsActivity : BaseActivity<GameDetailPersent>() {
             val indexOfChild = headView.tabCommentTitle.indexOfChild(it)
             when (indexOfChild) {
                 0 -> {
+
                     true
                 }
                 1 -> {
+
                     true
                 }
                 2 -> {
+
                     true
                 }
                 else -> {

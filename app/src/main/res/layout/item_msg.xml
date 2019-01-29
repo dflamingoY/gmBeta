@@ -35,22 +35,20 @@
         android:textSize="14sp"
         android:textStyle="bold" />
 
-    <!--
-        <org.xiaoxingqi.gmdoc.wegidt.textView.EmojiTextView
-            android:id="@+id/tv_content"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/tv_name"
-            android:layout_alignBottom="@+id/cardLogo"
-            android:layout_marginLeft="3dp"
-            android:ellipsize="end"
-            android:includeFontPadding="false"
-            android:lineSpacingExtra="2sp"
-            android:maxEms="15"
-            android:singleLine="true"
-            android:textColor="#888888"
-            android:textSize="12sp" />
-    -->
+    <org.xiaoxingqi.gmdoc.wegidt.textView.EmojiTextView
+        android:id="@+id/tv_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tv_name"
+        android:layout_alignBottom="@+id/cardLogo"
+        android:layout_marginLeft="3dp"
+        android:ellipsize="end"
+        android:includeFontPadding="false"
+        android:lineSpacingExtra="2sp"
+        android:maxEms="15"
+        android:singleLine="true"
+        android:textColor="#888888"
+        android:textSize="12sp" />
 
     <TextView
         android:id="@+id/tv_Time"

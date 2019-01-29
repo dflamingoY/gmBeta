@@ -3,7 +3,7 @@ package org.xiaoxingqi.gmdoc.impl;
 /**
  *
  */
-public interface BaseIntercepter {
+public interface BaseInterceptor {
 
     void onError(Object obj);
 

@@ -1,7 +1,10 @@
 package org.xiaoxingqi.gmdoc.tools;
 
+import android.util.Log;
+
 import org.greenrobot.eventbus.EventBus;
 import org.xiaoxingqi.gmdoc.eventbus.SocketEvent;
+import org.xiaoxingqi.gmdoc.eventbus.SocketOffline;
 import org.xiaoxingqi.gmdoc.impl.IConstant;
 
 import okhttp3.OkHttpClient;
@@ -32,11 +35,14 @@ public class SocketUtils {
             @Override
             public void onMessage(WebSocket webSocket, String text) {
                 super.onMessage(webSocket, text);
+                Log.d("Mozator", text);
                 EventBus.getDefault().post(new SocketEvent(text));
             }
 
             @Override
             public void onMessage(WebSocket webSocket, ByteString bytes) {
+                Log.d("Mozator", bytes.toString());
+
                 super.onMessage(webSocket, bytes);
             }
 
@@ -56,7 +62,7 @@ public class SocketUtils {
                 /**
                  * 断线重连
                  */
-                //                EventBus.getDefault().post();
+                EventBus.getDefault().post(new SocketOffline());
             }
         });
         webSocket.request();
