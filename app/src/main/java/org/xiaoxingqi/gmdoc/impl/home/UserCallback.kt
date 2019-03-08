@@ -5,6 +5,7 @@ import org.xiaoxingqi.gmdoc.entity.QINiuRespData
 import org.xiaoxingqi.gmdoc.entity.game.GameDetailsData
 import org.xiaoxingqi.gmdoc.entity.game.GameListData
 import org.xiaoxingqi.gmdoc.entity.home.HomeUserShareData
+import org.xiaoxingqi.gmdoc.entity.user.FollowData
 import org.xiaoxingqi.gmdoc.entity.user.LoveGameData
 import org.xiaoxingqi.gmdoc.entity.user.UserContentPhotoData
 
@@ -64,4 +65,10 @@ open class UserCallback {
      */
     open fun pushSuccess(data: BaseRespData) {}
 
+    /**
+     * 获取关注的列表
+     */
+    open fun loveList(data: FollowData) {
+
+    }
 }

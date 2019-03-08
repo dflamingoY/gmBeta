@@ -80,6 +80,7 @@
         <activity android:name=".modul.game.GameContributeActivity" />
         <activity android:name=".modul.game.ContributeDetailsActivity" />
         <activity android:name=".modul.message.ChatActivity" />
+        <activity android:name=".modul.home.LoveListActivity" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"

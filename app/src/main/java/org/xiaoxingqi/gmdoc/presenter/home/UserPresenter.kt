@@ -2,11 +2,13 @@ package org.xiaoxingqi.gmdoc.presenter.home
 
 import android.content.Context
 import com.alibaba.fastjson.JSON
+import com.alibaba.fastjson.JSONObject
 import org.xiaoxingqi.gmdoc.entity.BaseRespData
 import org.xiaoxingqi.gmdoc.entity.QINiuRespData
 import org.xiaoxingqi.gmdoc.entity.game.GameDetailsData
 import org.xiaoxingqi.gmdoc.entity.game.GameListData
 import org.xiaoxingqi.gmdoc.entity.home.HomeUserShareData
+import org.xiaoxingqi.gmdoc.entity.user.FollowData
 import org.xiaoxingqi.gmdoc.entity.user.LoveGameData
 import org.xiaoxingqi.gmdoc.entity.user.UserContentPhotoData
 import org.xiaoxingqi.gmdoc.impl.IConstant
@@ -230,5 +232,22 @@ class UserPresenter : BasePresenter {
             }
         })
     }
+
+    fun getLoveList(uid: String, page: Int) {
+        addObaser(apiServer.base_get("follow/$uid${IConstant.GET_END}&page=$page"), object : Subscriber<String>() {
+            override fun onNext(p0: String?) {
+                callback?.loveList(JSONObject.parseObject(p0, FollowData::class.java))
+            }
+
+            override fun onCompleted() {
+
+            }
+
+            override fun onError(p0: Throwable?) {
+
+            }
+        })
+    }
+
 
 }

@@ -105,7 +105,7 @@ class WriteDynamicActivity : BaseActivity<WriteDynamicPresenter>() {
     }
 
     override fun initEvent() {
-            manager.addSoftKeyboardStateListener(keyboardListener)
+        manager.addSoftKeyboardStateListener(keyboardListener)
         iv_Gif.setOnClickListener {
             if (manager.isSoftKeyboardOpened) {
                 closeMenu()

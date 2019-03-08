@@ -242,6 +242,10 @@ class MainActivity : BaseActivity<MainPresenter>() {
         iv_Help.setOnClickListener {
             startActivity(Intent(this, InviteCodeActivity::class.java))
         }
+        tv_UserLike.setOnClickListener {
+            val infoData = PreferenceTools.getObj(this, IConstant.USERINFO, UserInfoData::class.java)
+            startActivity(Intent(this, LoveListActivity::class.java).putExtra("userId", infoData.data.uid))
+        }
     }
 
     override fun request() {

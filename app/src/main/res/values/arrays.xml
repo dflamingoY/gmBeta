@@ -3,7 +3,6 @@
     <string-array name="game_Score">
         <item>社区评分</item>
         <item>关注人评分</item>
-
         <item>全平台评分</item>
     </string-array>
     <string-array name="game_artical">

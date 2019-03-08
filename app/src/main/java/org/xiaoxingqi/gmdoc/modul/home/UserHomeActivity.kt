@@ -1,14 +1,18 @@
 package org.xiaoxingqi.gmdoc.modul.home
 
 import android.annotation.SuppressLint
+import android.app.Activity
+import android.content.Intent
+import android.os.Build
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentPagerAdapter
+import android.support.v4.app.*
 import android.support.v4.view.ViewPager
 import android.text.TextUtils
+import android.transition.ArcMotion
 import android.util.TypedValue
 import android.view.View
+import android.view.animation.AnimationUtils
+import android.widget.ImageView
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_user_info.*
 import org.xiaoxingqi.gmdoc.R
@@ -18,6 +22,7 @@ import org.xiaoxingqi.gmdoc.impl.IConstant
 import org.xiaoxingqi.gmdoc.impl.home.UserInfoCallBack
 import org.xiaoxingqi.gmdoc.modul.lifeCircle.TypeCircleFragment
 import org.xiaoxingqi.gmdoc.presenter.home.HomeUserInfoPersent
+import org.xiaoxingqi.gmdoc.tools.CustomChangeBounds
 import org.xiaoxingqi.gmdoc.tools.PreferenceTools
 
 /**
@@ -123,7 +128,13 @@ class UserHomeActivity : BaseActivity<HomeUserInfoPersent>() {
     }
 
     override fun initData() {
-
+        intent.getStringExtra("url")?.let {
+            Glide.with(this@UserHomeActivity)
+                    .load(it)
+                    .error(R.mipmap.img_avatar_default)
+                    .into(iv_UserLogo)
+            setMotion(iv_UserLogo)
+        }
         infoData = PreferenceTools.getObj(this, IConstant.USERINFO, UserInfoData::class.java)
         intent.getStringExtra("userId")?.let {
             userId = it
@@ -170,6 +181,39 @@ class UserHomeActivity : BaseActivity<HomeUserInfoPersent>() {
 
         override fun getCount(): Int {
             return fragments.size
+        }
+    }
+
+
+    companion object {
+        @JvmStatic
+        fun start(context: Activity, url: String?, id: String?, imageView: View) {
+            val intent = Intent(context, UserHomeActivity::class.java)
+            intent.putExtra("userId", id)
+            intent.putExtra("url", url)
+            val options = ActivityOptionsCompat.makeSceneTransitionAnimation(context,
+                    imageView, "transition_movie_img")//与xml文件对应
+            ActivityCompat.startActivity(context, intent, options.toBundle())
+        }
+    }
+
+
+    private fun setMotion(imageView: ImageView) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            //定义ArcMotion
+            val arcMotion = ArcMotion()
+            arcMotion.minimumHorizontalAngle = 50f
+            arcMotion.minimumVerticalAngle = 50f
+            //插值器，控制速度
+            val interpolator = AnimationUtils.loadInterpolator(this, android.R.interpolator.fast_out_slow_in)
+            //实例化自定义的ChangeBounds
+            val changeBounds = CustomChangeBounds()
+            changeBounds.pathMotion = arcMotion
+            changeBounds.interpolator = interpolator
+            changeBounds.addTarget(imageView)
+            //将切换动画应用到当前的Activity的进入和返回
+            window.sharedElementEnterTransition = changeBounds
+            window.sharedElementReturnTransition = changeBounds
         }
     }
 

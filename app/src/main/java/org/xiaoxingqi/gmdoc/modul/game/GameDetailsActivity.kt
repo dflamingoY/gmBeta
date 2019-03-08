@@ -384,10 +384,10 @@ class GameDetailsActivity : BaseActivity<GameDetailPersent>() {
                     if (AppTools.isLogin(this)) {
                         map["is_sub"] = "2"
                         persent?.getComment(map, gameId)
-                        false
+                        true
                     } else {
                         AppTools.login(this)
-                        true
+                        false
                     }
                 }
                 2 -> {
@@ -404,15 +404,23 @@ class GameDetailsActivity : BaseActivity<GameDetailPersent>() {
             val indexOfChild = headView.tabCommentTitle.indexOfChild(it)
             when (indexOfChild) {
                 0 -> {
-
+                    map["is_sub"] = "1"
+                    persent?.getComment(map, gameId)
                     true
                 }
                 1 -> {
-
-                    true
+                    if (AppTools.isLogin(this)) {
+                        map["is_sub"] = "2"
+                        persent?.getComment(map, gameId)
+                        true
+                    } else {
+                        AppTools.login(this)
+                        false
+                    }
                 }
                 2 -> {
-
+                    map["is_sub"] = "3"
+                    persent?.getComment(map, gameId)
                     true
                 }
                 else -> {
