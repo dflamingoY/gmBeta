@@ -1,5 +1,6 @@
 package org.xiaoxingqi.gmdoc.modul.message
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.support.v7.widget.LinearLayoutManager
 import android.text.TextUtils
@@ -80,6 +81,7 @@ class ChatActivity : BaseActivity<MessagePresenter>() {
 
     }
 
+    @SuppressLint("SetTextI18n")
     override fun initData() {
         userId = intent.getStringExtra("userId")
         userInfo = PreferenceTools.getObj(this, IConstant.USERINFO, UserInfoData::class.java)
@@ -89,7 +91,7 @@ class ChatActivity : BaseActivity<MessagePresenter>() {
         adapter = object : QuickAdapter<BaseMsgDetailsBean>(this, R.layout.item_chat_msg, mData) {
             override fun convert(helper: BaseAdapterHelper?, item: BaseMsgDetailsBean?) {
                 userInfo?.let {
-                    val localtion = if (it.data.uid == item!!.from_uid) {//自己
+                    val local = if (it.data.uid == item!!.from_uid) {//自己
                         helper!!.getView(R.id.cardLeft).visibility = View.GONE
                         helper.getView(R.id.cardRight).visibility = View.VISIBLE
                         Glide.with(this@ChatActivity)
@@ -110,14 +112,14 @@ class ChatActivity : BaseActivity<MessagePresenter>() {
                         helper.getView(R.id.tvContent).visibility = View.VISIBLE
                         helper.getView(R.id.frame_ImgContainer).visibility = View.GONE
                         val params = helper.getView(R.id.tvContent).layoutParams as FrameLayout.LayoutParams
-                        params.gravity = localtion
+                        params.gravity = local
                         val msgTextView = helper.getView(R.id.tvContent) as MsgTextView
                         msgTextView.setTextData(AppConfig.getImageHtml(item.content))
                     } else {
                         helper.getView(R.id.tvContent).visibility = View.GONE
                         helper.getView(R.id.frame_ImgContainer).visibility = View.VISIBLE
                         val params = helper.getView(R.id.iv_showPic).layoutParams as FrameLayout.LayoutParams
-                        params.gravity = localtion
+                        params.gravity = local
                         val msgThumbImageView = helper.getView(R.id.iv_showPic) as MsgThumbImageView
                         msgThumbImageView.loadAsPath(item.content + "?imageMogr2/auto-orient/thumbnail/!200x200r", getImageMaxEdge(), getImageMinEdge(), R.drawable.message_item_round_bg, item.content + "?imageMogr2/auto-orient/thumbnail/!200x200r")
                     }
@@ -221,6 +223,7 @@ class ChatActivity : BaseActivity<MessagePresenter>() {
     fun msgEvent(event: MsgUpdateEvent) {
         /**
          * 解析信息
+         * 收到新消息,
          */
 
 

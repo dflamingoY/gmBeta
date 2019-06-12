@@ -42,10 +42,14 @@ import java.util.ArrayList
  * 本地相册
  */
 class AlbumActivity : BaseAct() {
-    private val WRITE_COARSE_LOCATION_REQUEST_CODE = 0x01
-    private val CAMERA_REQUEST_CODE = 0x02
-    private val CAMARECODE = 0x03
-    private val PREVIEW_CODE = 0x04
+
+    companion object{
+        private const val WRITE_COARSE_LOCATION_REQUEST_CODE = 0x01
+        private const val CAMERA_REQUEST_CODE = 0x02
+        private const val CAMERA_CODE = 0x03
+        private const val PREVIEW_CODE = 0x04
+    }
+
     private var cameraFile: File? = null
     private val pathList = ArrayList<FilePath>()
     private lateinit var adapter: QuickAdapter<String>
@@ -249,7 +253,7 @@ class AlbumActivity : BaseAct() {
                     uri = Uri.fromFile(cameraFile)
                 }
                 intent.putExtra(MediaStore.EXTRA_OUTPUT, uri)
-                startActivityForResult(intent, CAMARECODE)
+                startActivityForResult(intent, CAMERA_CODE)
             }
         } catch (e: Exception) {
             e.printStackTrace()
@@ -377,7 +381,7 @@ class AlbumActivity : BaseAct() {
                     setResult(RESULT_OK, intent)
                     finish()
                 }
-            } else if (requestCode == CAMARECODE) {
+            } else if (requestCode == CAMERA_CODE) {
                 mData.add(1, cameraFile!!.absolutePath)
                 adapter.notifyDataSetChanged()
                 //在手机相册中显示刚拍摄的图片

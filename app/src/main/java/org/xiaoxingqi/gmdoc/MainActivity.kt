@@ -45,8 +45,12 @@ import org.xiaoxingqi.gmdoc.tools.SocketUtils
 
 class MainActivity : BaseActivity<MainPresenter>() {
     private var socket: WebSocket? = null
+
+    companion object {
+        private const val REQUEST_PERMISSION = 0x01
+    }
+
     private val map by lazy { HashMap<String, String>() }
-    private val REQUEST_PERMISSION = 0x01
 
     override fun createPresent(): MainPresenter {
         return MainPresenter(this, object : MainCallBack {
@@ -118,7 +122,6 @@ class MainActivity : BaseActivity<MainPresenter>() {
                         }
                     }
                 }
-
             }
 
             override fun onError(obj: Any?) {
@@ -132,8 +135,8 @@ class MainActivity : BaseActivity<MainPresenter>() {
 
     private val homeFrag = HomeFragment()
     private val gameFrag = GameFragment()
-    val lifeCircle = LifCircleFragment()
-    val msgFrag = MsgFragment()
+    private val lifeCircle = LifCircleFragment()
+    private val msgFrag = MsgFragment()
     private var currentFrag: Fragment? = null
 
     override fun setContent() {
@@ -264,9 +267,6 @@ class MainActivity : BaseActivity<MainPresenter>() {
                 currentFrag = lifeCircle
             TypeFragment.Me ->
                 currentFrag = msgFrag
-            else -> {
-
-            }
         }
         currentFrag?.let {
             if (!currentFrag!!.isAdded) {
@@ -285,7 +285,10 @@ class MainActivity : BaseActivity<MainPresenter>() {
 
     override fun onDestroy() {
         super.onDestroy()
-
+        socket?.let {
+            it.close(1000, "")
+            socket = null
+        }
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -295,6 +298,10 @@ class MainActivity : BaseActivity<MainPresenter>() {
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == REQUEST_PERMISSION) {
+
+        }
+
     }
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {
@@ -310,6 +317,8 @@ class MainActivity : BaseActivity<MainPresenter>() {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun socketEvent(event: SocketEvent) {
+
+
         Log.d("Mozator", event.msg)
     }
 

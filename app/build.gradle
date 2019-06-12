@@ -7,7 +7,7 @@ apply plugin: 'me.tatarka.retrolambda'
 android {
     compileSdkVersion 27
     defaultConfig {
-        applicationId 'org.xiaoxingqi.gmdoc1'
+        applicationId 'org.xiaoxingqi.gmdoc'
         minSdkVersion 21
         targetSdkVersion 27
         versionCode 1

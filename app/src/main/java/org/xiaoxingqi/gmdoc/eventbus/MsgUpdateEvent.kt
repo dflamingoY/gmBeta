@@ -1,6 +1,7 @@
 package org.xiaoxingqi.gmdoc.eventbus
 
-class MsgUpdateEvent {
+import org.xiaoxingqi.gmdoc.entity.msg.BaseMsgDetailsBean
 
+class MsgUpdateEvent(var data: BaseMsgDetailsBean) {
 
 }
