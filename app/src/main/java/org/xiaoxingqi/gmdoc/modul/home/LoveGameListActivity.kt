@@ -22,10 +22,9 @@ class LoveGameListActivity : BaseActivity<UserPresenter>() {
         return UserPresenter(this, object : UserCallback() {
             override fun loveGameList(data: LoveGameData) {
                 transLayout.showContent()
-                for (bean in data.data) {
-                    mData.add(bean)
-                    adapter.notifyItemInserted(adapter.itemCount - 1)
-                }
+                mData.clear()
+                mData.addAll(data.data)
+                adapter.notifyDataSetChanged()
             }
         })
     }
@@ -62,7 +61,6 @@ class LoveGameListActivity : BaseActivity<UserPresenter>() {
 
     override fun onStart() {
         super.onStart()
-        mData.clear()
         adapter.notifyDataSetChanged()
         persent?.loveGame(userId)
     }

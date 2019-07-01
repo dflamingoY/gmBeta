@@ -330,7 +330,7 @@ class GameDetailsActivity : BaseActivity<GameDetailPersent>() {
         }
         gameRecycler.addOnScrollListener(object : RecyclerView.OnScrollListener() {
 
-            override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 allLength += dy
                 if (allLength <= AppTools.dp2px(this@GameDetailsActivity, 238)) {
                     appbar.setBackgroundColor(Color.argb((allLength / AppTools.dp2px(this@GameDetailsActivity, 238).toFloat() * 255 + 0.5f).toInt(), 0, 0, 0))

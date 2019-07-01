@@ -257,7 +257,7 @@ class MainActivity : BaseActivity<MainPresenter>() {
 
     private fun switchFragment(type: TypeFragment) {
         val transTemp = supportFragmentManager.beginTransaction()
-        currentFrag?.let { transTemp.hide(currentFrag) }
+        currentFrag?.let { transTemp.hide(currentFrag!!) }
         when (type) {
             TypeFragment.Home ->
                 currentFrag = homeFrag
@@ -270,10 +270,10 @@ class MainActivity : BaseActivity<MainPresenter>() {
         }
         currentFrag?.let {
             if (!currentFrag!!.isAdded) {
-                transTemp.add(R.id.frame_Fragment, currentFrag)
+                transTemp.add(R.id.frame_Fragment, currentFrag!!)
             }
         }
-        transTemp.show(currentFrag)
+        transTemp.show(currentFrag!!)
         transTemp.commit()
     }
 

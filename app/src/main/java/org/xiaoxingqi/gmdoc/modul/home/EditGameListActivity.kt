@@ -21,10 +21,9 @@ class EditGameListActivity : BaseActivity<UserPresenter>() {
     override fun createPresent(): UserPresenter {
         return UserPresenter(this, object : UserCallback() {
             override fun loveGameList(data: LoveGameData) {
-                for (bean in data.data) {
-                    mData.add(bean)
-                    adapter.notifyItemInserted(adapter.itemCount - 1)
-                }
+                mData.clear()
+                mData.addAll(data.data)
+                adapter.notifyDataSetChanged()
             }
         })
     }
@@ -52,10 +51,8 @@ class EditGameListActivity : BaseActivity<UserPresenter>() {
 
     override fun onStart() {
         super.onStart()
-        mData.clear()
         adapter.notifyDataSetChanged()
         persent?.loveGame(userId)
-
     }
 
     override fun initEvent() {

@@ -225,8 +225,8 @@ class ChatActivity : BaseActivity<MessagePresenter>() {
          * 解析信息
          * 收到新消息,
          */
+        if (mData.size > 0) {
 
-
+        }
     }
-
 }
