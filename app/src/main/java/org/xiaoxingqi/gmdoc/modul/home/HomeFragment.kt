@@ -340,6 +340,9 @@ class HomeFragment : BaseFrag<HomePresent>() {
         adapter.setOnItemClickListener { view, position ->
             startActivity(Intent(activity, DynamicDetailsActivity::class.java).putExtra("dynamicId", mData[position].id))
         }
+        mView!!.fab_top.setOnClickListener {
+            mView!!.recyclerView.scrollToPosition(0)
+        }
     }
 
     override fun request(flag: Int) {
