@@ -7,8 +7,9 @@ import org.xiaoxingqi.gmdoc.R
 import org.xiaoxingqi.gmdoc.core.BaseAct
 
 class SplashActivity : BaseAct() {
+
     override fun setContent() {
-        setContent(R.layout.activity_splash)
+//        setContent(R.layout.activity_splash)
     }
 
     override fun initView() {

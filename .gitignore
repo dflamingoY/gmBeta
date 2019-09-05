@@ -9,3 +9,6 @@
 /captures
 .externalNativeBuild
 .idea
+/gradle
+.idea
+/app/build

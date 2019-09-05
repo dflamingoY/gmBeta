@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layer-list xmlns:android="http://schemas.android.com/apk/res/android"
-    android:autoMirrored="true"
-    android:opacity="transparent">
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
     <item android:drawable="@color/colorWhite" />
 
     <item
@@ -9,6 +8,5 @@
         android:height="62dp"
         android:drawable="@drawable/img_empty_load_slogan"
         android:gravity="center" />
-
 
 </layer-list>
