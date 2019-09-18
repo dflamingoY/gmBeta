@@ -6,7 +6,7 @@ import org.xiaoxingqi.gmdoc.entity.home.HomeGameData
 import org.xiaoxingqi.gmdoc.entity.home.HomeUserShareData
 import org.xiaoxingqi.gmdoc.impl.IConstant
 import org.xiaoxingqi.gmdoc.impl.home.HomeTabCallback
-import rx.Subscriber
+import org.xiaoxingqi.gmdoc.rx.BaseSubscriber
 
 /**
  * 获取热门游戏列表
@@ -14,56 +14,32 @@ import rx.Subscriber
  */
 class HomePresent : BasePresenter {
 
-    private var tabCoallback: HomeTabCallback? = null
+    private var tabCallback: HomeTabCallback? = null
 
-    constructor(context: Context, tabCoallback: HomeTabCallback) : super(context) {
-        this.tabCoallback = tabCoallback
+    constructor(context: Context, tabCallback: HomeTabCallback) : super(context) {
+        this.tabCallback = tabCallback
     }
 
     fun getGameData() {
-        addObaser(apiServer.get_HomeGame("home${IConstant.GET_END}"), object : Subscriber<HomeGameData>() {
-            override fun onNext(t: HomeGameData?) {
-                tabCoallback?.let {
-                    it.gameSuccess(t)
-                }
-            }
-
-            override fun onCompleted() {
-            }
-
-            override fun onError(e: Throwable?) {
+        addObserve(apiServer.getHomeGame("home${IConstant.GET_END}"), object : BaseSubscriber<HomeGameData>() {
+            override fun onNext(t: HomeGameData) {
+                tabCallback?.gameSuccess(t)
             }
         })
     }
 
     fun getAttributeData(flag: Int) {
-        addObaser(apiServer.get_HomeContrubite("home_contribute${IConstant.GET_END}&page=$flag"), object : Subscriber<HomeUserShareData>() {
-            override fun onNext(t: HomeUserShareData?) {
-                tabCoallback?.let {
-                    it.contibuteSuccess(t)
-                }
-            }
-
-            override fun onCompleted() {
-            }
-
-            override fun onError(e: Throwable?) {
+        addObserve(apiServer.getHomeContribute("home_contribute${IConstant.GET_END}&page=$flag"), object : BaseSubscriber<HomeUserShareData>() {
+            override fun onNext(t: HomeUserShareData) {
+                tabCallback?.contibuteSuccess(t)
             }
         })
     }
 
     fun getActionData() {
-        addObaser(apiServer.get_HomeActiv("activity_list${IConstant.GET_END}"), object : Subscriber<HomeActiveData>() {
-            override fun onNext(t: HomeActiveData?) {
-                tabCoallback?.let {
-                    it.activeSuccess(t)
-                }
-            }
-
-            override fun onCompleted() {
-            }
-
-            override fun onError(e: Throwable?) {
+        addObserve(apiServer.getHomeActive("activity_list${IConstant.GET_END}"), object : BaseSubscriber<HomeActiveData>() {
+            override fun onNext(t: HomeActiveData) {
+                tabCallback?.activeSuccess(t)
             }
         })
     }

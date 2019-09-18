@@ -18,7 +18,7 @@ class GameImageVideoPresenter : BasePresenter {
 
     //GameImageData
     fun getGameImg(gameId: String, page: Int) {
-        addObaser(apiServer.base_get("propaganda/$gameId${IConstant.GET_END}&key=2&page=$page"), object : Subscriber<String>() {
+        addObserve(apiServer.baseGet("propaganda/$gameId${IConstant.GET_END}&key=2&page=$page"), object : Subscriber<String>() {
             override fun onNext(t: String?) {
                 callback?.getImgList(JSON.parseObject(t, GameImageData::class.java))
             }
@@ -34,7 +34,7 @@ class GameImageVideoPresenter : BasePresenter {
 
     //GameVedioImgData
     fun getVideo(gameId: String) {
-        addObaser(apiServer.base_get("propaganda/$gameId${IConstant.GET_END}"), object : Subscriber<String>() {
+        addObserve(apiServer.baseGet("propaganda/$gameId${IConstant.GET_END}"), object : Subscriber<String>() {
             override fun onNext(t: String?) {
                 callback?.getVideoList(JSON.parseObject(t, GameVideoImgData::class.java))
             }

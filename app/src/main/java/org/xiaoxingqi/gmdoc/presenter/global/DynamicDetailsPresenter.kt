@@ -17,7 +17,7 @@ class DynamicDetailsPresenter : BasePresenter {
 
     fun getDetails(dynamicId: String) {
 
-        addObaser(apiServer.base_get("detail/$dynamicId${IConstant.GET_END}"), object : Subscriber<String>() {
+        addObserve(apiServer.baseGet("detail/$dynamicId${IConstant.GET_END}"), object : Subscriber<String>() {
             override fun onNext(t: String?) {
                 callback?.dynamicInfo(JSON.parseObject(t, DynamicDetailsData::class.java))
             }

@@ -18,7 +18,7 @@ class InviteScorePresenter : BasePresenter {
     }
 
     fun getFollowUser(map: Map<String, String>, page: Int) {
-        addObaser(apiServer.base_post("invite_users${IConstant.GET_END}&page=$page", map), object : Subscriber<String>() {
+        addObserve(apiServer.basePost("invite_users${IConstant.GET_END}&page=$page", map), object : Subscriber<String>() {
             override fun onNext(t: String?) {
                 callback?.invateUser(JSON.parseObject(t, InvateGameData::class.java))
             }
@@ -34,7 +34,7 @@ class InviteScorePresenter : BasePresenter {
     }
 
     fun invating(map: Map<String, String>, bean: BaseInvateBean) {
-        addObaser(apiServer.base_post("invite_score", map), object : Subscriber<String>() {
+        addObserve(apiServer.basePost("invite_score", map), object : Subscriber<String>() {
             override fun onNext(t: String?) {
                 callback?.invating(JSON.parseObject(t, BaseRespData::class.java), bean)
             }

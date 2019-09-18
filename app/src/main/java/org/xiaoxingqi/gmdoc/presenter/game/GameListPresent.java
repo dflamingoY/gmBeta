@@ -19,7 +19,7 @@ public class GameListPresent extends BasePresenter {
 
 
     public void getGameList(String platfrom, int page) {
-        addObaser(apiServer.get_GameList("game_list/" + platfrom + IConstant.GET_END + "&page=" + page + "&sort=1"), new Subscriber<GameListData>() {
+        addObserve(apiServer.getGameList("game_list/" + platfrom + IConstant.GET_END + "&page=" + page + "&sort=1"), new Subscriber<GameListData>() {
             @Override
             public void onCompleted() {
 

@@ -16,7 +16,7 @@ class LifeFragPresenter : BasePresenter {
     }
 
     fun queryGroup() {
-        addObaser(apiServer.base_get("list_tem${IConstant.GET_END}"), object : Subscriber<String>() {
+        addObserve(apiServer.baseGet("list_tem${IConstant.GET_END}"), object : Subscriber<String>() {
             override fun onNext(t: String?) {
                 callback?.getGroupData(JSON.parseObject(t, GroupData::class.java))
             }

@@ -23,7 +23,7 @@ class TypeFragPresenter : BasePresenter {
      */
     fun queryData(flag: Int, uid: String, type: String) {
 
-        addObaser(apiServer.base_get("${IConstant.SPORT}user/$uid${IConstant.GET_END}&page=$flag&choose_type=$type"), object : Subscriber<String>() {
+        addObserve(apiServer.baseGet("${IConstant.SPORT}user/$uid${IConstant.GET_END}&page=$flag&choose_type=$type"), object : Subscriber<String>() {
             override fun onNext(t: String?) {
                 callback?.callTypeData(JSON.parseObject(t, HomeUserShareData::class.java))
             }
@@ -42,7 +42,7 @@ class TypeFragPresenter : BasePresenter {
      * 关注圈的列表
      */
     fun getData(flag: Int, type: String, groupId: String) {
-        addObaser(apiServer.base_get("web${IConstant.GET_END}&choose_type=$type&group=$groupId&page=$flag"), object : Subscriber<String>() {
+        addObserve(apiServer.baseGet("web${IConstant.GET_END}&choose_type=$type&group=$groupId&page=$flag"), object : Subscriber<String>() {
             override fun onNext(t: String?) {
                 callback?.callTypeData(JSON.parseObject(t, HomeUserShareData::class.java))
             }
@@ -58,7 +58,7 @@ class TypeFragPresenter : BasePresenter {
     }
 
     fun getHotUser() {
-        addObaser(apiServer.base_get("active_user${IConstant.GET_END}"), object : Subscriber<String>() {
+        addObserve(apiServer.baseGet("active_user${IConstant.GET_END}"), object : Subscriber<String>() {
             override fun onNext(t: String?) {
                 callback?.callHotUser(JSON.parseObject(t, RespFansData::class.java))
             }
@@ -74,7 +74,7 @@ class TypeFragPresenter : BasePresenter {
     }
 
     fun thumb(map: Map<String, String>, view: View) {
-        addObaser(apiServer.base_post("like${IConstant.GET_END}", map), object : Subscriber<String>() {
+        addObserve(apiServer.basePost("like${IConstant.GET_END}", map), object : Subscriber<String>() {
             override fun onNext(t: String?) {
                 callback?.thumbCallback(JSON.parseObject(t, ThumbData::class.java), view)
             }

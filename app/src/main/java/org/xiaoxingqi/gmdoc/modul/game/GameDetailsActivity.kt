@@ -33,7 +33,7 @@ import org.xiaoxingqi.gmdoc.impl.game.GameDetailCallBack
 import org.xiaoxingqi.gmdoc.modul.global.WriteLongCommentActivity
 import org.xiaoxingqi.gmdoc.modul.global.WriteShortCommentActivity
 import org.xiaoxingqi.gmdoc.modul.home.UserHomeActivity
-import org.xiaoxingqi.gmdoc.presenter.game.GameDetailPersent
+import org.xiaoxingqi.gmdoc.presenter.game.GameDetailPresenter
 import org.xiaoxingqi.gmdoc.tools.AppTools
 import org.xiaoxingqi.gmdoc.tools.FastBlur
 import org.xiaoxingqi.gmdoc.tools.TimeUtils
@@ -41,8 +41,9 @@ import org.xiaoxingqi.gmdoc.wegidt.gameDetails.GameLongCommentView
 import org.xiaoxingqi.gmdoc.wegidt.gameDetails.GameShortCommentView
 import org.xiaoxingqi.gmdoc.wegidt.homegame.ArticleListView
 import org.xiaoxingqi.gmdoc.wegidt.homegame.HomeDynamicView
+import java.util.concurrent.CountDownLatch
 
-class GameDetailsActivity : BaseActivity<GameDetailPersent>() {
+class GameDetailsActivity : BaseActivity<GameDetailPresenter>() {
     private lateinit var adapter: QuickAdapter<HomeUserShareData.ContributeBean>
     private lateinit var headView: View
     private lateinit var gameId: String
@@ -54,8 +55,8 @@ class GameDetailsActivity : BaseActivity<GameDetailPersent>() {
     private val map = HashMap<String, String>()
 
     @SuppressLint("SetTextI18n")
-    override fun createPresent(): GameDetailPersent {
-        return GameDetailPersent(this, object : GameDetailCallBack {
+    override fun createPresent(): GameDetailPresenter {
+        return GameDetailPresenter(this, object : GameDetailCallBack {
             override fun gameTab(data: GameTabData?) {
                 headView.gameTabView.setData(data!!.data.labels)
             }
@@ -193,7 +194,7 @@ class GameDetailsActivity : BaseActivity<GameDetailPersent>() {
                                 .into(mIvGameDesc)
                         view.layoutParams = params
                         headView.linear_img_Details.addView(view)
-                        mIvGameDesc.setOnClickListener { v ->
+                        mIvGameDesc.setOnClickListener {
                             //                            startActivity(Intent(this@GameDetailsActivity, ImageVedioDetailsActivity::class.java)
 //                                    .putExtra("data", descData)
 //                                    .putExtra("current", finalA)
@@ -211,7 +212,7 @@ class GameDetailsActivity : BaseActivity<GameDetailPersent>() {
                     val iv = ImageView(this@GameDetailsActivity)
                     iv.setImageResource(R.drawable.btn_post_pic)
                     headView.linear_img_Details.addView(iv, params)
-                    iv.setOnClickListener { v ->
+                    iv.setOnClickListener {
                         if (AppTools.isLogin(this@GameDetailsActivity)) {
                             startActivity(Intent(this@GameDetailsActivity, ContributeDetailsActivity::class.java).putExtra("gameId", gameId))
                         } else {
@@ -223,7 +224,7 @@ class GameDetailsActivity : BaseActivity<GameDetailPersent>() {
                     val mTvCount = view.findViewById<TextView>(R.id.tv_AllCount)
                     mTvCount.text = "${data.all_pic_num}张"
                     headView.linear_img_Details.addView(view, params)
-                    view.setOnClickListener { v -> startActivity(Intent(this@GameDetailsActivity, ImageVideoListActivity::class.java).putExtra("gameId", gameId)) }
+                    view.setOnClickListener { startActivity(Intent(this@GameDetailsActivity, ImageVideoListActivity::class.java).putExtra("gameId", gameId)) }
                 }
                 loadArray[0] = 1
                 checkStatus()
@@ -277,6 +278,7 @@ class GameDetailsActivity : BaseActivity<GameDetailPersent>() {
 
     @SuppressLint("SetTextI18n")
     override fun initData() {
+
         window.decorView.overlay
         gameId = intent.getStringExtra("gameId")
         map["_token"] = App.s_Token!!
@@ -342,9 +344,9 @@ class GameDetailsActivity : BaseActivity<GameDetailPersent>() {
                 } else {
                     commentTitle.visibility = View.GONE
                 }
-                val dy = allLength + AppTools.dp2px(this@GameDetailsActivity, 80) + AppTools.dp2px(this@GameDetailsActivity, 38)
-                if (dy >= bowenLocation) {
-                    var alpha = (-(bowenLocation - dy) / AppTools.dp2px(this@GameDetailsActivity, 38).toFloat())
+                val dOffset = allLength + AppTools.dp2px(this@GameDetailsActivity, 80) + AppTools.dp2px(this@GameDetailsActivity, 38)
+                if (dOffset >= bowenLocation) {
+                    var alpha = (-(bowenLocation - dOffset) / AppTools.dp2px(this@GameDetailsActivity, 38).toFloat())
                     if (alpha >= 1) {
                         alpha = 1f
                     }
@@ -373,8 +375,7 @@ class GameDetailsActivity : BaseActivity<GameDetailPersent>() {
             bowenLocation = headView.tabTitleDyncmia.y
         }
         commentTitle.setOnClick {
-            val indexOfChild = commentTitle.indexOfChild(it)
-            when (indexOfChild) {
+            when (commentTitle.indexOfChild(it)) {
                 0 -> {
                     map["is_sub"] = "1"
                     persent?.getComment(map, gameId)
@@ -401,8 +402,7 @@ class GameDetailsActivity : BaseActivity<GameDetailPersent>() {
             }
         }
         headView.tabCommentTitle.setOnClick {
-            val indexOfChild = headView.tabCommentTitle.indexOfChild(it)
-            when (indexOfChild) {
+            when (headView.tabCommentTitle.indexOfChild(it)) {
                 0 -> {
                     map["is_sub"] = "1"
                     persent?.getComment(map, gameId)
@@ -429,8 +429,7 @@ class GameDetailsActivity : BaseActivity<GameDetailPersent>() {
             }
         }
         titleDyncmia.setOnClick {
-            val indexOfChild = titleDyncmia.indexOfChild(it)
-            when (indexOfChild) {
+            when (titleDyncmia.indexOfChild(it)) {
                 0 -> {
                     true
                 }
@@ -443,8 +442,7 @@ class GameDetailsActivity : BaseActivity<GameDetailPersent>() {
             }
         }
         headView.tabTitleDyncmia.setOnClick {
-            val indexOfChild = headView.tabTitleDyncmia.indexOfChild(it)
-            when (indexOfChild) {
+            when (headView.tabTitleDyncmia.indexOfChild(it)) {
                 0 -> {
                     true
                 }
@@ -517,9 +515,7 @@ class GameDetailsActivity : BaseActivity<GameDetailPersent>() {
     }
 
     override fun request() {
-
     }
-
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
         if (keyCode == KeyEvent.KEYCODE_BACK) {

@@ -5,26 +5,26 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Color
-import android.support.v4.app.Fragment
-import kotlinx.android.synthetic.main.activity_main.*
-import org.xiaoxingqi.gmdoc.core.App
-import org.xiaoxingqi.gmdoc.entity.TokenData
-import android.view.WindowManager
 import android.os.Build
 import android.support.v4.app.ActivityCompat
+import android.support.v4.app.Fragment
 import android.support.v4.widget.DrawerLayout
 import android.text.TextUtils
 import android.util.Log
 import android.view.Gravity
 import android.view.KeyEvent
 import android.view.View
+import android.view.WindowManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.GlideDrawableImageViewTarget
+import kotlinx.android.synthetic.main.activity_main.*
 import okhttp3.WebSocket
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
+import org.xiaoxingqi.gmdoc.core.App
 import org.xiaoxingqi.gmdoc.core.BaseActivity
 import org.xiaoxingqi.gmdoc.entity.BaseRespData
+import org.xiaoxingqi.gmdoc.entity.TokenData
 import org.xiaoxingqi.gmdoc.entity.user.UserInfoData
 import org.xiaoxingqi.gmdoc.eventbus.SocketEvent
 import org.xiaoxingqi.gmdoc.eventbus.SocketOffline
@@ -66,7 +66,7 @@ class MainActivity : BaseActivity<MainPresenter>() {
                  */
                 drawerlayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
                 PreferenceTools.clear(this@MainActivity, IConstant.USERINFO)
-                persent?.post_token()
+                persent?.postToken()
             }
 
             @SuppressLint("SetTextI18n")
@@ -129,6 +129,7 @@ class MainActivity : BaseActivity<MainPresenter>() {
                  * 错误的时候  未登录
                  */
                 drawerlayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+                transLayout.showContent()
             }
         })
     }
@@ -165,7 +166,7 @@ class MainActivity : BaseActivity<MainPresenter>() {
             }
         }
         switchFragment(TypeFragment.Home)
-        persent?.post_token()
+        persent?.postToken()
         persent?.queryInfo()
     }
 

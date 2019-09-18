@@ -18,7 +18,7 @@ class MainPresenter : BasePresenter {
 
 
     fun queryInfo() {
-        addObaser(apiServer.get_UserInfo("user_info/${IConstant.GET_END}"), object : Subscriber<UserInfoData>() {
+        addObserve(apiServer.getUserInfo("user_info/${IConstant.GET_END}"), object : Subscriber<UserInfoData>() {
             override fun onNext(t: UserInfoData?) {
                 callback?.userInfo(t)
             }
@@ -37,7 +37,7 @@ class MainPresenter : BasePresenter {
 
 
     fun loginOut(map: Map<String, String>) {
-        addObaser(apiServer.base_post("logout/${IConstant.GET_END}", map), object : Subscriber<String>() {
+        addObserve(apiServer.basePost("logout/${IConstant.GET_END}", map), object : Subscriber<String>() {
             override fun onNext(t: String?) {
                 callback?.loginOut(JSON.parseObject(t, BaseRespData::class.java))
             }
@@ -52,8 +52,8 @@ class MainPresenter : BasePresenter {
         })
     }
 
-    fun post_token() {
-        addObaser(apiServer.post_token("post_token${IConstant.GET_END}"), object : Subscriber<TokenData>() {
+    fun postToken() {
+        addObserve(apiServer.postToken("post_token${IConstant.GET_END}"), object : Subscriber<TokenData>() {
             override fun onNext(t: TokenData?) {
                 callback?.token(t)
             }
@@ -63,7 +63,7 @@ class MainPresenter : BasePresenter {
             }
 
             override fun onError(e: Throwable?) {
-
+                callback?.onError(e?.cause)
             }
         })
     }

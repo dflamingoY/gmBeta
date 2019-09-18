@@ -10,7 +10,7 @@ import org.xiaoxingqi.gmdoc.tools.PreferenceTools
 /**
  * 解析响应头中cookie 本地保存
  */
-class ReciveIntercept(val context: Context) : Interceptor {
+class ReceiveIntercept(val context: Context) : Interceptor {
 
     override fun intercept(chain: Interceptor.Chain): Response {
         val proceed = chain.proceed(chain.request())

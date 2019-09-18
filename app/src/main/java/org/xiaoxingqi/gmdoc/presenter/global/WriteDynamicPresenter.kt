@@ -20,7 +20,7 @@ class WriteDynamicPresenter : BasePresenter {
      * 获取7牛的token
      */
     fun getQiNiuToken() {
-        addObaser(apiServer.base_get("niu_token"), object : Subscriber<String>() {
+        addObserve(apiServer.baseGet("niu_token"), object : Subscriber<String>() {
             override fun onNext(t: String?) {
                 callback?.qiniuToken(JSON.parseObject(t, QINiuRespData::class.java))
             }
@@ -39,7 +39,7 @@ class WriteDynamicPresenter : BasePresenter {
      * 发布
      */
     fun pushDynamic(map: Map<String, String>) {
-        addObaser(apiServer.base_post("send/${IConstant.GET_END}", map), object : Subscriber<String>() {
+        addObserve(apiServer.basePost("send/${IConstant.GET_END}", map), object : Subscriber<String>() {
             override fun onNext(t: String?) {
                 callback?.pushSuccess(JSON.parseObject(t, BaseRespData::class.java))
             }

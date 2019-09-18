@@ -15,7 +15,7 @@ class HomeUserInfoPersent : BasePresenter {
     }
 
     fun getUserInfo(userId: String) {
-        addObaser(apiServer.get_UserInfo("user_info/$userId${IConstant.GET_END}"), object : Subscriber<UserInfoData>() {
+        addObserve(apiServer.getUserInfo("user_info/$userId${IConstant.GET_END}"), object : Subscriber<UserInfoData>() {
             override fun onNext(t: UserInfoData?) {
                 callBack?.userInfo(t)
             }

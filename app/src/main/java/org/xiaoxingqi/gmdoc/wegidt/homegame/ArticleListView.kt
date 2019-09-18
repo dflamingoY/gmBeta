@@ -165,6 +165,7 @@ class ArticleListView(context: Context) : BaseLayout(context) {
             }
             Glide.with(context)
                     .load(url)
+                    .asBitmap()
                     .override(360, 180)
                     .centerCrop()
                     .into(iv_Details)

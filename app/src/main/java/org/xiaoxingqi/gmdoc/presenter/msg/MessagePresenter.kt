@@ -18,7 +18,7 @@ class MessagePresenter : BasePresenter {
     }
 
     fun getMsgList() {
-        addObaser(apiServer.base_get("client_list${IConstant.GET_END}"), object : Subscriber<String>() {
+        addObserve(apiServer.baseGet("client_list${IConstant.GET_END}"), object : Subscriber<String>() {
             override fun onNext(t: String?) {
                 callback?.msgList(JSON.parseObject(t, MsgInfoListData::class.java))
             }
@@ -35,7 +35,7 @@ class MessagePresenter : BasePresenter {
 
 
     fun getChatList(userId: String, page: Int) {
-        addObaser(apiServer.base_get("get_msg${IConstant.GET_END}&uid=$userId&page=$page"), object : Subscriber<String>() {
+        addObserve(apiServer.baseGet("get_msg${IConstant.GET_END}&uid=$userId&page=$page"), object : Subscriber<String>() {
             override fun onNext(t: String?) {
                 callback?.chatList(JSON.parseObject(t, MsgDetailsData::class.java))
             }
@@ -54,7 +54,7 @@ class MessagePresenter : BasePresenter {
      * 发送消息
      */
     fun sendMsg(map: Map<String, String>) {
-        addObaser(apiServer.base_post("send_msg/${IConstant.GET_END}", map), object : Subscriber<String>() {
+        addObserve(apiServer.basePost("send_msg/${IConstant.GET_END}", map), object : Subscriber<String>() {
             override fun onNext(t: String?) {
                 callback?.sendSuccess(JSON.parseObject(t, MsgCommentData::class.java))
             }

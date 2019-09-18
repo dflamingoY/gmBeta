@@ -16,7 +16,7 @@ class GameFragPersent : BasePresenter {
     }
 
     fun getGamePlat() {
-        addObaser(apiServer.get_GamePlat("platform_list${IConstant.GET_END}"), object : Subscriber<GamePlatformData>() {
+        addObserve(apiServer.getGamePlat("platform_list${IConstant.GET_END}"), object : Subscriber<GamePlatformData>() {
             override fun onNext(t: GamePlatformData?) {
                 callBack?.let {
                     it.gamePlatList(t)
@@ -35,7 +35,7 @@ class GameFragPersent : BasePresenter {
 
     fun getGameList(name: String, version: String, sell: String, type: String, page: Int) {
 
-        addObaser(apiServer.get_FragGameList("game_list/$name?version=$version&stime=$sell&sort=$type&page=$page&device=android"), object : Subscriber<GameListData>() {
+        addObserve(apiServer.getFragGameList("game_list/$name?version=$version&stime=$sell&sort=$type&page=$page&device=android"), object : Subscriber<GameListData>() {
             override fun onNext(t: GameListData?) {
                 callBack?.let { it.gameDetailsList(t) }
             }

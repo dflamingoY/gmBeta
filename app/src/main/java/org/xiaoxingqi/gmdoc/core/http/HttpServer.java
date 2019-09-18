@@ -86,7 +86,7 @@ public class HttpServer {
                     .getSocketFactory();
             OkHttpClient okHttpClient = new OkHttpClient();
             okHttpClient = okHttpClient.newBuilder()
-                    .addInterceptor(new ReciveIntercept(mContext))
+                    .addInterceptor(new ReceiveIntercept(mContext))
                     .addInterceptor(new RequestHeadInterceptot(mContext))
                     .connectTimeout(20, TimeUnit.SECONDS)
                     .readTimeout(20, TimeUnit.SECONDS)

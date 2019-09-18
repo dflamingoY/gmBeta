@@ -15,7 +15,7 @@ class LoginPresenter : BasePresenter {
     }
 
     fun login(map: Map<String, String>) {
-        addObaser(apiServer.post_login("login${IConstant.GET_END}", map), object : Subscriber<LoginUserData>() {
+        addObserve(apiServer.postLogin("login${IConstant.GET_END}", map), object : Subscriber<LoginUserData>() {
             override fun onNext(t: LoginUserData?) {
                 callBack?.loginCall(t)
             }
