@@ -8,10 +8,7 @@ import android.os.Handler
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.text.TextUtils
-import android.view.KeyEvent
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.*
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.animation.GlideAnimation
@@ -515,6 +512,13 @@ class GameDetailsActivity : BaseActivity<GameDetailPresenter>() {
     }
 
     override fun request() {
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        if (item?.itemId == android.R.id.home) {
+            finish()
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
