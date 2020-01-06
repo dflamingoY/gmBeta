@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <android.support.design.widget.AppBarLayout
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="80dp"
         app:elevation="1dp"
@@ -37,7 +37,7 @@
                 android:textStyle="normal" />
 
         </RelativeLayout>
-    </android.support.design.widget.AppBarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
 
     <org.xiaoxingqi.gmdoc.wegidt.TransLayout
         android:id="@+id/transLayout"
@@ -49,16 +49,16 @@
         app:offlineLayout="@layout/view_offline"
         app:progressLayout="@layout/view_progress">
 
-        <android.support.design.widget.CoordinatorLayout
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <android.support.design.widget.AppBarLayout
+            <com.google.android.material.appbar.AppBarLayout
                 app:elevation="1dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <android.support.design.widget.CollapsingToolbarLayout
+                <com.google.android.material.appbar.CollapsingToolbarLayout
                     android:id="@+id/collapsing_toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -116,7 +116,7 @@
                         </LinearLayout>
                     </RelativeLayout>
 
-                </android.support.design.widget.CollapsingToolbarLayout>
+                </com.google.android.material.appbar.CollapsingToolbarLayout>
 
                 <org.xiaoxingqi.gmdoc.wegidt.BaseTabTitleLayout
                     android:id="@+id/tabTitleLayout"
@@ -150,15 +150,15 @@
 
                 </LinearLayout>
 
-            </android.support.design.widget.AppBarLayout>
+            </com.google.android.material.appbar.AppBarLayout>
 
-            <android.support.v7.widget.RecyclerView
+            <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-            </android.support.v7.widget.RecyclerView>
-        </android.support.design.widget.CoordinatorLayout>
+            </androidx.recyclerview.widget.RecyclerView>
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
     </org.xiaoxingqi.gmdoc.wegidt.TransLayout>
 </LinearLayout>

@@ -9,7 +9,7 @@
     app:offlineLayout="@layout/view_offline"
     app:progressLayout="@layout/view_progress">
 
-    <android.support.v4.widget.DrawerLayout
+    <androidx.drawerlayout.widget.DrawerLayout
         android:id="@+id/drawerlayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -96,7 +96,7 @@
                     android:layout_marginLeft="22dp"
                     android:layout_marginTop="79dp">
 
-                    <android.support.v7.widget.CardView
+                    <androidx.cardview.widget.CardView
                         android:id="@+id/cardLogo"
                         android:layout_width="58dp"
                         android:layout_height="58dp"
@@ -111,7 +111,7 @@
 
                             />
 
-                    </android.support.v7.widget.CardView>
+                    </androidx.cardview.widget.CardView>
 
                     <TextView
                         android:id="@+id/tv_UserName"
@@ -387,5 +387,5 @@
         </RelativeLayout>
 
 
-    </android.support.v4.widget.DrawerLayout>
+    </androidx.drawerlayout.widget.DrawerLayout>
 </org.xiaoxingqi.gmdoc.wegidt.TransLayout>

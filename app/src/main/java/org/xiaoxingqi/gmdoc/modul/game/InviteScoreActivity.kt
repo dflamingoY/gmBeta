@@ -1,7 +1,7 @@
 package org.xiaoxingqi.gmdoc.modul.game
 
-import android.support.design.widget.Snackbar
-import android.support.v7.widget.LinearLayoutManager
+import com.google.android.material.snackbar.Snackbar
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_invate_score.*
 import me.dkzwm.widget.srl.RefreshingListenerAdapter

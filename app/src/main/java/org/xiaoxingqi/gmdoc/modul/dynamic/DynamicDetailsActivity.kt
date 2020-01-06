@@ -1,7 +1,7 @@
 package org.xiaoxingqi.gmdoc.modul.dynamic
 
 import android.annotation.SuppressLint
-import android.support.v7.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View

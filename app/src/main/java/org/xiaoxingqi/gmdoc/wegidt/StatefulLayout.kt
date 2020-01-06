@@ -26,11 +26,11 @@ abstract class StatefulLayout : FrameLayout {
     private var mState: State? = null
     private var mOnStateChangeListener: OnStateChangeListener? = null
 
-    constructor(context: Context?) : this(context, null, 0)
+    constructor(context: Context) : this(context, null, 0)
 
-    constructor(context: Context?, attrs: AttributeSet?) : this(context, attrs, 0)
+    constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
 
-    constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
+    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
 
         setWillNotCacheDrawing(true)
         setBackgroundColor(Color.parseColor("#00000000"))

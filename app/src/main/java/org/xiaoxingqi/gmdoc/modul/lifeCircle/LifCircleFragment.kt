@@ -1,10 +1,10 @@
 package org.xiaoxingqi.gmdoc.modul.lifeCircle
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentPagerAdapter
-import android.support.v4.view.ViewPager
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentPagerAdapter
+import androidx.viewpager.widget.ViewPager
 import android.view.View
 import kotlinx.android.synthetic.main.frag_lifecircle.view.*
 import org.xiaoxingqi.gmdoc.R
@@ -49,7 +49,7 @@ class LifCircleFragment : BaseFrag<LifeFragPresenter>() {
             fragments[tag] = frag
         }
         viewPager.adapter = DynamicAdapter(childFragmentManager)
-        persent?.queryGroup()
+        presenter?.queryGroup()
     }
 
     override fun bindEvent() {

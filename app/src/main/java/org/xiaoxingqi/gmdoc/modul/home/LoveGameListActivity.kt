@@ -2,7 +2,7 @@ package org.xiaoxingqi.gmdoc.modul.home
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.support.v7.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.View
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_love_game_list.*

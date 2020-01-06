@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:padding="2dp">
 
-    <android.support.v7.widget.CardView
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:cardCornerRadius="2dp"
@@ -17,7 +17,7 @@
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
             android:src="@drawable/img_empty_avatar_back" />
-    </android.support.v7.widget.CardView>
+    </androidx.cardview.widget.CardView>
 
     <org.xiaoxingqi.gmdoc.wegidt.CustomCheckImageView
         android:id="@+id/check_img"

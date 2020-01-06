@@ -6,9 +6,9 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.os.Build
-import android.support.v4.app.ActivityCompat
-import android.support.v4.app.Fragment
-import android.support.v4.widget.DrawerLayout
+import androidx.core.app.ActivityCompat
+import androidx.fragment.app.Fragment
+import androidx.drawerlayout.widget.DrawerLayout
 import android.text.TextUtils
 import android.util.Log
 import android.view.Gravity

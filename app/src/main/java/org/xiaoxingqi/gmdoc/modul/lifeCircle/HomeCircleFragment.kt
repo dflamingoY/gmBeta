@@ -2,8 +2,8 @@ package org.xiaoxingqi.gmdoc.modul.lifeCircle
 
 import android.content.Intent
 import android.graphics.Color
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
@@ -201,25 +201,25 @@ class HomeCircleFragment : BaseFrag<TypeFragPresenter>() {
                     map["_token"] = App.s_Token!!
                     map["type"] = "1"
                     map["from_id"] = item.id
-                    persent?.thumb(map, it)
+                    presenter?.thumb(map, it)
                 }
             }
         }
         recycler.adapter = adapter
-        persent?.getHotUser()
-        persent?.getData(current, chooseType, groupId)
+        presenter?.getHotUser()
+        presenter?.getData(current, chooseType, groupId)
     }
 
     override fun bindEvent() {
         refresh.setOnRefreshListener(object : RefreshingListenerAdapter() {
             override fun onRefreshing() {
                 current = 0
-                persent?.getData(current, chooseType, groupId)
+                presenter?.getData(current, chooseType, groupId)
             }
 
             override fun onLoadingMore() {
                 current++
-                persent?.getData(current, chooseType, groupId)
+                presenter?.getData(current, chooseType, groupId)
             }
         })
     }
@@ -231,7 +231,7 @@ class HomeCircleFragment : BaseFrag<TypeFragPresenter>() {
     override fun onPause() {
         super.onPause()
         if (refresh.isRefreshing) {
-            persent?.onDetach()
+            presenter?.onDetach()
         }
     }
 

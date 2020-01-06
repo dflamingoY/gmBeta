@@ -11,6 +11,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
+
         <activity
             android:name=".MainActivity"
             android:screenOrientation="portrait" />
@@ -81,9 +86,12 @@
         <activity android:name=".modul.game.ContributeDetailsActivity" />
         <activity android:name=".modul.message.ChatActivity" />
         <activity android:name=".modul.home.LoveListActivity" />
+        <activity android:name=".modul.dynamic.WebDetailsActivity" />
+        <activity android:name=".modul.home.HomeTabActivity" />
+        <activity android:name=".modul.home.MoreArticleActivity" />
 
         <provider
-            android:name="android.support.v4.content.FileProvider"
+            android:name="androidx.core.content.FileProvider"
             android:authorities="org.xiaoxingqi.gmdoc.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true">

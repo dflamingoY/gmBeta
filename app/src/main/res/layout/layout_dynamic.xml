@@ -105,7 +105,7 @@
             android:layout_marginRight="12dp"
             android:visibility="gone">
 
-            <org.xiaoxingqi.gmdoc.wegidt.gameDetails.SqureImageView
+            <org.xiaoxingqi.gmdoc.wegidt.gameDetails.SquareImageView
                 android:id="@+id/iv_Details"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

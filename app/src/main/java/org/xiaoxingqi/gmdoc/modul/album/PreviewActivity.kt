@@ -8,8 +8,8 @@ import android.app.Activity
 import android.content.Intent
 import android.os.AsyncTask
 import android.provider.MediaStore
-import android.support.v4.view.PagerAdapter
-import android.support.v4.view.ViewPager
+import androidx.viewpager.widget.PagerAdapter
+import androidx.viewpager.widget.ViewPager
 import android.text.TextUtils
 import android.view.KeyEvent
 import android.view.LayoutInflater

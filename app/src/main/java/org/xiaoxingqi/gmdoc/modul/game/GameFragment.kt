@@ -1,9 +1,9 @@
 package org.xiaoxingqi.gmdoc.modul.game
 
 import android.content.Intent
-import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
@@ -121,7 +121,7 @@ class GameFragment : BaseFrag<GameFragPersent>() {
             }
         }
         platRecycler.adapter = platAdapter
-        persent?.getGamePlat()
+        presenter?.getGamePlat()
         adapter = object : QuickAdapter<BaseGameBean>(activity, R.layout.item_game_list_layout, mData) {
             override fun convert(helper: BaseAdapterHelper?, item: BaseGameBean?) {
 
@@ -170,7 +170,7 @@ class GameFragment : BaseFrag<GameFragPersent>() {
             transLayout.showProgress()
             name = platData[position].name
             version = platData[position].version[0].id.toString()
-            persent?.getGameList(name!!, version = version!!, sell = sell!!, type = defaultType!!, page = 0)
+            presenter?.getGameList(name!!, version = version!!, sell = sell!!, type = defaultType!!, page = 0)
         }
         adapter.setOnItemClickListener { view, position ->
             startActivity(Intent(activity, GameDetailsActivity::class.java).putExtra("gameId", mData[position].id))
@@ -182,7 +182,7 @@ class GameFragment : BaseFrag<GameFragPersent>() {
                 version = platData[position].version[0].id.toString()
                 mData.clear()
                 adapter.notifyDataSetChanged()
-                persent?.getGameList(name!!, version = version!!, sell = sell!!, type = defaultType!!, page = 0)
+                presenter?.getGameList(name!!, version = version!!, sell = sell!!, type = defaultType!!, page = 0)
             }
 
             override fun versionClick(id: Int) {
@@ -190,7 +190,7 @@ class GameFragment : BaseFrag<GameFragPersent>() {
                 transLayout.showProgress()
                 mData.clear()
                 adapter.notifyDataSetChanged()
-                persent?.getGameList(name!!, version = version!!, sell = sell!!, type = defaultType!!, page = 0)
+                presenter?.getGameList(name!!, version = version!!, sell = sell!!, type = defaultType!!, page = 0)
             }
 
             override fun sellClick(id: Int) {
@@ -198,7 +198,7 @@ class GameFragment : BaseFrag<GameFragPersent>() {
                 transLayout.showProgress()
                 mData.clear()
                 adapter.notifyDataSetChanged()
-                persent?.getGameList(name!!, version = version!!, sell = sell!!, type = defaultType!!, page = 0)
+                presenter?.getGameList(name!!, version = version!!, sell = sell!!, type = defaultType!!, page = 0)
             }
 
             override fun releasClick(id: Int) {
@@ -206,7 +206,7 @@ class GameFragment : BaseFrag<GameFragPersent>() {
                 transLayout.showProgress()
                 mData.clear()
                 adapter.notifyDataSetChanged()
-                persent?.getGameList(name!!, version = version!!, sell = sell!!, type = defaultType!!, page = 0)
+                presenter?.getGameList(name!!, version = version!!, sell = sell!!, type = defaultType!!, page = 0)
             }
         })
     }

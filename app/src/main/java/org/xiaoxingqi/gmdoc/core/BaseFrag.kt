@@ -1,7 +1,7 @@
 package org.xiaoxingqi.gmdoc.core
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,14 +12,14 @@ abstract class BaseFrag<T : BasePresenter> : Fragment() {
 
     var mView: View? = null
     var toast: Toast? = null
-    var persent: T? = null
+    var presenter: T? = null
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         if (mView != null) {
             val viewGroup = mView?.parent?.let { it as ViewGroup }
             viewGroup?.removeAllViews()
         } else {
             mView = inflater.inflate(getlyoutId(), null)
-            persent = createPresent()
+            presenter = createPresent()
             initView(mView)
             initData()
             bindEvent()
@@ -50,7 +50,6 @@ abstract class BaseFrag<T : BasePresenter> : Fragment() {
     }
 
     override fun onDestroy() {
-
         super.onDestroy()
     }
 

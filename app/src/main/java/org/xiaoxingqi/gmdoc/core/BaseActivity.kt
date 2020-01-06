@@ -2,7 +2,9 @@ package org.xiaoxingqi.gmdoc.core
 
 import android.os.Build
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
+import android.view.MenuItem
 import android.view.View
 import android.view.Window
 import android.view.WindowManager
@@ -37,7 +39,7 @@ abstract class BaseActivity<T : BasePresenter> : AppCompatActivity() {
             window.requestFeature(Window.FEATURE_CONTENT_TRANSITIONS)
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {//修改状态栏文字颜色
-            window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+//            window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
         }
     }
 
@@ -56,6 +58,14 @@ abstract class BaseActivity<T : BasePresenter> : AppCompatActivity() {
         setContentView(layoutId)
     }
 
+    protected fun initActionBar(actionbar: Toolbar) {
+        setSupportActionBar(actionbar)
+        supportActionBar?.let {
+            it.setDisplayHomeAsUpEnabled(true)
+            it.setDisplayShowTitleEnabled(false)
+        }
+    }
+
     override fun onResume() {
         super.onResume()
         isTopActivity = true
@@ -69,6 +79,13 @@ abstract class BaseActivity<T : BasePresenter> : AppCompatActivity() {
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun onNewViewEvent(event: String) {
 
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        if (item?.itemId == android.R.id.home) {
+            finish()
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     override fun onDestroy() {

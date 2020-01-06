@@ -1,7 +1,11 @@
 package org.xiaoxingqi.gmdoc.impl.global
 
-abstract class WebDetailsCallBack  {
+import org.xiaoxingqi.gmdoc.entity.BowenDetailsData
+import org.xiaoxingqi.gmdoc.entity.CommentData
 
-  abstract fun setData(data:Any)
+abstract class WebDetailsCallBack {
 
+    abstract fun setData(data: CommentData)
+
+    abstract fun webDetails(data: BowenDetailsData)
 }

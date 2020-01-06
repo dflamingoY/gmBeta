@@ -2,8 +2,8 @@ package org.xiaoxingqi.gmdoc.modul.home
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import android.text.Html
 import android.view.LayoutInflater
 import android.view.MotionEvent
@@ -13,8 +13,11 @@ import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.frag_home.view.*
+import kotlinx.android.synthetic.main.frag_home.view.recyclerView
+import kotlinx.android.synthetic.main.home_heard_layout.view.*
 import me.dkzwm.widget.srl.MaterialSmoothRefreshLayout
 import me.dkzwm.widget.srl.RefreshingListenerAdapter
 import me.dkzwm.widget.srl.config.Constants
@@ -29,6 +32,7 @@ import org.xiaoxingqi.gmdoc.entity.home.HomeGameData
 import org.xiaoxingqi.gmdoc.entity.home.HomeUserShareData
 import org.xiaoxingqi.gmdoc.impl.home.HomeTabCallback
 import org.xiaoxingqi.gmdoc.modul.dynamic.DynamicDetailsActivity
+import org.xiaoxingqi.gmdoc.modul.dynamic.WebDetailsActivity
 import org.xiaoxingqi.gmdoc.modul.game.GameDetailsActivity
 import org.xiaoxingqi.gmdoc.modul.game.GameListActivity
 import org.xiaoxingqi.gmdoc.presenter.HomePresent
@@ -45,8 +49,6 @@ class HomeFragment : BaseFrag<HomePresent>() {
     private lateinit var gameRecycler: RecyclerView
     private lateinit var activeLinearContainer: LinearLayout
     private lateinit var swipeRefresh: MaterialSmoothRefreshLayout
-    private lateinit var tv_TopDesc: TextView
-    private lateinit var tv_GameCount: TextView
     private val gameData by lazy {
         ArrayList<List<BaseHomeBean>>()
     }
@@ -58,16 +60,17 @@ class HomeFragment : BaseFrag<HomePresent>() {
         ArrayList<String>()
     }
     private var current = 1
-
+    private var topData: BaseHomeBean? = null
     override fun createPresent(): HomePresent {
         return HomePresent(activity!!, object : HomeTabCallback() {
             override fun gameSuccess(data: HomeGameData?) {
                 gameData.clear()
                 data?.data?.dy_top_big
-                tv_TopDesc.text = data?.data?.dy_top_big?.get(0)?.title
-                Glide.with(this@HomeFragment)
+                headView.tv_TopDesc.text = data?.data?.dy_top_big?.get(0)?.title
+                topData = data?.data?.dy_top_big?.get(0)
+                Glide.with(context)
                         .load(data?.data?.dy_top_big?.get(0)?.cover)
-                        .into(headView.findViewById(R.id.iv_topImg))
+                        .into(headView.iv_topImg)
                 for (indices in data?.data?.game?.data!!.indices) {//遍歷游戏数据在不同的位置插入 新闻
                     if (indices == 2) {
                         gameData.add(data.data?.dy_long!!)
@@ -92,17 +95,26 @@ class HomeFragment : BaseFrag<HomePresent>() {
                     for (a in 0 until data.data.data.size) {
                         val params = LinearLayout.LayoutParams(width, width)
                         val view = LayoutInflater.from(activity).inflate(R.layout.layout_home_active_img, null)
-                        if (a == 0) {
-                            params.setMargins(AppTools.dp2px(activity, 12), AppTools.dp2px(activity, 13), 0, AppTools.dp2px(activity, 13))
-                        } else if (a == data.data.data.size - 1) {
-                            params.setMargins(AppTools.dp2px(activity, 10), AppTools.dp2px(activity, 13), AppTools.dp2px(activity, 12), AppTools.dp2px(activity, 13))
-                        } else {
-                            params.setMargins(AppTools.dp2px(activity, 10), AppTools.dp2px(activity, 13), 0, AppTools.dp2px(activity, 13))
+                        when (a) {
+                            0 -> {
+                                params.setMargins(AppTools.dp2px(activity, 12), AppTools.dp2px(activity, 13), 0, AppTools.dp2px(activity, 13))
+                            }
+                            data.data.data.size - 1 -> {
+                                params.setMargins(AppTools.dp2px(activity, 10), AppTools.dp2px(activity, 13), AppTools.dp2px(activity, 12), AppTools.dp2px(activity, 13))
+                            }
+                            else -> {
+                                params.setMargins(AppTools.dp2px(activity, 10), AppTools.dp2px(activity, 13), 0, AppTools.dp2px(activity, 13))
+                            }
                         }
                         (view.findViewById(R.id.tv_activeName) as TextView).text = data.data.data[a].activity_name
                         Glide.with(activity).load(data.data.data[a].activity_pic)
                                 .centerCrop()
                                 .into(view.findViewById(R.id.img_active) as ImageView)
+                        view.setOnClickListener {
+                            //TODO
+                            startActivity(Intent(context, HomeTabActivity::class.java).putExtra("data", data.data.data[a]))
+
+                        }
                         activeLinearContainer.addView(view, params)
                     }
                 }
@@ -125,7 +137,7 @@ class HomeFragment : BaseFrag<HomePresent>() {
         return R.layout.frag_home
     }
 
-    @SuppressLint("ClickableViewAccessibility")
+    @SuppressLint("ClickableViewAccessibility", "InflateParams")
     override fun initView(view: View?) {
         /**
          * 自动滚动
@@ -141,13 +153,11 @@ class HomeFragment : BaseFrag<HomePresent>() {
         mView!!.recyclerView.isNestedScrollingEnabled = false
         headView = LayoutInflater.from(activity).inflate(R.layout.home_heard_layout, null, false)
         mView!!.relativeAction.alpha = 0f
-        gameRecycler = headView.findViewById(R.id.recyclerView)
-        activeLinearContainer = headView.findViewById(R.id.linear_Active)
+        gameRecycler = headView.recyclerView
+        activeLinearContainer = headView.linear_Active
         swipeRefresh = view!!.swipeRefresh
-        val scrollview = headView.findViewById<LinearScrollView>(R.id.horizontalScrollview)
-        tv_TopDesc = headView.findViewById(R.id.tv_TopDesc)
-        tv_GameCount = headView.findViewById(R.id.tv_GameCount)
-        tv_GameCount.text = Html.fromHtml(resources.getString(R.string.string_all_game_count))
+        val scrollview = headView.horizontalScrollview
+        headView.tv_GameCount.text = Html.fromHtml(resources.getString(R.string.string_all_game_count))
         scrollview.setOnInterListener(object : LinearScrollView.OnInterListener {
             override fun intercept() {
                 swipeRefresh.isEnabled = false
@@ -157,7 +167,7 @@ class HomeFragment : BaseFrag<HomePresent>() {
                 swipeRefresh.isEnabled = true
             }
         })
-        scrollview.setOnTouchListener { v, event ->
+        scrollview.setOnTouchListener { _, event ->
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> {
                     swipeRefresh.isEnabled = false
@@ -206,8 +216,15 @@ class HomeFragment : BaseFrag<HomePresent>() {
                         val homeImg = HomeParentImg(activity!!)
                         val bean = item[a]
                         homeImg.setData(bean)
+                        homeImg.setOnClickListener {
+                            startActivity(Intent(activity, WebDetailsActivity::class.java)
+                                    .putExtra("id", bean.id)
+                            )
+                        }
                         mLinearContainer.addView(homeImg, params)
-
+                        helper.getView(R.id.tv_More).setOnClickListener {
+                            startActivity(Intent(context, MoreArticleActivity::class.java))
+                        }
                     }
                 } else {//游戏列表
                     val linearContainer = helper.itemView.findViewById<LinearLayout>(R.id.linearContainer)
@@ -219,53 +236,57 @@ class HomeFragment : BaseFrag<HomePresent>() {
                      * 分两段    ,  -2  ,  -3
                      */
                     var name = ""
-                    if (position in 0..1) {//0 1
-                        name = gameTitleData[position]
-                    } else if (position in 3..5) {//3 4 5
-                        name = gameTitleData[position - 1]
-                    } else if (position in 7..9) {//7 8 9
-                        name = gameTitleData[position - 2]
+                    when (position) {
+                        in 0..1 -> {//0 1
+                            name = gameTitleData[position]
+                        }
+                        in 3..5 -> {//3 4 5
+                            name = gameTitleData[position - 1]
+                        }
+                        in 7..9 -> {//7 8 9
+                            name = gameTitleData[position - 2]
+                        }
                     }
                     when (name) {
                         "ps4" -> {
                             mTvTypeName.text = "PlayStation 4 最新游戏"
-                            viewDivision.setBackgroundColor(resources.getColor(R.color.color_ps4_))
+                            viewDivision.setBackgroundColor(ContextCompat.getColor(context!!, R.color.color_ps4_))
                             mIvTypeGame.setImageResource(R.mipmap.img_mark_ps4)
                         }
                         "switch" -> {
                             mTvTypeName.text = "Switch 最新游戏"
-                            viewDivision.setBackgroundColor(resources.getColor(R.color.color_Switch))
+                            viewDivision.setBackgroundColor(ContextCompat.getColor(context!!, R.color.color_Switch))
                             mIvTypeGame.setImageResource(R.mipmap.img_mark_switch)
                         }
                         "pc" -> {
                             mTvTypeName.text = "PC 最新游戏"
                             mIvTypeGame.setImageResource(R.mipmap.img_mark_pc)
-                            viewDivision.setBackgroundColor(resources.getColor(R.color.color_PC))
+                            viewDivision.setBackgroundColor(ContextCompat.getColor(context!!, R.color.color_PC))
                         }
                         "xboxone" -> {
                             mTvTypeName.text = "XboxOne 最新游戏"
                             mIvTypeGame.setImageResource(R.mipmap.img_mark_xboxone)
-                            viewDivision.setBackgroundColor(resources.getColor(R.color.color_XBox))
+                            viewDivision.setBackgroundColor(ContextCompat.getColor(context!!, R.color.color_XBox))
                         }
                         "3ds" -> {
                             mTvTypeName.text = "3DS 最新游戏"
                             mIvTypeGame.setImageResource(R.mipmap.img_mark_3ds)
-                            viewDivision.setBackgroundColor(resources.getColor(R.color.color_3DS))
+                            viewDivision.setBackgroundColor(ContextCompat.getColor(context!!, R.color.color_3DS))
                         }
                         "psvita" -> {
                             mIvTypeGame.setImageResource(R.mipmap.img_mark_psvota)
                             mTvTypeName.text = "PSVITA 最新游戏"
-                            viewDivision.setBackgroundColor(resources.getColor(R.color.color_PSVITA))
+                            viewDivision.setBackgroundColor(ContextCompat.getColor(context!!, R.color.color_PSVITA))
                         }
                         "ios" -> {
                             mIvTypeGame.setImageResource(R.mipmap.img_mark_ios)
                             mTvTypeName.text = "iOS 热门游戏"
-                            viewDivision.setBackgroundColor(resources.getColor(R.color.color_IOS))
+                            viewDivision.setBackgroundColor(ContextCompat.getColor(context!!, R.color.color_IOS))
                         }
                         "psvr" -> {
                             mIvTypeGame.setImageResource(R.mipmap.img_mark_psvr)
                             mTvTypeName.text = "PlayStation VR 最新游戏"
-                            viewDivision.setBackgroundColor(resources.getColor(R.color.color_PS_VR))
+                            viewDivision.setBackgroundColor(ContextCompat.getColor(context!!, R.color.color_PS_VR))
                         }
                     }
 
@@ -295,7 +316,7 @@ class HomeFragment : BaseFrag<HomePresent>() {
 
             @SuppressLint("SetTextI18n")
             override fun convert(helper: BaseAdapterHelper?, item: HomeUserShareData.ContributeBean?) {
-                Glide.with(this@HomeFragment)
+                Glide.with(context)
                         .load(item!!.avatar)
                         .override(80, 80)
                         .into(helper!!.getImageView(R.id.iv_UserLogo))
@@ -314,7 +335,7 @@ class HomeFragment : BaseFrag<HomePresent>() {
             }
         }
         mView!!.recyclerView.adapter = adapter
-        persent?.let {
+        presenter?.let {
             it.getActionData()
             it.getAttributeData(current)
             it.getGameData()
@@ -324,7 +345,7 @@ class HomeFragment : BaseFrag<HomePresent>() {
     override fun bindEvent() {
         swipeRefresh.setOnRefreshListener(object : RefreshingListenerAdapter() {
             override fun onRefreshing() {
-                persent?.let {
+                presenter?.let {
                     current = 1
                     it.getActionData()
                     it.getAttributeData(current)
@@ -334,14 +355,17 @@ class HomeFragment : BaseFrag<HomePresent>() {
 
             override fun onLoadingMore() {
                 current++
-                persent?.getAttributeData(current)
+                presenter?.getAttributeData(current)
             }
         })
-        adapter.setOnItemClickListener { view, position ->
+        adapter.setOnItemClickListener { _, position ->
             startActivity(Intent(activity, DynamicDetailsActivity::class.java).putExtra("dynamicId", mData[position].id))
         }
         mView!!.fab_top.setOnClickListener {
             mView!!.recyclerView.scrollToPosition(0)
+        }
+        headView.iv_topImg.setOnClickListener {
+            startActivity(Intent(context, WebDetailsActivity::class.java).putExtra("id", topData?.id))
         }
     }
 
@@ -349,7 +373,4 @@ class HomeFragment : BaseFrag<HomePresent>() {
 
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-    }
 }

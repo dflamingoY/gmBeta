@@ -1,6 +1,9 @@
 package org.xiaoxingqi.gmdoc.entity;
 
-public class ActiveBean {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class ActiveBean implements Parcelable {
     /**
      * id : 1
      * activity_name : 异度之刃2
@@ -12,6 +15,25 @@ public class ActiveBean {
     private String activity_name;
     private String activity_pic;
     private String activity_desc;
+
+    protected ActiveBean(Parcel in) {
+        id = in.readInt();
+        activity_name = in.readString();
+        activity_pic = in.readString();
+        activity_desc = in.readString();
+    }
+
+    public static final Creator<ActiveBean> CREATOR = new Creator<ActiveBean>() {
+        @Override
+        public ActiveBean createFromParcel(Parcel in) {
+            return new ActiveBean(in);
+        }
+
+        @Override
+        public ActiveBean[] newArray(int size) {
+            return new ActiveBean[size];
+        }
+    };
 
     public int getId() {
         return id;
@@ -43,5 +65,18 @@ public class ActiveBean {
 
     public void setActivity_desc(String activity_desc) {
         this.activity_desc = activity_desc;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
+        dest.writeString(activity_name);
+        dest.writeString(activity_pic);
+        dest.writeString(activity_desc);
     }
 }

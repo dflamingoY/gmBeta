@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet"
+          href="https://sx-stag.oss-cn-shenzhen.aliyuncs.com/webfile/normalize.css">
+    <script>
+        document.addEventListener('DOMContentLoaded',function(){
+            var st = setTimeout(function(){
+                clearTimeout(st)
+                 document.body.style.backgroundColor='transparent';
+            },1000)
+
+        });
+    </script>
+    <style>
+    body{
+      padding:0 15px;
+      margin:0;
+      background-color:rbga(0,0,0,.1);
+    }
+  // @font-face {
+  // font-family: bygf3500;
+  // src: url("file:///android_asset/bygf3500.ttf")
+  // }
+  // body *{
+  //     font-family: bygf3500;
+  //     font-size: medium;
+  //     text-align: justify;
+  // }
+    #document-content{
+       min-height:100vh;
+       height:100%;
+       width:100%;
+    }
+    .night-body{
+      background-color:#181828;
+     }
+    .night-style *,
+    .night-style span,
+    .night-style a,
+    .night-style p {
+//     color:#72727f ;
+    }
+
+    .white-style{
+        background-color:#fff !important;
+    }
+    img {
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -o-user-select: none;
+      user-select: none;
+      display: block;
+      max-width: 100%;
+      max-height: 100%;
+      margin: 0 auto;
+    }
+
+
+
+
+
+
+
+
+    </style>
+    <title>Document</title>
+</head>
+<body>
+<div id="document-content">
+
+
+</div>
+<script>
+    var RE = {};
+    var ContentDom = document.getElementById('document-content');
+    RE.setHtml = function(contents) {
+     ContentDom.innerHTML = contents;
+     var  height = window.getComputedStyle(ContentDom).height;
+     return height
+    }
+    RE.callback = function(isNight){
+      if(Boolean(isNight)){
+         document.body.classList.add('night-style');
+         document.body.classList.remove('white-style');
+
+      }else{
+         document.body.classList.add('white-style');
+         document.body.classList.remove('night-style');
+      }
+    }
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>

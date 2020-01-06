@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <android.support.design.widget.AppBarLayout
+        <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -63,7 +63,7 @@
                     android:textColor="#ff863e"
                     android:textSize="18sp" />
             </RelativeLayout>
-        </android.support.design.widget.AppBarLayout>
+        </com.google.android.material.appbar.AppBarLayout>
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -97,7 +97,7 @@
                 android:layout_gravity="bottom"
                 android:layout_marginBottom="86dp">
 
-                <android.support.v7.widget.RecyclerView
+                <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recycler_img"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -112,7 +112,7 @@
                     android:layout_marginRight="12dp"
                     android:visibility="gone">
 
-                    <org.xiaoxingqi.gmdoc.wegidt.gameDetails.SqureImageView
+                    <org.xiaoxingqi.gmdoc.wegidt.gameDetails.SquareImageView
                         android:id="@+id/squreImg"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

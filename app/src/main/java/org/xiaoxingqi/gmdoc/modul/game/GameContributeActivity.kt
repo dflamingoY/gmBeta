@@ -2,7 +2,7 @@ package org.xiaoxingqi.gmdoc.modul.game
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.support.v7.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.text.Editable
 import android.text.Html
 import android.text.TextWatcher

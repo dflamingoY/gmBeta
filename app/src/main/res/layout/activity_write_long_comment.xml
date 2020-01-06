@@ -24,7 +24,7 @@
             android:background="@color/color_white"
             android:orientation="vertical">
 
-            <android.support.design.widget.AppBarLayout
+            <com.google.android.material.appbar.AppBarLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/color_white"
@@ -85,9 +85,9 @@
                         android:textColor="#ff863e"
                         android:textSize="18sp" />
                 </RelativeLayout>
-            </android.support.design.widget.AppBarLayout>
+            </com.google.android.material.appbar.AppBarLayout>
 
-            <android.support.v4.widget.NestedScrollView
+            <androidx.core.widget.NestedScrollView
                 android:id="@+id/nestedScroll"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -103,7 +103,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
-                        <org.xiaoxingqi.gmdoc.wegidt.gameDetails.SqureImageView
+                        <org.xiaoxingqi.gmdoc.wegidt.gameDetails.SquareImageView
                             android:id="@+id/iv_Cover"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
@@ -260,7 +260,7 @@
                         android:padding="16dp" />
 
                 </LinearLayout>
-            </android.support.v4.widget.NestedScrollView>
+            </androidx.core.widget.NestedScrollView>
 
         </LinearLayout>
 

@@ -2,8 +2,8 @@ package org.xiaoxingqi.gmdoc.modul.lifeCircle
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import android.view.View
 import android.widget.FrameLayout
 import com.bumptech.glide.Glide
@@ -123,19 +123,19 @@ class TypeCircleFragment : BaseFrag<TypeFragPresenter>() {
         }
         recyclerView.layoutManager = LinearLayoutManager(activity)
         recyclerView.adapter = adapter
-        persent?.queryData(current, userId, chooseType)
+        presenter?.queryData(current, userId, chooseType)
     }
 
     override fun bindEvent() {
         refreshLayout.setOnRefreshListener(object : RefreshingListenerAdapter() {
             override fun onRefreshing() {
                 current = 0
-                persent?.queryData(current, userId, chooseType)
+                presenter?.queryData(current, userId, chooseType)
             }
 
             override fun onLoadingMore() {
                 current++
-                persent?.queryData(current, userId, chooseType)
+                presenter?.queryData(current, userId, chooseType)
             }
         })
         adapter.setOnItemClickListener { _, position ->

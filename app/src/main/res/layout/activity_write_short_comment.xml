@@ -16,7 +16,7 @@
         android:background="@color/color_white"
         android:orientation="vertical">
 
-        <android.support.design.widget.AppBarLayout
+        <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="80dp"
             android:background="@color/color_white"
@@ -80,7 +80,7 @@
                     android:textColor="#ff863e"
                     android:textSize="18sp" />
             </RelativeLayout>
-        </android.support.design.widget.AppBarLayout>
+        </com.google.android.material.appbar.AppBarLayout>
 
         <ScrollView
             android:id="@+id/nestedScroll"

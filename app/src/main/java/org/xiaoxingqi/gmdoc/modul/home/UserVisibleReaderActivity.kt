@@ -1,6 +1,6 @@
 package org.xiaoxingqi.gmdoc.modul.home
 
-import android.support.design.widget.Snackbar
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_circle_recommend.*
 import org.xiaoxingqi.gmdoc.R
 import org.xiaoxingqi.gmdoc.core.BaseAct

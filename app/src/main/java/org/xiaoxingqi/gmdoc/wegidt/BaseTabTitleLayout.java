@@ -6,9 +6,11 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Build;
-import android.support.annotation.AttrRes;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+
+import androidx.annotation.AttrRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.View;
@@ -33,7 +35,7 @@ public class BaseTabTitleLayout extends LinearLayout implements View.OnClickList
     private CharSequence[] mTextArray;
     private boolean isFirst = false;
     private int defalueColor = Color.parseColor("#888888");
-    private int selectColor = Color.parseColor("#282828");
+    private int selectColor;
     private OnClickListener mClickListener;
     private int slidWidth = 80;//dp
     private int DP = 1;

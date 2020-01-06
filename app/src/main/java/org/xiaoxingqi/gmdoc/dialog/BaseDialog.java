@@ -3,7 +3,7 @@ package org.xiaoxingqi.gmdoc.dialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import android.view.Gravity;
 import android.view.Window;
 import android.view.WindowManager;

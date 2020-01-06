@@ -25,5 +25,10 @@
         <item>草稿箱</item>
         <item>垃圾箱</item>
     </string-array>
+    <array name="homeActive">
+        <item>动态和博文</item>
+        <item>博文</item>
+        <item>推荐</item>
+    </array>
 
 </resources>

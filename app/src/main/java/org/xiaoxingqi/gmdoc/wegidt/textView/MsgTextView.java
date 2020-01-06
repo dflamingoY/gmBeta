@@ -1,12 +1,11 @@
 package org.xiaoxingqi.gmdoc.wegidt.textView;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
-import android.support.v4.view.MotionEventCompat;
-import android.support.v7.widget.AppCompatTextView;
+import androidx.core.view.MotionEventCompat;
+import androidx.appcompat.widget.AppCompatTextView;
 import android.text.Html;
 import android.text.Layout;
 import android.text.Spannable;

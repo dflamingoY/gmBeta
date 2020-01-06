@@ -87,7 +87,7 @@
 
         </LinearLayout>
 
-        <android.support.v7.widget.RecyclerView
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -98,7 +98,7 @@
             android:focusableInTouchMode="false"
             android:visibility="visible">
 
-        </android.support.v7.widget.RecyclerView>
+        </androidx.recyclerview.widget.RecyclerView>
 
         <RelativeLayout
             android:id="@+id/relativeVedio"
@@ -108,7 +108,7 @@
             android:layout_marginRight="12dp"
             android:visibility="gone">
 
-            <org.xiaoxingqi.gmdoc.wegidt.gameDetails.SqureImageView
+            <org.xiaoxingqi.gmdoc.wegidt.gameDetails.SquareImageView
                 android:id="@+id/iv_Details"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
