@@ -31,4 +31,9 @@
         <item>推荐</item>
     </array>
 
+    <array name="homeMore">
+        <item>长评</item>
+        <item>博文</item>
+    </array>
+
 </resources>

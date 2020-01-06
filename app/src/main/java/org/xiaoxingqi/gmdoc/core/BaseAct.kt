@@ -2,11 +2,13 @@ package org.xiaoxingqi.gmdoc.core
 
 import android.os.Build
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import android.view.View
 import android.view.Window
 import android.view.WindowManager
 import android.widget.Toast
+import androidx.appcompat.widget.Toolbar
 
 abstract class BaseAct : AppCompatActivity() {
 
@@ -51,6 +53,20 @@ abstract class BaseAct : AppCompatActivity() {
 
     abstract fun initEvent()
     abstract fun request()
+    protected fun initActionBar(actionbar: Toolbar) {
+        setSupportActionBar(actionbar)
+        supportActionBar?.let {
+            it.setDisplayHomeAsUpEnabled(true)
+            it.setDisplayShowTitleEnabled(false)
+        }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        if (item?.itemId == android.R.id.home) {
+            finish()
+        }
+        return super.onOptionsItemSelected(item)
+    }
 
     protected fun showToast(text: String) {
         Toast.makeText(this, text, Toast.LENGTH_SHORT).show()
