@@ -66,8 +66,8 @@ class GameShortCommentView(context: Context) : BaseLayout(context) {
             iv_Flag.visibility = GONE
         }
         Glide.with(context)
-                .load(bean.img)
                 .asBitmap()
+                .load(bean.img)
                 .error(R.mipmap.img_avatar_default)
                 .into(iv_UserLogo)
         tv_GameDesc.setData(AppConfig.getImageHtml(bean.content))

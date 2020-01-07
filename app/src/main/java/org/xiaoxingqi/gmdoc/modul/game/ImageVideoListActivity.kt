@@ -98,8 +98,8 @@ class ImageVideoListActivity : BaseActivity<GameImageVideoPresenter>() {
                     helper.getView(R.id.viewIsVedio).visibility = View.VISIBLE
                 }
                 Glide.with(this@ImageVideoListActivity)
-                        .load(data.pic)
                         .asBitmap()
+                        .load(data.pic)
                         .error(R.mipmap.img_empty_square)
                         .centerCrop()
                         .into(helper.getImageView(R.id.iv_game_img))

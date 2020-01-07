@@ -7,8 +7,8 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import androidx.viewpager.widget.ViewPager
 import com.bumptech.glide.Glide
-import com.bumptech.glide.request.animation.GlideAnimation
 import com.bumptech.glide.request.target.SimpleTarget
+import com.bumptech.glide.request.transition.Transition
 import com.google.android.material.appbar.AppBarLayout
 import kotlinx.android.synthetic.main.activity_home_tab.*
 import kotlinx.android.synthetic.main.layout_home_active_heard.*
@@ -41,10 +41,10 @@ class HomeTabActivity : BaseAct() {
             }
         }
         Glide.with(this)
-                .load(data.activity_pic)
                 .asBitmap()
+                .load(data.activity_pic)
                 .into(object : SimpleTarget<Bitmap>() {
-                    override fun onResourceReady(resource: Bitmap?, glideAnimation: GlideAnimation<in Bitmap>?) {
+                    override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
                         activeImg.post {
                             FastBlur().fastblur(resource, 60, iv_bg).let {
                                 iv_bg.setImageBitmap(it)
@@ -88,7 +88,7 @@ class HomeTabActivity : BaseAct() {
 
     }
 
-    private inner class Adapter(fm: FragmentManager?) : FragmentPagerAdapter(fm) {
+    private inner class Adapter(fm: FragmentManager) : FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
         override fun getItem(position: Int): Fragment {
             return fragments[position]
         }

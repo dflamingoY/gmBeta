@@ -178,8 +178,8 @@ public class EmojiLayoutView extends BaseLayout {
                             helper.getImageView(R.id.iv_emoji).setImageResource(R.mipmap.edit_delete);
                         } else {
                             Glide.with(mContext)
-                                    .load("file:///android_asset/" + entity.getIconName())
                                     .asBitmap()
+                                    .load("file:///android_asset/" + entity.getIconName())
                                     .into(helper.getImageView(R.id.iv_emoji));
                         }
                     }

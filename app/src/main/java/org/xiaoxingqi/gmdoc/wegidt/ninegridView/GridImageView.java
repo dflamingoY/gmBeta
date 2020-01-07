@@ -10,7 +10,7 @@ import androidx.appcompat.widget.AppCompatImageView;
 import android.util.AttributeSet;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.bumptech.glide.request.target.SimpleTarget;
 
 import org.xiaoxingqi.gmdoc.R;
@@ -68,15 +68,10 @@ public class GridImageView extends AppCompatImageView {
     public void loadPic(String url, boolean isSpoiler) {
         isGif = url.contains(".gif");
         Glide.with(getContext())
-                .load(isSpoiler ? R.mipmap.img_hidden_106 : url)
                 .asBitmap()
+                .load(isSpoiler ? R.mipmap.img_hidden_106 : url)
                 .centerCrop()
-                .into(new SimpleTarget<Bitmap>() {
-                    @Override
-                    public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
-                        setImageBitmap(resource);
-                    }
-                });
+                .into(new BitmapImageViewTarget(this));
     }
 
     private boolean isGif = false;

@@ -8,7 +8,6 @@ import android.view.LayoutInflater
 import android.widget.LinearLayout
 import com.nineoldandroids.animation.*
 import kotlinx.android.synthetic.main.linaer_title_sort.view.*
-import org.jetbrains.anko.textColor
 import org.xiaoxingqi.gmdoc.R
 
 class LinearTabView : LinearLayout {
@@ -43,7 +42,7 @@ class LinearTabView : LinearLayout {
         val valueAnimator = ValueAnimator.ofObject(ArgbEvaluator(), Color.parseColor("#FFff7a31"), Color.parseColor("#ff888888"))
         valueAnimator.addUpdateListener {
             val value = it.animatedValue as Int
-            tv_Name.textColor = value
+            tv_Name.setTextColor(value)
         }
         valueAnimator.duration = 320
         valueAnimator.start()
@@ -64,7 +63,7 @@ class LinearTabView : LinearLayout {
         val valueAnimator = ValueAnimator.ofObject(ArgbEvaluator(), Color.parseColor("#ff888888"), Color.parseColor("#FFff7a31"))
         valueAnimator.addUpdateListener {
             val value = it.animatedValue as Int
-            tv_Name.textColor = value
+            tv_Name.setTextColor(value)
         }
         valueAnimator.duration = 320
         valueAnimator.start()

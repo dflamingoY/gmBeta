@@ -40,8 +40,8 @@ class UserHomeActivity : BaseActivity<HomeUserInfoPersent>() {
             @SuppressLint("SetTextI18n")
             override fun userInfo(info: UserInfoData?) {
                 Glide.with(this@UserHomeActivity)
-                        .load(info!!.data.top_image)
                         .asBitmap()
+                        .load(info!!.data.top_image)
                         .into(iv_User_Bg)
                 Glide.with(this@UserHomeActivity)
                         .load(info.data.avatar)

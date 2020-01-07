@@ -83,8 +83,8 @@ class UserPhotoListActivity : BaseActivity<UserPresenter>() {
                         }
                     }
                     Glide.with(this@UserPhotoListActivity)
-                            .load(item.url + "?imageMogr2/thumbnail/!240x240r/auto-orient")
                             .asBitmap()
+                            .load(item.url + "?imageMogr2/thumbnail/!240x240r/auto-orient")
                             .override(190, 190)
                             .placeholder(R.drawable.img_empty_avatar_back)
                             .centerCrop()

@@ -20,7 +20,6 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.View
 import com.bumptech.glide.Glide
-import com.bumptech.glide.request.target.GlideDrawableImageViewTarget
 import com.nineoldandroids.animation.Animator
 import com.nineoldandroids.animation.AnimatorListenerAdapter
 import com.nineoldandroids.animation.ObjectAnimator
@@ -85,8 +84,8 @@ class AlbumActivity : BaseAct() {
                 if ("相机" == item) {
                     helper!!.getImageView(R.id.img).setImageResource(R.mipmap.img_takephoto)
                     Glide.with(helper.getImageView(R.id.img).context)
-                            .load(R.mipmap.img_takephoto)
                             .asBitmap()
+                            .load(R.mipmap.img_takephoto)
                             .error(R.drawable.img_empty_avatar_back)
                             .placeholder(R.mipmap.img_takephoto)
                             .centerCrop()
@@ -99,8 +98,8 @@ class AlbumActivity : BaseAct() {
                         helper!!.getView(R.id.iv_Gif).visibility = View.GONE
                     }
                     Glide.with(helper.getImageView(R.id.img).context)
-                            .load(item)
                             .asBitmap()
+                            .load(item)
                             .error(R.drawable.img_empty_avatar_back)
                             .centerCrop()
                             .skipMemoryCache(true)
@@ -143,7 +142,7 @@ class AlbumActivity : BaseAct() {
                         .error(R.drawable.img_empty_avatar_back)
                         .centerCrop()
                         .override(180, 180)
-                        .into(GlideDrawableImageViewTarget(helper.getImageView(R.id.iv_img), 0))
+                        .into(helper.getImageView(R.id.iv_img))
                 helper.getTextView(R.id.tv_Title).text = item.name
                 helper.getTextView(R.id.tv_Count).text = item.count.toString() + ""
             }

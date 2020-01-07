@@ -4,15 +4,12 @@ import android.graphics.Canvas;
 import android.graphics.ColorFilter;
 import android.graphics.drawable.Drawable;
 
-import com.bumptech.glide.load.resource.drawable.GlideDrawable;
-
-
 /**
  * @author CentMeng csdn@vip.163.com on 16/7/19.
  */
-public class UrlDrawable_Glide extends Drawable implements Drawable.Callback {
+public class UrlGIfDrawable extends Drawable implements Drawable.Callback {
 
-    private GlideDrawable mDrawable;
+    private Drawable mDrawable;
 
     @Override
     public void draw(Canvas canvas) {
@@ -43,7 +40,7 @@ public class UrlDrawable_Glide extends Drawable implements Drawable.Callback {
         return 0;
     }
 
-    public void setDrawable(GlideDrawable drawable) {
+    public void setDrawable(Drawable drawable) {
         if (this.mDrawable != null) {
             this.mDrawable.setCallback(null);
         }

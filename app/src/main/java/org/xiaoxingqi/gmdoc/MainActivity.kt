@@ -16,7 +16,6 @@ import android.view.KeyEvent
 import android.view.View
 import android.view.WindowManager
 import com.bumptech.glide.Glide
-import com.bumptech.glide.request.target.GlideDrawableImageViewTarget
 import kotlinx.android.synthetic.main.activity_main.*
 import okhttp3.WebSocket
 import org.greenrobot.eventbus.Subscribe
@@ -85,10 +84,11 @@ class MainActivity : BaseActivity<MainPresenter>() {
                     PreferenceTools.saveObj(this@MainActivity, IConstant.USERINFO, it)
                     drawerlayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
                     Glide.with(this@MainActivity)
+                            .asBitmap()
                             .load(it.data.avatar)
                             .error(R.mipmap.img_avatar_default)
                             .centerCrop()
-                            .into(GlideDrawableImageViewTarget(iv_UserLogo, 0))
+                            .into(iv_UserLogo)
                     Glide.with(this@MainActivity)
                             .load(it.data.top_image)
 //                            .error(R.mipmap.img_mine_banner)

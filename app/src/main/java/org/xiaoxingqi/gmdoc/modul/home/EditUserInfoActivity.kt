@@ -46,8 +46,8 @@ class EditUserInfoActivity : BaseActivity<UserPresenter>() {
         et_Name.setText(infoData.data.username)
         et_Desc.setText(infoData.data.desc)
         Glide.with(this)
-                .load(infoData.data.avatar)
                 .asBitmap()
+                .load(infoData.data.avatar)
                 .into(iv_Logo)
         map["_token"] = App.s_Token!!
         if ("1" == infoData.data.sex) {
@@ -108,8 +108,8 @@ class EditUserInfoActivity : BaseActivity<UserPresenter>() {
             } else if (requestCode == REQUEST_CROP) {
                 val path = data?.getStringExtra("path")
                 Glide.with(this)
-                        .load(path)
                         .asBitmap()
+                        .load(path)
                         .into(iv_Logo)
                 map["type"] = "2"
                 map["url"] = path!!

@@ -11,7 +11,6 @@ import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_chat.*
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
-import org.jetbrains.anko.backgroundResource
 import org.xiaoxingqi.gmdoc.R
 import org.xiaoxingqi.gmdoc.core.App
 import org.xiaoxingqi.gmdoc.core.BaseActivity
@@ -97,7 +96,8 @@ class ChatActivity : BaseActivity<MessagePresenter>() {
                         Glide.with(this@ChatActivity)
                                 .load(item.from_avatar)
                                 .into(helper.getImageView(R.id.iv_rightimg))
-                        helper.getView(R.id.frame_container).backgroundResource = R.drawable.shape_round_white_r_2
+                        helper.getView(R.id.frame_container).setBackgroundResource(R.drawable.shape_round_white_r_2)
+
                         Gravity.RIGHT
                     } else {
                         helper!!.getView(R.id.cardLeft).visibility = View.VISIBLE
@@ -105,7 +105,7 @@ class ChatActivity : BaseActivity<MessagePresenter>() {
                         Glide.with(this@ChatActivity)
                                 .load(item.from_avatar)
                                 .into(helper.getImageView(R.id.iv_leftimg))
-                        helper.getView(R.id.frame_container).backgroundResource = R.drawable.shape_round_white_r_2
+                        helper.getView(R.id.frame_container).setBackgroundResource(R.drawable.shape_round_white_r_2)
                         Gravity.LEFT
                     }
                     if (item.is_pic == 0) {

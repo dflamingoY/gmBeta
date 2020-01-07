@@ -46,8 +46,8 @@ class LoveGameListActivity : BaseActivity<UserPresenter>() {
                 helper!!.getTextView(R.id.tv_List).text = "No." + item!!.rank
                 helper.getTextView(R.id.tv_GameName).text = item.game_name
                 Glide.with(this@LoveGameListActivity)
-                        .load(item.img)
                         .asBitmap()
+                        .load(item.img)
                         .centerCrop()
                         .override(360, 180)
                         .error(R.drawable.img_empty_avatar_back)

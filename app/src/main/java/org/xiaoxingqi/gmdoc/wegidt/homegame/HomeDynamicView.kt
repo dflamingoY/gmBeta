@@ -3,17 +3,12 @@ package org.xiaoxingqi.gmdoc.wegidt.homegame
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.graphics.Canvas
 import android.graphics.Color
 import android.text.TextUtils
 import android.util.AttributeSet
-import android.util.Log
 import android.view.View
-import android.widget.ImageView
-import com.bumptech.glide.Glide
 import com.nostra13.universalimageloader.core.ImageLoader
 import kotlinx.android.synthetic.main.layout_dynamic.view.*
-import org.jetbrains.anko.backgroundColor
 import org.xiaoxingqi.gmdoc.R
 import org.xiaoxingqi.gmdoc.entity.BaseImgBean
 import org.xiaoxingqi.gmdoc.entity.home.HomeUserShareData
@@ -43,7 +38,7 @@ class HomeDynamicView : BaseLayout {
                 }
             }
         }
-        nigenineGridView.setItemImageClickListener { context, imageView, index, list ->
+        nigenineGridView.setItemImageClickListener { context, _, index, _ ->
             context.startActivity(Intent(context, ShowPicActivity::class.java)
                     .putExtra("imgs", bean?.img)
                     .putExtra("index", index)
@@ -65,7 +60,7 @@ class HomeDynamicView : BaseLayout {
 
         } else {
             linear_Repeat.visibility = GONE
-            linearContent.backgroundColor = Color.WHITE
+            linearContent.setBackgroundColor(Color.WHITE)
             if (bean.game_id != null) {
                 val text = "为 " + bean.game.game_name + "(" + bean.game.game_pla + "|" + bean.game.game_ver + ") " + "贡献了游戏截图" + "#" + bean.game.game_name + "#"
                 tv_Content_Title.setData(text, bean.game.game_name + "(" + bean.game.game_pla + "|" + bean.game.game_ver + ") ")

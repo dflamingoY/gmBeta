@@ -122,7 +122,7 @@ class HomeCircleFragment : BaseFrag<TypeFragPresenter>() {
                     helper!!.getView(R.id.cardLogo).setBackgroundResource(0)
                     helper.getTextView(R.id.tv_UserName).text = "关注更多人"
                     helper.getTextView(R.id.tv_UserName).setTextColor(resources.getColor(R.color.color_shallow_yellow))
-                    Glide.with(activity)
+                    Glide.with(this@HomeCircleFragment)
                             .load(R.mipmap.btn_user_more)
                             .error(R.mipmap.btn_user_more)
                             .placeholder(R.mipmap.btn_user_more)
@@ -130,7 +130,7 @@ class HomeCircleFragment : BaseFrag<TypeFragPresenter>() {
                 } else {
                     helper!!.getView(R.id.cardLogo).setBackgroundResource(R.drawable.shape_red_circle)
                     helper.getTextView(R.id.tv_UserName).setTextColor(Color.parseColor("#4a4a4a"))
-                    Glide.with(activity)
+                    Glide.with(this@HomeCircleFragment)
                             .load(data.avatar)
                             .error(R.mipmap.img_avatar_default)
                             .into(helper.getImageView(R.id.iv_userLogo))

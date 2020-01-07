@@ -2,6 +2,7 @@ package org.xiaoxingqi.gmdoc.wegidt.gifTools;
 
 import android.content.Context;
 import android.graphics.Rect;
+import android.graphics.drawable.Animatable;
 import android.graphics.drawable.Drawable;
 import android.text.Html;
 import android.view.View;
@@ -9,16 +10,18 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.Request;
-import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.ViewTarget;
+import com.bumptech.glide.request.transition.Transition;
 
 import org.xiaoxingqi.gmdoc.R;
 import org.xiaoxingqi.gmdoc.tools.AppTools;
 
 import java.util.HashSet;
 import java.util.Set;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 /**
  * @author CentMeng csdn@vip.163.com on 16/7/19.
@@ -40,7 +43,7 @@ public class GlideImageGetter implements Html.ImageGetter, Drawable.Callback {
         if (prev == null) return;
 
         for (ImageGetterViewTarget target : prev.mTargets) {
-            Glide.clear(target);
+            Glide.with(mContext).clear(target);
         }
     }
 
@@ -55,11 +58,11 @@ public class GlideImageGetter implements Html.ImageGetter, Drawable.Callback {
 
     @Override
     public Drawable getDrawable(String url) {
-        final UrlDrawable_Glide urlDrawable = new UrlDrawable_Glide();
+        final UrlGIfDrawable urlDrawable = new UrlGIfDrawable();
         Glide.with(mContext)
                 .load(url)
                 .override(1, 1)
-                .diskCacheStrategy(DiskCacheStrategy.SOURCE)
+                .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
                 .into(new ImageGetterViewTarget(mTextView, urlDrawable));
         return urlDrawable;
     }
@@ -79,18 +82,26 @@ public class GlideImageGetter implements Html.ImageGetter, Drawable.Callback {
 
     }
 
-    private class ImageGetterViewTarget extends ViewTarget<TextView, GlideDrawable> {
+    private class ImageGetterViewTarget extends ViewTarget<TextView, Drawable> {
 
-        private final UrlDrawable_Glide mDrawable;
+        private final UrlGIfDrawable mDrawable;
 
-        private ImageGetterViewTarget(TextView view, UrlDrawable_Glide drawable) {
+        private ImageGetterViewTarget(TextView view, UrlGIfDrawable drawable) {
             super(view);
             mTargets.add(this);
             this.mDrawable = drawable;
         }
 
+        private Request request;
+
         @Override
-        public void onResourceReady(final GlideDrawable resource, GlideAnimation<? super GlideDrawable> glideAnimation) {
+        public Request getRequest() {
+            return request;
+        }
+
+        @Override
+        public void onResourceReady(@NonNull Drawable resource, @Nullable Transition<? super Drawable> transition) {
+
             Rect rect;
             if (resource.getIntrinsicWidth() > 100) {
                 float width;
@@ -114,10 +125,10 @@ public class GlideImageGetter implements Html.ImageGetter, Drawable.Callback {
             resource.setBounds(rect);
             mDrawable.setBounds(rect);
             mDrawable.setDrawable(resource);
-            if (resource.isAnimated()) {
+            if (resource instanceof Animatable) {
                 mDrawable.setCallback(get(getView()));
-                resource.setLoopCount(GlideDrawable.LOOP_FOREVER);
-                resource.start();
+//                resource.setLoopCount(GlideDrawable.LOOP_FOREVER);
+                ((Animatable) resource).start();
             }
             getView().addOnAttachStateChangeListener(new View.OnAttachStateChangeListener() {
                 @Override
@@ -125,26 +136,20 @@ public class GlideImageGetter implements Html.ImageGetter, Drawable.Callback {
                     /**
                      * 添加视图
                      */
-                    if (resource != null)
-                        resource.start();
+                    if (resource instanceof Animatable)
+                        ((Animatable) resource).start();
                 }
 
                 @Override
                 public void onViewDetachedFromWindow(View v) {
-                    if (resource != null)
-                        if (resource.isRunning())
-                            resource.stop();
+                    if (resource instanceof Animatable)
+                        if (((Animatable) resource).isRunning())
+                            ((Animatable) resource).stop();
                 }
             });
             getView().setText(getView().getText());
             getView().invalidate();
-        }
 
-        private Request request;
-
-        @Override
-        public Request getRequest() {
-            return request;
         }
 
         @Override

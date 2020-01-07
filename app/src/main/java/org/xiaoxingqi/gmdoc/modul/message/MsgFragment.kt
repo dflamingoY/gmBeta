@@ -54,7 +54,7 @@ class MsgFragment : BaseFrag<MessagePresenter>() {
     override fun initData() {
         adapter = object : QuickAdapter<BaseMsgListBean>(activity, R.layout.item_msg, mData, headView) {
             override fun convert(helper: BaseAdapterHelper?, item: BaseMsgListBean?) {
-                Glide.with(activity)
+                Glide.with(this@MsgFragment)
                         .load(item!!.img)
                         .error(R.mipmap.img_avatar_default)
                         .into(helper!!.getImageView(R.id.iv_userLogo))

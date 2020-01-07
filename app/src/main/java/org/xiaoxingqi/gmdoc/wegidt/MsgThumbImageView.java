@@ -10,8 +10,8 @@ import androidx.appcompat.widget.AppCompatImageView;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 
-import com.bumptech.glide.BitmapRequestBuilder;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.RequestBuilder;
 
 import org.xiaoxingqi.gmdoc.R;
 
@@ -104,10 +104,10 @@ public class MsgThumbImageView extends AppCompatImageView {
             }
         }
         setBlendDrawable(maskId);
-        BitmapRequestBuilder builder;
+        RequestBuilder builder;
         builder = Glide.with(getContext().getApplicationContext())
-                .load(path)
                 .asBitmap()
+                .load(path)
                 .override(width, height)
                 .fitCenter()
                 .placeholder(R.drawable.img_empty_avatar_back)

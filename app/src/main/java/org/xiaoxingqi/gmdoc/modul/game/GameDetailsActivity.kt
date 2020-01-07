@@ -11,8 +11,8 @@ import android.text.TextUtils
 import android.view.*
 import android.widget.*
 import com.bumptech.glide.Glide
-import com.bumptech.glide.request.animation.GlideAnimation
 import com.bumptech.glide.request.target.BitmapImageViewTarget
+import com.bumptech.glide.request.transition.Transition
 import kotlinx.android.synthetic.main.activity_game_details.*
 import kotlinx.android.synthetic.main.game_head.view.*
 import org.xiaoxingqi.gmdoc.R
@@ -111,11 +111,11 @@ class GameDetailsActivity : BaseActivity<GameDetailPresenter>() {
 
             override fun gameDetails(data: GameDetailsData?) {
                 Glide.with(this@GameDetailsActivity)
-                        .load(data?.game?.cover)
                         .asBitmap()
+                        .load(data?.game?.cover)
                         .into(object : BitmapImageViewTarget(headView.iv_Game_Logo) {
-                            override fun onResourceReady(resource: Bitmap?, glideAnimation: GlideAnimation<in Bitmap>?) {
-                                super.onResourceReady(resource, glideAnimation)
+                            override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
+                                super.onResourceReady(resource, transition)
                                 headView.iv_Bluer_Bg.setImageBitmap(FastBlur().fastblur(resource, 30, headView.iv_Bluer_Bg))
                             }
                         })

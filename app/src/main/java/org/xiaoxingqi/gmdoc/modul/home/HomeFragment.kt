@@ -68,7 +68,7 @@ class HomeFragment : BaseFrag<HomePresent>() {
                 data?.data?.dy_top_big
                 headView.tv_TopDesc.text = data?.data?.dy_top_big?.get(0)?.title
                 topData = data?.data?.dy_top_big?.get(0)
-                Glide.with(context)
+                Glide.with(this@HomeFragment)
                         .load(data?.data?.dy_top_big?.get(0)?.cover)
                         .into(headView.iv_topImg)
                 for (indices in data?.data?.game?.data!!.indices) {//遍歷游戏数据在不同的位置插入 新闻
@@ -107,8 +107,7 @@ class HomeFragment : BaseFrag<HomePresent>() {
                             }
                         }
                         (view.findViewById(R.id.tv_activeName) as TextView).text = data.data.data[a].activity_name
-                        Glide.with(activity).load(data.data.data[a].activity_pic)
-                                .centerCrop()
+                        Glide.with(activity!!).load(data.data.data[a].activity_pic)
                                 .into(view.findViewById(R.id.img_active) as ImageView)
                         view.setOnClickListener {
                             //TODO

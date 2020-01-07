@@ -164,8 +164,8 @@ class ArticleListView(context: Context) : BaseLayout(context) {
                 IConstant.PICSPORT + bean.cover
             }
             Glide.with(context)
-                    .load(url)
                     .asBitmap()
+                    .load(url)
                     .override(360, 180)
                     .centerCrop()
                     .into(iv_Details)

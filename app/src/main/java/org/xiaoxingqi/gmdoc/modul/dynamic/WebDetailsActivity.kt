@@ -56,8 +56,8 @@ class WebDetailsActivity : BaseActivity<WebPresenter>() {
                                     .centerCrop()
                                     .into(headView.squareBg)
                             Glide.with(this@WebDetailsActivity)
-                                    .load(bean.self.avatar)
                                     .asBitmap()
+                                    .load(bean.self.avatar)
                                     .error(R.mipmap.img_avatar_default)
                                     .centerCrop()
                                     .into(headView.ivUserLogo)
@@ -97,8 +97,8 @@ class WebDetailsActivity : BaseActivity<WebPresenter>() {
         adapter = object : QuickAdapter<CommentData.CommentDataBean>(this, R.layout.layout_item_comment_list_details, mData, headView) {
             override fun convert(helper: BaseAdapterHelper?, item: CommentData.CommentDataBean?) {
                 Glide.with(this@WebDetailsActivity)
-                        .load(item!!.avatar)
                         .asBitmap()
+                        .load(item!!.avatar)
                         .into(helper!!.getImageView(R.id.iv_Logo))
                 helper.getTextView(R.id.tv_FromUser).text = item.username
                 helper.getTextView(R.id.tv_LoveGame).text = item.like_game

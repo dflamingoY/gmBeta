@@ -66,8 +66,8 @@ class InviteScoreActivity : BaseActivity<InviteScorePresenter>() {
         adapter = object : QuickAdapter<BaseInvateBean>(this, R.layout.item_invate_score, mData) {
             override fun convert(helper: BaseAdapterHelper?, item: BaseInvateBean?) {
                 Glide.with(this@InviteScoreActivity)
-                        .load(item!!.avatar)
                         .asBitmap()
+                        .load(item!!.avatar)
                         .error(R.mipmap.img_avatar_default)
                         .override(80, 80)
                         .centerCrop()

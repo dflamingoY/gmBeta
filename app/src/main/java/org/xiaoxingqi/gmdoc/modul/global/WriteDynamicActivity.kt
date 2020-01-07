@@ -81,8 +81,8 @@ class WriteDynamicActivity : BaseActivity<WriteDynamicPresenter>() {
         adapter = object : QuickAdapter<ImgBean>(this, R.layout.item_spoiler_input, imgData) {
             override fun convert(helper: BaseAdapterHelper?, item: ImgBean?) {
                 Glide.with(this@WriteDynamicActivity)
-                        .load(item!!.key)
                         .asBitmap()
+                        .load(item!!.key)
                         .centerCrop()
                         .into(helper!!.getImageView(R.id.iv_img))
                 val checkImageView = helper.getView(R.id.checkbox) as CustomCheckImageView

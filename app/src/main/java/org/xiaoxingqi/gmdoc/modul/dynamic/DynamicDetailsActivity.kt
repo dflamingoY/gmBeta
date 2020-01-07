@@ -6,7 +6,6 @@ import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import com.bumptech.glide.Glide
-import com.bumptech.glide.request.target.GlideDrawableImageViewTarget
 import kotlinx.android.synthetic.main.activity_dynamic_details.*
 import kotlinx.android.synthetic.main.layout_dynamic_head.view.*
 import org.xiaoxingqi.gmdoc.R
@@ -39,11 +38,12 @@ class DynamicDetailsActivity : BaseActivity<DynamicDetailsPresenter>() {
                 mBean = data.data[0]
                 if (null != mBean) {
                     Glide.with(this@DynamicDetailsActivity)
+                            .asBitmap()
                             .load(mBean!!.avatar)
                             .error(R.mipmap.img_avatar_default)
                             .override(80, 80)
                             .centerCrop()
-                            .into(GlideDrawableImageViewTarget(headView.iv_UserLogo, 0))
+                            .into(headView.iv_UserLogo)
                     if (mBean!!.no_forward == 1) {
                         linear_aircraft.isEnabled = false
                         linear_aircraft.alpha = 0.5f

@@ -1,5 +1,6 @@
 package org.xiaoxingqi.gmdoc.modul.common
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.net.Uri
@@ -12,9 +13,9 @@ import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.RelativeLayout
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.drawable.GlideDrawable
-import com.bumptech.glide.request.animation.GlideAnimation
-import com.bumptech.glide.request.target.GlideDrawableImageViewTarget
+import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import kotlinx.android.synthetic.main.activity_showpic.*
 import org.xiaoxingqi.gmdoc.R
@@ -97,25 +98,21 @@ class ShowPicActivity : BaseAct() {
             } else {
                 url = imgBean.url + "?imageMogr2/auto-orient/thumbnail/!50p"// thumbnail/!50p/ ?imageMogr2/thumbnail/720x/auto-orient
             }
+            progressBar.visibility = View.VISIBLE
             Glide.with(this@ShowPicActivity)
                     .load(url)
                     .error(R.drawable.img_empty_avatar_back)
-                    .into(object : GlideDrawableImageViewTarget(ivPic) {
-                        override fun onResourceReady(resource: GlideDrawable, animation: GlideAnimation<in GlideDrawable>?) {
-                            super.onResourceReady(resource, animation)
+                    .listener(object : RequestListener<Drawable> {
+                        override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean {
                             progressBar.visibility = View.GONE
+                            return false
                         }
 
-                        override fun onLoadStarted(placeholder: Drawable?) {
-                            super.onLoadStarted(placeholder)
-                            progressBar.visibility = View.VISIBLE
-                        }
-
-                        override fun onLoadFailed(e: Exception?, errorDrawable: Drawable?) {
-                            super.onLoadFailed(e, errorDrawable)
+                        override fun onResourceReady(resource: Drawable?, model: Any?, target: Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
                             progressBar.visibility = View.GONE
+                            return false
                         }
-                    })
+                    }).into(ivPic)
             container.addView(view)
             ivPic.setOnLongClickListener {
                 /**
@@ -141,6 +138,7 @@ class ShowPicActivity : BaseAct() {
     /**
      * 保存
      */
+    @SuppressLint("StaticFieldLeak")
     private fun save(savePath: String) {
         var path: String = savePath
         if (savePath.contains("?")) {

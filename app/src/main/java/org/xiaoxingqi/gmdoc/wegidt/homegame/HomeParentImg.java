@@ -47,8 +47,8 @@ public class HomeParentImg extends BaseLayout {
     public void setData(BaseHomeBean bean) {
         mTvUserName.setText(bean.getName());
         Glide.with(getContext())
-                .load(bean.getCover())
                 .asBitmap()
+                .load(bean.getCover())
                 .into(mIvTopView);
         mTvTopDesc.setText(bean.getTitle());
     }

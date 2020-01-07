@@ -115,7 +115,7 @@ class GameFragment : BaseFrag<GameFragPersent>() {
                     mParams.setMargins(AppTools.dp2px(activity, 10), 0, 0, AppTools.dp2px(activity, 11))
                 }
                 helper.getImageView(R.id.iv_Platform).layoutParams = mParams
-                Glide.with(activity)
+                Glide.with(this@GameFragment)
                         .load(item!!.url)
                         .into(helper.getImageView(R.id.iv_Platform))
             }
@@ -133,7 +133,7 @@ class GameFragment : BaseFrag<GameFragPersent>() {
                         url = IConstant.PICSPORT + item.cover
                     }
                 }
-                Glide.with(activity)
+                Glide.with(this@GameFragment)
                         .load("$url?imageMogr2/auto-orient/thumbnail/!200x200r")
                         .override(200, 200)
                         .centerCrop()
