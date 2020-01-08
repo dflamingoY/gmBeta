@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.frag_msg.view.*
 import org.xiaoxingqi.gmdoc.R
 import org.xiaoxingqi.gmdoc.core.BaseFrag
@@ -54,9 +55,9 @@ class MsgFragment : BaseFrag<MessagePresenter>() {
     override fun initData() {
         adapter = object : QuickAdapter<BaseMsgListBean>(activity, R.layout.item_msg, mData, headView) {
             override fun convert(helper: BaseAdapterHelper?, item: BaseMsgListBean?) {
-                Glide.with(this@MsgFragment)
+                Glide.with(activity)
                         .load(item!!.img)
-                        .error(R.mipmap.img_avatar_default)
+                        .apply(RequestOptions().error(R.mipmap.img_avatar_default))
                         .into(helper!!.getImageView(R.id.iv_userLogo))
                 helper.getView(R.id.viewUnRead).visibility = if (item.unread == 0) View.GONE else View.VISIBLE
                 helper.getTextView(R.id.tv_name).text = item.name

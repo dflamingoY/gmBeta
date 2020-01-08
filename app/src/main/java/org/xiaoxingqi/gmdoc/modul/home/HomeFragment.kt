@@ -15,6 +15,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.frag_home.view.*
 import kotlinx.android.synthetic.main.frag_home.view.recyclerView
 import kotlinx.android.synthetic.main.home_heard_layout.view.*
@@ -68,7 +69,7 @@ class HomeFragment : BaseFrag<HomePresent>() {
                 data?.data?.dy_top_big
                 headView.tv_TopDesc.text = data?.data?.dy_top_big?.get(0)?.title
                 topData = data?.data?.dy_top_big?.get(0)
-                Glide.with(this@HomeFragment)
+                Glide.with(activity!!)
                         .load(data?.data?.dy_top_big?.get(0)?.cover)
                         .into(headView.iv_topImg)
                 for (indices in data?.data?.game?.data!!.indices) {//遍歷游戏数据在不同的位置插入 新闻
@@ -317,7 +318,7 @@ class HomeFragment : BaseFrag<HomePresent>() {
             override fun convert(helper: BaseAdapterHelper?, item: HomeUserShareData.ContributeBean?) {
                 Glide.with(context)
                         .load(item!!.avatar)
-                        .override(80, 80)
+                        .apply(RequestOptions().override(80, 80))
                         .into(helper!!.getImageView(R.id.iv_UserLogo))
                 helper.getTextView(R.id.tv_CreateTime).text = TimeUtils.getInstance().parseTime(item.created_at)
                 helper.getTextView(R.id.tv_UserName).text = item.username

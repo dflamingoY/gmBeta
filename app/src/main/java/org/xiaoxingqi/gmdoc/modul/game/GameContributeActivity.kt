@@ -13,6 +13,7 @@ import android.widget.EditText
 import com.alibaba.fastjson.JSONArray
 import com.alibaba.fastjson.JSONObject
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.activity_contibute_photo.*
 import org.xiaoxingqi.gmdoc.R
 import org.xiaoxingqi.gmdoc.core.App
@@ -126,8 +127,8 @@ class GameContributeActivity : BaseActivity<UserPresenter>() {
 
                 Glide.with(this@GameContributeActivity)
                         .load(if (URLUtil.isValidUrl(item!!.pic)) item.pic + "?imageMogr2/auto-orient/thumbnail/!200x200r" else item.pic)
-                        .centerCrop()
-                        .override(180, 180)
+                        .apply(RequestOptions().centerCrop()
+                                .override(180, 180))
                         .into(helper!!.getImageView(R.id.iv_Img))
                 val editText = helper.getTextView(R.id.et_Title) as EditText
                 editText.addTextChangedListener(object : TextWatcher {

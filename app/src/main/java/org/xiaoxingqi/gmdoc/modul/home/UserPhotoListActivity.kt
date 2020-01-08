@@ -6,6 +6,7 @@ import android.view.View.GONE
 import android.view.View.VISIBLE
 import com.alibaba.fastjson.JSON
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.activity_photo_list.*
 import org.xiaoxingqi.gmdoc.R
 import org.xiaoxingqi.gmdoc.core.BaseActivity
@@ -85,10 +86,10 @@ class UserPhotoListActivity : BaseActivity<UserPresenter>() {
                     Glide.with(this@UserPhotoListActivity)
                             .asBitmap()
                             .load(item.url + "?imageMogr2/thumbnail/!240x240r/auto-orient")
-                            .override(190, 190)
-                            .placeholder(R.drawable.img_empty_avatar_back)
-                            .centerCrop()
-                            .error(R.drawable.img_empty_avatar_back)
+                            .apply(RequestOptions().override(190, 190)
+                                    .placeholder(R.drawable.img_empty_avatar_back)
+                                    .centerCrop()
+                                    .error(R.drawable.img_empty_avatar_back))
                             .into(helper.getImageView(R.id.iv_img))
                 }
             }

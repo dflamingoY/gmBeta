@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.activity_love_list.*
 import org.xiaoxingqi.gmdoc.R
 import org.xiaoxingqi.gmdoc.core.BaseActivity
@@ -53,8 +54,8 @@ class LoveListActivity : BaseActivity<UserPresenter>() {
             override fun convert(helper: BaseAdapterHelper?, item: BaseSimpleData?) {
                 Glide.with(this@LoveListActivity)
                         .load(item!!.avatar)
-                        .error(R.mipmap.img_avatar_default)
-                        .centerCrop()
+                        .apply(RequestOptions().error(R.mipmap.img_avatar_default)
+                                .centerCrop())
                         .into(helper!!.getImageView(R.id.iv_UserLogo))
                 helper.getTextView(R.id.tv_UserName).text = item.username
                 helper.getTextView(R.id.tv_LoveGame).text = item.like_game

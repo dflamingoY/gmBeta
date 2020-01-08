@@ -17,6 +17,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.activity_user_info.*
 import org.xiaoxingqi.gmdoc.R
 import org.xiaoxingqi.gmdoc.core.BaseActivity
@@ -45,7 +46,7 @@ class UserHomeActivity : BaseActivity<HomeUserInfoPersent>() {
                         .into(iv_User_Bg)
                 Glide.with(this@UserHomeActivity)
                         .load(info.data.avatar)
-                        .error(R.mipmap.img_avatar_default)
+                        .apply(RequestOptions().error(R.mipmap.img_avatar_default))
                         .into(iv_UserLogo)
 
 
@@ -134,7 +135,7 @@ class UserHomeActivity : BaseActivity<HomeUserInfoPersent>() {
         intent.getStringExtra("url")?.let {
             Glide.with(this@UserHomeActivity)
                     .load(it)
-                    .error(R.mipmap.img_avatar_default)
+                    .apply(RequestOptions().error(R.mipmap.img_avatar_default))
                     .into(iv_UserLogo)
             setMotion(iv_UserLogo)
         }

@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.View
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.nineoldandroids.animation.Animator
 import com.nineoldandroids.animation.AnimatorListenerAdapter
 import com.nineoldandroids.animation.ObjectAnimator
@@ -42,7 +43,7 @@ import java.util.ArrayList
  */
 class AlbumActivity : BaseAct() {
 
-    companion object{
+    companion object {
         private const val WRITE_COARSE_LOCATION_REQUEST_CODE = 0x01
         private const val CAMERA_REQUEST_CODE = 0x02
         private const val CAMERA_CODE = 0x03
@@ -84,11 +85,11 @@ class AlbumActivity : BaseAct() {
                 if ("相机" == item) {
                     helper!!.getImageView(R.id.img).setImageResource(R.mipmap.img_takephoto)
                     Glide.with(helper.getImageView(R.id.img).context)
+                            .applyDefaultRequestOptions(RequestOptions().error(R.drawable.img_empty_avatar_back)
+                                    .placeholder(R.mipmap.img_takephoto)
+                                    .centerCrop())
                             .asBitmap()
                             .load(R.mipmap.img_takephoto)
-                            .error(R.drawable.img_empty_avatar_back)
-                            .placeholder(R.mipmap.img_takephoto)
-                            .centerCrop()
                             .into(helper.getImageView(R.id.img))
                     helper.getView(R.id.check_img).visibility = View.GONE
                 } else {
@@ -98,12 +99,12 @@ class AlbumActivity : BaseAct() {
                         helper!!.getView(R.id.iv_Gif).visibility = View.GONE
                     }
                     Glide.with(helper.getImageView(R.id.img).context)
+                            .applyDefaultRequestOptions(RequestOptions().error(R.drawable.img_empty_avatar_back)
+                                    .centerCrop()
+                                    .skipMemoryCache(true)
+                                    .override(180, 180))
                             .asBitmap()
                             .load(item)
-                            .error(R.drawable.img_empty_avatar_back)
-                            .centerCrop()
-                            .skipMemoryCache(true)
-                            .override(180, 180)
                             .into(helper.getImageView(R.id.img))
                     helper.getView(R.id.check_img).visibility = View.VISIBLE
                     val check = helper.getView(R.id.check_img) as CustomCheckImageView
@@ -138,10 +139,10 @@ class AlbumActivity : BaseAct() {
         fileAdapter = object : QuickAdapter<FilePath>(this, R.layout.item_photo_file_list, pathList) {
             override fun convert(helper: BaseAdapterHelper?, item: FilePath?) {
                 Glide.with(helper!!.getImageView(R.id.iv_img).context)
+                        .applyDefaultRequestOptions(RequestOptions().error(R.drawable.img_empty_avatar_back)
+                                .centerCrop()
+                                .override(180, 180))
                         .load(item!!.firstPath)
-                        .error(R.drawable.img_empty_avatar_back)
-                        .centerCrop()
-                        .override(180, 180)
                         .into(helper.getImageView(R.id.iv_img))
                 helper.getTextView(R.id.tv_Title).text = item.name
                 helper.getTextView(R.id.tv_Count).text = item.count.toString() + ""

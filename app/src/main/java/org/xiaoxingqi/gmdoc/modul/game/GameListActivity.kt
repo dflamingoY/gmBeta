@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import android.text.TextUtils
 import android.view.View
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.activity_game_list.*
 import org.xiaoxingqi.gmdoc.R
 import org.xiaoxingqi.gmdoc.core.BaseActivity
@@ -61,8 +62,8 @@ class GameListActivity : BaseActivity<GameListPresent>() {
                 }
                 Glide.with(this@GameListActivity)
                         .load(url)
-                        .error(R.mipmap.img_empty_square)
-                        .placeholder(R.mipmap.img_empty_square)
+                        .apply(RequestOptions().error(R.mipmap.img_empty_square)
+                                .placeholder(R.mipmap.img_empty_square))
                         .into(helper.getImageView(R.id.iv_Game_Logo))
                 helper.getTextView(R.id.tv_Game_Name).text = item.game_name
                 (helper.getView(R.id.relative_Score) as RoundScoreView).setScore(item.score)

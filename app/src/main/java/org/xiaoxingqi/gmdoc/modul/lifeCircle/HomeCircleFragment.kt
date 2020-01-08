@@ -10,6 +10,7 @@ import android.view.View
 import android.widget.FrameLayout
 import android.widget.TextView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.frag_type_circle.view.*
 import me.dkzwm.widget.srl.MaterialSmoothRefreshLayout
 import me.dkzwm.widget.srl.RefreshingListenerAdapter
@@ -122,17 +123,17 @@ class HomeCircleFragment : BaseFrag<TypeFragPresenter>() {
                     helper!!.getView(R.id.cardLogo).setBackgroundResource(0)
                     helper.getTextView(R.id.tv_UserName).text = "关注更多人"
                     helper.getTextView(R.id.tv_UserName).setTextColor(resources.getColor(R.color.color_shallow_yellow))
-                    Glide.with(this@HomeCircleFragment)
+                    Glide.with(activity!!)
                             .load(R.mipmap.btn_user_more)
-                            .error(R.mipmap.btn_user_more)
-                            .placeholder(R.mipmap.btn_user_more)
+                            .apply(RequestOptions().error(R.mipmap.btn_user_more)
+                                    .placeholder(R.mipmap.btn_user_more))
                             .into(helper.getImageView(R.id.iv_userLogo))
                 } else {
                     helper!!.getView(R.id.cardLogo).setBackgroundResource(R.drawable.shape_red_circle)
                     helper.getTextView(R.id.tv_UserName).setTextColor(Color.parseColor("#4a4a4a"))
-                    Glide.with(this@HomeCircleFragment)
+                    Glide.with(activity)
                             .load(data.avatar)
-                            .error(R.mipmap.img_avatar_default)
+                            .apply(RequestOptions().error(R.mipmap.img_avatar_default))
                             .into(helper.getImageView(R.id.iv_userLogo))
                     helper.getTextView(R.id.tv_UserName).text = data.name
                 }
@@ -142,9 +143,9 @@ class HomeCircleFragment : BaseFrag<TypeFragPresenter>() {
         headView.adapter = headAdapter
         adapter = object : QuickAdapter<HomeUserShareData.ContributeBean>(activity, R.layout.item_dynamic, mData, headView) {
             override fun convert(helper: BaseAdapterHelper?, item: HomeUserShareData.ContributeBean?) {
-                Glide.with(this@HomeCircleFragment)
+                Glide.with(activity!!)
                         .load(item!!.avatar)
-                        .override(80, 80)
+                        .apply(RequestOptions().override(80, 80))
                         .into(helper!!.getImageView(R.id.iv_UserLogo))
                 helper.getTextView(R.id.tv_CreateTime).text = TimeUtils.getInstance().parseTime(item.created_at)
                 helper.getTextView(R.id.tv_UserName).text = item.username

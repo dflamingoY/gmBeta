@@ -8,6 +8,7 @@ import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.activity_recycler_details.*
 import kotlinx.android.synthetic.main.head_web_details.view.*
 import org.xiaoxingqi.gmdoc.R
@@ -52,14 +53,14 @@ class WebDetailsActivity : BaseActivity<WebPresenter>() {
                             headView.squareBg.visibility = if (TextUtils.isEmpty(bean.cover)) View.GONE else View.VISIBLE
                             Glide.with(this@WebDetailsActivity)
                                     .load(bean.cover)
-                                    .error(R.drawable.img_empty_avatar_back)
-                                    .centerCrop()
+                                    .apply(RequestOptions().error(R.drawable.img_empty_avatar_back)
+                                            .centerCrop())
                                     .into(headView.squareBg)
                             Glide.with(this@WebDetailsActivity)
                                     .asBitmap()
                                     .load(bean.self.avatar)
-                                    .error(R.mipmap.img_avatar_default)
-                                    .centerCrop()
+                                    .apply(RequestOptions().error(R.mipmap.img_avatar_default)
+                                            .centerCrop())
                                     .into(headView.ivUserLogo)
                             headView.tvUserName.text = bean.self.username
                             headView.tvLoveGame.text = "（${bean.self.like_game}）"

@@ -11,6 +11,7 @@ import android.text.TextUtils
 import android.view.*
 import android.widget.*
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.BitmapImageViewTarget
 import com.bumptech.glide.request.transition.Transition
 import kotlinx.android.synthetic.main.activity_game_details.*
@@ -284,7 +285,7 @@ class GameDetailsActivity : BaseActivity<GameDetailPresenter>() {
             override fun convert(helper: BaseAdapterHelper?, item: HomeUserShareData.ContributeBean?) {
                 Glide.with(this@GameDetailsActivity)
                         .load(item!!.avatar)
-                        .override(80, 80)
+                        .apply(RequestOptions().override(80, 80))
                         .into(helper!!.getImageView(R.id.iv_UserLogo))
                 helper.getTextView(R.id.tv_CreateTime).text = TimeUtils.getInstance().parseTime(item.created_at)
                 helper.getTextView(R.id.tv_UserName).text = item.username

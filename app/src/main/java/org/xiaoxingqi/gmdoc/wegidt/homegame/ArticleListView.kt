@@ -14,6 +14,7 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.ViewConfiguration
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.layout_long_comment.view.*
 import org.xiaoxingqi.gmdoc.R
 import org.xiaoxingqi.gmdoc.entity.home.HomeUserShareData
@@ -166,8 +167,8 @@ class ArticleListView(context: Context) : BaseLayout(context) {
             Glide.with(context)
                     .asBitmap()
                     .load(url)
-                    .override(360, 180)
-                    .centerCrop()
+                    .apply(RequestOptions().override(360, 180)
+                            .centerCrop())
                     .into(iv_Details)
             tv_PhotoTitle.text = bean.self.title
         } else {

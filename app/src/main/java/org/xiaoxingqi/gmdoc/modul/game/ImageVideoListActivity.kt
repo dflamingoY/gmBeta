@@ -8,6 +8,7 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.RelativeLayout
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.activity_img_video_list.*
 import me.dkzwm.widget.srl.RefreshingListenerAdapter
 import org.xiaoxingqi.gmdoc.R
@@ -100,8 +101,8 @@ class ImageVideoListActivity : BaseActivity<GameImageVideoPresenter>() {
                 Glide.with(this@ImageVideoListActivity)
                         .asBitmap()
                         .load(data.pic)
-                        .error(R.mipmap.img_empty_square)
-                        .centerCrop()
+                        .apply(RequestOptions().error(R.mipmap.img_empty_square)
+                                .centerCrop())
                         .into(helper.getImageView(R.id.iv_game_img))
                 helper.getImageView(R.id.iv_game_img).layoutParams = mParams
             }

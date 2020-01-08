@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.RelativeLayout
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.frag_game.view.*
 import org.xiaoxingqi.gmdoc.R
 import org.xiaoxingqi.gmdoc.core.BaseFrag
@@ -115,7 +116,7 @@ class GameFragment : BaseFrag<GameFragPersent>() {
                     mParams.setMargins(AppTools.dp2px(activity, 10), 0, 0, AppTools.dp2px(activity, 11))
                 }
                 helper.getImageView(R.id.iv_Platform).layoutParams = mParams
-                Glide.with(this@GameFragment)
+                Glide.with(activity!!)
                         .load(item!!.url)
                         .into(helper.getImageView(R.id.iv_Platform))
             }
@@ -133,10 +134,10 @@ class GameFragment : BaseFrag<GameFragPersent>() {
                         url = IConstant.PICSPORT + item.cover
                     }
                 }
-                Glide.with(this@GameFragment)
+                Glide.with(context)
                         .load("$url?imageMogr2/auto-orient/thumbnail/!200x200r")
-                        .override(200, 200)
-                        .centerCrop()
+                        .apply(RequestOptions().override(200, 200)
+                                .centerCrop())
                         .into(helper!!.getImageView(R.id.iv_Game_Logo))
                 if ("ios".equals(name, ignoreCase = true)) {
                     helper.getView(R.id.linear_Time).visibility = View.GONE

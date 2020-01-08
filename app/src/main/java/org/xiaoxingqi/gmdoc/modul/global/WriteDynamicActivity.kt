@@ -15,6 +15,7 @@ import android.view.inputmethod.InputMethodManager
 import com.alibaba.fastjson.JSONArray
 import com.alibaba.fastjson.JSONObject
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.activity_write_dynamic.*
 import org.xiaoxingqi.gmdoc.R
 import org.xiaoxingqi.gmdoc.core.App
@@ -83,7 +84,7 @@ class WriteDynamicActivity : BaseActivity<WriteDynamicPresenter>() {
                 Glide.with(this@WriteDynamicActivity)
                         .asBitmap()
                         .load(item!!.key)
-                        .centerCrop()
+                        .apply(RequestOptions().centerCrop())
                         .into(helper!!.getImageView(R.id.iv_img))
                 val checkImageView = helper.getView(R.id.checkbox) as CustomCheckImageView
                 checkImageView.setOnStateChangeListener { selected ->

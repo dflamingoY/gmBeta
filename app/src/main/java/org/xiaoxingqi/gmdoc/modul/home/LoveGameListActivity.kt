@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.View
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.activity_love_game_list.*
 import org.xiaoxingqi.gmdoc.R
 import org.xiaoxingqi.gmdoc.core.BaseActivity
@@ -48,9 +49,9 @@ class LoveGameListActivity : BaseActivity<UserPresenter>() {
                 Glide.with(this@LoveGameListActivity)
                         .asBitmap()
                         .load(item.img)
-                        .centerCrop()
-                        .override(360, 180)
-                        .error(R.drawable.img_empty_avatar_back)
+                        .apply(RequestOptions().centerCrop()
+                                .override(360, 180)
+                                .error(R.drawable.img_empty_avatar_back))
                         .into(helper.getImageView(R.id.iv_Details))
                 helper.getTextView(R.id.tv_Desc).text = item.desc
             }

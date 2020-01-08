@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.View
 import android.widget.FrameLayout
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.frag_type_circle.view.*
 import me.dkzwm.widget.srl.MaterialSmoothRefreshLayout
 import me.dkzwm.widget.srl.RefreshingListenerAdapter
@@ -84,9 +85,9 @@ class TypeCircleFragment : BaseFrag<TypeFragPresenter>() {
         adapter = object : QuickAdapter<HomeUserShareData.ContributeBean>(activity, R.layout.item_dynamic, mData) {
             @SuppressLint("SetTextI18n")
             override fun convert(helper: BaseAdapterHelper?, item: HomeUserShareData.ContributeBean?) {
-                Glide.with(this@TypeCircleFragment)
+                Glide.with(activity)
                         .load(item!!.avatar)
-                        .override(80, 80)
+                        .apply(RequestOptions().override(80, 80))
                         .into(helper!!.getImageView(R.id.iv_UserLogo))
                 helper.getTextView(R.id.tv_CreateTime).text = TimeUtils.getInstance().parseTime(item.created_at)
                 helper.getTextView(R.id.tv_UserName).text = item.username

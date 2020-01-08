@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.Request;
+import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.ViewTarget;
 import com.bumptech.glide.request.transition.Transition;
 
@@ -61,8 +62,7 @@ public class GlideImageGetter implements Html.ImageGetter, Drawable.Callback {
         final UrlGIfDrawable urlDrawable = new UrlGIfDrawable();
         Glide.with(mContext)
                 .load(url)
-                .override(1, 1)
-                .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
+                .apply(new RequestOptions().diskCacheStrategy(DiskCacheStrategy.RESOURCE))
                 .into(new ImageGetterViewTarget(mTextView, urlDrawable));
         return urlDrawable;
     }
@@ -127,7 +127,7 @@ public class GlideImageGetter implements Html.ImageGetter, Drawable.Callback {
             mDrawable.setDrawable(resource);
             if (resource instanceof Animatable) {
                 mDrawable.setCallback(get(getView()));
-//                resource.setLoopCount(GlideDrawable.LOOP_FOREVER);
+                //                resource.setLoopCount(GlideDrawable.LOOP_FOREVER);
                 ((Animatable) resource).start();
             }
             getView().addOnAttachStateChangeListener(new View.OnAttachStateChangeListener() {

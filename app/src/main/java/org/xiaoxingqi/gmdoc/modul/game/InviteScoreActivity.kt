@@ -3,6 +3,7 @@ package org.xiaoxingqi.gmdoc.modul.game
 import com.google.android.material.snackbar.Snackbar
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.activity_invate_score.*
 import me.dkzwm.widget.srl.RefreshingListenerAdapter
 import me.dkzwm.widget.srl.config.Constants
@@ -68,9 +69,9 @@ class InviteScoreActivity : BaseActivity<InviteScorePresenter>() {
                 Glide.with(this@InviteScoreActivity)
                         .asBitmap()
                         .load(item!!.avatar)
-                        .error(R.mipmap.img_avatar_default)
-                        .override(80, 80)
-                        .centerCrop()
+                        .apply(RequestOptions().error(R.mipmap.img_avatar_default)
+                                .override(80, 80)
+                                .centerCrop())
                         .into(helper!!.getImageView(R.id.iv_UserLogo))
                 helper.getTextView(R.id.tv_UserName).text = item.name
                 helper.getTextView(R.id.tv_User_Desc).text = item.desc

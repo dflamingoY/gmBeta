@@ -16,6 +16,7 @@ import android.view.KeyEvent
 import android.view.View
 import android.view.WindowManager
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.activity_main.*
 import okhttp3.WebSocket
 import org.greenrobot.eventbus.Subscribe
@@ -84,15 +85,14 @@ class MainActivity : BaseActivity<MainPresenter>() {
                     PreferenceTools.saveObj(this@MainActivity, IConstant.USERINFO, it)
                     drawerlayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
                     Glide.with(this@MainActivity)
+                            .applyDefaultRequestOptions(RequestOptions().error(R.mipmap.img_avatar_default)
+                                    .centerCrop())
                             .asBitmap()
                             .load(it.data.avatar)
-                            .error(R.mipmap.img_avatar_default)
-                            .centerCrop()
                             .into(iv_UserLogo)
                     Glide.with(this@MainActivity)
+                            .applyDefaultRequestOptions(RequestOptions().centerCrop())
                             .load(it.data.top_image)
-//                            .error(R.mipmap.img_mine_banner)
-                            .centerCrop()
                             .into(user_Home_Bg)
                     tv_UserName.text = it.data.username
                     if (TextUtils.isEmpty(it.data.like_num)) {

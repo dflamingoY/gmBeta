@@ -7,9 +7,11 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 
 import androidx.appcompat.widget.AppCompatImageView;
+
 import android.util.AttributeSet;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.bumptech.glide.request.target.SimpleTarget;
 
@@ -70,7 +72,7 @@ public class GridImageView extends AppCompatImageView {
         Glide.with(getContext())
                 .asBitmap()
                 .load(isSpoiler ? R.mipmap.img_hidden_106 : url)
-                .centerCrop()
+                .apply(new RequestOptions().centerCrop())
                 .into(new BitmapImageViewTarget(this));
     }
 

@@ -3,6 +3,7 @@ package org.xiaoxingqi.gmdoc.wegidt.gameDetails
 import android.content.Context
 import android.text.TextUtils
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.layout_game_short_comment.view.*
 import org.xiaoxingqi.gmdoc.R
 import org.xiaoxingqi.gmdoc.entity.game.BaseScoreBean
@@ -68,7 +69,7 @@ class GameShortCommentView(context: Context) : BaseLayout(context) {
         Glide.with(context)
                 .asBitmap()
                 .load(bean.img)
-                .error(R.mipmap.img_avatar_default)
+                .apply(RequestOptions().error(R.mipmap.img_avatar_default))
                 .into(iv_UserLogo)
         tv_GameDesc.setData(AppConfig.getImageHtml(bean.content))
         if (TextUtils.isEmpty(bean.good)) {

@@ -16,6 +16,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.Target
 import kotlinx.android.synthetic.main.activity_showpic.*
 import org.xiaoxingqi.gmdoc.R
@@ -100,8 +101,8 @@ class ShowPicActivity : BaseAct() {
             }
             progressBar.visibility = View.VISIBLE
             Glide.with(this@ShowPicActivity)
+                    .applyDefaultRequestOptions(RequestOptions().error(R.drawable.img_empty_avatar_back))
                     .load(url)
-                    .error(R.drawable.img_empty_avatar_back)
                     .listener(object : RequestListener<Drawable> {
                         override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean {
                             progressBar.visibility = View.GONE

@@ -3,6 +3,7 @@ package org.xiaoxingqi.gmdoc.wegidt.gameDetails
 import android.content.Context
 import android.text.TextUtils
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.nostra13.universalimageloader.core.ImageLoader
 import kotlinx.android.synthetic.main.layout_game_long_comment.view.*
 import org.xiaoxingqi.gmdoc.R
@@ -54,7 +55,7 @@ class GameLongCommentView(context: Context) : BaseLayout(context) {
         tv_Title.text = bean.self_title
         Glide.with(context)
                 .load(bean.img)
-                .error(R.mipmap.img_avatar_default)
+                .apply(RequestOptions().error(R.mipmap.img_avatar_default))
                 .into(iv_UserLogo)
         tvLoveGame.text = bean.name + "( " + bean.like_game + " )"
         if (TextUtils.isEmpty(bean.cover)) {

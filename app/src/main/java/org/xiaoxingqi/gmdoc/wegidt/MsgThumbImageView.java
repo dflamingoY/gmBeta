@@ -6,12 +6,15 @@ import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.drawable.Drawable;
+
 import androidx.appcompat.widget.AppCompatImageView;
+
 import android.text.TextUtils;
 import android.util.AttributeSet;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestBuilder;
+import com.bumptech.glide.request.RequestOptions;
 
 import org.xiaoxingqi.gmdoc.R;
 
@@ -108,10 +111,10 @@ public class MsgThumbImageView extends AppCompatImageView {
         builder = Glide.with(getContext().getApplicationContext())
                 .asBitmap()
                 .load(path)
-                .override(width, height)
-                .fitCenter()
-                .placeholder(R.drawable.img_empty_avatar_back)
-                .error(R.drawable.img_empty_avatar_back)
+                .apply(new RequestOptions().override(width, height)
+                        .fitCenter()
+                        .placeholder(R.drawable.img_empty_avatar_back)
+                        .error(R.drawable.img_empty_avatar_back))
         ;
         builder.into(this);
     }

@@ -14,6 +14,7 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.ViewConfiguration
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.layout_long_comment.view.*
 import org.xiaoxingqi.gmdoc.R
 import org.xiaoxingqi.gmdoc.entity.home.HomeUserShareData
@@ -195,9 +196,9 @@ class HomeLongCommentView(context: Context) : BaseLayout(context) {
             }
             Glide.with(context)
                     .load(url)
-                    .override(360, 180)
-                    .centerCrop()
-                    .error(R.mipmap.img_avatar_default)
+                    .apply(RequestOptions() .override(360, 180)
+                            .centerCrop()
+                            .error(R.mipmap.img_avatar_default))
                     .into(iv_Details)
 
             try {
