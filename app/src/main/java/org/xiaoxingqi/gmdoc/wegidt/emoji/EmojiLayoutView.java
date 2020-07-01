@@ -2,10 +2,12 @@ package org.xiaoxingqi.gmdoc.wegidt.emoji;
 
 import android.content.Context;
 import android.graphics.Color;
+
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;

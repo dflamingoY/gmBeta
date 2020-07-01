@@ -77,5 +77,8 @@
             <enum name="type_Rect" value="2" />
         </attr>
     </declare-styleable>
+    <declare-styleable name="PerCentImgView">
+        <attr name="percentage" format="float"></attr>
+    </declare-styleable>
 
 </resources>

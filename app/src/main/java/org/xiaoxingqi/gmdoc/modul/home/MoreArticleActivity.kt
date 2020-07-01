@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
+import androidx.viewpager.widget.ViewPager
 import kotlinx.android.synthetic.main.activity_more_article.*
 import org.xiaoxingqi.gmdoc.R
 import org.xiaoxingqi.gmdoc.core.BaseAct
@@ -12,7 +13,7 @@ class MoreArticleActivity : BaseAct() {
     private val fragments = Array(2) {
         RecommendArtFragment().apply {
             arguments = Bundle().apply {
-                putInt("type", it + 1)
+                putInt("type", it + 2)
             }
         }
     }
@@ -31,6 +32,14 @@ class MoreArticleActivity : BaseAct() {
     }
 
     override fun initEvent() {
+        tabTitleLayout.setOnClick {
+            viewPager.currentItem = tabTitleLayout.indexOfChild(it)
+        }
+        viewPager.addOnPageChangeListener(object : ViewPager.SimpleOnPageChangeListener() {
+            override fun onPageSelected(position: Int) {
+                tabTitleLayout.setCurrentSelect(position)
+            }
+        })
 
     }
 
@@ -38,7 +47,7 @@ class MoreArticleActivity : BaseAct() {
 
     }
 
-    private inner class ArtAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm,BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
+    private inner class ArtAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
         override fun getItem(position: Int): Fragment {
             return fragments[position]
         }

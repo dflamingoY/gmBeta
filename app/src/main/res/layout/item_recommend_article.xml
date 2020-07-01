@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="5dp"
+    android:layout_marginLeft="12dp"
+    android:layout_marginRight="12dp"
+    android:layout_marginTop="5dp"
+    app:cardCornerRadius="2dp"
+    app:cardElevation="1dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <org.xiaoxingqi.gmdoc.wegidt.PerCentImgView
+            android:id="@+id/iv_Cover"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/img_empty_avatar_back"
+            app:percentage="2.4" />
+
+        <org.xiaoxingqi.gmdoc.wegidt.RoundScoreView
+            android:id="@+id/scoreView"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_alignParentRight="true"
+            android:layout_margin="12dp"
+            android:gravity="center"
+            android:text="bdt"
+            android:textColor="@color/color_white"
+            app:bgStyle="circleType" />
+
+
+        <TextView
+            android:id="@+id/tv_Game_Name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/iv_Cover"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:shadowColor="#c9000000"
+            android:shadowRadius="2"
+            android:singleLine="true"
+            android:text="游戏名"
+            android:textColor="#ffffff"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/tv_Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/iv_Cover"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="10dp"
+            android:singleLine="true"
+            android:text="标题"
+            android:textColor="#282828"
+            android:textSize="14sp" />
+    </RelativeLayout>
+
+
+</androidx.cardview.widget.CardView>
