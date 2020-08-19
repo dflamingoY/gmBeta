@@ -86,10 +86,11 @@ public class HttpServer {
                     .getSocketFactory();
             OkHttpClient okHttpClient = new OkHttpClient();
             okHttpClient = okHttpClient.newBuilder()
-                    .addInterceptor(new ReceiveIntercept(mContext))
-                    .addInterceptor(new RequestHeadInterceptot(mContext))
+//                    .addInterceptor(new ReceiveIntercept(mContext))
+//                    .addInterceptor(new RequestHeadInterceptot(mContext))
                     .connectTimeout(20, TimeUnit.SECONDS)
                     .readTimeout(20, TimeUnit.SECONDS)
+                    .cookieJar(new LocalCook())
                     .sslSocketFactory(sslSocketFactory)
                     .hostnameVerifier(org.apache.http.conn.ssl.SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER).build();
 
