@@ -271,9 +271,7 @@
             android:layout_alignTop="@+id/scrollView"
             android:layout_alignBottom="@+id/scrollView"
             android:layout_alignParentRight="true"
-            android:background="@drawable/shape_game_details_desc_gradent"
-
-            />
+            android:background="@drawable/shape_game_details_desc_gradent" />
 
     </RelativeLayout>
 

@@ -1,5 +1,7 @@
 package org.xiaoxingqi.gmdoc.impl.game;
 
+import androidx.annotation.Nullable;
+
 import org.xiaoxingqi.gmdoc.entity.ThumbData;
 import org.xiaoxingqi.gmdoc.entity.game.GameDetailsData;
 import org.xiaoxingqi.gmdoc.entity.game.GameScoreAllData;
@@ -40,5 +42,11 @@ public interface GameDetailCallBack {
      * 获取游戏的标签
      */
     void gameTab(GameTabData data);
+
+    /**
+     *
+     * @param index
+     */
+    void error(int index,@Nullable String msg);
 
 }

@@ -26,7 +26,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/relativeTop"
-        app:defaultState="content"
+        app:defaultStateId="content"
         app:emptyLayout="@layout/view_empty"
         app:offlineLayout="@layout/view_offline"
         app:progressLayout="@layout/view_progress">

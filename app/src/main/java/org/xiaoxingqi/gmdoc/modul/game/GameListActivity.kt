@@ -61,10 +61,12 @@ class GameListActivity : BaseActivity<GameListPresent>() {
                     helper!!.getView(R.id.linear_Time).visibility = View.VISIBLE
                 }
                 Glide.with(this@GameListActivity)
-                        .load(url)
-                        .apply(RequestOptions().error(R.mipmap.img_empty_square)
-                                .placeholder(R.mipmap.img_empty_square))
-                        .into(helper.getImageView(R.id.iv_Game_Logo))
+                    .load(url)
+                    .apply(
+                        RequestOptions().error(R.mipmap.img_empty_square)
+                            .placeholder(R.mipmap.img_empty_square)
+                    )
+                    .into(helper.getImageView(R.id.iv_Game_Logo))
                 helper.getTextView(R.id.tv_Game_Name).text = item.game_name
                 (helper.getView(R.id.relative_Score) as RoundScoreView).setScore(item.score)
                 helper.getTextView(R.id.tv_Desc).text = item.introduce
@@ -82,7 +84,12 @@ class GameListActivity : BaseActivity<GameListPresent>() {
     override fun initEvent() {
         adapter.setOnItemClickListener { view, position ->
 
-            startActivity(Intent(this, GameDetailsActivity::class.java).putExtra("gameId", mData[position].id))
+            startActivity(
+                Intent(this, GameDetailsActivity::class.java).putExtra(
+                    "gameId",
+                    mData[position].id
+                )
+            )
         }
     }
 

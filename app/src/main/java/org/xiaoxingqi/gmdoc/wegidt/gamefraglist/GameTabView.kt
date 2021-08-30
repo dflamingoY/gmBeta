@@ -50,27 +50,46 @@ class GameTabView : BaseLayout {
     private val sortData by lazy {
         ArrayList<GamePlatformData.PlatformData>()
     }
-    private val tempData = arrayListOf(GamePlatformData.PlatformData(0, "已发售", true), GamePlatformData.PlatformData(1, "即将发售", false)
-            , GamePlatformData.PlatformData(0, "默认排序", true), GamePlatformData.PlatformData(1, "发布时间", false)
-            , GamePlatformData.PlatformData(2, "社区评分", false), GamePlatformData.PlatformData(4, "关注均分", false))
+    private val tempData = arrayListOf(
+        GamePlatformData.PlatformData(0, "已发售", true),
+        GamePlatformData.PlatformData(1, "即将发售", false),
+        GamePlatformData.PlatformData(0, "默认排序", true),
+        GamePlatformData.PlatformData(1, "发布时间", false),
+        GamePlatformData.PlatformData(2, "社区评分", false),
+        GamePlatformData.PlatformData(4, "关注均分", false)
+    )
     private var clickType = ClickType.Version
     private var onTabClickListener: OnGameTabClickListener? = null
     private fun initView() {
-        adapter = object : QuickAdapter<GamePlatformData.PlatformListData>(context, R.layout.item_text, mData) {
-            override fun convert(helper: BaseAdapterHelper?, item: GamePlatformData.PlatformListData?) {
+        adapter = object :
+            QuickAdapter<GamePlatformData.PlatformListData>(context, R.layout.item_text, mData) {
+            override fun convert(
+                helper: BaseAdapterHelper?,
+                item: GamePlatformData.PlatformListData?
+            ) {
                 if (helper!!.itemView.tag as Int == current) {
-                    helper.getTextView(R.id.tv_SortTypeName).setTextColor(resources.getColor(R.color.color_shallow_yellow))
+                    helper.getTextView(R.id.tv_SortTypeName)
+                        .setTextColor(resources.getColor(R.color.color_shallow_yellow))
                 } else {
-                    helper.getTextView(R.id.tv_SortTypeName).setTextColor(Color.parseColor("#6d6d6d"))
+                    helper.getTextView(R.id.tv_SortTypeName)
+                        .setTextColor(Color.parseColor("#6d6d6d"))
                 }
                 helper.getTextView(R.id.tv_SortTypeName).text = item!!.name
             }
         }
         recyclerSort.layoutManager = GridLayoutManager(context, 4)
         recyclerSort.adapter = adapter
-        sortOtherAdapter = object : QuickAdapter<GamePlatformData.PlatformData>(context, R.layout.item_horination_text, sortData) {
+        sortOtherAdapter = object : QuickAdapter<GamePlatformData.PlatformData>(
+            context,
+            R.layout.item_horination_text,
+            sortData
+        ) {
             override fun convert(helper: BaseAdapterHelper?, item: GamePlatformData.PlatformData?) {
-                helper!!.getTextView(R.id.tv_SelectedName).setTextColor(if (item!!.isSelected) resources.getColor(R.color.color_shallow_yellow) else Color.parseColor("#444444"))
+                helper!!.getTextView(R.id.tv_SelectedName).setTextColor(
+                    if (item!!.isSelected) resources.getColor(R.color.color_shallow_yellow) else Color.parseColor(
+                        "#444444"
+                    )
+                )
                 helper.getView(R.id.iv_Selected).visibility = if (item.isSelected) VISIBLE else GONE
                 helper.getTextView(R.id.tv_SelectedName).text = item.name
             }
@@ -152,7 +171,11 @@ class GameTabView : BaseLayout {
         adapter.setOnItemClickListener { view, position ->
             current = position
             initdata()
-            ObjectAnimator.ofFloat(relativePlat, "translationY", -AppTools.getWindowsHeight(context).toFloat()).setDuration(320).start()
+            ObjectAnimator.ofFloat(
+                relativePlat,
+                "translationY",
+                -AppTools.getWindowsHeight(context).toFloat()
+            ).setDuration(320).start()
             adapter.notifyDataSetChanged()
             gameClickTabView.setTabName(mData[current].name, mData[current].version[0].name, "", "")
             onTabClickListener?.onplatClick(mData[current].name, position)
@@ -198,7 +221,8 @@ class GameTabView : BaseLayout {
     }
 
     private fun anim(animValue: Float, duration: Long, delay: Long) {
-        val animator = ObjectAnimator.ofFloat(relativePlat, "translationY", animValue).setDuration(duration)
+        val animator =
+            ObjectAnimator.ofFloat(relativePlat, "translationY", animValue).setDuration(duration)
         animator.interpolator = LinearInterpolator()
         animator.startDelay = delay
         animator.start()
@@ -208,7 +232,9 @@ class GameTabView : BaseLayout {
      * 关闭menu
      */
     private fun closeMenu(view: View, duration: Long, delay: Long) {
-        val animator = ObjectAnimator.ofFloat(view, "translationY", -AppTools.dp2px(context, 240).toFloat()).setDuration(duration)
+        val animator =
+            ObjectAnimator.ofFloat(view, "translationY", -AppTools.dp2px(context, 240).toFloat())
+                .setDuration(duration)
         animator.interpolator = LinearInterpolator()
         animator.startDelay = delay
         animator.start()
@@ -234,8 +260,16 @@ class GameTabView : BaseLayout {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
         if (!isFirst) {
             isFirst = true
-            ObjectAnimator.ofFloat(relativePlat, "translationY", -AppTools.getWindowsHeight(context).toFloat()).setDuration(0).start()
-            ObjectAnimator.ofFloat(recyclerOther, "translationY", -AppTools.dp2px(context, 240).toFloat()).setDuration(0).start()
+            ObjectAnimator.ofFloat(
+                relativePlat,
+                "translationY",
+                -AppTools.getWindowsHeight(context).toFloat()
+            ).setDuration(0).start()
+            ObjectAnimator.ofFloat(
+                recyclerOther,
+                "translationY",
+                -AppTools.dp2px(context, 240).toFloat()
+            ).setDuration(0).start()
         }
     }
 

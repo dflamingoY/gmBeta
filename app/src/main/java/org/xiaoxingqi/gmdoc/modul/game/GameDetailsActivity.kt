@@ -59,6 +59,11 @@ class GameDetailsActivity : BaseActivity<GameDetailPresenter>() {
                 headView.gameTabView.setData(data!!.data.labels)
             }
 
+            override fun error(index: Int, msg: String?) {
+                loadArray[index] = 1
+                checkStatus()
+            }
+
             override fun gameOperator(data: ThumbData?, type: String?) {
                 when (type) {
                     "wish" -> {
@@ -90,8 +95,10 @@ class GameDetailsActivity : BaseActivity<GameDetailPresenter>() {
                 } catch (e: Exception) {
 
                 }
-                headView.isHaveShort.visibility = if (headView.linearShortContainer.childCount > 0) View.GONE else View.VISIBLE
-                headView.tv_FindMoreShort.visibility = if (headView.linearShortContainer.childCount >= 3) View.VISIBLE else View.GONE
+                headView.isHaveShort.visibility =
+                    if (headView.linearShortContainer.childCount > 0) View.GONE else View.VISIBLE
+                headView.tv_FindMoreShort.visibility =
+                    if (headView.linearShortContainer.childCount >= 3) View.VISIBLE else View.GONE
                 headView.tv_LongCommentCount.text = "长评( ${data.long_list_total})"
                 try {
                     for (bean in data.long_list) {
@@ -104,28 +111,41 @@ class GameDetailsActivity : BaseActivity<GameDetailPresenter>() {
                     }
                 } catch (e: Exception) {
                 }
-                headView.iv_IsLongComment.visibility = if (headView.linearLongCommentContainer.childCount > 0) View.GONE else View.VISIBLE
-                headView.tv_FindMoreLong.visibility = if (headView.linearLongCommentContainer.childCount >= 3) View.VISIBLE else View.GONE
+                headView.iv_IsLongComment.visibility =
+                    if (headView.linearLongCommentContainer.childCount > 0) View.GONE else View.VISIBLE
+                headView.tv_FindMoreLong.visibility =
+                    if (headView.linearLongCommentContainer.childCount >= 3) View.VISIBLE else View.GONE
                 loadArray[2] = 1
                 checkStatus()
             }
 
             override fun gameDetails(data: GameDetailsData?) {
                 Glide.with(this@GameDetailsActivity)
-                        .asBitmap()
-                        .load(data?.game?.cover)
-                        .into(object : BitmapImageViewTarget(headView.iv_Game_Logo) {
-                            override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
-                                super.onResourceReady(resource, transition)
-                                headView.iv_Bluer_Bg.setImageBitmap(FastBlur().fastblur(resource, 30, headView.iv_Bluer_Bg))
-                            }
-                        })
+                    .asBitmap()
+                    .load(data?.game?.cover)
+                    .into(object : BitmapImageViewTarget(headView.iv_Game_Logo) {
+                        override fun onResourceReady(
+                            resource: Bitmap,
+                            transition: Transition<in Bitmap>?
+                        ) {
+                            super.onResourceReady(resource, transition)
+                            headView.iv_Bluer_Bg.setImageBitmap(
+                                FastBlur().fastblur(
+                                    resource,
+                                    30,
+                                    headView.iv_Bluer_Bg
+                                )
+                            )
+                        }
+                    })
                 headView.expendView.setTvShowText(data!!.game.introduce + data.game.introduce_2)
                 headView.tv_GameTitle.text = data.game.game_name
                 if (!"ios".equals(data.game.platform, ignoreCase = true)) {
-                    headView.tv_GameExtrl.text = data.game.platform + " | " + data.game.developer + " | " + data.game.type + " | " + data.game.sale_time
+                    headView.tv_GameExtrl.text =
+                        data.game.platform + " | " + data.game.developer + " | " + data.game.type + " | " + data.game.sale_time
                 } else {
-                    headView.tv_GameExtrl.text = data.game.platform + " | " + data.game.developer + " | " + data.game.type
+                    headView.tv_GameExtrl.text =
+                        data.game.platform + " | " + data.game.developer + " | " + data.game.type
                 }
                 headView.iv_Wish.setImageResource(if (data.is_love == "1") R.mipmap.btn_fav_selected else R.mipmap.btn_fav_default)
                 headView.iv_Play.setImageResource(if (data.is_playing == 1) R.mipmap.btn_fav_defaultcopy else R.mipmap.btn_playing_default)
@@ -152,7 +172,10 @@ class GameDetailsActivity : BaseActivity<GameDetailPresenter>() {
                         }
                     }
                 }
-                val width = ((AppTools.getWindowsWidth(this@GameDetailsActivity) - AppTools.dp2px(this@GameDetailsActivity, 50)) * 1f / 3.1f + 0.5f).toInt()
+                val width = ((AppTools.getWindowsWidth(this@GameDetailsActivity) - AppTools.dp2px(
+                    this@GameDetailsActivity,
+                    50
+                )) * 1f / 3.1f + 0.5f).toInt()
                 descData?.let {
                     for (index in 0 until it.size) {
                         val params = LinearLayout.LayoutParams(width, width)
@@ -160,21 +183,50 @@ class GameDetailsActivity : BaseActivity<GameDetailPresenter>() {
                             break
                         }
                         if (it.size == 1) {
-                            params.setMargins(AppTools.dp2px(this@GameDetailsActivity, 14), 0, AppTools.dp2px(this@GameDetailsActivity, 12), 0)
+                            params.setMargins(
+                                AppTools.dp2px(this@GameDetailsActivity, 14),
+                                0,
+                                AppTools.dp2px(this@GameDetailsActivity, 12),
+                                0
+                            )
                         } else {
                             if (index == 0) {
-                                params.setMargins(AppTools.dp2px(this@GameDetailsActivity, 14), 0, 0, 0)
+                                params.setMargins(
+                                    AppTools.dp2px(this@GameDetailsActivity, 14),
+                                    0,
+                                    0,
+                                    0
+                                )
                             } else if (index == it.size - 1) {
                                 if (index == 4) {
-                                    params.setMargins(AppTools.dp2px(this@GameDetailsActivity, 12), 0, AppTools.dp2px(this@GameDetailsActivity, 12), 0)
+                                    params.setMargins(
+                                        AppTools.dp2px(this@GameDetailsActivity, 12),
+                                        0,
+                                        AppTools.dp2px(this@GameDetailsActivity, 12),
+                                        0
+                                    )
                                 } else {
-                                    params.setMargins(AppTools.dp2px(this@GameDetailsActivity, 12), 0, AppTools.dp2px(this@GameDetailsActivity, 12), 0)
+                                    params.setMargins(
+                                        AppTools.dp2px(this@GameDetailsActivity, 12),
+                                        0,
+                                        AppTools.dp2px(this@GameDetailsActivity, 12),
+                                        0
+                                    )
                                 }
                             } else {
-                                params.setMargins(AppTools.dp2px(this@GameDetailsActivity, 12), 0, 0, 0)
+                                params.setMargins(
+                                    AppTools.dp2px(this@GameDetailsActivity, 12),
+                                    0,
+                                    0,
+                                    0
+                                )
                             }
                         }
-                        val view = View.inflate(this@GameDetailsActivity, R.layout.layout_game_details_desc_img, null)
+                        val view = View.inflate(
+                            this@GameDetailsActivity,
+                            R.layout.layout_game_details_desc_img,
+                            null
+                        )
                         val isVeedio = view.findViewById<View>(R.id.viewIsVedio)
                         if (TextUtils.isEmpty(it[index].url) || !it[index].url.contains(".mp4")) {
                             isVeedio.visibility = View.GONE
@@ -188,8 +240,8 @@ class GameDetailsActivity : BaseActivity<GameDetailPresenter>() {
                             it[index].pic + "?imageMogr2/auto-orient/thumbnail/!200x200r"
                         }
                         Glide.with(this@GameDetailsActivity)
-                                .load(url)
-                                .into(mIvGameDesc)
+                            .load(url)
+                            .into(mIvGameDesc)
                         view.layoutParams = params
                         headView.linear_img_Details.addView(view)
                         mIvGameDesc.setOnClickListener {
@@ -212,17 +264,33 @@ class GameDetailsActivity : BaseActivity<GameDetailPresenter>() {
                     headView.linear_img_Details.addView(iv, params)
                     iv.setOnClickListener {
                         if (AppTools.isLogin(this@GameDetailsActivity)) {
-                            startActivity(Intent(this@GameDetailsActivity, ContributeDetailsActivity::class.java).putExtra("gameId", gameId))
+                            startActivity(
+                                Intent(
+                                    this@GameDetailsActivity,
+                                    ContributeDetailsActivity::class.java
+                                ).putExtra("gameId", gameId)
+                            )
                         } else {
                             AppTools.login(this@GameDetailsActivity)
                         }
                     }
                 } else {
-                    val view = View.inflate(this@GameDetailsActivity, R.layout.layout_game_desc_find_all, null)
+                    val view = View.inflate(
+                        this@GameDetailsActivity,
+                        R.layout.layout_game_desc_find_all,
+                        null
+                    )
                     val mTvCount = view.findViewById<TextView>(R.id.tv_AllCount)
                     mTvCount.text = "${data.all_pic_num}张"
                     headView.linear_img_Details.addView(view, params)
-                    view.setOnClickListener { startActivity(Intent(this@GameDetailsActivity, ImageVideoListActivity::class.java).putExtra("gameId", gameId)) }
+                    view.setOnClickListener {
+                        startActivity(
+                            Intent(
+                                this@GameDetailsActivity,
+                                ImageVideoListActivity::class.java
+                            ).putExtra("gameId", gameId)
+                        )
+                    }
                 }
                 loadArray[0] = 1
                 checkStatus()
@@ -263,14 +331,18 @@ class GameDetailsActivity : BaseActivity<GameDetailPresenter>() {
     override fun initView() {
         gameRecycler.layoutManager = LinearLayoutManager(this)
         headView = View.inflate(this, R.layout.game_head, null)
-        val params = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+        val params = ViewGroup.LayoutParams(
+            ViewGroup.LayoutParams.MATCH_PARENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT
+        )
         headView.layoutParams = params
         setSupportActionBar(toolbar)
         supportActionBar?.let {
             it.setDisplayHomeAsUpEnabled(true)
             it.setDisplayShowTitleEnabled(false)
         }
-        footView = LayoutInflater.from(this).inflate(R.layout.layout_game_details_foot, gameRecycler, false)
+        footView = LayoutInflater.from(this)
+            .inflate(R.layout.layout_game_details_foot, gameRecycler, false)
 
     }
 
@@ -281,13 +353,23 @@ class GameDetailsActivity : BaseActivity<GameDetailPresenter>() {
         gameId = intent.getStringExtra("gameId")
         map["_token"] = App.s_Token!!
         map["game_id"] = gameId
-        adapter = object : QuickAdapter<HomeUserShareData.ContributeBean>(this, R.layout.item_dynamic, mData, headView, footView) {
-            override fun convert(helper: BaseAdapterHelper?, item: HomeUserShareData.ContributeBean?) {
+        adapter = object : QuickAdapter<HomeUserShareData.ContributeBean>(
+            this,
+            R.layout.item_dynamic,
+            mData,
+            headView,
+            footView
+        ) {
+            override fun convert(
+                helper: BaseAdapterHelper?,
+                item: HomeUserShareData.ContributeBean?
+            ) {
                 Glide.with(this@GameDetailsActivity)
-                        .load(item!!.avatar)
-                        .apply(RequestOptions().override(80, 80))
-                        .into(helper!!.getImageView(R.id.iv_UserLogo))
-                helper.getTextView(R.id.tv_CreateTime).text = TimeUtils.getInstance().parseTime(item.created_at)
+                    .load(item!!.avatar)
+                    .apply(RequestOptions().override(80, 80))
+                    .into(helper!!.getImageView(R.id.iv_UserLogo))
+                helper.getTextView(R.id.tv_CreateTime).text =
+                    TimeUtils.getInstance().parseTime(item.created_at)
                 helper.getTextView(R.id.tv_UserName).text = item.username
                 helper.getTextView(R.id.tv_loveGame).text = "(${item.like_game.split(" ")[0]})"
                 val container = helper.getView(R.id.frameContainer) as FrameLayout
@@ -306,7 +388,12 @@ class GameDetailsActivity : BaseActivity<GameDetailPresenter>() {
                     }
                 }
                 helper.getImageView(R.id.iv_UserLogo).setOnClickListener {
-                    startActivity(Intent(this@GameDetailsActivity, UserHomeActivity::class.java).putExtra("userId", item.uid))
+                    startActivity(
+                        Intent(
+                            this@GameDetailsActivity,
+                            UserHomeActivity::class.java
+                        ).putExtra("userId", item.uid)
+                    )
                 }
             }
         }
@@ -333,7 +420,14 @@ class GameDetailsActivity : BaseActivity<GameDetailPresenter>() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 allLength += dy
                 if (allLength <= AppTools.dp2px(this@GameDetailsActivity, 238)) {
-                    appbar.setBackgroundColor(Color.argb((allLength / AppTools.dp2px(this@GameDetailsActivity, 238).toFloat() * 255 + 0.5f).toInt(), 0, 0, 0))
+                    appbar.setBackgroundColor(
+                        Color.argb(
+                            (allLength / AppTools.dp2px(
+                                this@GameDetailsActivity,
+                                238
+                            ).toFloat() * 255 + 0.5f).toInt(), 0, 0, 0
+                        )
+                    )
                 } else {
                     appbar.setBackgroundColor(Color.BLACK)
                 }
@@ -342,18 +436,29 @@ class GameDetailsActivity : BaseActivity<GameDetailPresenter>() {
                 } else {
                     commentTitle.visibility = View.GONE
                 }
-                val dOffset = allLength + AppTools.dp2px(this@GameDetailsActivity, 80) + AppTools.dp2px(this@GameDetailsActivity, 38)
+                val dOffset = allLength + AppTools.dp2px(
+                    this@GameDetailsActivity,
+                    80
+                ) + AppTools.dp2px(this@GameDetailsActivity, 38)
                 if (dOffset >= bowenLocation) {
-                    var alpha = (-(bowenLocation - dOffset) / AppTools.dp2px(this@GameDetailsActivity, 38).toFloat())
+                    var alpha =
+                        (-(bowenLocation - dOffset) / AppTools.dp2px(this@GameDetailsActivity, 38)
+                            .toFloat())
                     if (alpha >= 1) {
                         alpha = 1f
                     }
                     val layoutComment = commentTitle.layoutParams
-                    layoutComment.height = (AppTools.dp2px(this@GameDetailsActivity, 38) * (1 - alpha) + 0.5f).toInt()
+                    layoutComment.height =
+                        (AppTools.dp2px(this@GameDetailsActivity, 38) * (1 - alpha) + 0.5f).toInt()
                     commentTitle.layoutParams = layoutComment
 
                     val params = frameBowen.layoutParams as RelativeLayout.LayoutParams
-                    params.setMargins(0, (AppTools.dp2px(this@GameDetailsActivity, 38) * (1 - alpha) + 0.5f).toInt(), 0, 0)
+                    params.setMargins(
+                        0,
+                        (AppTools.dp2px(this@GameDetailsActivity, 38) * (1 - alpha) + 0.5f).toInt(),
+                        0,
+                        0
+                    )
                     params.height = AppTools.dp2px(this@GameDetailsActivity, 38)
                     frameBowen.layoutParams = params
                 } else {
@@ -484,7 +589,8 @@ class GameDetailsActivity : BaseActivity<GameDetailPresenter>() {
             if (!AppTools.isLogin(this)) {
                 AppTools.login(this)
             } else
-                startActivity(Intent(this, InviteScoreActivity::class.java)
+                startActivity(
+                    Intent(this, InviteScoreActivity::class.java)
                         .putExtra("gameId", gameId)
                 )
         }
@@ -492,11 +598,18 @@ class GameDetailsActivity : BaseActivity<GameDetailPresenter>() {
 
         }
         headView.tv_AddShotComment.setOnClickListener {
-            startActivity(Intent(this, WriteShortCommentActivity::class.java)
-                    .putExtra("gameId", gameId))
+            startActivity(
+                Intent(this, WriteShortCommentActivity::class.java)
+                    .putExtra("gameId", gameId)
+            )
         }
         headView.tv_addLongComment.setOnClickListener {
-            startActivity(Intent(this, WriteLongCommentActivity::class.java).putExtra("gameId", gameId))
+            startActivity(
+                Intent(this, WriteLongCommentActivity::class.java).putExtra(
+                    "gameId",
+                    gameId
+                )
+            )
         }
         headView.tv_FindMoreLong.setOnClickListener {
 
@@ -508,7 +621,12 @@ class GameDetailsActivity : BaseActivity<GameDetailPresenter>() {
 
         }
         headView.tv_Share_img.setOnClickListener {
-            startActivity(Intent(this, GameContributeActivity::class.java).putExtra("gameId", gameId))
+            startActivity(
+                Intent(this, GameContributeActivity::class.java).putExtra(
+                    "gameId",
+                    gameId
+                )
+            )
         }
     }
 

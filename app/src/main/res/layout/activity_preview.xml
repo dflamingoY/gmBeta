@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_below="@+id/appbar"
-    app:defaultState="progress"
+    app:defaultStateId="progress"
     app:emptyLayout="@layout/view_empty"
     app:offlineLayout="@layout/view_offline"
     app:progressLayout="@layout/view_progress">

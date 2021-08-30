@@ -35,8 +35,8 @@ abstract class StatefulLayout : FrameLayout {
         setWillNotCacheDrawing(true)
         setBackgroundColor(Color.parseColor("#00000000"))
         val typedArray = context?.obtainStyledAttributes(attrs, R.styleable.StatefulLayout)
-        if (typedArray!!.hasValue(R.styleable.StatefulLayout_defaultState)) {
-            val initialStateValue = typedArray.getInt(R.styleable.StatefulLayout_defaultState, State.CONTENT.getValue())
+        if (typedArray!!.hasValue(R.styleable.StatefulLayout_defaultStateId)) {
+            val initialStateValue = typedArray.getInt(R.styleable.StatefulLayout_defaultStateId, State.CONTENT.getValue())
             mInitialState = State.CONTENT.valueToState(initialStateValue)
 //            mInitialState = State.values()[initialStateValue]
         }

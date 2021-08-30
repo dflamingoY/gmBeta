@@ -8,7 +8,7 @@
         <attr name="text_size" format="integer" />
     </declare-styleable>
     <declare-styleable name="StatefulLayout">
-        <attr name="defaultState" format="enum">
+        <attr name="defaultStateId" format="enum">
             <enum name="content" value="0" />
             <enum name="progress" value="1" />
             <enum name="offline" value="2" />
